@@ -32,7 +32,7 @@
   <nav class="nav">
     <a href="index.html"><span class="nav-ico" aria-hidden="true">CCT</span>차징 타이밍</a>
     <a href="cmp.html"><span class="nav-ico" aria-hidden="true">CMP</span>차징 우선권</a>
-    <span class="nav-sep">초보자용</span>
+    <span class="nav-sep" aria-hidden="true"></span>
     <a href="ivs.html"><span class="nav-ico" aria-hidden="true">IV</span>개체값 고르기</a>
     <a href="team.html"><span class="nav-ico" aria-hidden="true">팀</span>팀 조합 유형</a>
     <a href="types.html"><span class="nav-ico" aria-hidden="true">상성</span>타입 상성</a>
@@ -52,41 +52,41 @@
 
 <main class="wrap">
 
-  <section class="picker cmp-picker">
-    <label class="picker-label">포켓몬으로 찾기</label>
-    <div class="combo">
-      <input type="search" class="search" placeholder="이름으로 검색 (한글·영문)" autocomplete="off"
-             aria-label="포켓몬 검색">
-      <ul class="results" hidden></ul>
-    </div>
-    <div class="chosen" hidden>
-      <img class="chosen-img" alt="">
-      <div class="chosen-text">
-        <strong class="chosen-name"></strong>
-        <span class="chosen-rank"></span>
+  <section class="panel">
+    <h2>포켓몬 또는 타입 고르기</h2>
+    <div id="src-mon" style="margin-top:8px">
+      <div class="combo">
+        <input type="search" class="search" placeholder="포켓몬 이름으로 검색 (한글·영문)" autocomplete="off" aria-label="포켓몬 검색">
+        <ul class="results" hidden></ul>
       </div>
-      <button type="button" class="clear" aria-label="선택 해제">✕</button>
+      <div class="chosen" hidden>
+        <img class="chosen-img" alt="">
+        <div class="chosen-text">
+          <strong class="chosen-name"></strong>
+          <span class="chosen-rank"></span>
+        </div>
+        <button type="button" class="clear" aria-label="선택 해제">✕</button>
+      </div>
     </div>
+    <div class="selbar" id="def-sel"></div>
+    <div class="tpick" id="def-pick" data-multi="2"></div>
+    <p class="tpick-hint">포켓몬을 검색하거나 타입을 1~2개 직접 고르세요. 3번째를 누르면 가장 먼저 고른 것이 빠집니다. 결과는 아래에 받는 피해와 주는 피해가 나란히 나옵니다.</p>
   </section>
-
-  <section class="result" id="mon-result" aria-live="polite">
-    <p class="placeholder">포켓몬을 고르면 약점과 저항이 나옵니다.</p>
-  </section>
+  <section class="result" id="out-def" aria-live="polite"></section>
 
   <section class="panel">
     <h2>전체 상성표</h2>
     <p class="note">
-      세로 = 맞는 쪽(방어) 타입 · 가로 = 때리는 기술 타입 · 칸에 마우스를 올리면 줄이 강조됩니다
+      세로 = 맞는 쪽(방어) 타입 · 가로 = 때리는 기술 타입 · 칸을 누르면 설명이 나오고 줄이 강조됩니다 · 맨 아래 숫자는 그 타입 기술이 약점을 찌르는 타입 수
     </p>
     <div class="tlegend">
-      <span><i class="sw super"></i>● 효과가 굉장하다 ×1.6</span>
-      <span><i class="sw resist"></i>▲ 효과가 별로다 ×0.625</span>
-      <span><i class="sw double"></i>✕ 이중 저항 ×0.39</span>
-      <span><i class="sw neutral"></i>빈칸 보통 ×1</span>
+      <span>● 효과가 굉장하다 ×1.6</span>
+      <span>▲ 효과가 별로다 ×0.625</span>
+      <span>✕ 이중 저항 ×0.39</span>
+      <span>빈칸 보통 ×1</span>
     </div>
-    <div class="table-scroll">
-      <table class="tchart" id="type-table"></table>
-    </div>
+    <div class="tchart-wrap"><table class="tchart" id="type-table"></table></div>
+    <div class="cell-detail" id="cell-detail">칸을 눌러보세요.</div>
   </section>
 
   <section class="panel">

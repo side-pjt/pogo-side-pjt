@@ -340,10 +340,7 @@ table.cmp-table td.tie { color: var(--t4); }
 .made-by strong { color: var(--ink); font-weight: 600; }
 
 /* ---------- 사이드바 구분선 ---------- */
-.nav-sep {
-  font-size: 10px; color: #7a86a8; letter-spacing: .08em;
-  padding: 12px 10px 4px;
-}
+.nav-sep { height: 1px; background: var(--line); margin: 10px 10px 6px; }
 
 /* ---------- 초보자용 공통 ---------- */
 .panel.lead h2 { margin-bottom: 10px; }
@@ -384,39 +381,133 @@ table.cmp-table td.tie { color: var(--t4); }
 .iv-card-note { font-size: 11px; color: #8792b3; margin-top: 7px; line-height: 1.5; }
 
 /* ---------- 타입 상성 ---------- */
-.tlegend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 12px; font-size: 12px; color: var(--ink-dim); }
-.tlegend span { display: flex; align-items: center; gap: 6px; }
-.tlegend .sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
-.tlegend .sw.super { background: #f2685f; }
-.tlegend .sw.resist { background: #5aa9f0; }
-.tlegend .sw.double { background: #2a3454; }
-.tlegend .sw.neutral { background: transparent; }
-
-table.tchart { border-collapse: collapse; font-size: 11px; min-width: 760px; }
-table.tchart th, table.tchart td {
-  border: 1px solid var(--line); text-align: center; padding: 0;
-  width: 38px; height: 28px;
+:root {
+  --ty-normal:#a8a77a; --ty-fire:#ee8130; --ty-water:#6390f0; --ty-electric:#f7d02c;
+  --ty-grass:#7ac74c; --ty-ice:#96d9d6; --ty-fighting:#c22e28; --ty-poison:#a33ea1;
+  --ty-ground:#e2bf65; --ty-flying:#a98ff3; --ty-psychic:#f95587; --ty-bug:#a6b91a;
+  --ty-rock:#b6a136; --ty-ghost:#735797; --ty-dragon:#6f35fc; --ty-dark:#705746;
+  --ty-steel:#b7b7ce; --ty-fairy:#d685ad;
 }
-table.tchart th { background: var(--panel-2); font-weight: 600; font-size: 11px; white-space: nowrap; padding: 3px 5px; }
-table.tchart th.corner { font-size: 10px; color: var(--ink-dim); min-width: 110px; }
-table.tchart td.super { color: #f2685f; font-size: 13px; }
-table.tchart td.resist { color: #5aa9f0; font-size: 11px; }
-table.tchart td.double { color: var(--ink-dim); font-size: 11px; background: rgba(255,255,255,.03); }
-table.tchart .hl { background: rgba(255, 211, 77, .12); }
-table.tchart th.hl { background: rgba(255, 211, 77, .2); color: var(--accent); }
+.ty { --c: var(--ty-normal); }
+.ty-normal{--c:var(--ty-normal)} .ty-fire{--c:var(--ty-fire)} .ty-water{--c:var(--ty-water)}
+.ty-electric{--c:var(--ty-electric)} .ty-grass{--c:var(--ty-grass)} .ty-ice{--c:var(--ty-ice)}
+.ty-fighting{--c:var(--ty-fighting)} .ty-poison{--c:var(--ty-poison)} .ty-ground{--c:var(--ty-ground)}
+.ty-flying{--c:var(--ty-flying)} .ty-psychic{--c:var(--ty-psychic)} .ty-bug{--c:var(--ty-bug)}
+.ty-rock{--c:var(--ty-rock)} .ty-ghost{--c:var(--ty-ghost)} .ty-dragon{--c:var(--ty-dragon)}
+.ty-dark{--c:var(--ty-dark)} .ty-steel{--c:var(--ty-steel)} .ty-fairy{--c:var(--ty-fairy)}
 
-.tgroup { margin-top: 14px; }
-.tgroup h3 { margin: 0 0 7px; font-size: 13px; font-weight: 600; }
+.tbadge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: color-mix(in srgb, var(--c) 22%, var(--panel-2));
+  border: 1px solid color-mix(in srgb, var(--c) 70%, transparent);
+  border-radius: 999px; padding: 5px 11px; font-size: 13px; color: var(--ink);
+}
+.tbadge::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+.tbadge.x4 { border-width: 2px; font-weight: 700; box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 25%, transparent); }
+
+.tpick { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 6px; margin-top: 12px; }
+.tpick button {
+  background: color-mix(in srgb, var(--c) 14%, var(--panel-2)); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 10px; padding: 9px 4px; font: inherit; font-size: 13px; cursor: pointer;
+}
+.tpick button.on { background: var(--c); color: #0d1220; font-weight: 700; border-color: var(--c); }
+.tpick.has-sel button:not(.on) { opacity: .55; }
+.tpick button.on { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--c); position: relative; }
+.tpick button.on::before { content: "✓ "; font-weight: 700; }
+.selbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; padding: 10px 12px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; }
+.selbar-label { font-size: 12px; color: var(--ink-dim); }
+.selchip { display: inline-flex; align-items: center; gap: 6px; background: var(--c); color: #0d1220; border: 0; border-radius: 999px; padding: 6px 8px 6px 13px; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.selchip i { font-style: normal; display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: rgba(13,18,32,.25); font-size: 10px; }
+.selclear { margin-left: auto; background: none; border: 1px solid var(--line); color: var(--ink-dim); border-radius: 8px; padding: 6px 10px; font: inherit; font-size: 12px; cursor: pointer; }
+.selclear:hover { color: var(--ink); border-color: var(--ink-dim); }
+.tpick-hint { font-size: 12px; color: var(--ink-dim); margin: 8px 0 0; }
+
+.sumrow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+.sum { background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px; text-align: center; }
+.sum b { display: block; font-family: var(--font-num, inherit); font-size: 24px; }
+.sum small { font-size: 11px; color: var(--ink-dim); }
+.sum.weak b { color: #f2685f; } .sum.res b { color: #5aa9f0; } .sum.dbl b { color: var(--ink-dim); }
+
+.lvl { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 0; border-top: 1px solid var(--line); }
+.lvl:first-child { border-top: 0; }
+.lvl-x { font-family: var(--font-num, inherit); font-size: 17px; font-weight: 700; padding-top: 4px; }
+.lvl.x16 .lvl-x { color: #ff5a4f; }
+.lvl.x4 .lvl-x { color: #f2685f; }
+.lvl.r .lvl-x { color: #5aa9f0; }
+.lvl.rr .lvl-x { color: var(--ink-dim); }
+.lvl-tip { grid-column: 2; font-size: 12px; color: var(--ink-dim); margin-top: -2px; }
+
+.tchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.tchips .none { color: var(--ink-dim); font-size: 13px; padding-top: 5px; }
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.duo-col { background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 14px; min-width: 0; }
+.duo-col.def { border-top: 3px solid #f2685f; }
+.duo-col.atk { border-top: 3px solid #4ade80; }
+.duo-col h3 { margin: 0 0 6px; font-size: 15px; }
+.duo-col h3 small { font-size: 11px; font-weight: 400; color: var(--ink-dim); margin-left: 6px; }
+.duo-sum { margin: 0 0 6px; font-size: 13px; color: var(--ink-dim); }
+.duo .weak { color: #f2685f; } .duo .res { color: #5aa9f0; }
+.duo-col .lvl { grid-template-columns: 54px minmax(0, 1fr); }
+.atk-type + .atk-type { margin-top: 14px; padding-top: 12px; border-top: 2px solid var(--line); }
+.atk-type-head { font-size: 13px; margin-bottom: 4px; }
+@media (max-width: 760px) { .duo { grid-template-columns: 1fr; } }
 .tg-super { color: #f2685f; }
 .tg-resist { color: #5aa9f0; }
 .tg-double { color: var(--ink-dim); }
-.tchips { display: flex; flex-wrap: wrap; gap: 6px; }
-.tchip {
-  background: var(--panel-2); border: 1px solid var(--line);
-  border-radius: 999px; padding: 5px 11px; font-size: 13px;
+
+.tlegend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 12px; font-size: 12px; color: var(--ink-dim); }
+.tchart-wrap { max-height: 70vh; overflow: auto; border: 1px solid var(--line); border-radius: 10px; }
+table.tchart { border-collapse: separate; border-spacing: 0; font-size: 11px; }
+table.tchart th, table.tchart td {
+  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  text-align: center; padding: 0; width: 38px; height: 28px;
 }
-.tchip small { color: var(--ink-dim); margin-left: 5px; font-size: 11px; }
-.tchips .none { color: var(--ink-dim); font-size: 13px; }
+table.tchart th { background: var(--panel-2); font-weight: 600; font-size: 11px; white-space: nowrap; padding: 3px 5px; }
+table.tchart thead th { position: sticky; top: 0; z-index: 2; border-bottom: 3px solid var(--c); }
+table.tchart thead th.corner { left: 0; z-index: 3; font-size: 10px; color: var(--ink-dim); min-width: 64px; border-bottom-color: var(--line); }
+table.tchart tbody th { position: sticky; left: 0; z-index: 1; text-align: left; min-width: 64px; border-left: 4px solid var(--c); }
+table.tchart td { cursor: pointer; }
+table.tchart td.super { background: rgba(242,104,95,.22); color: #ffb3ad; font-weight: 700; font-size: 13px; }
+table.tchart td.resist { background: rgba(90,169,240,.14); color: #5aa9f0; }
+table.tchart td.double { background: rgba(255,255,255,.07); color: var(--ink-dim); }
+table.tchart tfoot td { background: var(--panel-2); font-size: 11px; color: var(--ink-dim); position: sticky; bottom: 0; cursor: default; }
+table.tchart tfoot td.lbl { text-align: left; padding: 3px 6px; position: sticky; left: 0; z-index: 1; }
+table.tchart .hl { background: rgba(255, 211, 77, .12); }
+table.tchart th.hl { background: rgba(255, 211, 77, .2); color: var(--accent); }
+table.tchart .sel { outline: 2px solid var(--accent); outline-offset: -2px; position: relative; z-index: 1; }
+.cell-detail { margin-top: 10px; min-height: 44px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; font-size: 13px; }
+.cell-detail .tbadge { margin-inline: 2px; }
+
+/* 타입 상성: 폰에서는 버튼·칩·표를 줄여 한 화면에 더 많이 보이게 */
+@media (max-width: 680px) {
+  .tpick { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; margin-top: 8px; }
+  .tpick button { padding: 7px 0; font-size: 12px; border-radius: 8px; }
+  .tpick button.on { box-shadow: 0 0 0 1px var(--bg), 0 0 0 3px var(--c); }
+  .tpick button.on::before { content: "✓"; margin-right: 1px; }
+  .tpick-hint { font-size: 11px; margin-top: 6px; }
+  .selbar { margin-top: 8px; padding: 7px 9px; gap: 6px; }
+  .selchip { padding: 4px 6px 4px 10px; font-size: 12px; }
+  .selchip i { width: 16px; height: 16px; }
+  .selclear { padding: 4px 8px; font-size: 11px; }
+  .duo { gap: 10px; }
+  .duo-col { padding: 11px; }
+  .duo-col h3 { font-size: 14px; }
+  .duo-col .lvl { grid-template-columns: 46px minmax(0, 1fr); gap: 6px; padding: 7px 0; }
+  .lvl-x { font-size: 14px; padding-top: 3px; }
+  .tbadge { padding: 3px 8px; font-size: 12px; gap: 4px; }
+  .tbadge::before { width: 7px; height: 7px; }
+  .tchips { gap: 4px; }
+  .tchart-wrap { max-height: 60vh; }
+  table.tchart th, table.tchart td { width: 26px; height: 22px; }
+  table.tchart th { font-size: 9px; padding: 2px 3px; }
+  table.tchart thead th.corner { font-size: 8px; min-width: 44px; }
+  table.tchart tbody th { min-width: 44px; border-left-width: 3px; }
+  table.tchart td.super { font-size: 11px; }
+  table.tchart td.resist, table.tchart td.double { font-size: 9px; }
+  table.tchart tfoot td { font-size: 9px; }
+  .cell-detail { font-size: 12px; padding: 9px 11px; }
+  .tlegend { gap: 4px 10px; font-size: 11px; margin-bottom: 8px; }
+}
 
 /* ---------- 팀 조합 ---------- */
 .roles { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-top: 12px; }
