@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>포켓몬 GO 슈퍼리그 CCT 계산기</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1>슈퍼리그 CCT 계산기</h1>
+    <p class="sub">상대 일반기술의 마지막 턴에 차징기를 입력해 ‘공짜 턴’을 최소화한다</p>
+    <div class="meta"><span>1턴 = 0.5초</span><span>차징 입력 = 행동 1회</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="pickers">
+    <div class="picker" data-side="me">
+      <label class="picker-label">내 포켓몬</label>
+      <div class="combo">
+        <input type="search" class="search" placeholder="이름으로 검색 (한글·영문)" autocomplete="off"
+               aria-label="내 포켓몬 검색">
+        <ul class="results" hidden></ul>
+      </div>
+      <div class="chosen" hidden>
+        <img class="chosen-img" alt="">
+        <div class="chosen-text">
+          <strong class="chosen-name"></strong>
+          <span class="chosen-rank"></span>
+        </div>
+        <button type="button" class="clear" aria-label="선택 해제">✕</button>
+      </div>
+      <div class="moves" hidden>
+        <label class="moves-label">일반기술</label>
+        <div class="move-chips"></div>
+      </div>
+    </div>
+
+    <div class="picker" data-side="foe">
+      <label class="picker-label">상대 포켓몬</label>
+      <div class="combo">
+        <input type="search" class="search" placeholder="이름으로 검색 (한글·영문)" autocomplete="off"
+               aria-label="상대 포켓몬 검색">
+        <ul class="results" hidden></ul>
+      </div>
+      <div class="chosen" hidden>
+        <img class="chosen-img" alt="">
+        <div class="chosen-text">
+          <strong class="chosen-name"></strong>
+          <span class="chosen-rank"></span>
+        </div>
+        <button type="button" class="clear" aria-label="선택 해제">✕</button>
+      </div>
+      <div class="moves" hidden>
+        <label class="moves-label">일반기술</label>
+        <div class="move-chips"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="result" id="result" aria-live="polite">
+    <p class="placeholder">양쪽 포켓몬을 고르면 차징 타이밍이 나옵니다.</p>
+  </section>
+
+  <section class="panel">
+    <h2>CCT 횟수표</h2>
+    <p class="note">내 일반기술 턴 × 상대 일반기술 턴 · 숫자 = 내 일반기술을 몇 번 쓴 직후 차징을 누르는지</p>
+    <div class="table-scroll">
+      <table class="cct" id="cct-table"></table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>턴 그룹별 일반기술</h2>
+    <p class="note">상위 100위 안에서 실제로 쓰이는 일반기술</p>
+    <div class="groups" id="groups"></div>
+  </section>
+
+  <section class="panel">
+    <h2>실전에서 틀리지 않는 4가지</h2>
+    <ol class="tips">
+      <li><strong>카운트 리셋</strong> 차징기 사용 후·새 포켓몬 등장 후 다시 0부터</li>
+      <li><strong>교체로 어긋남</strong> 중간 교체나 멈춤이 있으면 애니메이션을 보고 재정렬</li>
+      <li><strong>같은 턴 조합</strong> 완벽한 CCT가 불가능하므로 에너지·CMP를 우선</li>
+      <li><strong>상대 1턴 기술</strong> 매 턴 끝나므로 CCT 차이가 거의 없다</li>
+    </ol>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <p>순위·기술 데이터 PvPoke · 스프라이트와 한글명 PoGoMate · 기술 한글명 포켓몬 GO 한국어 로케일</p>
+  <p>상표 및 게임 이미지의 권리는 각 권리자에게 있습니다.</p>
+</footer>
+
+<script src="data/data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

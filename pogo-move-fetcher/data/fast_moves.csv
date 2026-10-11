@@ -1,0 +1,99 @@
+﻿turns,seconds,moveId,nameKo,name,type,power,energyGain
+1,0.5,LOCK_ON,록온,Lock On,normal,1,5
+1,0.5,SAND_ATTACK,모래뿌리기,Sand Attack,ground,2,4
+1,0.5,TACKLE,몸통박치기,Tackle,normal,3,3
+1,0.5,BITE,물기,Bite,dark,2,4
+1,0.5,WATER_GUN,물대포,Water Gun,water,3,3
+1,0.5,BUG_BITE,벌레먹기,Bug Bite,bug,4,3
+1,0.5,PSYWAVE,사이코웨이브,Psywave,psychic,3,4
+1,0.5,FURY_CUTTER,연속자르기,Fury Cutter,bug,3,4
+1,0.5,DRAGON_BREATH,용의숨결,Dragon Breath,dragon,3,4
+1,0.5,CUT,풀베기,Cut,normal,3,2
+1,0.5,SCRATCH,할퀴기,Scratch,normal,3,4
+1,0.5,LICK,핥기,Lick,ghost,3,3
+2,1.0,STEEL_WING,강철날개,Steel Wing,steel,7,5
+2,1.0,METAL_SOUND,금속음,Metal Sound,steel,5,8
+2,1.0,SUCKER_PUNCH,기습,Sucker Punch,dark,8,7
+2,1.0,LEAFAGE,나뭇잎,Leafage,grass,6,8
+2,1.0,WING_ATTACK,날개치기,Wing Attack,flying,5,8
+2,1.0,POWDER_SNOW,눈싸라기,Powder Snow,ice,6,8
+2,1.0,VINE_WHIP,덩굴채찍,Vine Whip,grass,5,8
+2,1.0,POISON_JAB,독찌르기,Poison Jab,poison,7,7
+2,1.0,POISON_STING,독침,Poison Sting,poison,4,9
+2,1.0,ROCK_THROW,돌떨구기,Rock Throw,rock,8,5
+2,1.0,POUND,막치기,Pound,normal,4,4
+2,1.0,MUD_SHOT,머드샷,Mud Shot,ground,3,9
+2,1.0,METAL_CLAW,메탈클로,Metal Claw,steel,5,7
+2,1.0,WATER_GUN_FAST_BLASTOISE,물대포,Water Gun Fast Blastoise,water,6,4
+2,1.0,THUNDER_FANG,번개엄니,Thunder Fang,electric,8,6
+2,1.0,EMBER,불꽃세례,Ember,fire,4,9
+2,1.0,FIRE_FANG,불꽃엄니,Fire Fang,fire,8,6
+2,1.0,BULLET_PUNCH,불릿펀치,Bullet Punch,steel,7,7
+2,1.0,PSYCHO_CUT,사이코커터,Psycho Cut,psychic,4,9
+2,1.0,AEGISLASH_CHARGE_PSYCHO_CUT,사이코커터,Psycho Cut,psychic,0,6
+2,1.0,SHADOW_CLAW,섀도클로,Shadow Claw,ghost,6,8
+2,1.0,FEINT_ATTACK,속여때리기,Feint Attack,dark,6,6
+2,1.0,SPARK,스파크,Spark,electric,5,7
+2,1.0,LOW_KICK,안다리걸기,Low Kick,fighting,6,8
+2,1.0,FROST_BREATH,얼음숨결,Frost Breath,ice,7,5
+2,1.0,ICE_FANG,얼음엄니,Ice Fang,ice,8,6
+2,1.0,FAIRY_WIND,요정의바람,Fairy Wind,fairy,4,9
+2,1.0,ACID,용해액,Acid,poison,6,8
+2,1.0,RAZOR_LEAF,잎날가르기,Razor Leaf,grass,9,4
+2,1.0,QUICK_ATTACK,전광석화,Quick Attack,normal,5,8
+2,1.0,THUNDER_SHOCK,전기쇼크,Thunder Shock,electric,4,9
+2,1.0,PECK,쪼기,Peck,flying,6,8
+2,1.0,COUNTER,카운터,Counter,fighting,8,6
+2,1.0,KARATE_CHOP,태권당수,Karate Chop,fighting,5,9
+3,1.5,BUBBLE,거품,Bubble,water,8,11
+3,1.5,ROLLOUT,구르기,Rollout,rock,7,13
+3,1.5,ASTONISH,놀래키기,Astonish,ghost,12,10
+3,1.5,TAKE_DOWN,돌진,Take Down,normal,14,9
+3,1.5,DOUBLE_KICK,두번차기,Double Kick,fighting,8,12
+3,1.5,DRAGON_TAIL,드래곤테일,Dragon Tail,dragon,9,12
+3,1.5,SMACK_DOWN,떨어뜨리기,Smack Down,rock,11,8
+3,1.5,MAGICAL_LEAF,매지컬리프,Magical Leaf,grass,10,10
+3,1.5,WATER_SHURIKEN,물수리검,Water Shuriken,water,6,14
+3,1.5,ROCK_SMASH,바위깨기,Rock Smash,fighting,9,7
+3,1.5,SNARL,바크아웃,Snarl,dark,5,13
+3,1.5,FORCE_PALM,발경,Force Palm,fighting,13,10
+3,1.5,STRUGGLE_BUG,벌레의저항,Struggle Bug,bug,9,8
+3,1.5,HEX,병상첨병,Hex,ghost,7,13
+3,1.5,ZEN_HEADBUTT,사념의박치기,Zen Headbutt,psychic,8,6
+3,1.5,EXTRASENSORY,신통력,Extrasensory,psychic,8,10
+3,1.5,BULLET_SEED,씨기관총,Bullet Seed,grass,5,13
+3,1.5,IRON_TAIL,아이언테일,Iron Tail,steel,10,7
+3,1.5,CHARM,애교부리기,Charm,fairy,12,8
+3,1.5,ICE_SHARD,얼음뭉치,Ice Shard,ice,9,10
+3,1.5,INFESTATION,엉겨붙기,Infestation,bug,10,12
+3,1.5,AIR_SLASH,에어슬래시,Air Slash,flying,9,9
+3,1.5,AEGISLASH_CHARGE_AIR_SLASH,에어슬래시,Air Slash,flying,0,6
+3,1.5,HIDDEN_POWER_NORMAL,잠재파워,Hidden Power,normal,9,8
+3,1.5,HIDDEN_POWER_STEEL,잠재파워 (강철),Hidden Power (Steel),steel,9,8
+3,1.5,HIDDEN_POWER_FIGHTING,잠재파워 (격투),Hidden Power (Fighting),fighting,9,8
+3,1.5,HIDDEN_POWER_GHOST,잠재파워 (고스트),Hidden Power (Ghost),ghost,9,8
+3,1.5,HIDDEN_POWER_POISON,잠재파워 (독),Hidden Power (Poison),poison,9,8
+3,1.5,HIDDEN_POWER_DRAGON,잠재파워 (드래곤),Hidden Power (Dragon),dragon,9,8
+3,1.5,HIDDEN_POWER_GROUND,잠재파워 (땅),Hidden Power (Ground),ground,9,8
+3,1.5,HIDDEN_POWER_WATER,잠재파워 (물),Hidden Power (Water),water,9,8
+3,1.5,HIDDEN_POWER_ROCK,잠재파워 (바위),Hidden Power (Rock),rock,9,8
+3,1.5,HIDDEN_POWER_BUG,잠재파워 (벌레),Hidden Power (Bug),bug,9,8
+3,1.5,HIDDEN_POWER_FIRE,잠재파워 (불꽃),Hidden Power (Fire),fire,9,8
+3,1.5,HIDDEN_POWER_FLYING,잠재파워 (비행),Hidden Power (Flying),flying,9,8
+3,1.5,HIDDEN_POWER_DARK,잠재파워 (악),Hidden Power (Dark),dark,9,8
+3,1.5,HIDDEN_POWER_ICE,잠재파워 (얼음),Hidden Power (Ice),ice,9,8
+3,1.5,HIDDEN_POWER_PSYCHIC,잠재파워 (에스퍼),Hidden Power (Psychic),psychic,9,8
+3,1.5,HIDDEN_POWER_ELECTRIC,잠재파워 (전기),Hidden Power (Electric),electric,9,8
+3,1.5,HIDDEN_POWER_GRASS,잠재파워 (풀),Hidden Power (Grass),grass,9,8
+3,1.5,GEOMANCY,지오컨트롤,Geomancy,fairy,8,13
+3,1.5,MUD_SLAP,진흙뿌리기,Mud Slap,ground,11,10
+3,1.5,CHARGE_BEAM,차지빔,Charge Beam,electric,6,11
+3,1.5,WATERFALL,폭포오르기,Waterfall,water,11,10
+3,1.5,PRESENT,프레젠트,Present,normal,3,12
+3,1.5,FIRE_SPIN,회오리불꽃,Fire Spin,fire,11,10
+4,2.0,GUST,바람일으키기,Gust,flying,16,14
+4,2.0,VOLT_SWITCH,볼트체인지,Volt Switch,electric,14,16
+4,2.0,CONFUSION,염동력,Confusion,psychic,16,14
+4,2.0,SPLASH,튀어오르기,Splash,water,0,12
+4,2.0,YAWN,하품,Yawn,normal,0,12
+5,2.5,INCINERATE,불태우기,Incinerate,fire,20,20
