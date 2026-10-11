@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>포켓몬 GO 슈퍼리그 개체값 고르기</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="shell">
+
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="brand-sub">포켓몬 GO</span>
+    <span class="brand-name">슈퍼리그 도구</span>
+  </a>
+  <nav class="nav">
+    <a href="index.html"><span class="nav-ico" aria-hidden="true">CCT</span>차징 타이밍</a>
+    <a href="cmp.html"><span class="nav-ico" aria-hidden="true">CMP</span>차징 우선권</a>
+    <span class="nav-sep">초보자용</span>
+    <a href="ivs.html"><span class="nav-ico" aria-hidden="true">IV</span>개체값 고르기</a>
+    <a href="team.html"><span class="nav-ico" aria-hidden="true">팀</span>팀 조합 유형</a>
+    <a href="types.html"><span class="nav-ico" aria-hidden="true">상성</span>타입 상성</a>
+  </nav>
+  <p class="side-note">CP 1500 · 슈퍼리그<br>데이터 PvPoke · PoGoMate</p>
+</aside>
+
+<div class="content">
+
+<header class="top">
+  <div class="wrap">
+    <h1>개체값 고르기</h1>
+    <p class="sub">슈퍼리그에서 공격이 낮은 개체가 좋은 이유</p>
+    <div class="meta"><span>CP 1500 제한</span><span>4,096조합 전수 계산</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="panel lead">
+    <h2>슈퍼리그는 왜 공격이 낮은 개체를 쓰나요?</h2>
+    <div class="lead-grid">
+      <div class="lead-item"><span class="n">1</span>
+        <p><b>CP 1500 제한이 있습니다.</b> 이 선을 넘으면 슈퍼리그에 못 나갑니다.</p></div>
+      <div class="lead-item"><span class="n">2</span>
+        <p><b>공격은 CP를 가장 많이 올립니다.</b> 공격이 높으면 낮은 레벨에서 1500에 도달해 버립니다.</p></div>
+      <div class="lead-item"><span class="n">3</span>
+        <p><b>공격이 낮으면 레벨을 더 올릴 수 있습니다.</b> 그만큼 방어와 HP가 커져서 오래 버팁니다.</p></div>
+    </div>
+    <p class="note">
+      CP = ⌊공격 × √방어 × √HP ÷ 10⌋ — 공격만 제곱근이 없어서 CP를 가장 빨리 밀어 올립니다.
+      그래서 같은 1500 CP 안에서는 보통 공격↓ / 방어↑ / 체력↑ 개체가 더 단단합니다.
+    </p>
+  </section>
+
+  <section class="picker cmp-picker">
+    <label class="picker-label">포켓몬으로 확인하기</label>
+    <div class="combo">
+      <input type="search" class="search" placeholder="이름으로 검색 (한글·영문)" autocomplete="off"
+             aria-label="포켓몬 검색">
+      <ul class="results" hidden></ul>
+    </div>
+    <div class="chosen" hidden>
+      <img class="chosen-img" alt="">
+      <div class="chosen-text">
+        <strong class="chosen-name"></strong>
+        <span class="chosen-rank"></span>
+      </div>
+      <button type="button" class="clear" aria-label="선택 해제">✕</button>
+    </div>
+    <div class="ivs" hidden>
+      <div class="preset-row">
+        <button type="button" class="chip iv-quick" data-ivs="15/15/15">15 · 15 · 15</button>
+        <button type="button" class="chip iv-quick" data-ivs="0/15/15">0 · 15 · 15</button>
+        <button type="button" class="chip iv-quick" data-ivs="0/0/0">0 · 0 · 0</button>
+      </div>
+      <div class="iv-row">
+        <label>공격 <input type="number" class="iv-input" min="0" max="15" step="1"></label>
+        <label>방어 <input type="number" class="iv-input" min="0" max="15" step="1"></label>
+        <label>HP <input type="number" class="iv-input" min="0" max="15" step="1"></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="result" id="iv-result" aria-live="polite">
+    <p class="placeholder">포켓몬을 고르면 개체값별 결과가 나옵니다.</p>
+  </section>
+
+  <section class="panel">
+    <h2>꼭 기억하세요</h2>
+    <ul class="tips">
+      <li><strong>무조건 0/15/15가 정답은 아닙니다</strong>
+        포켓몬마다 최적 조합이 다릅니다. 위에서 직접 확인하세요</li>
+      <li><strong>레벨 상한 50 기준입니다</strong>
+        베스트프렌드(레벨 51)는 계산에 넣지 않았습니다</li>
+      <li><strong>버티는 힘과 차징 우선권은 반대로 갑니다</strong>
+        1등 개체는 오래 버티지만 공격이 낮아 CMP에서 집니다.
+        <a href="cmp.html">CMP 계산기</a>에서 확인해 보세요</li>
+      <li><strong>초보자는 ‘공격 낮고 방어·체력 높은 개체’부터 보면 쉽습니다</strong>
+        세밀한 최적화는 나중에 해도 됩니다</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <p class="made-by">made by <strong>kingchkickenmayo</strong></p>
+  <p>종족값 PvPoke · 스프라이트와 한글명 PoGoMate</p>
+  <p>상표 및 게임 이미지의 권리는 각 권리자에게 있습니다.</p>
+</footer>
+
+</div><!-- /content -->
+</div><!-- /shell -->
+
+<script src="data/data.js"></script>
+<script src="common.js"></script>
+<script src="ivs.js"></script>
+</body>
+</html>

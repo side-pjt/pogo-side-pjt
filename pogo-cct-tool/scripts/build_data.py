@@ -29,6 +29,16 @@ PVPOKE_GM = 'https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/gam
 PVPOKE_POKEMON_JS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
                      'src/js/pokemon/Pokemon.js')
 
+# 타입 상성 — PvPoke DamageCalculator 의 getTypeTraits 를 쓴다.
+# 공식 GAME_MASTER 의 attackScalar 배열과 324칸 전부 대조해 검증했다.
+# attackScalar 쪽은 배열 순서에 라벨이 없어 순서를 가정해야 하지만, 이쪽은 타입을
+# 이름으로 적어 둬서 추측할 여지가 없다. 그래서 이쪽을 정본으로 쓴다.
+PVPOKE_DMG_JS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
+                 'src/js/battle/DamageCalculator.js')
+TYPE_MOVE_TABLE = ROOT.parent / 'pogo-move-fetcher' / 'data' / 'types.json'
+
+SUPER, RESIST, DOUBLE_RESIST = 1.6, 0.625, 0.390625
+
 
 def load(p):
     if not p.exists():
@@ -61,6 +71,53 @@ def load_cmp_source():
     return base, cpms
 
 
+def load_type_chart():
+    """방어 타입별 약점·저항·무효를 긁어 18x18 배율 행렬로 만든다."""
+    src = fetch(PVPOKE_DMG_JS)
+    traits = {}
+    for m in re.finditer(r'case\s+"(\w+)":\s*traits\s*=\s*\{(.*?)\};', src, re.S):
+        t, body = m.group(1), m.group(2)
+        got = {}
+        for key in ('resistances', 'weaknesses', 'immunities'):
+            block = re.search(key + r':\s*\[(.*?)\]', body, re.S)
+            got[key] = re.findall(r'"(\w+)"', block.group(1)) if block else []
+        traits[t] = got
+
+    if len(traits) != 18:
+        raise SystemExit('타입 상성표를 18개로 못 읽었습니다 (%d개) — PvPoke 소스 구조 확인 필요.'
+                         % len(traits))
+
+    def mult(atk, dfn):
+        tr = traits[dfn]
+        if atk in tr['weaknesses']:
+            return SUPER
+        if atk in tr['resistances']:
+            return RESIST
+        if atk in tr['immunities']:
+            return DOUBLE_RESIST
+        return 1.0
+
+    # 게임 내 표준 타입 순서. GAME_MASTER attackScalar 배열의 인덱스 순서와 같고,
+    # 324칸 전부 대조해 확인했다. 알파벳순으로 두면 표가 읽기 어색해진다.
+    order = ['normal', 'fighting', 'flying', 'poison', 'ground', 'rock',
+             'bug', 'ghost', 'steel', 'fire', 'water', 'grass',
+             'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy']
+    if set(order) != set(traits):
+        raise SystemExit('타입 목록이 표준 순서와 다릅니다: %s' % (set(order) ^ set(traits)))
+
+    chart = {a: {d: mult(a, d) for d in order} for a in order}
+
+    ko = {}
+    if TYPE_MOVE_TABLE.exists():
+        ko = load(TYPE_MOVE_TABLE)['types']
+    missing = [t for t in order if t not in ko]
+    if missing:
+        print('  [경고] 한글 타입명 없음: %s' % ', '.join(missing))
+
+    return {'order': order, 'ko': ko, 'chart': chart,
+            'mult': {'super': SUPER, 'resist': RESIST, 'doubleResist': DOUBLE_RESIST}}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--no-images', action='store_true', help='스프라이트 복사 건너뛰기')
@@ -74,6 +131,10 @@ def main():
     base_stats, cpms = load_cmp_source()
     print('  종족값 %d종 / CPM %d개 (레벨 1~%g)'
           % (len(base_stats), len(cpms), 1 + (len(cpms) - 1) / 2))
+
+    print('타입 상성표 받는 중…')
+    types = load_type_chart()
+    print('  타입 %d개 / 상성 %d칸' % (len(types['order']), len(types['order']) ** 2))
 
     by_species = {m['speciesId']: m for m in mov}
     rows, skipped = [], []
@@ -123,7 +184,11 @@ def main():
         'window.POKEMON = %s;\n'
         '// CPM[i] = 레벨 (1 + i/2) 의 배율. 공격 실수치 = (종족값 + 개체값) x CPM\n'
         'window.CPM = %s;\n'
-        % (payload, json.dumps(cpms, separators=(',', ':'))), encoding='utf-8')
+        '// TYPES.chart[공격타입][방어타입] = 배율 (1.6 / 1 / 0.625 / 0.390625)\n'
+        'window.TYPES = %s;\n'
+        % (payload,
+           json.dumps(cpms, separators=(',', ':')),
+           json.dumps(types, ensure_ascii=False, separators=(',', ':'))), encoding='utf-8')
 
     if not args.no_images:
         dst = ROOT / 'images'

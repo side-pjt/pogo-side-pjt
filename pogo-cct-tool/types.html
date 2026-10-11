@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>포켓몬 GO 타입 상성</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="shell">
+
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <span class="brand-sub">포켓몬 GO</span>
+    <span class="brand-name">슈퍼리그 도구</span>
+  </a>
+  <nav class="nav">
+    <a href="index.html"><span class="nav-ico" aria-hidden="true">CCT</span>차징 타이밍</a>
+    <a href="cmp.html"><span class="nav-ico" aria-hidden="true">CMP</span>차징 우선권</a>
+    <span class="nav-sep">초보자용</span>
+    <a href="ivs.html"><span class="nav-ico" aria-hidden="true">IV</span>개체값 고르기</a>
+    <a href="team.html"><span class="nav-ico" aria-hidden="true">팀</span>팀 조합 유형</a>
+    <a href="types.html"><span class="nav-ico" aria-hidden="true">상성</span>타입 상성</a>
+  </nav>
+  <p class="side-note">CP 1500 · 슈퍼리그<br>데이터 PvPoke · PoGoMate</p>
+</aside>
+
+<div class="content">
+
+<header class="top">
+  <div class="wrap">
+    <h1>타입 상성</h1>
+    <p class="sub">어떤 타입 기술이 잘 통하고 잘 안 통하는지</p>
+    <div class="meta"><span>포켓몬 GO 기준 (본편과 배수가 다름)</span><span>완전 무효 없음</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="picker cmp-picker">
+    <label class="picker-label">포켓몬으로 찾기</label>
+    <div class="combo">
+      <input type="search" class="search" placeholder="이름으로 검색 (한글·영문)" autocomplete="off"
+             aria-label="포켓몬 검색">
+      <ul class="results" hidden></ul>
+    </div>
+    <div class="chosen" hidden>
+      <img class="chosen-img" alt="">
+      <div class="chosen-text">
+        <strong class="chosen-name"></strong>
+        <span class="chosen-rank"></span>
+      </div>
+      <button type="button" class="clear" aria-label="선택 해제">✕</button>
+    </div>
+  </section>
+
+  <section class="result" id="mon-result" aria-live="polite">
+    <p class="placeholder">포켓몬을 고르면 약점과 저항이 나옵니다.</p>
+  </section>
+
+  <section class="panel">
+    <h2>전체 상성표</h2>
+    <p class="note">
+      세로 = 맞는 쪽(방어) 타입 · 가로 = 때리는 기술 타입 · 칸에 마우스를 올리면 줄이 강조됩니다
+    </p>
+    <div class="tlegend">
+      <span><i class="sw super"></i>● 효과가 굉장하다 ×1.6</span>
+      <span><i class="sw resist"></i>▲ 효과가 별로다 ×0.625</span>
+      <span><i class="sw double"></i>✕ 이중 저항 ×0.39</span>
+      <span><i class="sw neutral"></i>빈칸 보통 ×1</span>
+    </div>
+    <div class="table-scroll">
+      <table class="tchart" id="type-table"></table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>알아두면 쉬워지는 것</h2>
+    <ul class="tips">
+      <li><strong>포켓몬 GO에는 완전 무효가 없다</strong>
+        본편에서 ×0 인 조합도 여기서는 ×0.39로 조금은 들어간다.
+        고스트에게 노말 기술이 아예 안 통하는 게 아니다</li>
+      <li><strong>두 타입이면 곱해진다</strong>
+        약점 둘이 겹치면 ×2.56, 약점과 저항이 겹치면 ×1로 상쇄된다</li>
+      <li><strong>배수가 본편과 다르다</strong>
+        본편은 2배·0.5배지만 포켓몬 GO는 1.6배·0.625배라 체감이 더 완만하다</li>
+      <li><strong>자속 보정은 별도</strong>
+        자기 타입과 같은 기술은 여기에 ×1.2가 더 붙는다</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <p class="made-by">made by <strong>kingchkickenmayo</strong></p>
+  <p>타입 상성 PvPoke · 한글 타입명 포켓몬 GO 한국어 로케일</p>
+  <p>상표 및 게임 이미지의 권리는 각 권리자에게 있습니다.</p>
+</footer>
+
+</div><!-- /content -->
+</div><!-- /shell -->
+
+<script src="data/data.js"></script>
+<script src="common.js"></script>
+<script src="types.js"></script>
+</body>
+</html>

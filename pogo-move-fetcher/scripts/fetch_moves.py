@@ -57,6 +57,12 @@ def norm(s):
     return re.sub(r'[^a-z0-9]', '', s.lower())
 
 
+def korean_types(ko):
+    """한글 타입명 — 공식 로케일의 pokemon_type_* 키."""
+    return {k[len('pokemon_type_'):]: v
+            for k, v in ko.items() if k.startswith('pokemon_type_')}
+
+
 def build_korean_names(moves, en, ko):
     """영문 기술명으로 로케일 키를 찾아 한글명을 붙인다.
 
@@ -67,8 +73,7 @@ def build_korean_names(moves, en, ko):
         if k.startswith('move_name_'):
             by_en.setdefault(norm(v), k)
 
-    types_ko = {k[len('pokemon_type_'):]: v
-                for k, v in ko.items() if k.startswith('pokemon_type_')}
+    types_ko = korean_types(ko)
 
     out, missing = {}, []
     for m in moves:
@@ -169,6 +174,11 @@ def main():
               open(out_dir / 'pokemon_moves.json', 'w', encoding='utf-8'),
               ensure_ascii=False, indent=1)
 
+    tko = korean_types(ko)
+    json.dump({'count': len(tko), 'types': tko},
+              open(out_dir / 'types.json', 'w', encoding='utf-8'),
+              ensure_ascii=False, indent=1)
+
     fast = sorted([m for m in move_rows.values() if m['kind'] == 'fast'],
                   key=lambda m: (m['turns'] or 9, m['nameKo'] or m['name']))
     with open(out_dir / 'fast_moves.csv', 'w', encoding='utf-8-sig', newline='') as f:
@@ -188,6 +198,7 @@ def main():
     print('  %s' % (out_dir / 'moves.json'))
     print('  %s' % (out_dir / 'pokemon_moves.json'))
     print('  %s' % (out_dir / 'fast_moves.csv'))
+    print('  %s (한글 타입명 %d개)' % (out_dir / 'types.json', len(tko)))
     return 1 if missing else 0
 
 

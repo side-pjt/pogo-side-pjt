@@ -3,9 +3,17 @@ name: pogo-cct-tool
 description: 슈퍼리그 CCT·CMP 계산기 웹 도구를 고치거나 데이터를 갱신한다. CCT/CMP 계산식을 수정할 때, 화면·검색·표를 손볼 때, 페이지를 추가할 때, 수집기를 돌린 뒤 도구 데이터를 다시 만들 때 사용한다. 트리거 "CCT 계산기", "CMP 계산기", "차징 타이밍", "개체값", "도구 갱신", "data.js 다시 만들어".
 ---
 
-# 슈퍼리그 CCT·CMP 계산기
+# 슈퍼리그 계산기 모음
 
-페이지 둘. `index.html` = CCT, `cmp.html` = CMP.
+페이지 다섯. 전부 같은 껍데기와 `common.js` 를 공유한다.
+
+| 페이지 | 스크립트 | 내용 |
+| --- | --- | --- |
+| `index.html` | `app.js` | CCT 차징 타이밍 |
+| `cmp.html` | `cmp.js` | CMP 차징 우선권 |
+| `ivs.html` | `ivs.js` | 개체값 가이드 (초보자용) |
+| `team.html` | `team.js` | 팀 조합 유형 (초보자용) |
+| `types.html` | `types.js` | 타입 상성 (초보자용) |
 
 정적 HTML/CSS/JS. **빌드 도구도 프레임워크도 쓰지 않는다** — `index.html` 을 그냥 열면 돈다.
 
@@ -122,9 +130,18 @@ URL=$(python -c "import pathlib;print(pathlib.Path('index.html').resolve().as_ur
 
 ## 레이아웃 주의
 
-`main` 과 `.pickers` 가 그리드다. 그리드 아이템은 기본 `min-width: auto` 라서 안에 넓은
-요소(`table.cct` 는 `min-width: 560px`)가 있으면 칸을 밀어내 페이지 전체가 가로로 넘친다.
-`main > *, .pickers > *, .table-scroll { min-width: 0 }` 가 이걸 막는다 — 지우지 말 것.
+**`min-width: 0` 을 지우지 말 것.** 그리드·플렉스 아이템은 기본 `min-width: auto` 라서
+안에 넓은 요소가 있으면 칸을 밀어내 페이지 전체가 가로로 넘친다. 세 군데가 필요하다:
+
+```css
+.shell > *                            { min-width: 0 }  /* 사이드바 + 본문 */
+main > *, .pickers > *, .table-scroll { min-width: 0 }  /* 넓은 표 */
+@media (max-width: 860px) { .nav      { min-width: 0 } }/* 가로 네비 */
+```
+
+이 함정을 세 번 밟았다. 증상은 매번 같다 — 좁은 화면에서 페이지가 가로로 넘치고
+좌우가 잘린다. `documentElement.scrollWidth > clientWidth` 로 확인할 것.
+넘치는 요소를 찾으려면 모든 요소의 `getBoundingClientRect().right` 를 뷰포트 폭과 비교하면 된다.
 
 `[hidden] { display: none !important }` 도 필요하다. `.chosen { display: flex }` 가
 `hidden` 속성을 이겨서, 없으면 선택 전에도 빈 박스가 보인다.
@@ -174,6 +191,24 @@ PvPoke gamemaster의 `defaultIVs.cp1500` 은 **1등 개체가 아니다** (스�
 사이드바는 `position: sticky; height: 100vh` 라 스크롤해도 남는다.
 현재 페이지 표시는 `common.js` 의 `markNav()` 가 파일명으로 `aria-current` 를 붙인다 —
 링크 `href` 는 `index.html` 처럼 **파일명 그대로** 적을 것 (`./index.html` 은 매칭 안 된다).
+
+## 타입 상성 데이터
+
+`window.TYPES` = `{ order, ko, chart, mult }`. `chart[공격][방어]` 가 배율이다.
+
+출처는 PvPoke `DamageCalculator.js` 의 `getTypeTraits` — 방어 타입별 약점·저항·무효를
+**이름으로** 적어 둬서 배열 순서를 추측할 필요가 없다. 공식 GAME_MASTER 의
+`attackScalar` 는 18칸 배열인데 라벨이 없어 순서를 가정해야 하므로 정본으로 쓰지 않는다.
+단 **324칸 전부 대조해 두 소스가 일치**하는 것은 확인했고, 그래서 표시용 표준 순서
+(`order`)도 그 가정이 맞다고 보고 쓴다.
+
+주의할 점:
+
+- 포켓몬 GO에는 **완전 무효가 없다.** 본편 ×0 조합도 ×0.390625다
+- 배수가 본편과 다르다 (×1.6 / ×0.625, 본편은 ×2 / ×0.5)
+- 두 타입이면 곱해진다 — 이중 약점 ×2.56, 이중 저항 ×0.39
+- 한글 타입명은 `pogo-move-fetcher` 가 `data/types.json` 으로 내보낸다
+  (게임 한국어 로케일의 `pokemon_type_*`)
 
 ## 구조
 

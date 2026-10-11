@@ -6,6 +6,9 @@
 | --- | --- |
 | `index.html` | **CCT** — 차징기를 몇 번째 일반기술 직후에 눌러야 하는지 |
 | `cmp.html` | **CMP** — 같은 턴에 차징기를 쓰면 누가 먼저 나가는지 |
+| `ivs.html` | **개체값** — 슈퍼리그에서 공격이 낮은 개체가 좋은 이유 (초보자용) |
+| `team.html` | **팀 조합** — ABB · ABA · ABC · XAB 구조 (초보자용) |
+| `types.html` | **타입 상성** — 18×18 상성표와 포켓몬별 약점 (초보자용) |
 
 ## 여는 법
 
@@ -72,14 +75,15 @@ PvPoke 시뮬레이터도 `poke.stats.atk > opponent.stats.atk` 로만 판정한
 ## 구조
 
 ```
-index.html        CCT 페이지
-cmp.html          CMP 페이지
-                  (둘 다 좌측 사이드바 + 본문 구조를 공유한다)
-style.css         두 페이지 공용
+index.html        CCT 페이지        app.js
+cmp.html          CMP 페이지        cmp.js
+ivs.html          개체값 가이드      ivs.js
+team.html         팀 조합 유형       team.js
+types.html        타입 상성         types.js
+                  (모두 좌측 사이드바 + 본문 구조를 공유한다)
+style.css         전 페이지 공용
 common.js         데이터·검색·포켓몬 선택 콤보박스 (공용)
-app.js            CCT 계산과 화면
-cmp.js            CMP 계산과 화면
-data/data.js      window.POKEMON (1,152종, 종족값 포함) + window.CPM
+data/data.js      window.POKEMON (1,152종, 종족값 포함) + window.CPM + window.TYPES
 images/*.webp     스프라이트 1,152장
 scripts/build_data.py
 ```
@@ -87,6 +91,23 @@ scripts/build_data.py
 `common.js` 와 `app.js`/`cmp.js` 는 전역 스코프를 공유하는 일반 스크립트다.
 같은 이름을 두 파일에서 선언하면 `SyntaxError` 로 **스크립트 전체가 죽는다**.
 file:// 에서는 그 에러가 `Script error.` 로만 보여서 원인을 찾기 어렵다 — 이름을 겹치지 말 것.
+
+## 타입 상성
+
+`TYPES.chart[공격타입][방어타입]` = 배율. 포켓몬 GO는 본편과 배수가 다르다.
+
+| 구분 | 배율 |
+| --- | --- |
+| 효과가 굉장하다 | ×1.6 |
+| 효과가 별로다 | ×0.625 |
+| 이중 저항 | ×0.390625 |
+
+**포켓몬 GO에는 완전 무효가 없다.** 본편에서 ×0 인 조합도 ×0.390625로 조금은 들어간다.
+두 타입이면 배율이 곱해져서 ×2.56(이중 약점)이나 ×0.39(이중 저항)가 나온다.
+
+표는 PvPoke `DamageCalculator.js` 의 타입별 약점·저항·무효 목록에서 뽑는다. 타입을
+이름으로 적어 둬서 순서를 추측할 필요가 없기 때문이다. 공식 GAME_MASTER 의 `attackScalar`
+배열과 **324칸 전부 대조해 일치**를 확인했다.
 
 ## 데이터 출처
 
