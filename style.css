@@ -4,9 +4,10 @@
   --panel-2: #1b2440;
   --line: #2a3454;
   --ink: #e8edf8;
-  --ink-dim: #9aa6c4;
+  --ink-dim: #aab5d2;
   --accent: #ffd34d;
   --good: #4ade80;
+  --font-num: "Chakra Petch", "Noto Sans KR", system-ui, sans-serif;
 
   --t1: #5aa9f0;
   --t2: #4ade80;
@@ -27,7 +28,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 16px/1.6 "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  font: 16px/1.6 "Noto Sans KR", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -64,8 +65,8 @@ body {
 }
 
 .brand { display: grid; gap: 1px; text-decoration: none; padding-inline: 10px; }
-.brand-sub { font-size: 11px; color: var(--ink-dim); letter-spacing: .04em; }
-.brand-name { font-size: 17px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+.brand-sub { font-size: 12px; color: var(--ink-dim); letter-spacing: .04em; }
+.brand-name { font-family: var(--font-num); font-size: 17px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
 
 .nav { display: flex; flex-direction: column; gap: 4px; }
 .nav a {
@@ -76,7 +77,7 @@ body {
 }
 .nav a:hover { color: var(--ink); background: rgba(255, 255, 255, .04); }
 .nav-ico {
-  font-size: 10px; font-weight: 700; letter-spacing: .02em;
+  font-family: var(--font-num); font-size: 10px; font-weight: 700; letter-spacing: .02em;
   background: var(--panel-2); color: var(--ink-dim);
   border: 1px solid var(--line); border-radius: 6px;
   padding: 3px 5px; min-width: 38px; text-align: center; flex: none;
@@ -90,7 +91,7 @@ body {
   background: var(--accent); color: #1a1405; border-color: var(--accent);
 }
 
-.side-note { margin: auto 0 0; padding-inline: 10px; font-size: 11px; color: #6d7899; line-height: 1.7; }
+.side-note { margin: auto 0 0; padding-inline: 10px; font-size: 12px; color: #8792b3; line-height: 1.7; }
 
 @media (max-width: 860px) {
   .shell { grid-template-columns: 1fr; }
@@ -115,7 +116,7 @@ body {
   .nav-sep, .side-note { display: none; }
 }
 
-.top h1 { margin: 0; font-size: clamp(16px, 3vw, 19px); letter-spacing: -0.02em; }
+.top h1 { font-family: var(--font-num); margin: 0; font-size: clamp(16px, 3vw, 19px); letter-spacing: -0.02em; }
 .sub { margin: 2px 0 0; color: var(--ink-dim); font-size: 13px; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
 .meta span {
@@ -194,7 +195,8 @@ main > *, .pickers > *, .table-scroll { min-width: 0; }
 
 /* ---------- result ---------- */
 .result {
-  background: var(--panel); border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line);
   border-radius: 14px; padding: 20px; min-height: 120px;
 }
 .placeholder { margin: 0; color: var(--ink-dim); text-align: center; padding-block: 18px; }
@@ -203,18 +205,18 @@ main > *, .pickers > *, .table-scroll { min-width: 0; }
 .matchup div { color: var(--ink-dim); }
 .matchup b { color: var(--ink); font-weight: 600; }
 
-.answer { font-size: clamp(26px, 6vw, 40px); font-weight: 700; letter-spacing: -0.02em; }
+.answer { font-family: var(--font-num); font-size: clamp(26px, 6vw, 40px); font-weight: 700; letter-spacing: -0.02em; }
 .answer .k { color: var(--accent); }
 .answer-sub { margin-top: 6px; color: var(--ink-dim); font-size: 14px; }
 
-.verdict { font-size: clamp(19px, 4vw, 24px); font-weight: 600; }
+.verdict { font-family: var(--font-num); font-size: clamp(19px, 4vw, 24px); font-weight: 600; }
 .verdict.free { color: var(--good); }
 .verdict.blocked { color: var(--accent); }
 
 .timeline { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 16px; }
 .tick {
   width: 26px; height: 26px; display: grid; place-items: center;
-  border-radius: 6px; font-size: 11px;
+  border-radius: 6px; font: 500 11px/1 var(--font-num);
   background: var(--panel-2); border: 1px solid var(--line); color: var(--ink-dim);
 }
 .tick.hit { background: var(--accent); border-color: var(--accent); color: #1a1405; font-weight: 700; }
@@ -224,7 +226,7 @@ main > *, .pickers > *, .table-scroll { min-width: 0; }
   background: var(--panel); border: 1px solid var(--line);
   border-radius: 14px; padding: 18px;
 }
-.panel h2 { margin: 0; font-size: 17px; }
+.panel h2 { margin: 0; font-family: var(--font-num); font-size: 17px; }
 .note { margin: 5px 0 14px; color: var(--ink-dim); font-size: 13px; }
 
 .table-scroll { overflow-x: auto; }
@@ -232,7 +234,7 @@ table.cct { border-collapse: collapse; width: 100%; min-width: 560px; font-size:
 table.cct th, table.cct td {
   border: 1px solid var(--line); padding: 9px 7px; text-align: center;
 }
-table.cct thead th { background: var(--panel-2); font-weight: 600; }
+table.cct thead th { background: var(--panel-2); font-weight: 600; font-family: var(--font-num); }
 table.cct tbody th { background: var(--panel-2); font-weight: 600; white-space: nowrap; }
 table.cct td.free { color: var(--good); }
 table.cct td.blocked { color: var(--accent); }
@@ -256,7 +258,7 @@ table.cct td.on { outline: 2px solid var(--accent); outline-offset: -2px; }
 .tips { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 14px; color: var(--ink-dim); }
 .tips strong { color: var(--ink); margin-right: 6px; }
 
-.foot { color: #6d7899; font-size: 12px; padding-block: 0 32px; }
+.foot { color: #8792b3; font-size: 12px; padding-block: 0 32px; }
 .foot p { margin: 2px 0; }
 
 /* ---------- CMP 페이지 ---------- */
@@ -296,7 +298,7 @@ table.cct td.on { outline: 2px solid var(--accent); outline-offset: -2px; }
 .cmp-side-label { font-size: 12px; color: var(--ink-dim); }
 .cmp-side img { width: 66px; height: 66px; object-fit: contain; }
 .cmp-side strong { display: block; font-size: 15px; }
-.cmp-atk { font-size: clamp(24px, 5vw, 32px); font-weight: 700; color: var(--accent); }
+.cmp-atk { font-family: var(--font-num); font-size: clamp(24px, 5vw, 32px); font-weight: 700; color: var(--accent); }
 .cmp-meta { font-size: 12px; color: var(--ink-dim); }
 .vs { color: var(--ink-dim); font-size: 13px; font-weight: 600; }
 
@@ -339,7 +341,7 @@ table.cmp-table td.tie { color: var(--t4); }
 
 /* ---------- 사이드바 구분선 ---------- */
 .nav-sep {
-  font-size: 10px; color: #5c678c; letter-spacing: .08em;
+  font-size: 10px; color: #7a86a8; letter-spacing: .08em;
   padding: 12px 10px 4px;
 }
 
@@ -374,12 +376,12 @@ table.cmp-table td.tie { color: var(--t4); }
 .iv-card.mine { border-color: var(--accent); }
 .iv-card-title { font-size: 12px; color: var(--ink-dim); }
 .iv-card-ivs { font-size: 15px; font-weight: 600; margin-top: 2px; }
-.iv-card-main { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin-top: 6px; }
+.iv-card-main { font-family: var(--font-num); font-size: 30px; font-weight: 700; letter-spacing: -0.02em; margin-top: 6px; }
 .iv-card-main small { font-size: 14px; font-weight: 500; color: var(--ink-dim); margin-left: 2px; }
 .iv-card.best .iv-card-main { color: var(--good); }
 .iv-card.mine .iv-card-main { color: var(--accent); }
 .iv-card-meta { font-size: 12px; color: var(--ink-dim); }
-.iv-card-note { font-size: 11px; color: #6d7899; margin-top: 7px; line-height: 1.5; }
+.iv-card-note { font-size: 11px; color: #8792b3; margin-top: 7px; line-height: 1.5; }
 
 /* ---------- 타입 상성 ---------- */
 .tlegend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 12px; font-size: 12px; color: var(--ink-dim); }
@@ -447,7 +449,7 @@ table.tchart th.hl { background: rgba(255, 211, 77, .2); color: var(--accent); }
 .arch[data-code="XAB"] { border-top: 3px solid #b98cf5; }
 
 .arch-head { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
-.arch-head h3 { margin: 0; font-size: 20px; letter-spacing: .02em; }
+.arch-head h3 { font-family: var(--font-num); margin: 0; font-size: 20px; letter-spacing: .02em; }
 .arch-slots { display: flex; gap: 3px; }
 .arch-slots .role { width: 18px; height: 18px; font-size: 10px; }
 .arch-headline { font-size: 12px; color: var(--ink-dim); margin-left: auto; }
@@ -460,7 +462,7 @@ table.tchart th.hl { background: rgba(255, 211, 77, .2); color: var(--accent); }
 .tm img { width: 52px; height: 52px; object-fit: contain; }
 .tm figcaption { display: grid; gap: 3px; justify-items: center; }
 .tm-name { font-size: 12px; }
-.tm-rank { font-size: 10px; color: #6d7899; }
+.tm-rank { font-size: 10px; color: #8792b3; }
 
 .arch-pc { display: grid; gap: 6px; margin-top: 12px; font-size: 12px; color: var(--ink-dim); }
 .arch-pc b { margin-right: 5px; }
