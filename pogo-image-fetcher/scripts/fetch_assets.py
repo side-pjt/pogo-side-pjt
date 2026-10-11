@@ -26,6 +26,11 @@ import urllib.request
 PAGE_URL = 'https://pogomate.com/battles/great-league'
 PVPOKE_RANKS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/'
                 'rankings/all/overall/rankings-1500.json')
+# 메가 진화·원시회귀는 표준 슈퍼리그 랭킹에 없다. 배틀리그 메가 에디션 랭킹(PvPoke)에서
+# 이 폼들만 따로 가져와 '메가 순위'를 붙인다.
+PVPOKE_MEGA_RANKS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/'
+                     'rankings/mega/overall/rankings-1500.json')
+MEGA_ID = re.compile(r'_(mega|primal)(_[xyz])?$')
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) pogomate-asset-fetch'
 
 
@@ -182,7 +187,11 @@ def korean_name(p, labels):
     form = p.get('imageForm')
     out = base
 
-    if form and form not in MEGA_LIKE and form != 'GIGANTAMAX':
+    if form in MEGA_LIKE:
+        # PoGoMate 라벨표에는 메가가 없어 직접 붙인다: 메가 리자몽 X / 원시 가이오가
+        prefix = '원시 ' if form == 'PRIMAL' else '메가 '
+        out = prefix + base + (' ' + form[-1] if form in ('MEGA_X', 'MEGA_Y', 'MEGA_Z') else '')
+    elif form and form != 'GIGANTAMAX':
         key = '%s_%s' % (p['dex'], form)
         if key in overrides:
             out = overrides[key] + base
@@ -240,7 +249,7 @@ def resolve(ranked, sprite_map, labels):
             continue
         rows.append({
             'rank': p['pvpokeRank'],                 # 정본 순위 = PvPoke
-            'pogomateRank': p['greatRank'],          # 참고용 (둘은 서로 다르다)
+            'pogomateRank': p.get('greatRank'),          # 참고용 (둘은 서로 다르다)
             'id': p['id'],
             'name': p['name'],
             'nameKo': p.get('nameKo'),
@@ -248,6 +257,7 @@ def resolve(ranked, sprite_map, labels):
             'displayKo': korean_name(p, labels),
             'dex': dex,
             'isShadow': bool(p.get('isShadow')),
+            'isMega': bool(p.get('isMega')),
             'form': form,
             'types': p.get('types', []),
             'level': p.get('greatLevel'),
@@ -318,7 +328,20 @@ def main():
     for p in data:
         p['pvpokeRank'] = pv.get(p['id'])
 
-    ranked = sorted([p for p in data if p['pvpokeRank']], key=lambda p: p['pvpokeRank'])
+    # 메가·원시 폼의 순위 = PvPoke 메가 에디션 랭킹 전체(일반 포켓몬 포함)에서의 순위. PvPoke 사이트와 같은 숫자다.
+    mega_all = fetch_json(PVPOKE_MEGA_RANKS)
+    mega_rank = {e['speciesId']: i for i, e in enumerate(mega_all, 1) if MEGA_ID.search(e['speciesId'])}
+    mega_ids = list(mega_rank)
+    for p in data:
+        if p['id'] in mega_rank and not p['pvpokeRank']:
+            p['pvpokeRank'] = mega_rank[p['id']]
+            p['isMega'] = True
+    lost = [sid for sid in mega_ids if not any(p['id'] == sid for p in data)]
+    if lost:
+        print('    [경고] PoGoMate에 없는 메가: %s' % ', '.join(lost))
+
+    ranked = sorted([p for p in data if p['pvpokeRank']],
+                    key=lambda p: (bool(p.get('isMega')), p['pvpokeRank']))
     unmatched = [p['id'] for p in data
                  if isinstance(p.get('greatRank'), int) and not p['pvpokeRank']]
     if args.top:

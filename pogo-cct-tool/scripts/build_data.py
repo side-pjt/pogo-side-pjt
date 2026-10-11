@@ -60,6 +60,9 @@ def load_cmp_source():
     """
     gm = json.loads(fetch(PVPOKE_GM))
     base = {p['speciesId']: p['baseStats'] for p in gm['pokemon'] if 'baseStats' in p}
+    # PvPoke 기본 개체값(CP 1500): [레벨, 공격, 방어, HP]. 메가 폼에 '메가 에디션 기본값' 프리셋으로 쓴다.
+    pv_iv = {p['speciesId']: p['defaultIVs']['cp1500'][1:] for p in gm['pokemon']
+             if p.get('defaultIVs', {}).get('cp1500')}
 
     js = fetch(PVPOKE_POKEMON_JS)
     m = re.search(r'cpms\s*=\s*\[([^\]]+)\]', js)
@@ -68,7 +71,7 @@ def load_cmp_source():
     cpms = [float(x) for x in m.group(1).split(',')]
     if len(cpms) < 100:
         raise SystemExit('CPM 표가 너무 짧습니다 (%d개)' % len(cpms))
-    return base, cpms
+    return base, cpms, pv_iv
 
 
 def load_type_chart():
@@ -128,7 +131,7 @@ def main():
     moves = {m['moveId']: m for m in load(MOVE_TABLE)['moves']}
 
     print('CMP용 종족값·CPM 표 받는 중…')
-    base_stats, cpms = load_cmp_source()
+    base_stats, cpms, pv_iv = load_cmp_source()
     print('  종족값 %d종 / CPM %d개 (레벨 1~%g)'
           % (len(base_stats), len(cpms), 1 + (len(cpms) - 1) / 2))
 
@@ -162,19 +165,23 @@ def main():
         # 추천 기술을 맨 앞으로
         fast.sort(key=lambda f: f['id'] != rec)
 
+        extra = {'pvIv': pv_iv[a['id']]} if a.get('isMega') and a['id'] in pv_iv else {}
         rows.append({
+            **extra,
             'id': a['id'],
             'ko': a['displayKo'],
             'en': a['name'],
             'rank': a['rank'],
             'types': a['types'],
             'shadow': a['isShadow'],
+            'mega': bool(a.get('isMega')),
             'img': pathlib.PurePosixPath(a['file']).name,
             'fast': fast,
             'base': [bs['atk'], bs['def'], bs['hp']],   # CMP 계산용 종족값
         })
 
-    rows.sort(key=lambda r: r['rank'])
+    # 표준 순위가 먼저, 메가·원시는 뒤에 (둘은 서로 다른 랭킹이라 순위 숫자가 겹친다)
+    rows.sort(key=lambda r: (r['mega'], r['rank']))
 
     out = ROOT / 'data'
     out.mkdir(parents=True, exist_ok=True)

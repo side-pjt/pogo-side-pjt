@@ -124,6 +124,13 @@ def main():
     ranks = fetch_json(PVPOKE + 'rankings/all/overall/rankings-1500.json')
     print('    %d종' % len(ranks))
 
+    # 메가·원시 폼은 메가 에디션 랭킹에서 따로 가져온다 (표준 슈퍼리그에는 없다)
+    mega_all = fetch_json(PVPOKE + 'rankings/mega/overall/rankings-1500.json')
+    # 순위는 메가 에디션 랭킹 전체(일반 포켓몬 포함)에서의 위치 — PvPoke 사이트와 같은 숫자
+    mega_ranks = [(i, e) for i, e in enumerate(mega_all, 1)
+                  if re.search(r'_(mega|primal)(_[xyz])?$', e['speciesId'])]
+    print('    메가 에디션 랭킹의 메가·원시 %d종' % len(mega_ranks))
+
     # ---- 기술 테이블 -------------------------------------------------
     move_rows = {}
     for m in moves:
@@ -146,13 +153,16 @@ def main():
 
     # ---- 포켓몬별 기술 -----------------------------------------------
     pm_rows = []
-    for rank, e in enumerate(ranks, 1):              # 파일 순서 = PvPoke 랭킹(점수 내림차순)
+    entries = [(rank, e, False) for rank, e in enumerate(ranks, 1)]   # 파일 순서 = PvPoke 랭킹(점수 내림차순)
+    entries += [(rank, e, True) for rank, e in mega_ranks]
+    for rank, e, is_mega in entries:
         fast_used = e.get('moves', {}).get('fastMoves', [])
         total = sum(f.get('uses') or 0 for f in fast_used) or 1
         pm_rows.append({
             'speciesId': e['speciesId'],
             'speciesName': e['speciesName'],
             'rank': rank,
+            'mega': is_mega,
             'score': e.get('score'),
             'recommended': {
                 'fast': e['moveset'][0] if e.get('moveset') else None,

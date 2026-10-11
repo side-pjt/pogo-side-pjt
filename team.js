@@ -66,7 +66,7 @@ function memberCard(id, role) {
     <figcaption>
       <span class="tm-name">${esc(p.ko)}</span>
       <span class="role r-${role}">${role}</span>
-      <span class="tm-rank">${p.rank}위</span>
+      <span class="tm-rank">${rankText(p)}</span>
     </figcaption>
   </figure>`;
 }
@@ -99,3 +99,14 @@ function buildRoles() {
 
 buildRoles();
 document.getElementById('archetypes').innerHTML = ARCHETYPES.map(archetypeCard).join('');
+
+// 메가·원시 포켓몬 전체 (메가 에디션 순위순)
+document.getElementById('mega-list').innerHTML = DATA.filter(p => p.mega)
+  .sort((a, b) => a.rank - b.rank)
+  .map(p => `<figure class="tm">
+    <img src="images/${encodeURIComponent(p.img)}" alt="" loading="lazy">
+    <figcaption>
+      <span class="tm-name">${esc(p.ko)}</span>
+      <span class="tm-rank">${rankText(p)}</span>
+    </figcaption>
+  </figure>`).join('');

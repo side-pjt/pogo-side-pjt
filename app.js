@@ -102,7 +102,7 @@ function setupPicker(root, side, initial) {
     chosen.hidden = false;
     chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(p.img);
     chosen.querySelector('.chosen-name').textContent = p.ko;
-    chosen.querySelector('.chosen-rank').textContent = `${p.rank}위 · ${p.types.join(' / ')}`;
+    chosen.querySelector('.chosen-rank').textContent = `${rankText(p)} · ${p.types.join(' / ')}`;
 
     chips.innerHTML = '';
     p.fast.forEach(f => {
@@ -257,7 +257,7 @@ function highlightCell(m, o) {
 
 function buildGroups() {
   const seen = new Map();
-  DATA.filter(p => p.rank <= 100).forEach(p => {
+  DATA.filter(p => !p.mega && p.rank <= 100).forEach(p => {
     const f = p.fast[0];
     if (f && !seen.has(f.name)) seen.set(f.name, f.turns);
   });

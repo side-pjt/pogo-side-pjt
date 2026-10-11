@@ -31,6 +31,8 @@ python pogo-cct-tool/scripts/build_data.py          # 둘을 합쳐 계산기 �
 
 Python 3 표준 라이브러리만 쓴다. 설치할 패키지가 없다.
 
+메가 진화·원시회귀 56종은 표준 슈퍼리그 랭킹에 없어서, PvPoke 메가 에디션 랭킹(`rankings/mega/overall/rankings-1500.json`)에서 따로 가져와 `mega: true`로 표시한다. 순위는 그 랭킹 전체에서의 순위(PvPoke 사이트와 같은 숫자, "메가 에디션 N위")이고, PvPoke 기본 개체값을 프리셋으로 쓴다. 전투 중 CP 보정은 계산에 반영하지 않는다.
+
 ## CCT 계산식
 
 내 일반기술을 **k회** 쓴 직후 차징을 누른다. 그때까지 흐른 턴은 `k × m`.

@@ -1151,3 +1151,59 @@
 1150,1150,unown,Unown,안농,안농,アンノーン,201,,,psychic,pokemon/unown_안농.webp
 1151,1151,slaking,Slaking,게을킹,게을킹,ケッキング,289,,,normal,pokemon/slaking_게을킹.webp
 1152,1152,slaking_shadow,Slaking,게을킹,그림자 게을킹,ケッキング,289,Y,,normal,pokemon/slaking_shadow_그림자게을킹.webp
+2,,sableye_mega,Sableye,깜까미,메가 깜까미,ヤミラミ,302,,MEGA,dark/ghost,pokemon/sableye_mega_메가깜까미.webp
+37,,malamar_mega,Malamar,칼라마네로,메가 칼라마네로,カラマネロ,687,,MEGA,dark/psychic,pokemon/malamar_mega_메가칼라마네로.webp
+173,,mawile_mega,Mawile,입치트,메가 입치트,クチート,303,,MEGA,steel/fairy,pokemon/mawile_mega_메가입치트.webp
+178,,raichu_mega_x,Raichu,라이츄,메가 라이츄 X,ライチュウ,26,,MEGA_X,electric,pokemon/raichu_mega_x_메가라이츄X.webp
+191,,dragonite_mega,Dragonite,망나뇽,메가 망나뇽,カイリュー,149,,MEGA,dragon/flying,pokemon/dragonite_mega_메가망나뇽.webp
+200,,houndoom_mega,Houndoom,헬가,메가 헬가,ヘルガー,229,,MEGA,dark/fire,pokemon/houndoom_mega_메가헬가.webp
+220,,audino_mega,Audino,다부니,메가 다부니,タブンネ,531,,MEGA,normal/fairy,pokemon/audino_mega_메가다부니.webp
+234,,greninja_mega,Greninja,개굴닌자,메가 개굴닌자,ゲッコウガ,658,,MEGA,water/dark,pokemon/greninja_mega_메가개굴닌자.webp
+260,,altaria_mega,Altaria,파비코리,메가 파비코리,チルタリス,334,,MEGA,dragon/fairy,pokemon/altaria_mega_메가파비코리.webp
+305,,abomasnow_mega,Abomasnow,눈설왕,메가 눈설왕,ユキノオー,460,,MEGA,grass/ice,pokemon/abomasnow_mega_메가눈설왕.webp
+313,,charizard_mega_x,Charizard,리자몽,메가 리자몽 X,リザードン,6,,MEGA_X,fire/dragon,pokemon/charizard_mega_x_메가리자몽X.webp
+326,,aggron_mega,Aggron,보스로라,메가 보스로라,ボスゴドラ,306,,MEGA,steel,pokemon/aggron_mega_메가보스로라.webp
+335,,raichu_mega_y,Raichu,라이츄,메가 라이츄 Y,ライチュウ,26,,MEGA_Y,electric,pokemon/raichu_mega_y_메가라이츄Y.webp
+360,,gyarados_mega,Gyarados,갸라도스,메가 갸라도스,ギャラドス,130,,MEGA,water/dark,pokemon/gyarados_mega_메가갸라도스.webp
+364,,scizor_mega,Scizor,핫삼,메가 핫삼,ハッサム,212,,MEGA,bug/steel,pokemon/scizor_mega_메가핫삼.webp
+379,,charizard_mega_y,Charizard,리자몽,메가 리자몽 Y,リザードン,6,,MEGA_Y,fire/flying,pokemon/charizard_mega_y_메가리자몽Y.webp
+380,,chesnaught_mega,Chesnaught,브리가론,메가 브리가론,ブリガロン,652,,MEGA,grass/fighting,pokemon/chesnaught_mega_메가브리가론.webp
+396,,latias_mega,Latias,라티아스,메가 라티아스,ラティアス,380,,MEGA,dragon/psychic,pokemon/latias_mega_메가라티아스.webp
+406,,ampharos_mega,Ampharos,전룡,메가 전룡,デンリュウ,181,,MEGA,electric/dragon,pokemon/ampharos_mega_메가전룡.webp
+410,,swampert_mega,Swampert,대짱이,메가 대짱이,ラグラージ,260,,MEGA,water/ground,pokemon/swampert_mega_메가대짱이.webp
+423,,steelix_mega,Steelix,강철톤,메가 강철톤,ハガネール,208,,MEGA,steel/ground,pokemon/steelix_mega_메가강철톤.webp
+434,,staraptor_mega,Staraptor,찌르호크,메가 찌르호크,ムクホーク,398,,MEGA,fighting/flying,pokemon/staraptor_mega_메가찌르호크.webp
+465,,salamence_mega,Salamence,보만다,메가 보만다,ボーマンダ,373,,MEGA,dragon/flying,pokemon/salamence_mega_메가보만다.webp
+467,,starmie_mega,Starmie,아쿠스타,메가 아쿠스타,スターミー,121,,MEGA,water/psychic,pokemon/starmie_mega_메가아쿠스타.webp
+470,,blaziken_mega,Blaziken,번치코,메가 번치코,バシャーモ,257,,MEGA,fire/fighting,pokemon/blaziken_mega_메가번치코.webp
+486,,delphox_mega,Delphox,마폭시,메가 마폭시,マフォクシー,655,,MEGA,fire/psychic,pokemon/delphox_mega_메가마폭시.webp
+491,,venusaur_mega,Venusaur,이상해꽃,메가 이상해꽃,フシギバナ,3,,MEGA,grass/poison,pokemon/venusaur_mega_메가이상해꽃.webp
+492,,victreebel_mega,Victreebel,우츠보트,메가 우츠보트,ウツボット,71,,MEGA,grass/poison,pokemon/victreebel_mega_메가우츠보트.webp
+533,,skarmory_mega,Skarmory,무장조,메가 무장조,エアームド,227,,MEGA,steel/flying,pokemon/skarmory_mega_메가무장조.webp
+554,,latios_mega,Latios,라티오스,메가 라티오스,ラティオス,381,,MEGA,dragon/psychic,pokemon/latios_mega_메가라티오스.webp
+560,,lopunny_mega,Lopunny,이어롭,메가 이어롭,ミミロップ,428,,MEGA,normal/fighting,pokemon/lopunny_mega_메가이어롭.webp
+574,,slowbro_mega,Slowbro,야도란,메가 야도란,ヤドラン,80,,MEGA,water/psychic,pokemon/slowbro_mega_메가야도란.webp
+586,,medicham_mega,Medicham,요가램,메가 요가램,チャーレム,308,,MEGA,fighting/psychic,pokemon/medicham_mega_메가요가램.webp
+603,,beedrill_mega,Beedrill,독침붕,메가 독침붕,スピアー,15,,MEGA,bug/poison,pokemon/beedrill_mega_메가독침붕.webp
+617,,aerodactyl_mega,Aerodactyl,프테라,메가 프테라,プテラ,142,,MEGA,rock/flying,pokemon/aerodactyl_mega_메가프테라.webp
+627,,heracross_mega,Heracross,헤라크로스,메가 헤라크로스,ヘラクロス,214,,MEGA,bug/fighting,pokemon/heracross_mega_메가헤라크로스.webp
+636,,gallade_mega,Gallade,엘레이드,메가 엘레이드,エルレイド,475,,MEGA,psychic/fighting,pokemon/gallade_mega_메가엘레이드.webp
+650,,lucario_mega,Lucario,루카리오,메가 루카리오,ルカリオ,448,,MEGA,fighting/steel,pokemon/lucario_mega_메가루카리오.webp
+662,,falinks_mega,Falinks,대여르,메가 대여르,タイレーツ,870,,MEGA,fighting,pokemon/falinks_mega_메가대여르.webp
+682,,garchomp_mega,Garchomp,한카리아스,메가 한카리아스,ガブリアス,445,,MEGA,dragon/ground,pokemon/garchomp_mega_메가한카리아스.webp
+687,,tyranitar_mega,Tyranitar,마기라스,메가 마기라스,バンギラス,248,,MEGA,rock/dark,pokemon/tyranitar_mega_메가마기라스.webp
+692,,gengar_mega,Gengar,팬텀,메가 팬텀,ゲンガー,94,,MEGA,ghost/poison,pokemon/gengar_mega_메가팬텀.webp
+732,,kangaskhan_mega,Kangaskhan,캥카,메가 캥카,ガルーラ,115,,MEGA,normal,pokemon/kangaskhan_mega_메가캥카.webp
+742,,pidgeot_mega,Pidgeot,피죤투,메가 피죤투,ピジョット,18,,MEGA,normal/flying,pokemon/pidgeot_mega_메가피죤투.webp
+782,,sceptile_mega,Sceptile,나무킹,메가 나무킹,ジュカイン,254,,MEGA,grass/dragon,pokemon/sceptile_mega_메가나무킹.webp
+801,,glalie_mega,Glalie,얼음귀신,메가 얼음귀신,オニゴーリ,362,,MEGA,ice,pokemon/glalie_mega_메가얼음귀신.webp
+808,,metagross_mega,Metagross,메타그로스,메가 메타그로스,メタグロス,376,,MEGA,steel/psychic,pokemon/metagross_mega_메가메타그로스.webp
+815,,blastoise_mega,Blastoise,거북왕,메가 거북왕,カメックス,9,,MEGA,water,pokemon/blastoise_mega_메가거북왕.webp
+830,,pinsir_mega,Pinsir,쁘사이저,메가 쁘사이저,カイロス,127,,MEGA,bug/flying,pokemon/pinsir_mega_메가쁘사이저.webp
+855,,sharpedo_mega,Sharpedo,샤크니아,메가 샤크니아,サメハダー,319,,MEGA,water/dark,pokemon/sharpedo_mega_메가샤크니아.webp
+856,,absol_mega,Absol,앱솔,메가 앱솔,アブソル,359,,MEGA,dark,pokemon/absol_mega_메가앱솔.webp
+1022,,alakazam_mega,Alakazam,후딘,메가 후딘,フーディン,65,,MEGA,psychic,pokemon/alakazam_mega_메가후딘.webp
+1038,,diancie_mega,Diancie,디안시,메가 디안시,ディアンシー,719,,MEGA,rock/fairy,pokemon/diancie_mega_메가디안시.webp
+1100,,manectric_mega,Manectric,썬더볼트,메가 썬더볼트,ライボルト,310,,MEGA,electric,pokemon/manectric_mega_메가썬더볼트.webp
+1116,,banette_mega,Banette,다크펫,메가 다크펫,ジュペッタ,354,,MEGA,ghost,pokemon/banette_mega_메가다크펫.webp
+1134,,gardevoir_mega,Gardevoir,가디안,메가 가디안,サーナイト,282,,MEGA,psychic/fairy,pokemon/gardevoir_mega_메가가디안.webp

@@ -3,7 +3,7 @@
 /* ------------------------------------------------------------------
    개체값 고르기 — 왜 슈퍼리그는 공격이 낮은 개체가 좋은가
 
-   CP = floor(공격 x sqrt(방어) x sqrt(HP) / 10) 이고 CP 1500 상한이 있다.
+   CP = floor(공격 x sqrt(방어) x sqrt(HP) / 10) 이고 CP 1500 상한이 있다. (CP의 HP는 내림 전 값)
    공격은 CP를 가장 많이 올리는 값이라, 공격 개체값이 낮으면 같은 1500 CP
    안에서 레벨을 더 올릴 수 있고 결과적으로 방어·HP가 커진다.
 
@@ -17,8 +17,9 @@ function statsAt(base, ivs, level) {
   const c = CPM[Math.round((level - 1) * 2)];
   const atk = (base[0] + ivs[0]) * c;
   const def = (base[1] + ivs[1]) * c;
-  const hp = Math.floor((base[2] + ivs[2]) * c);
-  return { atk, def, hp, cp: Math.max(10, Math.floor(atk * Math.sqrt(def) * Math.sqrt(hp) / 10)) };
+  const hpRaw = (base[2] + ivs[2]) * c;              // CP는 내림하기 전 체력으로 계산한다 (게임과 같다)
+  const hp = Math.floor(hpRaw);                       // 화면에 보이는 실제 HP·스탯곱은 내림한 값
+  return { atk, def, hp, cp: Math.max(10, Math.floor(atk * Math.sqrt(def) * Math.sqrt(hpRaw) / 10)) };
 }
 
 function bestBuild(base, ivs) {
@@ -79,7 +80,17 @@ function paint() {
   document.querySelector('.ivs').hidden = false;
   chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(mon.img);
   chosen.querySelector('.chosen-name').textContent = mon.ko;
-  chosen.querySelector('.chosen-rank').textContent = `${mon.rank}위 · ${mon.types.join(' / ')}`;
+  chosen.querySelector('.chosen-rank').textContent = `${rankText(mon)} · ${mon.types.join(' / ')}${mon.mega ? ' · 메가 전투용 CP 보정 미반영' : ''}`;
+
+  // 메가 폼만: PvPoke 기본 개체값 빠른 선택
+  const pvBtn = document.getElementById('iv-pv');
+  if (mon.pvIv) {
+    pvBtn.hidden = false;
+    pvBtn.dataset.ivs = mon.pvIv.join('/');
+    pvBtn.textContent = 'PvPoke 기본 ' + mon.pvIv.join(' · ');
+  } else {
+    pvBtn.hidden = true;
+  }
 
   const all = ranked(mon);
   const best = all[0];
@@ -105,6 +116,7 @@ function paint() {
         ${row('내 개체값', mine, pct(mine))}
         ${row('1등 개체', best, pct(best))}
         ${row('15 · 15 · 15', hundo, pct(hundo))}
+        ${mon.pvIv ? row('PvPoke 기본', findBuild(mon, mon.pvIv), pct(findBuild(mon, mon.pvIv))) : ''}
       </tbody>
     </table>
 

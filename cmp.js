@@ -12,7 +12,7 @@
    - 공격 실수치가 정확히 같으면 어느 쪽도 우선권이 없다 (사실상 랜덤)
 
    공격 실수치 = (종족값공격 + 공격개체값) x CPM(레벨)
-   CP         = floor(공격 x sqrt(방어) x sqrt(HP) / 10)
+   CP         = floor(공격 x sqrt(방어) x sqrt(HP) / 10)   ※ HP는 내림하기 전 값. 화면의 HP·스탯곱은 내림한 값
    1,152종 전부 PvPoke 수치와 대조해 검증한 식이다.
 ------------------------------------------------------------------ */
 
@@ -23,8 +23,9 @@ function statsAt(base, ivs, level) {
   const c = CPM[Math.round((level - 1) * 2)];
   const atk = (base[0] + ivs[0]) * c;
   const def = (base[1] + ivs[1]) * c;
-  const hp = Math.floor((base[2] + ivs[2]) * c);
-  return { atk, def, hp, cp: Math.max(10, Math.floor(atk * Math.sqrt(def) * Math.sqrt(hp) / 10)) };
+  const hpRaw = (base[2] + ivs[2]) * c;              // CP는 내림하기 전 체력으로 계산한다 (게임과 같다)
+  const hp = Math.floor(hpRaw);                       // 화면에 보이는 실제 HP·스탯곱은 내림한 값
+  return { atk, def, hp, cp: Math.max(10, Math.floor(atk * Math.sqrt(def) * Math.sqrt(hpRaw) / 10)) };
 }
 
 /* CP 상한을 넘지 않는 가장 높은 레벨. CP는 레벨에 단조증가라 넘는 순간 끊으면 된다. */
@@ -66,6 +67,8 @@ function presets(mon) {
     rank1,                                   // 스탯곱 최대 — 대부분이 키우는 빌드
     maxAtk,                                  // 공격 최대 — CMP를 노린 빌드
     hundo: bestBuild(mon.base, [15, 15, 15]),
+    // 메가 폼만: PvPoke 메가 에디션 기본 개체값
+    pvpoke: mon.pvIv ? bestBuild(mon.base, mon.pvIv) : undefined,
   };
 }
 
@@ -88,7 +91,7 @@ function spread(myAtk, foe) {
    상태
 ------------------------------------------------------------------ */
 
-const PRESET_LABEL = { rank1: '1등 개체', maxAtk: '공격 최대', hundo: '15·15·15', custom: '직접 입력' };
+const PRESET_LABEL = { rank1: '1등 개체', maxAtk: '공격 최대', hundo: '15·15·15', pvpoke: 'PvPoke 기본', custom: '직접 입력' };
 
 const S = {
   mode: 'spread',                                  // spread | head
@@ -149,7 +152,7 @@ function paintSide(root, side) {
   chosen.hidden = false;
   chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(st.mon.img);
   chosen.querySelector('.chosen-name').textContent = st.mon.ko;
-  chosen.querySelector('.chosen-rank').textContent = `${st.mon.rank}위 · ${st.mon.types.join(' / ')}`;
+  chosen.querySelector('.chosen-rank').textContent = `${rankText(st.mon)} · ${st.mon.types.join(' / ')}${st.mon.mega ? ' · 메가 전투용 CP 보정 미반영' : ''}`;
 
   // 상대 쪽은 '전체 비교' 모드에서 개체값을 받지 않는다
   const needIV = side === 'me' || S.mode === 'head';
@@ -157,6 +160,11 @@ function paintSide(root, side) {
   ivBox.hidden = !needIV;
   if (hint) hint.hidden = needIV;
   if (!needIV) return;
+
+  // PvPoke 기본 프리셋은 메가 폼에서만 보인다
+  const pvBtn = root.querySelector('.preset[data-preset="pvpoke"]');
+  if (pvBtn) pvBtn.hidden = !st.mon.pvIv;
+  if (st.preset === 'pvpoke' && !st.mon.pvIv) st.preset = 'rank1';
 
   root.querySelectorAll('.preset').forEach(b =>
     b.setAttribute('aria-pressed', String(b.dataset.preset === st.preset)));
@@ -264,7 +272,7 @@ function renderSpread(me, foe, mb) {
     return `<span class="iv-cell ${cls}" title="공격 개체값 ${iv}: ${s.total}개 중 ${s.win}개 승">${iv}</span>`;
   }).join('');
 
-  const rows = [['rank1', '1등 개체'], ['maxAtk', '공격 최대'], ['hundo', '15·15·15']].map(([k, name]) => {
+  const rows = [['rank1', '1등 개체'], ['maxAtk', '공격 최대'], ['hundo', '15·15·15'], ['pvpoke', 'PvPoke 기본']].filter(([k]) => fp[k]).map(([k, name]) => {
     const b = fp[k];
     const v = verdict(mb.atk, b.atk);
     return `<tr>

@@ -12,7 +12,13 @@ function esc(s) {
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 }
 
-function byRank(r) { return DATA.find(p => p.rank === r); }
+/* 메가·원시 폼은 표준 슈퍼리그 랭킹이 아니라 PvPoke 메가 에디션 랭킹의 순위다 */
+function byRank(r) { return DATA.find(p => !p.mega && p.rank === r); }
+/* 메가·원시끼리만 매긴 순위. 메가 에디션 전체 순위 순서대로 1, 2, 3… */
+const MEGA_ORDER = new Map(DATA.filter(p => p.mega).sort((a, b) => a.rank - b.rank).map((p, i) => [p.id, i + 1]));
+function rankText(p) {
+  return p.mega ? `메가 에디션 ${p.rank}위 (메가 중 ${MEGA_ORDER.get(p.id)}위)` : `${p.rank}위`;
+}
 
 function search(q, limit) {
   const n = norm(q);
@@ -25,7 +31,7 @@ function search(q, limit) {
     if (ko === n || en === n) s = 0;
     else if (ko.startsWith(n) || en.startsWith(n)) s = 1;
     else if (ko.includes(n) || en.includes(n) || id.includes(n)) s = 2;
-    if (s >= 0) scored.push([s, p.rank, p]);
+    if (s >= 0) scored.push([s, p.rank + (p.mega ? 5000 : 0), p]);
   }
   scored.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
   return scored.slice(0, limit).map(x => x[2]);
@@ -58,7 +64,7 @@ function setupSearch(root, onPick) {
       li.setAttribute('role', 'option');
       li.setAttribute('aria-selected', String(i === cursor));
       li.innerHTML = `<img src="images/${encodeURIComponent(p.img)}" alt="" loading="lazy">` +
-        `<span class="r-name"></span><span class="r-sub">${p.rank}위</span>`;
+        `<span class="r-name"></span><span class="r-sub">${rankText(p)}</span>`;
       li.querySelector('.r-name').textContent = p.ko;
       li.addEventListener('mousedown', e => { e.preventDefault(); pick(p); });
       list.append(li);

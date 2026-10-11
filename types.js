@@ -53,7 +53,7 @@ function paintMon(mon) {
   chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(mon.img);
   chosen.querySelector('.chosen-name').textContent = mon.ko;
   chosen.querySelector('.chosen-rank').textContent =
-    `${mon.rank}위 · ${mon.types.map(TKO).join(' / ')}`;
+    `${rankText(mon)} · ${mon.types.map(TKO).join(' / ')}`;
 
   const prof = defenseProfile(mon.types);
   const groups = { super: [], resist: [], double: [] };
