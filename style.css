@@ -509,6 +509,49 @@ table.tchart .sel { outline: 2px solid var(--accent); outline-offset: -2px; posi
   .tlegend { gap: 4px 10px; font-size: 11px; margin-bottom: 8px; }
 }
 
+/* ---------- 기술표 (노말어택 / 스페셜어택) ---------- */
+#mv-result { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 5fr); gap: 28px; align-items: start; }
+#mv-result .placeholder { grid-column: 1 / -1; }
+.mv-col h3 { margin: 0 0 4px; font-size: 14px; display: flex; align-items: baseline; gap: 6px; }
+.mv-col h3 small { font-size: 12px; font-weight: 400; color: var(--ink-dim); }
+.mv-list { list-style: none; margin: 0; padding: 0; }
+.mv-item {
+  display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; column-gap: 10px; row-gap: 2px;
+  padding: 10px 8px; border-bottom: 1px solid var(--line);
+}
+.mv-item:last-child { border-bottom: 0; }
+#mv-normal .mv-item { cursor: pointer; border-radius: 8px; }
+#mv-normal .mv-item:hover { background: rgba(255,255,255,.03); }
+#mv-normal .mv-item.on { background: rgba(255, 211, 77, .08); box-shadow: inset 2px 0 0 var(--accent); }
+.mv-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.mv-name { font-size: 14px; font-weight: 500; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 6px; }
+.mv-tag { font-style: normal; font-size: 10px; line-height: 1; padding: 3px 5px; border-radius: 4px; }
+.mv-tag.stab { background: rgba(90, 169, 240, .16); color: #7dbbf5; }
+.mv-tag.elite { background: rgba(185, 140, 245, .2); color: #c9a6f7; }
+.mv-tag.legacy { background: rgba(240, 138, 130, .16); color: #f08a82; }
+.mv-foot { grid-column: 1 / -1; margin: 0; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-dim); display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.mv-tag.rec { background: rgba(255, 211, 77, .16); color: var(--accent); }
+.mv-stats { display: inline-flex; align-items: baseline; gap: 3px; font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mv-stats b { font-weight: 600; }
+.mv-stats small { font-size: 10px; color: var(--ink-dim); margin-right: 7px; }
+.mv-stats small:last-child { margin-right: 0; }
+.mv-stats .gain { color: var(--good); }
+.mv-stats .cost { color: #f08a82; }
+.mv-sub { grid-column: 2 / -1; font-size: 12px; color: var(--ink-dim); display: flex; flex-wrap: wrap; gap: 2px 12px; font-variant-numeric: tabular-nums; }
+.mv-buff.up { color: var(--good); } .mv-buff.down { color: #f08a82; }
+.mv-hint { margin: 8px 8px 0; font-size: 11px; color: var(--ink-dim); }
+.mv-help { font-size: 13px; color: var(--ink-dim); }
+.mv-help h2 { margin: 0 0 10px; font-size: 15px; color: var(--ink); }
+.mv-help ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.mv-help b { color: var(--ink); }
+@media (max-width: 760px) {
+  #mv-result { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .mv-item { padding: 9px 4px; column-gap: 8px; }
+  .mv-name { font-size: 13px; }
+  .mv-stats { font-size: 12px; }
+  .mv-stats small { margin-right: 5px; }
+}
+
 /* ---------- 팀 조합 ---------- */
 .roles { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-top: 12px; }
 .role-item {
