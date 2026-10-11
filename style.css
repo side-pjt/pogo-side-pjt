@@ -64,7 +64,8 @@ body {
   gap: 22px;
 }
 
-.brand { display: grid; gap: 1px; text-decoration: none; padding-inline: 10px; }
+.brand { display: grid; grid-template-columns: 36px 1fr; column-gap: 10px; row-gap: 1px; align-items: center; text-decoration: none; padding-inline: 10px; }
+.brand-logo { grid-row: 1 / span 2; width: 36px; height: 36px; display: block; }
 .brand-sub { font-size: 12px; color: var(--ink-dim); letter-spacing: .04em; }
 .brand-name { font-family: var(--font-num); font-size: 17px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
 
@@ -791,7 +792,8 @@ main { gap: 18px; }
 /* ---------- 폰: 사이트 이름과 페이지 이름을 한 줄로 ---------- */
 .brand-page { display: none; }
 @media (max-width: 860px) {
-  .brand { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+  .brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .brand-logo { width: 26px; height: 26px; flex: none; }
   .brand-sub { display: none; }
   .brand-page { display: block; min-width: 0; font-size: 14px; color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .brand-page::before { content: "-"; margin-right: 8px; }
@@ -972,4 +974,15 @@ main { gap: 18px; }
   .tt-grid { gap: 4px; }
   .tt-cell { padding: 4px 0; font-size: 11px; }
   .tt-trios li { padding: 8px 10px; }
+}
+
+/* ---------- 사이드바 상단: 큰 화면에서는 이미지, 폰에서는 로고+글자 ---------- */
+.brand-img { display: none; }
+@media (min-width: 861px) {
+  .brand { display: block; padding-inline: 0; }
+  .brand-img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); }
+  .brand-logo, .brand-sub {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .brand-name { display: block; margin-top: 9px; padding-inline: 2px; }
 }
