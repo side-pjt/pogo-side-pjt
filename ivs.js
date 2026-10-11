@@ -91,17 +91,13 @@ function paint() {
   const pct = b => ((b.product / best.product) * 100).toFixed(1);
 
   box.innerHTML = `
-    <div class="matchup">
-      <div><b>${esc(mon.ko)}</b> 의 개체값 4,096조합을 전부 계산했습니다.
-      각 조합은 CP 1500을 넘지 않는 가장 높은 레벨 기준입니다.</div>
-    </div>
+    ${gradeBlock(mine, best, all)}
+    ${statBars(mine, best, hundo)}
 
-    <div class="iv-cards">
-      ${card('내 개체값', mine, best, '내가 입력한 조합', 'mine')}
-      ${card('1등 개체', best, best, '스탯곱이 가장 큰 조합 — 가장 오래 버틴다', 'best')}
-      ${card('15 · 15 · 15', hundo, best, '소위 100% 개체', 'hundo')}
-    </div>
-
+    <details class="more">
+      <summary>숫자로 자세히 보기</summary>
+      <p class="answer-sub" style="margin-top:8px"><b>${esc(mon.ko)}</b> 의 개체값 4,096조합을 전부 계산했습니다.
+      각 조합은 CP 1500을 넘지 않는 가장 높은 레벨 기준입니다.</p>
     <table class="cmp-table">
       <thead><tr><th>구분</th><th>개체값</th><th>레벨</th><th>CP</th>
         <th>공격</th><th>방어</th><th>HP</th><th>버티는 정도</th></tr></thead>
@@ -117,7 +113,83 @@ function paint() {
       내 개체값은 4,096조합 중 <b>${mine.rank}위</b>입니다.
     </p>
 
-    ${verdictBlock(mine, best, hundo)}`;
+    ${verdictBlock(mine, best, hundo)}
+    </details>`;
+}
+
+/* 4,096조합 중 순위를 등급으로 바꾼다. 기준은 임의로 정한 것이라 화면에도 적어 둔다. */
+function gradeOf(rank, total) {
+  const top = rank / total * 100;
+  if (top <= 1) return { g: 'S', cls: 's', text: '버티는 힘 최상급입니다' };
+  if (top <= 10) return { g: 'A', cls: 'a', text: '충분히 좋은 개체입니다' };
+  if (top <= 30) return { g: 'B', cls: 'b', text: '무난한 개체입니다' };
+  return { g: 'C', cls: 'c', text: '더 좋은 개체가 많습니다' };
+}
+
+function gradeBlock(mine, best, all) {
+  const total = all.length;
+  const topPct = Math.max(0.1, mine.rank / total * 100);
+  const g = gradeOf(mine.rank, total);
+  const hold = mine.product / best.product * 100;
+  const holdLabel = hold >= 99 ? ['매우 좋음', 'good'] : hold >= 97 ? ['좋음', 'good'] : hold >= 94 ? ['보통', 'acc'] : ['약함', 'bad'];
+
+  // 공격 실수치가 4,096조합 중 얼마나 높은지 = 차징 우선권(CMP) 쪽 강도
+  const beaten = all.filter(b => b.atk < mine.atk).length / total * 100;
+  const cmpLabel = beaten >= 70 ? ['강함', 'good'] : beaten >= 30 ? ['보통', 'acc'] : ['약함', 'bad'];
+
+  return `
+    <div class="iv-grade">
+      <span class="iv-g ${g.cls}">${g.g}</span>
+      <div>
+        <div class="iv-g-title">상위 ${topPct.toFixed(1)}% · ${g.text}</div>
+        <div class="iv-g-sub">${esc(mon.ko)} ${mine.ivs.join('/')} · 4,096조합 중 ${mine.rank}위</div>
+        <div class="iv-pct"><i style="width:${(100 - topPct).toFixed(1)}%"></i></div>
+      </div>
+    </div>
+    <div class="iv-two">
+      <div class="iv-verdict"><span class="k">오래 버티기</span>
+        <b class="${holdLabel[1]}">${holdLabel[0]} · 1등의 ${hold.toFixed(1)}%</b>
+        <span>스탯곱(공격×방어×HP) 기준</span></div>
+      <div class="iv-verdict"><span class="k">차징 우선권 (CMP)</span>
+        <b class="${cmpLabel[1]}">${cmpLabel[0]} · 공격이 ${beaten.toFixed(0)}%의 조합보다 높음</b>
+        <span>같은 턴 차징에서 이기기 쉬운 정도</span></div>
+    </div>
+    <p class="iv-grade-note">등급 기준: S 상위 1% · A 10% · B 30% · 그 아래 C</p>`;
+}
+
+/* 공격·방어·HP·레벨을 내 개체, 1등, 15/15/15로 겹쳐 비교한다.
+   차이가 보이도록 막대 축을 잘라서 그린다(0이 아니라 최댓값의 70%에서 시작). */
+function statBars(mine, best, hundo) {
+  const sets = [
+    ['내 개체', 'me', mine], ['1등', 'best', best], ['15/15/15', 'hundo', hundo],
+  ];
+  const stats = [
+    ['공격', b => b.atk, v => v.toFixed(1)],
+    ['방어', b => b.def, v => v.toFixed(1)],
+    ['HP', b => b.hp, v => String(v)],
+    ['레벨', b => b.level, v => 'Lv' + v],
+  ];
+  const rows = stats.map(([name, get, fmt]) => {
+    const vals = sets.map(([, , b]) => get(b));
+    const hi = Math.max(...vals), lo = hi * 0.7;
+    const bars = sets.map(([label, cls, b]) => {
+      const v = get(b);
+      const w = Math.max(4, (v - lo) / (hi - lo) * 100);
+      return `<div class="iv-bar ${cls}"><i style="width:${w.toFixed(1)}%"></i><em>${fmt(v)}</em></div>`;
+    }).join('');
+    return `<div class="iv-bar-row"><span>${name}</span><div class="iv-bar-stack">${bars}</div></div>`;
+  }).join('');
+  return `
+    <div class="iv-bars">
+      <div class="iv-bars-title">같은 CP 1500에서 이렇게 달라집니다</div>
+      ${rows}
+      <div class="iv-bars-leg">
+        <span><i class="me"></i>내 개체 ${mine.ivs.join('/')}</span>
+        <span><i class="best"></i>1등 ${best.ivs.join('/')}</span>
+        <span><i class="hundo"></i>15/15/15</span>
+      </div>
+      <p class="iv-grade-note">막대는 차이가 잘 보이도록 최댓값의 70%부터 그렸습니다.</p>
+    </div>`;
 }
 
 function card(title, b, best, note, cls) {

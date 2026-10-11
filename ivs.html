@@ -52,22 +52,7 @@
 
 <main class="wrap">
 
-  <section class="panel lead">
-    <h2>슈퍼리그는 왜 공격이 낮은 개체를 쓰나요?</h2>
-    <div class="lead-grid">
-      <div class="lead-item"><span class="n">1</span>
-        <p><b>CP 1500 제한이 있습니다.</b> 이 선을 넘으면 슈퍼리그에 못 나갑니다.</p></div>
-      <div class="lead-item"><span class="n">2</span>
-        <p><b>공격은 CP를 가장 많이 올립니다.</b> 공격이 높으면 낮은 레벨에서 1500에 도달해 버립니다.</p></div>
-      <div class="lead-item"><span class="n">3</span>
-        <p><b>공격이 낮으면 레벨을 더 올릴 수 있습니다.</b> 그만큼 방어와 HP가 커져서 오래 버팁니다.</p></div>
-    </div>
-    <p class="note">
-      CP = ⌊공격 × √방어 × √HP ÷ 10⌋ — 공격만 제곱근이 없어서 CP를 가장 빨리 밀어 올립니다.
-      그래서 같은 1500 CP 안에서는 보통 공격↓ / 방어↑ / 체력↑ 개체가 더 단단합니다.
-    </p>
-  </section>
-
+  <div class="bench">
   <section class="picker cmp-picker">
     <label class="picker-label">포켓몬으로 확인하기</label>
     <div class="combo">
@@ -100,6 +85,23 @@
   <section class="result" id="iv-result" aria-live="polite">
     <p class="placeholder">포켓몬을 고르면 개체값별 결과가 나옵니다.</p>
   </section>
+  </div>
+
+  <details class="panel lead fold-lead">
+    <summary>왜 공격이 낮은 개체를 쓰나요?</summary>
+    <div class="lead-grid">
+      <div class="lead-item"><span class="n">1</span>
+        <p><b>CP 1500 제한이 있습니다.</b> 이 선을 넘으면 슈퍼리그에 못 나갑니다.</p></div>
+      <div class="lead-item"><span class="n">2</span>
+        <p><b>공격은 CP를 가장 많이 올립니다.</b> 공격이 높으면 낮은 레벨에서 1500에 도달해 버립니다.</p></div>
+      <div class="lead-item"><span class="n">3</span>
+        <p><b>공격이 낮으면 레벨을 더 올릴 수 있습니다.</b> 그만큼 방어와 HP가 커져서 오래 버팁니다.</p></div>
+    </div>
+    <p class="note">
+      CP = ⌊공격 × √방어 × √HP ÷ 10⌋ — 공격만 제곱근이 없어서 CP를 가장 빨리 밀어 올립니다.
+      그래서 같은 1500 CP 안에서는 보통 공격↓ / 방어↑ / 체력↑ 개체가 더 단단합니다.
+    </p>
+  </details>
 
   <section class="panel">
     <h2>꼭 기억하세요</h2>

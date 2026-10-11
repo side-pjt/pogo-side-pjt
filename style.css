@@ -665,3 +665,63 @@ main { gap: 18px; }
   .top h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   body:has(.bench) .top { display: none; }
 }
+
+/* ---------- 개체값: 등급 판정 + 스탯 막대 + 접이식 설명 ---------- */
+.fold-lead { padding: 0; }
+.fold-lead > summary { cursor: pointer; padding: 12px 16px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.fold-lead > summary::-webkit-details-marker { display: none; }
+.fold-lead > summary::after { content: "▸ 펼치기"; color: var(--ink-dim); font-size: 12px; font-weight: 400; }
+.fold-lead[open] > summary::after { content: "▾ 접기"; }
+.fold-lead > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 10px; }
+.fold-lead > :not(summary) { margin-inline: 16px; }
+.fold-lead[open] { padding-bottom: 16px; }
+.fold-lead[open] > summary { margin-bottom: 4px; }
+.fold-lead .lead-grid { margin-top: 6px; }
+
+.iv-grade { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: center; }
+.iv-g {
+  width: 60px; height: 60px; border-radius: 14px; display: grid; place-items: center;
+  font: 700 32px/1 var(--font-num); border: 2px solid var(--good); color: var(--good); background: rgba(74, 222, 128, .12);
+}
+.iv-g.a { border-color: var(--t1); color: var(--t1); background: rgba(90, 169, 240, .12); }
+.iv-g.b { border-color: var(--accent); color: var(--accent); background: rgba(255, 211, 77, .1); }
+.iv-g.c { border-color: var(--t5); color: var(--t5); background: rgba(242, 104, 95, .1); }
+.iv-g-title { font: 700 clamp(17px, 3.6vw, 21px)/1.3 var(--font-num); }
+.iv-g-sub { color: var(--ink-dim); font-size: 13px; margin-top: 2px; }
+.iv-pct { height: 8px; border-radius: 4px; background: var(--line); margin-top: 8px; overflow: hidden; }
+.iv-pct i { display: block; height: 100%; background: var(--good); }
+.iv-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.iv-verdict { background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 2px; font-size: 13px; }
+.iv-verdict .k { font-size: 11px; color: var(--ink-dim); }
+.iv-verdict b { font-size: 14px; }
+.iv-verdict span:last-child { color: var(--ink-dim); font-size: 12px; }
+.iv-verdict .good { color: var(--good); } .iv-verdict .bad { color: var(--t5); } .iv-verdict .acc { color: var(--accent); }
+.iv-grade-note { margin: 8px 0 0; font-size: 12px; color: var(--ink-dim); }
+
+.iv-bars { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); display: grid; gap: 10px; }
+.iv-bars-title { font-size: 13px; color: var(--ink-dim); }
+.iv-bar-row { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 8px; align-items: center; }
+.iv-bar-row > span { font-size: 12px; color: var(--ink-dim); }
+.iv-bar-stack { display: grid; gap: 3px; }
+.iv-bar { display: flex; align-items: center; gap: 8px; }
+.iv-bar i { display: block; height: 9px; border-radius: 5px; background: var(--c); }
+.iv-bar em { font: normal 500 11px/1 var(--font-num); color: var(--ink-dim); white-space: nowrap; }
+.iv-bar.me, .iv-bars-leg .me { --c: var(--t1); }
+.iv-bar.best, .iv-bars-leg .best { --c: var(--good); }
+.iv-bar.hundo, .iv-bars-leg .hundo { --c: #7a86a8; }
+.iv-bars-leg { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--ink-dim); }
+.iv-bars-leg i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; background: var(--c); }
+
+.more { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 10px; }
+.more > summary { cursor: pointer; color: var(--ink-dim); font-size: 13px; }
+.more > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 680px) {
+  .iv-two { grid-template-columns: minmax(0, 1fr); }
+  .iv-g { width: 50px; height: 50px; font-size: 26px; }
+}
+
+/* 폰: 내용이 짧을 때 남는 높이가 사이드바(상단 바) 아래 빈칸으로 퍼지지 않게 한다 */
+@media (max-width: 860px) {
+  .shell { grid-template-rows: auto 1fr; }
+}
