@@ -79,7 +79,7 @@ function paint() {
   chosen.hidden = false;
   document.querySelector('.ivs').hidden = false;
   chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(mon.img);
-  chosen.querySelector('.chosen-name').textContent = mon.ko;
+  chosen.querySelector('.chosen-name').innerHTML = nameHtml(mon);
   chosen.querySelector('.chosen-rank').textContent = `${rankText(mon)} · ${mon.types.join(' / ')}${mon.mega ? ' · 메가 전투용 CP 보정 미반영' : ''}`;
 
   // 메가 폼만: PvPoke 기본 개체값 빠른 선택
@@ -241,8 +241,8 @@ function verdictBlock(mine, best, hundo) {
 
 /* ------------------------------------------------------------------ */
 
-setupSearch(document.querySelector('.cmp-picker'), m => { mon = m; paint(); });
-document.querySelector('.cmp-picker .clear').addEventListener('click', () => { mon = null; paint(); });
+setupSearch(document.querySelector('.cmp-picker'), m => { mon = m; paint(); urlSet('p', m && m.id); });
+document.querySelector('.cmp-picker .clear').addEventListener('click', () => { mon = null; paint(); urlSet('p', null); });
 
 document.querySelectorAll('.iv-input').forEach((inp, i) => {
   inp.addEventListener('input', () => {
@@ -258,5 +258,5 @@ document.querySelectorAll('.iv-quick').forEach(btn => {
   });
 });
 
-mon = byRank(1);
+mon = monFromUrl('p') || byRank(1);
 paint();

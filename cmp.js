@@ -114,13 +114,14 @@ function setupSide(root, side) {
   const chosen = root.querySelector('.chosen');
   const ivBox = root.querySelector('.ivs');
 
-  setupSearch(root, mon => { S[side].mon = mon; paintSide(root, side); render(); });
+  setupSearch(root, mon => { S[side].mon = mon; paintSide(root, side); render(); urlSet(side, mon && mon.id); });
 
   root.querySelector('.clear').addEventListener('click', () => {
     S[side].mon = null;
     chosen.hidden = true;
     ivBox.hidden = true;
     render();
+    urlSet(side, null);
   });
 
   // 프리셋 버튼
@@ -151,7 +152,7 @@ function paintSide(root, side) {
 
   chosen.hidden = false;
   chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(st.mon.img);
-  chosen.querySelector('.chosen-name').textContent = st.mon.ko;
+  chosen.querySelector('.chosen-name').innerHTML = nameHtml(st.mon);
   chosen.querySelector('.chosen-rank').textContent = `${rankText(st.mon)} · ${st.mon.types.join(' / ')}${st.mon.mega ? ' · 메가 전투용 CP 보정 미반영' : ''}`;
 
   // 상대 쪽은 '전체 비교' 모드에서 개체값을 받지 않는다
@@ -327,7 +328,7 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
 });
 
 // 기본값: 1위 vs 2위
-S.me.mon = byRank(1);
-S.foe.mon = byRank(2);
+S.me.mon = monFromUrl('me') || byRank(1);
+S.foe.mon = monFromUrl('foe') || byRank(2);
 document.querySelectorAll('.cmp-picker').forEach(el => paintSide(el, el.dataset.side));
 render();

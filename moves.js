@@ -112,7 +112,7 @@ function paintMon(m) {
   chosen.hidden = !m;
   if (m) {
     chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(m.img);
-    chosen.querySelector('.chosen-name').textContent = m.ko;
+    chosen.querySelector('.chosen-name').innerHTML = nameHtml(m);
     chosen.querySelector('.chosen-rank').textContent = `${rankText(m)} · ${m.types.map(TKO).join(' / ')}`;
   }
   render();
@@ -128,6 +128,6 @@ result.addEventListener('keydown', e => {
   if ((e.key === 'Enter' || e.key === ' ') && pickBasis(e)) e.preventDefault();
 });
 
-setupSearch(document.querySelector('.cmp-picker'), paintMon);
-document.querySelector('.cmp-picker .clear').addEventListener('click', () => paintMon(null));
-paintMon(byRank(1));
+setupSearch(document.querySelector('.cmp-picker'), m => { paintMon(m); urlSet('p', m && m.id); });
+document.querySelector('.cmp-picker .clear').addEventListener('click', () => { paintMon(null); urlSet('p', null); });
+paintMon(monFromUrl('p') || byRank(1));

@@ -212,7 +212,7 @@ function paintSlot(root, i) {
   chosen.hidden = !mon;
   if (!mon) return;
   chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(mon.img);
-  chosen.querySelector('.chosen-name').textContent = mon.ko;
+  chosen.querySelector('.chosen-name').innerHTML = nameHtml(mon);
   chosen.querySelector('.chosen-rank').textContent = `${rankText(mon)} · ${mon.types.map(TKO).join(' / ')}`;
 }
 

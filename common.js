@@ -13,6 +13,28 @@ function esc(s) {
 }
 
 /* 메가·원시 폼은 표준 슈퍼리그 랭킹이 아니라 PvPoke 메가 에디션 랭킹의 순위다 */
+/* 주소창 ?키=값 — 고른 포켓몬을 주소에 남겨서 링크로 다시 열 수 있게 한다 */
+function urlGet(key) {
+  try { return new URLSearchParams(location.search).get(key); } catch (e) { return null; }
+}
+function urlSet(key, val) {
+  try {
+    const q = new URLSearchParams(location.search);
+    if (val) q.set(key, val); else q.delete(key);
+    const s = q.toString();
+    history.replaceState(null, '', location.pathname + (s ? '?' + s : '') + location.hash);
+  } catch (e) { /* file:// 등 */ }
+}
+function monFromUrl(key) {
+  const id = urlGet(key);
+  return id ? DATA.find(p => p.id === id) || null : null;
+}
+
+/* 영문 이름 — 그림자는 data 의 en 에 'Shadow' 가 없어서 붙여준다 */
+function enName(p) { return (p.shadow && !/shadow/i.test(p.en) ? 'Shadow ' : '') + p.en; }
+/* 한글 이름 뒤에 작고 흐린 영문 이름 */
+function nameHtml(p) { return `${esc(p.ko)}<small class="en">${esc(enName(p))}</small>`; }
+
 function byRank(r) { return DATA.find(p => !p.mega && p.rank === r); }
 /* 메가·원시끼리만 매긴 순위. 메가 에디션 전체 순위 순서대로 1, 2, 3… */
 const MEGA_ORDER = new Map(DATA.filter(p => p.mega).sort((a, b) => a.rank - b.rank).map((p, i) => [p.id, i + 1]));
@@ -65,7 +87,7 @@ function setupSearch(root, onPick) {
       li.setAttribute('aria-selected', String(i === cursor));
       li.innerHTML = `<img src="images/${encodeURIComponent(p.img)}" alt="" loading="lazy">` +
         `<span class="r-name"></span><span class="r-sub">${rankText(p)}</span>`;
-      li.querySelector('.r-name').textContent = p.ko;
+      li.querySelector('.r-name').innerHTML = nameHtml(p);
       li.addEventListener('mousedown', e => { e.preventDefault(); pick(p); });
       list.append(li);
     });

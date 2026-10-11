@@ -101,7 +101,7 @@ function setupPicker(root, side, initial) {
 
     chosen.hidden = false;
     chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(p.img);
-    chosen.querySelector('.chosen-name').textContent = p.ko;
+    chosen.querySelector('.chosen-name').innerHTML = nameHtml(p);
     chosen.querySelector('.chosen-rank').textContent = `${rankText(p)} · ${p.types.join(' / ')}`;
 
     chips.innerHTML = '';
@@ -126,7 +126,7 @@ function setupPicker(root, side, initial) {
     render();
   }
 
-  setupSearch(root, pick);
+  setupSearch(root, p => { pick(p); urlSet(side, p && p.id); });
 
   root.querySelector('.clear').addEventListener('click', () => {
     state[side].mon = null;
@@ -134,6 +134,7 @@ function setupPicker(root, side, initial) {
     chosen.hidden = true;
     movesBox.hidden = true;
     render();
+    urlSet(side, null);
   });
 
   if (initial) pick(initial);
@@ -290,7 +291,7 @@ function buildGroups() {
 
 // 기본값: 내 포켓몬 = 1위, 상대 = 2위 (열자마자 결과가 보이도록)
 document.querySelectorAll('.picker').forEach(el =>
-  setupPicker(el, el.dataset.side, byRank(el.dataset.side === 'me' ? 1 : 2)));
+  setupPicker(el, el.dataset.side, monFromUrl(el.dataset.side) || byRank(el.dataset.side === 'me' ? 1 : 2)));
 buildTable();
 buildGroups();
 render();

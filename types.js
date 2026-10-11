@@ -42,6 +42,7 @@ function buildPick(host) {
     // 타입을 직접 만지면 포켓몬 선택은 풀린다
     if (host === defHost) { mon = null; document.querySelector('#src-mon .chosen').hidden = true; }
     render();
+    if (host === defHost) syncUrl();
   });
 }
 function setPick(host, types) {
@@ -103,11 +104,11 @@ function renderSel(ts) {
     : '';
 }
 document.getElementById('def-sel').addEventListener('click', e => {
-  if (e.target.closest('.selclear')) return paintMon(null);
+  if (e.target.closest('.selclear')) { paintMon(null); syncUrl(); return; }
   const c = e.target.closest('.selchip'); if (!c) return;
   const rest = picked(defHost).filter(t => t !== c.dataset.t);
   mon = null; document.querySelector('#src-mon .chosen').hidden = true;
-  setPick(defHost, rest); render();
+  setPick(defHost, rest); render(); syncUrl();
 });
 
 function render() {
@@ -121,13 +122,20 @@ function render() {
     <div class="duo">${defCol(ts)}${atkCol(ts)}</div>`;
 }
 
+/* 포켓몬을 골랐으면 ?p=, 타입을 직접 골랐으면 ?t=, 둘 다 없으면 주소를 비운다 */
+function syncUrl() {
+  const ts = picked(defHost);
+  urlSet('p', mon ? mon.id : null);
+  urlSet('t', !mon && ts.length ? ts.join(',') : null);
+}
+
 function paintMon(m) {
   mon = m;
   const chosen = document.querySelector('#src-mon .chosen');
   chosen.hidden = !m;
   if (m) {
     chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(m.img);
-    chosen.querySelector('.chosen-name').textContent = m.ko;
+    chosen.querySelector('.chosen-name').innerHTML = nameHtml(m);
     chosen.querySelector('.chosen-rank').textContent = `${rankText(m)} · ${m.types.map(TKO).join(' / ')}`;
     setPick(defHost, m.types);
   } else setPick(defHost, []);
@@ -175,6 +183,9 @@ function buildChart() {
 
 buildPick(defHost);
 buildChart();
-setupSearch(document.getElementById('src-mon'), paintMon);
-document.querySelector('#src-mon .clear').addEventListener('click', () => paintMon(null));
-paintMon(byRank(1));
+setupSearch(document.getElementById('src-mon'), m => { paintMon(m); syncUrl(); });
+document.querySelector('#src-mon .clear').addEventListener('click', () => { paintMon(null); syncUrl(); });
+
+const urlTypes = (urlGet('t') || '').split(',').filter(t => T.order.includes(t)).slice(0, 2);
+if (!monFromUrl('p') && urlTypes.length) { setPick(defHost, urlTypes); render(); }
+else paintMon(monFromUrl('p') || byRank(1));
