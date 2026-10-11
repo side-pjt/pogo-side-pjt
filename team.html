@@ -63,12 +63,57 @@
   </section>
 
   <div class="tt-tabs" role="tablist" aria-label="팀 조합 보기">
-    <button type="button" role="tab" class="tt-tab" id="tab-btn-types" data-tab="types" aria-selected="true" aria-controls="tab-types">유형 알아보기</button>
-    <button type="button" role="tab" class="tt-tab" id="tab-btn-diag" data-tab="diag" aria-selected="false" aria-controls="tab-diag">내 팀 진단</button>
+    <button type="button" role="tab" class="tt-tab" id="tab-btn-diag" data-tab="diag" aria-selected="true" aria-controls="tab-diag">내 팀 진단</button>
     <button type="button" role="tab" class="tt-tab" id="tab-btn-mega" data-tab="mega" aria-selected="false" aria-controls="tab-mega">메가 에디션</button>
+    <button type="button" role="tab" class="tt-tab" id="tab-btn-types" data-tab="types" aria-selected="false" aria-controls="tab-types">유형 알아보기</button>
   </div>
 
-  <div class="tt-pane" id="tab-types" role="tabpanel" aria-labelledby="tab-btn-types">
+  <div class="tt-pane" id="tab-diag" role="tabpanel" aria-labelledby="tab-btn-diag">
+    <section class="panel">
+      <h2>내 팀 약점 확인하기</h2>
+      <p class="note">선봉, 중견, 마무리 순서로 세 마리를 고르면 18개 타입 중 팀이 약한 곳을 보여줍니다. 유형은 약점이 겹치는 정도로 추정한 값입니다.</p>
+      <label class="tt-check"><input type="checkbox" id="diag-6"> 대회 룰: 6마리 등록, 3마리 출전</label>
+      <div class="tt-slots" id="diag-slots">
+        <div class="tt-dslot" data-slot="0"><span class="tt-slot-label"><i class="role r-A">1</i> 선봉</span>
+          <div class="combo"><input type="search" class="search" placeholder="포켓몬 이름으로 검색" autocomplete="off" aria-label="선봉 포켓몬 검색"><ul class="results" hidden></ul></div>
+          <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="선봉 선택 해제">✕</button></div></div>
+        <div class="tt-dslot" data-slot="1"><span class="tt-slot-label"><i class="role r-B">2</i> 중견</span>
+          <div class="combo"><input type="search" class="search" placeholder="포켓몬 이름으로 검색" autocomplete="off" aria-label="중견 포켓몬 검색"><ul class="results" hidden></ul></div>
+          <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="중견 선택 해제">✕</button></div></div>
+        <div class="tt-dslot" data-slot="2"><span class="tt-slot-label"><i class="role r-C">3</i> 마무리</span>
+          <div class="combo"><input type="search" class="search" placeholder="포켓몬 이름으로 검색" autocomplete="off" aria-label="마무리 포켓몬 검색"><ul class="results" hidden></ul></div>
+          <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="마무리 선택 해제">✕</button></div></div>
+        <div class="tt-dslot" data-slot="3" hidden><span class="tt-slot-label">등록 4</span>
+          <div class="combo"><input type="search" class="search" placeholder="포켓몬 이름으로 검색" autocomplete="off" aria-label="등록 4번 포켓몬 검색"><ul class="results" hidden></ul></div>
+          <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="등록 4번 선택 해제">✕</button></div></div>
+        <div class="tt-dslot" data-slot="4" hidden><span class="tt-slot-label">등록 5</span>
+          <div class="combo"><input type="search" class="search" placeholder="포켓몬 이름으로 검색" autocomplete="off" aria-label="등록 5번 포켓몬 검색"><ul class="results" hidden></ul></div>
+          <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="등록 5번 선택 해제">✕</button></div></div>
+        <div class="tt-dslot" data-slot="5" hidden><span class="tt-slot-label">등록 6</span>
+          <div class="combo"><input type="search" class="search" placeholder="포켓몬 이름으로 검색" autocomplete="off" aria-label="등록 6번 포켓몬 검색"><ul class="results" hidden></ul></div>
+          <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="등록 6번 선택 해제">✕</button></div></div>
+      </div>
+      <div id="diag-result" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <div class="tt-pane" id="tab-mega" role="tabpanel" aria-labelledby="tab-btn-mega" hidden>
+    <section class="panel" id="mega-panel">
+      <h2>메가 에디션에 나오는 메가·원시 포켓몬</h2>
+      <p class="note">
+        메가 진화 포켓몬은 일반 슈퍼리그에서는 쓸 수 없고, 배틀리그의 메가 에디션 같은 별도 컵에서만 나옵니다.
+        순위는 PvPoke 메가 에디션 기준이고 규칙은 시즌마다 바뀔 수 있습니다. 위의 팀 유형 예시는 일반 슈퍼리그 기준입니다.
+      </p>
+      <div class="tt-mega-tools">
+        <input type="search" id="mega-q" class="search" placeholder="이름으로 찾기" autocomplete="off" aria-label="메가 포켓몬 이름 검색">
+        <div class="tt-chips" id="mega-chips" role="group" aria-label="타입 필터"></div>
+      </div>
+      <p class="note" id="mega-count"></p>
+      <div class="arch-members" id="mega-list"></div>
+    </section>
+  </div>
+
+  <div class="tt-pane" id="tab-types" role="tabpanel" aria-labelledby="tab-btn-types" hidden>
 
     <section class="panel tt-quiz">
       <h2>내 스타일에 맞는 유형 찾기</h2>
@@ -101,41 +146,6 @@
       <div id="flow"></div>
     </section>
 
-  </div>
-
-  <div class="tt-pane" id="tab-diag" role="tabpanel" aria-labelledby="tab-btn-diag" hidden>
-    <section class="panel">
-      <h2>내 팀 약점 확인하기</h2>
-      <p class="note">선봉, 중견, 마무리 순서로 세 마리를 고르면 18개 타입 중 팀이 약한 곳을 보여줍니다. 유형은 약점이 겹치는 정도로 추정한 값입니다.</p>
-      <div class="tt-slots" id="diag-slots">
-        <div class="tt-dslot" data-slot="0"><span class="tt-slot-label"><i class="role r-A">1</i> 선봉</span>
-          <div class="combo"><input type="search" class="search" placeholder="포켓몬 이름으로 검색" autocomplete="off" aria-label="선봉 포켓몬 검색"><ul class="results" hidden></ul></div>
-          <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="선봉 선택 해제">✕</button></div></div>
-        <div class="tt-dslot" data-slot="1"><span class="tt-slot-label"><i class="role r-B">2</i> 중견</span>
-          <div class="combo"><input type="search" class="search" placeholder="포켓몬 이름으로 검색" autocomplete="off" aria-label="중견 포켓몬 검색"><ul class="results" hidden></ul></div>
-          <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="중견 선택 해제">✕</button></div></div>
-        <div class="tt-dslot" data-slot="2"><span class="tt-slot-label"><i class="role r-C">3</i> 마무리</span>
-          <div class="combo"><input type="search" class="search" placeholder="포켓몬 이름으로 검색" autocomplete="off" aria-label="마무리 포켓몬 검색"><ul class="results" hidden></ul></div>
-          <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="마무리 선택 해제">✕</button></div></div>
-      </div>
-      <div id="diag-result" aria-live="polite"></div>
-    </section>
-  </div>
-
-  <div class="tt-pane" id="tab-mega" role="tabpanel" aria-labelledby="tab-btn-mega" hidden>
-    <section class="panel" id="mega-panel">
-      <h2>메가 에디션에 나오는 메가·원시 포켓몬</h2>
-      <p class="note">
-        메가 진화 포켓몬은 일반 슈퍼리그에서는 쓸 수 없고, 배틀리그의 메가 에디션 같은 별도 컵에서만 나옵니다.
-        순위는 PvPoke 메가 에디션 기준이고 규칙은 시즌마다 바뀔 수 있습니다. 위의 팀 유형 예시는 일반 슈퍼리그 기준입니다.
-      </p>
-      <div class="tt-mega-tools">
-        <input type="search" id="mega-q" class="search" placeholder="이름으로 찾기" autocomplete="off" aria-label="메가 포켓몬 이름 검색">
-        <div class="tt-chips" id="mega-chips" role="group" aria-label="타입 필터"></div>
-      </div>
-      <p class="note" id="mega-count"></p>
-      <div class="arch-members" id="mega-list"></div>
-    </section>
   </div>
 
   <section class="panel">

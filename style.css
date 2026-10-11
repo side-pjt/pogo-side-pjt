@@ -808,3 +808,30 @@ main { gap: 18px; }
   .tt-slots { grid-template-columns: minmax(0, 1fr); }
   .tt-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 }
+
+/* ---------- 내 팀 진단: 대회 룰 ---------- */
+.tt-check { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 14px; cursor: pointer; }
+.tt-check input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
+.tt-trios { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.tt-trios li { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: center; background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.tt-trios small { grid-column: 2; color: var(--ink-dim); font-size: 12px; }
+.tt-trio-tag { grid-row: span 2; font: 700 12px/1 var(--font-num); padding: 5px 8px; border-radius: 6px; background: rgba(74, 222, 128, .15); color: var(--good); white-space: nowrap; }
+.tt-trio-tag.bad { background: rgba(242, 104, 95, .18); color: var(--t5); }
+
+/* ---------- 내 팀 진단: 폰에서는 슬롯을 2열로 압축 ---------- */
+@media (max-width: 680px) {
+  .tt-slots { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .tt-slots:not(.six) .tt-dslot[data-slot="2"] { grid-column: 1 / -1; }
+  .tt-dslot { padding: 8px 10px; gap: 6px; border-radius: 10px; }
+  .tt-slot-label { font-size: 12px; }
+  .tt-dslot .search { padding: 7px 9px; font-size: 14px; }
+  .tt-dslot .chosen { gap: 8px; }
+  .tt-dslot .chosen-img { width: 32px; height: 32px; }
+  .tt-dslot .chosen-name { font-size: 14px; }
+  .tt-dslot .chosen-rank { display: none; }
+  .tt-dslot .clear { width: 30px; height: 30px; }
+  .tt-check { margin-top: 8px; }
+  .tt-grid { gap: 4px; }
+  .tt-cell { padding: 4px 0; font-size: 11px; }
+  .tt-trios li { padding: 8px 10px; }
+}

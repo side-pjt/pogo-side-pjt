@@ -174,7 +174,9 @@ function paintQuiz() {
 
 /* ---------- 2. 내 팀 진단 ---------- */
 
-const diag = [null, null, null];
+const diag = [null, null, null, null, null, null];
+let tournament = false;   // 대회 룰: 6마리 등록, 3마리 출전
+const LABELS3 = ['선봉', '중견', '마무리'];
 
 /* 약점 = 방어 타입 조합의 배율이 1.6배 이상인 공격 타입 */
 function weakSet(mon) {
@@ -194,6 +196,16 @@ function jaccard(a, b) {
   return i / u.size;
 }
 
+/* 세 마리의 약점 겹침으로 유형을 추정한다 (선봉, 중견, 마무리 순서) */
+function guessType(w) {
+  const j01 = jaccard(w[0], w[1]), j02 = jaccard(w[0], w[2]), j12 = jaccard(w[1], w[2]);
+  const max = Math.max(j01, j02, j12);
+  if (max < 0.2) return { code: 'ABC', why: '세 마리의 약점이 거의 겹치지 않아 서로 다른 역할을 맡는 구조에 가깝습니다.' };
+  if (max === j12) return { code: 'ABB', why: '중견과 마무리의 약점이 비슷해서, 뒤 두 마리가 같은 역할을 하는 구조에 가깝습니다.' };
+  if (max === j02) return { code: 'ABA', why: '선봉과 마무리의 약점이 비슷해서, 앞뒤가 같은 역할을 하는 구조에 가깝습니다.' };
+  return { code: null, why: '선봉과 중견의 약점이 비슷합니다. 이 페이지의 네 유형에는 없는 구조예요.' };
+}
+
 function paintSlot(root, i) {
   const mon = diag[i];
   const chosen = root.querySelector('.chosen');
@@ -204,49 +216,122 @@ function paintSlot(root, i) {
   chosen.querySelector('.chosen-rank').textContent = `${rankText(mon)} · ${mon.types.map(TKO).join(' / ')}`;
 }
 
-function paintDiag() {
-  const box = document.getElementById('diag-result');
-  const picked = diag.filter(Boolean);
-  if (!picked.length) { box.innerHTML = '<p class="placeholder">포켓몬을 고르면 팀의 약점이 나옵니다.</p>'; return; }
-
-  const weak = diag.map(m => m ? weakSet(m) : new Set());
-  const cells = T.order.map(t => {
+function typeGrid(weak) {
+  return T.order.map(t => {
     const n = weak.filter(w => w.has(t)).length;
     const cls = n >= 3 ? 'w3' : n === 2 ? 'w2' : n === 1 ? 'w1' : '';
     return `<div class="tt-cell ${cls}"><span>${esc(TKO(t))}</span><i>${n}</i></div>`;
   }).join('');
+}
 
+/* 6마리 중 3마리를 고르는 모든 조합(20가지)을 약점 겹침이 적은 순으로 */
+function trioReport(mons) {
+  const ws = mons.map(weakSet);
+  const out = [];
+  for (let a = 0; a < mons.length; a++)
+    for (let b = a + 1; b < mons.length; b++)
+      for (let c = b + 1; c < mons.length; c++) {
+        const w = [ws[a], ws[b], ws[c]];
+        let all3 = 0, two = 0;
+        for (const t of T.order) {
+          const n = w.filter(x => x.has(t)).length;
+          if (n === 3) all3++; else if (n === 2) two++;
+        }
+        out.push({ idx: [a, b, c], all3, two, score: all3 * 3 + two, g: guessType(w) });
+      }
+  out.sort((x, y) => x.score - y.score);
+  return out;
+}
+
+function trioRow(t, mons, tag) {
+  const names = t.idx.map(i => esc(mons[i].ko)).join(' · ');
+  const detail = t.all3 === 0 && t.two === 0 ? '약점이 겹치지 않음'
+    : `${t.all3 ? `세 마리 모두 약한 타입 ${t.all3}개 · ` : ''}두 마리가 약한 타입 ${t.two}개`;
+  return `<li><span class="tt-trio-tag ${tag.cls}">${tag.text}</span><b>${names}</b>
+    <small>${detail}${t.g.code ? ` · 추정 ${t.g.code}` : ''}</small></li>`;
+}
+
+function paintDiag() {
+  const box = document.getElementById('diag-result');
+  const n = tournament ? 6 : 3;
+  const mons = diag.slice(0, n).filter(Boolean);
+  if (!mons.length) { box.innerHTML = '<p class="placeholder">포켓몬을 고르면 팀의 약점이 나옵니다.</p>'; return; }
+
+  const weak = mons.map(weakSet);
   const counts = T.order.map(t => [t, weak.filter(w => w.has(t)).length]);
-  const all3 = counts.filter(([, n]) => n >= 3 && picked.length === 3).map(([t]) => TKO(t));
-  const two = counts.filter(([, n]) => n === 2).map(([t]) => TKO(t));
+  const grid = typeGrid(weak);
+
+  if (tournament) {
+    const wide = counts.filter(([, c]) => c >= 3).map(([t, c]) => `${TKO(t)}(${c})`);
+    const summary = wide.length
+      ? `<p class="tt-warn">6마리 중 3마리 이상이 약한 타입: <b>${wide.join(', ')}</b>. 이 타입을 쓰는 상대에게는 출전 3마리를 신중히 고르세요.</p>`
+      : '<p class="tt-warn good">6마리 중 3마리 이상이 함께 약한 타입이 없어, 상대에 맞춰 출전 조합을 고를 여유가 있습니다.</p>';
+
+    let trios = '';
+    if (mons.length >= 3) {
+      const rep = trioReport(mons);
+      const best = rep.slice(0, 3).map((t, i) => trioRow(t, mons, { cls: 'good', text: `추천 ${i + 1}` }));
+      const worst = rep.length > 3 ? [trioRow(rep[rep.length - 1], mons, { cls: 'bad', text: '피하기' })] : [];
+      trios = `<h3 class="tt-h3">출전 3마리 조합 <small>${mons.length}마리 중 ${rep.length}가지, 약점 겹침이 적은 순</small></h3>
+        <ol class="tt-trios">${best.concat(worst).join('')}</ol>
+        <p class="note">약점 겹침만 본 값이라 실제 상대와의 상성, 기술, 메타는 반영하지 않았습니다.</p>`;
+    } else {
+      trios = '<p class="note">세 마리 이상 고르면 출전 조합을 추천해 드립니다.</p>';
+    }
+    box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">등록 ${mons.length}마리가 약한 타입 <small>칸의 숫자 = 그 타입에 약한 포켓몬 수</small></h3>
+      <div class="tt-grid">${grid}</div>
+      ${summary}
+      ${trios}`;
+    return;
+  }
+
+  const all3 = counts.filter(([, c]) => c >= 3 && mons.length === 3).map(([t]) => TKO(t));
+  const two = counts.filter(([, c]) => c === 2).map(([t]) => TKO(t));
   let summary;
   if (all3.length) summary = `<p class="tt-warn bad">세 마리가 모두 약한 타입: <b>${all3.join(', ')}</b>. 이 타입을 쓰는 상대에게 팀이 통째로 밀릴 수 있습니다.</p>`;
   else if (two.length) summary = `<p class="tt-warn">두 마리가 함께 약한 타입: <b>${two.join(', ')}</b>. 이 타입을 쓰는 상대는 조심하세요.</p>`;
   else summary = '<p class="tt-warn good">두 마리 이상이 함께 약한 타입이 없습니다. 한 가지 타입에 팀 전체가 무너지지 않습니다.</p>';
 
-  let guess = '';
-  if (picked.length === 3) {
-    const j01 = jaccard(weak[0], weak[1]), j02 = jaccard(weak[0], weak[2]), j12 = jaccard(weak[1], weak[2]);
-    const max = Math.max(j01, j02, j12);
-    let code = null, why;
-    if (max < 0.2) { code = 'ABC'; why = '세 마리의 약점이 거의 겹치지 않아 서로 다른 역할을 맡는 구조에 가깝습니다.'; }
-    else if (max === j12) { code = 'ABB'; why = '중견과 마무리의 약점이 비슷해서, 뒤 두 마리가 같은 역할을 하는 구조에 가깝습니다.'; }
-    else if (max === j02) { code = 'ABA'; why = '선봉과 마무리의 약점이 비슷해서, 앞뒤가 같은 역할을 하는 구조에 가깝습니다.'; }
-    else { why = '선봉과 중견의 약점이 비슷합니다. 이 페이지의 네 유형에는 없는 구조예요.'; }
+  let guess = '<p class="note">세 마리를 모두 고르면 유형을 추정해 드립니다.</p>';
+  if (mons.length === 3) {
+    const g = guessType(weak);
     guess = `<div class="tt-reco">
       <div><span class="lb">추정 유형 (참고용)</span>
-        <div class="tt-reco-code">${code || '—'} <small>${code ? esc(byCode(code).headline) : '해당 없음'}</small></div>
-        <p class="note">${why} 역할은 데이터에 없어서 약점 겹침과 순서로만 추정한 값입니다.</p></div>
-      ${code ? `<button type="button" class="tt-go" data-code="${code}">흐름도 보기</button>` : ''}
+        <div class="tt-reco-code">${g.code || '—'} <small>${g.code ? esc(byCode(g.code).headline) : '해당 없음'}</small></div>
+        <p class="note">${g.why} 역할은 데이터에 없어서 약점 겹침과 순서로만 추정한 값입니다.</p></div>
+      ${g.code ? `<button type="button" class="tt-go" data-code="${g.code}">흐름도 보기</button>` : ''}
     </div>`;
-  } else {
-    guess = '<p class="note">세 마리를 모두 고르면 유형을 추정해 드립니다.</p>';
   }
 
-  box.innerHTML = `${guess}
-    <h3 class="tt-h3">팀이 약한 타입 <small>칸의 숫자 = 그 타입에 약한 포켓몬 수</small></h3>
-    <div class="tt-grid">${cells}</div>
-    ${summary}`;
+  box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">팀이 약한 타입 <small>칸의 숫자 = 그 타입에 약한 포켓몬 수</small></h3>
+    <div class="tt-grid">${grid}</div>
+    ${summary}
+    ${guess}`;
+}
+
+function relabelSlots() {
+  document.getElementById('diag-slots').classList.toggle('six', tournament);
+  document.querySelectorAll('.tt-dslot').forEach(root => {
+    const i = Number(root.dataset.slot);
+    root.hidden = i >= 3 && !tournament;
+    const label = root.querySelector('.tt-slot-label');
+    const badge = i < 3 ? `<i class="role r-${['A', 'B', 'C'][i]}">${i + 1}</i> ` : '';
+    label.innerHTML = badge + (tournament ? `등록 ${i + 1}` : LABELS3[i]);
+  });
+}
+
+function setTournament(on) {
+  tournament = on;
+  if (on && diag.slice(3).every(m => !m)) {
+    // 처음 켤 때는 예시 팀으로 채워 바로 결과가 보이게 한다
+    const have = new Set(diag.slice(0, 3).filter(Boolean).map(m => m.id));
+    const pool = [];
+    ARCHETYPES.forEach(a => a.members.forEach(id => { if (!have.has(id) && !pool.includes(id)) pool.push(id); }));
+    for (let i = 3; i < 6; i++) diag[i] = byId(pool[i - 3]) || null;
+  }
+  relabelSlots();
+  document.querySelectorAll('.tt-dslot').forEach(root => paintSlot(root, Number(root.dataset.slot)));
+  paintDiag();
 }
 
 function setupDiag() {
@@ -257,7 +342,9 @@ function setupDiag() {
   });
   // 처음 열 때 보여줄 예시: ABC 유형의 예시 팀
   byCode('ABC').members.forEach((id, i) => { diag[i] = byId(id) || null; });
+  relabelSlots();
   document.querySelectorAll('.tt-dslot').forEach(root => paintSlot(root, Number(root.dataset.slot)));
+  document.getElementById('diag-6').addEventListener('change', e => setTournament(e.target.checked));
   paintDiag();
 }
 
@@ -293,7 +380,7 @@ function paintMega() {
 function showTab(name) {
   document.querySelectorAll('.tt-tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
   document.querySelectorAll('.tt-pane').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
-  try { history.replaceState(null, '', name === 'types' ? location.pathname : '#' + name); } catch (e) { /* file:// 등 */ }
+  try { history.replaceState(null, '', name === 'diag' ? location.pathname : '#' + name); } catch (e) { /* file:// 등 */ }
 }
 
 /* ------------------------------------------------------------------ */
@@ -323,4 +410,4 @@ document.addEventListener('keydown', e => {
 document.getElementById('mega-q').addEventListener('input', e => { megaQuery = e.target.value; paintMega(); });
 
 const startTab = location.hash.replace('#', '');
-if (['diag', 'mega'].includes(startTab)) showTab(startTab);
+if (['types', 'mega'].includes(startTab)) showTab(startTab);
