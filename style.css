@@ -518,3 +518,47 @@ table.tchart th.hl { background: rgba(255, 211, 77, .2); color: var(--accent); }
   .nav-ico { min-width: 34px; font-size: 10px; padding: 3px 6px; }
   body { padding-bottom: calc(66px + env(safe-area-inset-bottom)); }
 }
+
+/* ---------- 일반기술 턴 버튼 (포켓몬을 몰라도 계산) ---------- */
+.turn-seg { display: flex; gap: 6px; }
+.turn-seg button {
+  flex: 1 1 0; padding: 9px 0; border-radius: 9px; cursor: pointer;
+  background: var(--panel-2); color: var(--ink-dim);
+  border: 1px solid var(--line);
+  font: 700 14px/1 var(--font-num);
+}
+.turn-seg button:hover { color: var(--ink); }
+.picker[data-side="me"] .turn-seg button[aria-pressed="true"] { background: var(--t1); border-color: var(--t1); color: #07111f; }
+.picker[data-side="foe"] .turn-seg button[aria-pressed="true"] { background: var(--t5); border-color: var(--t5); color: #1d0705; }
+.turn-seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.alt-label { display: block; margin: 12px 0 6px; font-size: 12px; color: var(--ink-dim); }
+
+/* ---------- 결과 타임라인 ---------- */
+.tl { margin-top: 16px; display: grid; gap: 5px; overflow-x: auto; padding-bottom: 4px; }
+.tl-row { display: grid; grid-template-columns: 30px minmax(calc(var(--n) * 22px), 1fr); gap: 8px; align-items: center; }
+.tl-name { font: 500 11px/1 var(--font-num); color: var(--ink-dim); }
+.trk, .axis { display: grid; grid-template-columns: repeat(var(--n), minmax(22px, 1fr)); gap: 2px; }
+.trk i {
+  height: 24px; border-radius: 4px; display: grid; place-items: center;
+  font: normal 500 10px/1 var(--font-num); color: #07111f; background: var(--t1);
+}
+.trk.foe i { background: var(--t5); color: #1d0705; }
+.trk i.alt { opacity: .55; }
+.trk i.hit { background: var(--accent); color: #1a1405; opacity: 1; font-weight: 700; box-shadow: 0 0 0 2px rgba(255, 211, 77, .35); }
+.trk.foe i.hit { background: var(--t5); color: #1d0705; box-shadow: 0 0 0 2px var(--accent); }
+.axis span { text-align: center; font: 500 10px/1 var(--font-num); color: var(--ink-dim); }
+.tl-note { margin: 6px 0 0; font-size: 12px; color: var(--ink-dim); }
+
+/* ---------- 결과 + 횟수표: 넓은 화면에서는 나란히 ---------- */
+.bench { display: grid; gap: 22px; }
+.bench > * { min-width: 0; }
+table.cct th.hl, table.cct td.hl { background: #232f55; }
+table.cct td.on { background: #2b3a6b; }
+@media (min-width: 1280px) {
+  body:has(.bench) .wrap { width: min(1160px, 100% - 48px); }
+  .bench { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .bench-table table.cct { min-width: 0; font-size: 12px; }
+  .bench-table table.cct th, .bench-table table.cct td { padding: 7px 3px; }
+  .bench-table table.cct td small { font-size: 10px; }
+  .bench-table .note { font-size: 12px; }
+}

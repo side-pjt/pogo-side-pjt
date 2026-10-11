@@ -53,7 +53,9 @@
 
   <section class="pickers">
     <div class="picker" data-side="me">
-      <label class="picker-label">내 포켓몬</label>
+      <label class="picker-label">내 일반기술</label>
+      <div class="turn-seg" role="group" aria-label="내 일반기술 턴 수"><button type="button" data-turns="1" aria-pressed="false">1턴</button><button type="button" data-turns="2" aria-pressed="false">2턴</button><button type="button" data-turns="3" aria-pressed="false">3턴</button><button type="button" data-turns="4" aria-pressed="false">4턴</button><button type="button" data-turns="5" aria-pressed="false">5턴</button></div>
+      <span class="alt-label">또는 포켓몬으로 찾기</span>
       <div class="combo">
         <input type="search" class="search" placeholder="이름으로 검색 (한글·영문)" autocomplete="off"
                aria-label="내 포켓몬 검색">
@@ -74,7 +76,9 @@
     </div>
 
     <div class="picker" data-side="foe">
-      <label class="picker-label">상대 포켓몬</label>
+      <label class="picker-label">상대 일반기술</label>
+      <div class="turn-seg" role="group" aria-label="상대 일반기술 턴 수"><button type="button" data-turns="1" aria-pressed="false">1턴</button><button type="button" data-turns="2" aria-pressed="false">2턴</button><button type="button" data-turns="3" aria-pressed="false">3턴</button><button type="button" data-turns="4" aria-pressed="false">4턴</button><button type="button" data-turns="5" aria-pressed="false">5턴</button></div>
+      <span class="alt-label">또는 포켓몬으로 찾기</span>
       <div class="combo">
         <input type="search" class="search" placeholder="이름으로 검색 (한글·영문)" autocomplete="off"
                aria-label="상대 포켓몬 검색">
@@ -95,17 +99,19 @@
     </div>
   </section>
 
+  <div class="bench">
   <section class="result" id="result" aria-live="polite">
     <p class="placeholder">양쪽 포켓몬을 고르면 차징 타이밍이 나옵니다.</p>
   </section>
 
-  <section class="panel">
+  <section class="panel bench-table">
     <h2>CCT 횟수표</h2>
     <p class="note">내 일반기술 턴 × 상대 일반기술 턴 · 숫자 = 내 일반기술을 몇 번 쓴 직후 차징을 누르는지</p>
     <div class="table-scroll">
       <table class="cct" id="cct-table"></table>
     </div>
   </section>
+  </div>
 
   <section class="panel">
     <h2>턴 그룹별 일반기술</h2>

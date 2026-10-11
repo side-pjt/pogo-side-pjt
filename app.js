@@ -57,9 +57,15 @@ function cellText(m, o) {
 ------------------------------------------------------------------ */
 
 const state = {
-  me: { mon: null, move: null },
-  foe: { mon: null, move: null },
+  me: { mon: null, move: null, turns: null },
+  foe: { mon: null, move: null, turns: null },
 };
+
+/* 턴 버튼 표시를 state에 맞춘다 */
+function syncSeg(root, turns) {
+  root.querySelectorAll('.turn-seg button').forEach(b =>
+    b.setAttribute('aria-pressed', String(Number(b.dataset.turns) === turns)));
+}
 
 
 
@@ -72,9 +78,26 @@ function setupPicker(root, side, initial) {
   const movesBox = root.querySelector('.moves');
   const chips = root.querySelector('.move-chips');
 
+  // 포켓몬을 몰라도 턴 수만 눌러서 계산할 수 있다. 고른 기술과 턴이 다르면 기술 선택은 푼다.
+  root.querySelectorAll('.turn-seg button').forEach(b => {
+    b.addEventListener('click', () => {
+      const n = Number(b.dataset.turns);
+      state[side].turns = n;
+      if (state[side].move && state[side].move.turns !== n) state[side].move = null;
+      [...chips.children].forEach((c, i) => {
+        const mon = state[side].mon;
+        c.setAttribute('aria-pressed', String(!!mon && mon.fast[i] === state[side].move));
+      });
+      syncSeg(root, n);
+      render();
+    });
+  });
+
   function pick(p) {
     state[side].mon = p;
     state[side].move = p.fast[0];
+    state[side].turns = p.fast[0].turns;
+    syncSeg(root, state[side].turns);
 
     chosen.hidden = false;
     chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(p.img);
@@ -91,6 +114,8 @@ function setupPicker(root, side, initial) {
       b.querySelector('.mv').textContent = f.name;
       b.addEventListener('click', () => {
         state[side].move = f;
+        state[side].turns = f.turns;
+        syncSeg(root, f.turns);
         [...chips.children].forEach((c, i) =>
           c.setAttribute('aria-pressed', String(p.fast[i] === f)));
         render();
@@ -105,7 +130,7 @@ function setupPicker(root, side, initial) {
 
   root.querySelector('.clear').addEventListener('click', () => {
     state[side].mon = null;
-    state[side].move = null;
+    state[side].move = null;   // 턴 수는 남겨 둬서 계속 계산할 수 있다
     chosen.hidden = true;
     movesBox.hidden = true;
     render();
@@ -122,20 +147,22 @@ function render() {
   const box = document.getElementById('result');
   const { me, foe } = state;
 
-  if (!me.mon || !foe.mon) {
-    box.innerHTML = '<p class="placeholder">양쪽 포켓몬을 고르면 차징 타이밍이 나옵니다.</p>';
+  if (!me.turns || !foe.turns) {
+    box.innerHTML = '<p class="placeholder">양쪽 일반기술 턴 수를 고르거나 포켓몬을 고르면 차징 타이밍이 나옵니다.</p>';
     highlightCell(null, null);
     return;
   }
 
-  const m = me.move.turns, o = foe.move.turns;
+  const m = me.turns, o = foe.turns;
   const r = cct(m, o, 4);
 
-  const head =
-    `<div class="matchup">` +
-    `<div>내 <b>${esc(me.mon.ko)}</b> · ${esc(me.move.name)} <b>${m}턴</b> (${(m * 0.5).toFixed(1)}초)</div>` +
-    `<div>상대 <b>${esc(foe.mon.ko)}</b> · ${esc(foe.move.name)} <b>${o}턴</b> (${(o * 0.5).toFixed(1)}초)</div>` +
-    `</div>`;
+  const who = (s, label) => {
+    const name = s.mon && s.move
+      ? `${label} <b>${esc(s.mon.ko)}</b> · ${esc(s.move.name)} `
+      : s.mon ? `${label} <b>${esc(s.mon.ko)}</b> · 일반기술 ` : `${label} 일반기술 `;
+    return `<div>${name}<b>${s.turns}턴</b> (${(s.turns * 0.5).toFixed(1)}초)</div>`;
+  };
+  const head = `<div class="matchup">${who(me, '내')}${who(foe, '상대')}</div>`;
 
   let body;
   if (r.kind === 'free') {
@@ -149,7 +176,7 @@ function render() {
       `<p class="answer-sub">이 조합은 최선이어도 ${r.loss}턴을 내줍니다.</p>`;
   } else {
     body =
-      `<div class="answer"><span class="k">${r.ks.join(' · ')}</span>회 직후 차징</div>` +
+      `<div class="answer"><span class="k">${r.ks.join(' · ')}</span>번째 직후 차징</div>` +
       `<p class="answer-sub">` +
       `내 일반기술을 ${r.ks[0]}번 쓴 직후가 첫 타이밍, 이후 ${r.period}번마다 반복` +
       (r.loss ? ` · 최선이어도 ${r.loss}턴 손해` : ' · 공짜 턴 없음') +
@@ -162,15 +189,31 @@ function render() {
   highlightCell(m, o);
 }
 
-/* 내 기술 횟수 눈금 — 눌러야 하는 지점을 표시 */
+/* 두 기술을 같은 시간축(1칸 = 1턴 = 0.5초)에 겹쳐 그린다.
+   노란 칸 = 내 기술 k번째가 끝나는 턴, 여기서 차징을 입력한다. */
 function timeline(m, o, ks) {
-  const max = Math.max(ks[Math.min(2, ks.length - 1)] + 2, 8);
-  const hit = new Set(ks);
-  let html = '<div class="timeline">';
-  for (let k = 1; k <= max; k++) {
-    html += `<span class="tick${hit.has(k) ? ' hit' : ''}" title="내 기술 ${k}회">${k}</span>`;
-  }
-  return html + '</div>';
+  const n = Math.min(Math.max(12, ks[0] * m + o), 30);
+  const hit = new Set(ks.map(k => k * m).filter(t => t <= n));
+
+  const track = (len, cls, mark) => {
+    let h = `<div class="trk ${cls}" style="--n:${n}">`;
+    for (let i = 1; i <= n; i++) {
+      const alt = Math.floor((i - 1) / len) % 2 ? 'alt' : '';
+      const on = hit.has(i) ? ' hit' : '';
+      h += `<i class="${alt}${on}">${mark && hit.has(i) ? '●' : ((i - 1) % len) + 1}</i>`;
+    }
+    return h + '</div>';
+  };
+  let axis = `<div class="axis" style="--n:${n}">`;
+  for (let i = 1; i <= n; i++) axis += `<span>${i % 2 === 0 ? i / 2 : ''}</span>`;
+  axis += '</div>';
+
+  return `<div class="tl" style="--n:${n}">` +
+    `<div class="tl-row"><span class="tl-name">상대</span>${track(o, 'foe', false)}</div>` +
+    `<div class="tl-row"><span class="tl-name">나</span>${track(m, 'me', true)}</div>` +
+    `<div class="tl-row"><span class="tl-name">초</span>${axis}</div>` +
+    `<p class="tl-note">노란 칸이 끝나는 순간 차징을 입력합니다. 칸 하나는 1턴(0.5초)입니다.</p>` +
+    `</div>`;
 }
 
 
@@ -183,11 +226,11 @@ function buildTable() {
   const turns = [1, 2, 3, 4, 5];
 
   let html = '<thead><tr><th>내 턴 ↓ / 상대 턴 →</th>';
-  turns.forEach(o => { html += `<th>${o}턴</th>`; });
+  turns.forEach(o => { html += `<th data-o="${o}">${o}턴</th>`; });
   html += '</tr></thead><tbody>';
 
   turns.forEach(m => {
-    html += `<tr><th>내 ${m}턴 기술</th>`;
+    html += `<tr><th data-m="${m}">내 ${m}턴 기술</th>`;
     turns.forEach(o => {
       const c = cellText(m, o);
       html += `<td class="${c.cls}" data-m="${m}" data-o="${o}">${c.main}` +
@@ -200,8 +243,10 @@ function buildTable() {
 }
 
 function highlightCell(m, o) {
-  document.querySelectorAll('#cct-table td.on').forEach(td => td.classList.remove('on'));
+  document.querySelectorAll('#cct-table .on, #cct-table .hl').forEach(el => el.classList.remove('on', 'hl'));
   if (!m || !o) return;
+  document.querySelectorAll(`#cct-table [data-m="${m}"], #cct-table [data-o="${o}"]`)
+    .forEach(el => el.classList.add('hl'));
   const td = document.querySelector(`#cct-table td[data-m="${m}"][data-o="${o}"]`);
   if (td) td.classList.add('on');
 }
