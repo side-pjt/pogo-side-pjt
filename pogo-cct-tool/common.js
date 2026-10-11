@@ -39,6 +39,9 @@ function setupSearch(root, onPick) {
 
   function close() { list.hidden = true; cursor = -1; }
 
+  // 고른 뒤 포커스를 풀어야 같은 입력창을 다시 눌렀을 때 focus가 다시 발생하고(모바일은 키보드도 내려감) 목록이 열린다
+  function pick(p) { input.value = ''; close(); input.blur(); onPick(p); }
+
   function renderList(items) {
     shown = items;
     list.innerHTML = '';
@@ -57,7 +60,7 @@ function setupSearch(root, onPick) {
       li.innerHTML = `<img src="images/${encodeURIComponent(p.img)}" alt="" loading="lazy">` +
         `<span class="r-name"></span><span class="r-sub">${p.rank}위</span>`;
       li.querySelector('.r-name').textContent = p.ko;
-      li.addEventListener('mousedown', e => { e.preventDefault(); input.value = ''; close(); onPick(p); });
+      li.addEventListener('mousedown', e => { e.preventDefault(); pick(p); });
       list.append(li);
     });
     list.hidden = false;
@@ -72,12 +75,13 @@ function setupSearch(root, onPick) {
 
   input.addEventListener('input', () => renderList(search(input.value, 40)));
   input.addEventListener('focus', () => renderList(search(input.value, 40)));
+  input.addEventListener('click', () => { if (list.hidden) renderList(search(input.value, 40)); });
   input.addEventListener('blur', () => setTimeout(close, 120));
   input.addEventListener('keydown', e => {
     if (e.key === 'ArrowDown') { e.preventDefault(); moveCursor(1); }
     else if (e.key === 'ArrowUp') { e.preventDefault(); moveCursor(-1); }
     else if (e.key === 'Enter' && cursor >= 0) {
-      e.preventDefault(); input.value = ''; close(); onPick(shown[cursor]);
+      e.preventDefault(); pick(shown[cursor]);
     } else if (e.key === 'Escape') close();
   });
 }
