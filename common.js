@@ -42,6 +42,9 @@ function rankText(p) {
   return p.mega ? `메가 에디션 ${p.rank}위 (메가 중 ${MEGA_ORDER.get(p.id)}위)` : `${p.rank}위`;
 }
 
+/* 선택 목록에 보여줄 최대 개수 (순위 순). 아래로 스크롤하면 더 나온다 */
+const LIST_LIMIT = 300;
+
 function search(q, limit) {
   const n = norm(q);
   if (!n) return DATA.slice(0, limit);
@@ -101,9 +104,9 @@ function setupSearch(root, onPick) {
     list.children[cursor].scrollIntoView({ block: 'nearest' });
   }
 
-  input.addEventListener('input', () => renderList(search(input.value, 40)));
-  input.addEventListener('focus', () => renderList(search(input.value, 40)));
-  input.addEventListener('click', () => { if (list.hidden) renderList(search(input.value, 40)); });
+  input.addEventListener('input', () => renderList(search(input.value, LIST_LIMIT)));
+  input.addEventListener('focus', () => renderList(search(input.value, LIST_LIMIT)));
+  input.addEventListener('click', () => { if (list.hidden) renderList(search(input.value, LIST_LIMIT)); });
   input.addEventListener('blur', () => setTimeout(close, 120));
   input.addEventListener('keydown', e => {
     if (e.key === 'ArrowDown') { e.preventDefault(); moveCursor(1); }
