@@ -224,6 +224,36 @@ function typeGrid(weak) {
   }).join('');
 }
 
+/* 강점 = 포켓몬 자기 타입(자속) 기술이 1.6배 이상으로 들어가는 방어 타입.
+   실제 보유 기술이 아니라 타입 기준이고, 방어 쪽은 단일 타입으로 본다. */
+function strongSet(mon) {
+  const out = new Set();
+  for (const def of T.order)
+    if (mon.types.some(a => ((T.chart[a] || {})[def] ?? 1) >= 1.59)) out.add(def);
+  return out;
+}
+
+function strongGrid(strong) {
+  return T.order.map(t => {
+    const n = strong.filter(s => s.has(t)).length;
+    const cls = n >= 2 ? 's2' : n === 1 ? 's1' : 's0';
+    return `<div class="tt-cell ${cls}"><span>${esc(TKO(t))}</span><i>${n}</i></div>`;
+  }).join('');
+}
+
+/* 약점 아래에 붙는 '팀이 강한 타입' 블록 */
+function strongBlock(mons) {
+  const strong = mons.map(strongSet);
+  const none = T.order.filter(t => !strong.some(s => s.has(t))).map(TKO);
+  const msg = none.length
+    ? `<p class="tt-warn">팀의 자속 기술로 약점을 못 찌르는 타입: <b>${none.join(', ')}</b>. 이 타입 상대에게는 다른 타입 기술이 필요합니다.</p>`
+    : '<p class="tt-warn good">18개 타입 모두를 약점으로 찌를 수 있는 포켓몬이 팀에 있습니다.</p>';
+  return `<h3 class="tt-h3">팀이 강한 타입 <small>칸의 숫자 = 그 타입에 자속 기술이 잘 통하는 포켓몬 수</small></h3>
+    <div class="tt-grid">${strongGrid(strong)}</div>
+    ${msg}
+    <p class="note">자기 타입 기준이라 실제 보유 기술은 반영하지 않았고, 듀얼 타입 상대는 따로 계산하지 않았습니다.</p>`;
+}
+
 /* 6마리 중 3마리를 고르는 모든 조합(20가지)을 약점 겹침이 적은 순으로 */
 function trioReport(mons) {
   const ws = mons.map(weakSet);
@@ -281,6 +311,7 @@ function paintDiag() {
     box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">등록 ${mons.length}마리가 약한 타입 <small>칸의 숫자 = 그 타입에 약한 포켓몬 수</small></h3>
       <div class="tt-grid">${grid}</div>
       ${summary}
+      ${strongBlock(mons)}
       ${trios}`;
     return;
   }
@@ -306,6 +337,7 @@ function paintDiag() {
   box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">팀이 약한 타입 <small>칸의 숫자 = 그 타입에 약한 포켓몬 수</small></h3>
     <div class="tt-grid">${grid}</div>
     ${summary}
+    ${strongBlock(mons)}
     ${guess}`;
 }
 

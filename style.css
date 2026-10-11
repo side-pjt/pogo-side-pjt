@@ -882,6 +882,9 @@ main { gap: 18px; }
 .tt-cell.w1 { background: rgba(240, 169, 60, .16); color: #f0a93c; }
 .tt-cell.w2 { background: rgba(242, 104, 95, .2); color: var(--t5); }
 .tt-cell.w3 { background: rgba(242, 104, 95, .4); color: #fff; }
+.tt-cell.s0 { background: transparent; border: 1px dashed var(--line); color: #7a86a8; }
+.tt-cell.s1 { background: rgba(74, 222, 128, .14); color: var(--good); }
+.tt-cell.s2 { background: rgba(74, 222, 128, .32); color: #fff; }
 .tt-warn { margin: 12px 0 0; font-size: 14px; color: var(--ink-dim); }
 .tt-warn.bad b { color: var(--t5); } .tt-warn.good { color: var(--good); }
 .tt-warn b { color: var(--accent); }
