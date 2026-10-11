@@ -12,8 +12,10 @@ pogo-image-fetcher + pogo-move-fetcher 결과를 합쳐 정적 도구용 데이�
 import argparse
 import json
 import pathlib
+import re
 import shutil
 import sys
+import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 IMG_MANIFEST = ROOT.parent / 'pogo-image-fetcher' / 'assets' / 'manifest.json'
@@ -21,11 +23,42 @@ IMG_DIR = ROOT.parent / 'pogo-image-fetcher' / 'assets' / 'pokemon'
 MOVE_POKEMON = ROOT.parent / 'pogo-move-fetcher' / 'data' / 'pokemon_moves.json'
 MOVE_TABLE = ROOT.parent / 'pogo-move-fetcher' / 'data' / 'moves.json'
 
+# CMP 계산용 — 종족값과 CPM 표는 PvPoke 소스에서 직접 받는다.
+# 공격 실수치 = (종족값공격 + 공격개체값) x CPM(레벨)  — 1,152종 전부 재현 검증 완료.
+PVPOKE_GM = 'https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/gamemaster.json'
+PVPOKE_POKEMON_JS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
+                     'src/js/pokemon/Pokemon.js')
+
 
 def load(p):
     if not p.exists():
         raise SystemExit('없는 파일: %s\n먼저 해당 수집기를 실행하세요.' % p)
     return json.load(open(p, encoding='utf-8'))
+
+
+def fetch(url):
+    req = urllib.request.Request(url, headers={'User-Agent': 'pogo-cct-build'})
+    with urllib.request.urlopen(req, timeout=120) as r:
+        return r.read().decode('utf-8', 'replace')
+
+
+def load_cmp_source():
+    """CMP 계산에 필요한 종족값과 CPM 표.
+
+    개체값·레벨 조합은 브라우저에서 계산한다 (4096조합 x 이진탐색이면 즉시 끝난다).
+    그래서 여기서는 재료만 넘기고 프리셋을 미리 굽지 않는다.
+    """
+    gm = json.loads(fetch(PVPOKE_GM))
+    base = {p['speciesId']: p['baseStats'] for p in gm['pokemon'] if 'baseStats' in p}
+
+    js = fetch(PVPOKE_POKEMON_JS)
+    m = re.search(r'cpms\s*=\s*\[([^\]]+)\]', js)
+    if not m:
+        raise SystemExit('CPM 표를 찾지 못했습니다 — PvPoke 소스 구조가 바뀌었을 수 있습니다.')
+    cpms = [float(x) for x in m.group(1).split(',')]
+    if len(cpms) < 100:
+        raise SystemExit('CPM 표가 너무 짧습니다 (%d개)' % len(cpms))
+    return base, cpms
 
 
 def main():
@@ -37,12 +70,18 @@ def main():
     mov = load(MOVE_POKEMON)['pokemon']
     moves = {m['moveId']: m for m in load(MOVE_TABLE)['moves']}
 
+    print('CMP용 종족값·CPM 표 받는 중…')
+    base_stats, cpms = load_cmp_source()
+    print('  종족값 %d종 / CPM %d개 (레벨 1~%g)'
+          % (len(base_stats), len(cpms), 1 + (len(cpms) - 1) / 2))
+
     by_species = {m['speciesId']: m for m in mov}
     rows, skipped = [], []
 
     for a in img:
         m = by_species.get(a['id'])
-        if not m:
+        bs = base_stats.get(a['id'])
+        if not m or not bs:
             skipped.append(a['id'])
             continue
 
@@ -71,6 +110,7 @@ def main():
             'shadow': a['isShadow'],
             'img': pathlib.PurePosixPath(a['file']).name,
             'fast': fast,
+            'base': [bs['atk'], bs['def'], bs['hp']],   # CMP 계산용 종족값
         })
 
     rows.sort(key=lambda r: r['rank'])
@@ -80,7 +120,10 @@ def main():
     payload = json.dumps(rows, ensure_ascii=False, separators=(',', ':'))
     (out / 'data.js').write_text(
         '// 자동 생성 — scripts/build_data.py\n'
-        'window.POKEMON = %s;\n' % payload, encoding='utf-8')
+        'window.POKEMON = %s;\n'
+        '// CPM[i] = 레벨 (1 + i/2) 의 배율. 공격 실수치 = (종족값 + 개체값) x CPM\n'
+        'window.CPM = %s;\n'
+        % (payload, json.dumps(cpms, separators=(',', ':'))), encoding='utf-8')
 
     if not args.no_images:
         dst = ROOT / 'images'

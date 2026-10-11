@@ -38,6 +38,72 @@ body {
   border-bottom: 1px solid var(--line);
   padding-block: 28px 22px;
 }
+
+/* ---------- 레이아웃: 좌측 사이드바 + 본문 ---------- */
+.shell {
+  display: grid;
+  grid-template-columns: 224px minmax(0, 1fr);
+  min-height: 100vh;
+}
+.content { min-width: 0; }
+
+.sidebar {
+  background: #111829;
+  border-right: 1px solid var(--line);
+  padding: 22px 14px;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.brand { display: grid; gap: 1px; text-decoration: none; padding-inline: 10px; }
+.brand-sub { font-size: 11px; color: var(--ink-dim); letter-spacing: .04em; }
+.brand-name { font-size: 17px; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+
+.nav { display: flex; flex-direction: column; gap: 4px; }
+.nav a {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--ink-dim); text-decoration: none; font-size: 14px;
+  padding: 9px 10px; border-radius: 9px;
+  border: 1px solid transparent;
+}
+.nav a:hover { color: var(--ink); background: rgba(255, 255, 255, .04); }
+.nav-ico {
+  font-size: 10px; font-weight: 700; letter-spacing: .02em;
+  background: var(--panel-2); color: var(--ink-dim);
+  border: 1px solid var(--line); border-radius: 6px;
+  padding: 3px 5px; min-width: 38px; text-align: center; flex: none;
+}
+.nav a[aria-current="page"] {
+  color: var(--accent);
+  background: rgba(255, 211, 77, .08);
+  border-color: rgba(255, 211, 77, .35);
+}
+.nav a[aria-current="page"] .nav-ico {
+  background: var(--accent); color: #1a1405; border-color: var(--accent);
+}
+
+.side-note { margin: auto 0 0; padding-inline: 10px; font-size: 11px; color: #6d7899; line-height: 1.7; }
+
+@media (max-width: 860px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar {
+    position: static; height: auto; flex-direction: row; align-items: center;
+    gap: 14px; padding: 12px 16px;
+    border-right: none; border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .brand { padding-inline: 0; }
+  .nav { flex-direction: row; margin-left: auto; }
+  .nav a { padding: 7px 10px; }
+  .nav-ico { min-width: 0; }
+  .side-note { display: none; }
+}
+
 .top h1 { margin: 0; font-size: clamp(22px, 4.2vw, 30px); letter-spacing: -0.02em; }
 .sub { margin: 6px 0 0; color: var(--ink-dim); font-size: 15px; }
 .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
@@ -181,3 +247,81 @@ table.cct td.on { outline: 2px solid var(--accent); outline-offset: -2px; }
 
 .foot { color: #6d7899; font-size: 12px; padding-block: 0 32px; }
 .foot p { margin: 2px 0; }
+
+/* ---------- CMP 페이지 ---------- */
+
+.modes { display: flex; gap: 8px; flex-wrap: wrap; }
+.mode-btn {
+  flex: 1 1 180px; text-align: left;
+  background: var(--panel); color: var(--ink-dim);
+  border: 1px solid var(--line); border-radius: 12px;
+  padding: 11px 14px; font: inherit; font-size: 14px; cursor: pointer;
+}
+.mode-btn small { display: block; font-size: 12px; opacity: .75; margin-top: 2px; }
+.mode-btn[aria-pressed="true"] {
+  color: var(--accent); border-color: var(--accent); background: rgba(255, 211, 77, .07);
+}
+
+.ivs { margin-top: 12px; }
+.preset-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.iv-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.iv-row label {
+  flex: 1 1 86px; display: grid; gap: 4px;
+  font-size: 12px; color: var(--ink-dim);
+}
+.iv-input {
+  width: 100%; padding: 7px 9px;
+  background: var(--panel-2); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 8px; font: inherit; font-size: 14px;
+}
+.iv-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.iv-summary { margin-top: 9px; font-size: 12px; color: var(--ink-dim); }
+
+.cmp-head {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 10px; margin-bottom: 18px;
+}
+.cmp-side { text-align: center; }
+.cmp-side-label { font-size: 12px; color: var(--ink-dim); }
+.cmp-side img { width: 66px; height: 66px; object-fit: contain; }
+.cmp-side strong { display: block; font-size: 15px; }
+.cmp-atk { font-size: clamp(24px, 5vw, 32px); font-weight: 700; color: var(--accent); }
+.cmp-meta { font-size: 12px; color: var(--ink-dim); }
+.vs { color: var(--ink-dim); font-size: 13px; font-weight: 600; }
+
+.verdict.tie { color: var(--t4); }
+
+.iv-strip-wrap { margin-top: 18px; }
+.iv-strip-label { font-size: 12px; color: var(--ink-dim); margin-bottom: 6px; }
+.iv-strip { display: flex; flex-wrap: wrap; gap: 3px; }
+.iv-cell {
+  width: 28px; height: 28px; display: grid; place-items: center;
+  border-radius: 6px; font-size: 11px; border: 1px solid var(--line);
+}
+.iv-cell.all  { background: rgba(74, 222, 128, .22); border-color: var(--good); color: var(--good); }
+.iv-cell.some { background: rgba(255, 211, 77, .18); border-color: var(--accent); color: var(--accent); }
+.iv-cell.none { background: rgba(242, 104, 95, .15); border-color: var(--t5); color: var(--t5); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; font-size: 12px; color: var(--ink-dim); }
+.legend span { display: flex; align-items: center; gap: 5px; }
+.legend .sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.legend .sw.all  { background: var(--good); }
+.legend .sw.some { background: var(--accent); }
+.legend .sw.none { background: var(--t5); }
+
+table.cmp-table { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 13px; }
+table.cmp-table th, table.cmp-table td {
+  border-bottom: 1px solid var(--line); padding: 9px 8px; text-align: left;
+}
+table.cmp-table th { color: var(--ink-dim); font-weight: 600; font-size: 12px; }
+table.cmp-table td.free { color: var(--good); }
+table.cmp-table td.blocked { color: var(--t5); }
+table.cmp-table td.tie { color: var(--t4); }
+.side-hint {
+  margin: 12px 0 0; font-size: 13px; color: var(--ink-dim);
+  border: 1px dashed var(--line); border-radius: 10px; padding: 10px 12px;
+}
+.side-hint b { color: var(--ink); }
+
+.made-by { color: var(--ink-dim); font-size: 13px; margin-bottom: 8px !important; }
+.made-by strong { color: var(--ink); font-weight: 600; }

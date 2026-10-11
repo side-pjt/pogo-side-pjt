@@ -56,94 +56,30 @@ function cellText(m, o) {
    상태
 ------------------------------------------------------------------ */
 
-const DATA = (window.POKEMON || []).slice();
 const state = {
   me: { mon: null, move: null },
   foe: { mon: null, move: null },
 };
 
-const norm = s => (s || '').toLowerCase().replace(/\s+/g, '');
 
-/* ------------------------------------------------------------------
-   검색
------------------------------------------------------------------- */
-
-function search(q, limit) {
-  const n = norm(q);
-  if (!n) return DATA.slice(0, limit);
-
-  const scored = [];
-  for (const p of DATA) {
-    const ko = norm(p.ko), en = norm(p.en), id = norm(p.id);
-    let s = -1;
-    if (ko === n || en === n) s = 0;
-    else if (ko.startsWith(n) || en.startsWith(n)) s = 1;
-    else if (ko.includes(n) || en.includes(n) || id.includes(n)) s = 2;
-    if (s >= 0) scored.push([s, p.rank, p]);
-  }
-  scored.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
-  return scored.slice(0, limit).map(x => x[2]);
-}
 
 /* ------------------------------------------------------------------
    포켓몬 선택 UI
 ------------------------------------------------------------------ */
 
 function setupPicker(root, side, initial) {
-  const input = root.querySelector('.search');
-  const list = root.querySelector('.results');
   const chosen = root.querySelector('.chosen');
   const movesBox = root.querySelector('.moves');
   const chips = root.querySelector('.move-chips');
-  let cursor = -1;
-  let shown = [];
-
-  function closeList() { list.hidden = true; cursor = -1; }
-
-  function renderList(items) {
-    shown = items;
-    list.innerHTML = '';
-    if (!items.length) {
-      const li = document.createElement('li');
-      li.className = 'empty';
-      li.textContent = '검색 결과 없음';
-      list.append(li);
-      list.hidden = false;
-      return;
-    }
-    items.forEach((p, i) => {
-      const li = document.createElement('li');
-      li.setAttribute('role', 'option');
-      li.setAttribute('aria-selected', String(i === cursor));
-      li.innerHTML =
-        `<img src="images/${encodeURIComponent(p.img)}" alt="" loading="lazy">` +
-        `<span class="r-name"></span><span class="r-sub">${p.rank}위</span>`;
-      li.querySelector('.r-name').textContent = p.ko;
-      li.addEventListener('mousedown', e => { e.preventDefault(); pick(p); });
-      list.append(li);
-    });
-    list.hidden = false;
-  }
-
-  function moveCursor(d) {
-    if (list.hidden || !shown.length) return;
-    cursor = (cursor + d + shown.length) % shown.length;
-    [...list.children].forEach((li, i) =>
-      li.setAttribute('aria-selected', String(i === cursor)));
-    list.children[cursor].scrollIntoView({ block: 'nearest' });
-  }
 
   function pick(p) {
     state[side].mon = p;
     state[side].move = p.fast[0];
-    input.value = '';
-    closeList();
 
     chosen.hidden = false;
     chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(p.img);
     chosen.querySelector('.chosen-name').textContent = p.ko;
-    chosen.querySelector('.chosen-rank').textContent =
-      `${p.rank}위 · ${p.types.join(' / ')}`;
+    chosen.querySelector('.chosen-rank').textContent = `${p.rank}위 · ${p.types.join(' / ')}`;
 
     chips.innerHTML = '';
     p.fast.forEach(f => {
@@ -161,30 +97,19 @@ function setupPicker(root, side, initial) {
       });
       chips.append(b);
     });
-    movesBox.hidden = p.fast.length < 1;
+    movesBox.hidden = false;
     render();
   }
 
-  function clear() {
+  setupSearch(root, pick);
+
+  root.querySelector('.clear').addEventListener('click', () => {
     state[side].mon = null;
     state[side].move = null;
     chosen.hidden = true;
     movesBox.hidden = true;
-    input.value = '';
-    closeList();
     render();
-  }
-
-  input.addEventListener('input', () => renderList(search(input.value, 40)));
-  input.addEventListener('focus', () => renderList(search(input.value, 40)));
-  input.addEventListener('blur', () => setTimeout(closeList, 120));
-  input.addEventListener('keydown', e => {
-    if (e.key === 'ArrowDown') { e.preventDefault(); moveCursor(1); }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); moveCursor(-1); }
-    else if (e.key === 'Enter' && cursor >= 0) { e.preventDefault(); pick(shown[cursor]); }
-    else if (e.key === 'Escape') closeList();
   });
-  root.querySelector('.clear').addEventListener('click', clear);
 
   if (initial) pick(initial);
 }
@@ -248,10 +173,6 @@ function timeline(m, o, ks) {
   return html + '</div>';
 }
 
-function esc(s) {
-  return String(s).replace(/[&<>"]/g, c =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-}
 
 /* ------------------------------------------------------------------
    5×5 표
@@ -323,7 +244,6 @@ function buildGroups() {
 /* ------------------------------------------------------------------ */
 
 // 기본값: 내 포켓몬 = 1위, 상대 = 2위 (열자마자 결과가 보이도록)
-const byRank = r => DATA.find(p => p.rank === r);
 document.querySelectorAll('.picker').forEach(el =>
   setupPicker(el, el.dataset.side, byRank(el.dataset.side === 'me' ? 1 : 2)));
 buildTable();
