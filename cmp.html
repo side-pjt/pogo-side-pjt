@@ -27,6 +27,7 @@
   <a class="brand" href="index.html">
     <span class="brand-sub">포켓몬 GO</span>
     <span class="brand-name">슈퍼리그 가이드</span>
+    <span class="brand-page">CMP 계산기</span>
   </a>
   <nav class="nav">
     <a href="index.html"><span class="nav-ico" aria-hidden="true">CCT</span>차징 타이밍</a>
@@ -54,14 +55,18 @@
 
 <main class="wrap">
 
-  <div class="modes" role="group" aria-label="계산 모드">
-    <button type="button" class="mode-btn" data-mode="spread" aria-pressed="true">
-      내 개체값만 <small>상대 전체와 비교</small>
-    </button>
-    <button type="button" class="mode-btn" data-mode="head" aria-pressed="false">
-      양쪽 개체값 <small>1:1 비교</small>
-    </button>
+  <div class="mode-ask">
+    <div class="mode-q">
+      <b>상대 개체값을 아시나요?</b>
+      <span>몰라요: 가능한 모든 개체와 비교 · 알아요: 직접 입력해서 1:1 비교</span>
+    </div>
+    <div class="modes" role="group" aria-label="상대 개체값을 아는지">
+      <button type="button" class="mode-btn" data-mode="spread" aria-pressed="true">몰라요</button>
+      <button type="button" class="mode-btn" data-mode="head" aria-pressed="false">알아요</button>
+    </div>
   </div>
+
+  <div class="bench">
 
   <section class="pickers">
     <div class="picker cmp-picker" data-side="me">
@@ -111,7 +116,7 @@
       </div>
       <p class="side-hint" hidden>
         개체값을 입력하지 않습니다 — 가능한 4,096조합 전체와 비교합니다.
-        상대 개체값을 아는 경우엔 위에서 <b>양쪽 개체값</b> 모드로 바꾸세요.
+        상대 개체값을 아는 경우엔 위에서 <b>알아요</b>를 고르세요.
       </p>
       <div class="ivs" hidden>
         <div class="preset-row">
@@ -132,6 +137,7 @@
   <section class="result" id="cmp-result" aria-live="polite">
     <p class="placeholder">양쪽 포켓몬을 고르면 CMP 결과가 나옵니다.</p>
   </section>
+  </div>
 
   <section class="panel">
     <h2>CMP는 이렇게 정해진다</h2>

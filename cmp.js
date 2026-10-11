@@ -222,8 +222,41 @@ function sideCard(mon, b, preset, label) {
 
 function renderSpread(me, foe, mb) {
   const sp = spread(mb.atk, foe);
-  const pct = (sp.win / sp.total * 100).toFixed(1);
+  const pctOf = n => (n / sp.total * 100).toFixed(1);
+  const pct = pctOf(sp.win);
   const fp = presets(foe);
+
+  // 이김·동점·짐 비율을 막대 한 줄로
+  const bar = `<div class="wl">` +
+    (sp.win ? `<i class="w" style="flex:${sp.win}"></i>` : '') +
+    (sp.tie ? `<i class="t" style="flex:${sp.tie}"></i>` : '') +
+    (sp.lose ? `<i class="l" style="flex:${sp.lose}"></i>` : '') + `</div>` +
+    `<div class="wl-legend">` +
+    `<span><i class="w"></i>이김 <b>${pctOf(sp.win)}%</b></span>` +
+    (sp.tie ? `<span><i class="t"></i>동점 <b>${pctOf(sp.tie)}%</b></span>` : '') +
+    `<span><i class="l"></i>짐 <b>${pctOf(sp.lose)}%</b></span></div>`;
+
+  // 상대 공격 개체값 구간별로 전부 승 / 일부 승 / 전부 패를 한 문장으로
+  const span = ivs => {
+    const parts = [];
+    for (let i = 0; i < ivs.length; i++) {
+      let j = i;
+      while (j + 1 < ivs.length && ivs[j + 1] === ivs[j] + 1) j++;
+      parts.push(j > i ? `${ivs[i]}~${ivs[j]}` : `${ivs[i]}`);
+      i = j;
+    }
+    return `<b>${parts.join(', ')}</b>`;
+  };
+  const group = kind => sp.perAtkIV.map((s, iv) => [s, iv])
+    .filter(([s]) => (kind === 'all' ? s.win === s.total : kind === 'none' ? s.win === 0 : s.win > 0 && s.win < s.total))
+    .map(([, iv]) => iv);
+  const ga = group('all'), gs = group('some'), gn = group('none');
+  const bits = [];
+  if (ga.length) bits.push(`${span(ga)}이면 전부 이기고`);
+  if (gs.length) bits.push(`${span(gs)}이면 일부만 이기고`);
+  if (gn.length) bits.push(`${span(gn)}이면 전부 집니다`);
+  const bound = ga.length === 16 ? '상대 공격 개체값이 몇이어도 내가 먼저입니다.'
+    : '상대 공격 개체값이 ' + bits.join(' ').replace(/고$/, '고').replace(/고 전부 집니다/, '고 전부 집니다') + '.';
 
   // 공격 개체값별 — 내가 전부 이기는지 / 일부만인지 / 전부 지는지
   const strip = sp.perAtkIV.map((s, iv) => {
@@ -249,15 +282,15 @@ function renderSpread(me, foe, mb) {
       <div>상대 <b>${esc(foe.ko)}</b> · 개체값 전체 ${sp.total}조합과 비교</div>
     </div>
 
-    <div class="answer"><span class="k">${pct}%</span> 에게 내가 먼저</div>
-    <p class="answer-sub">
-      ${sp.win}승 · ${sp.lose}패${sp.tie ? ` · ${sp.tie}동점` : ''}
-      — 상대 개체값을 모를 때 내가 CMP를 이길 확률입니다.
-    </p>
+    <div class="answer-label">내가 CMP를 이길 확률</div>
+    <div class="answer"><span class="k">${pct}%</span> 내가 먼저</div>
+    ${bar}
+    <p class="answer-sub">상대 개체값을 모를 때, 가능한 ${sp.total.toLocaleString()}조합 전체와 비교한 값입니다.</p>
 
     <div class="iv-strip-wrap">
       <div class="iv-strip-label">상대 공격 개체값별</div>
       <div class="iv-strip">${strip}</div>
+      <p class="bound">${bound}</p>
       <div class="legend">
         <span><i class="sw all"></i>전부 승</span>
         <span><i class="sw some"></i>일부 승</span>

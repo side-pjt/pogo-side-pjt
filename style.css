@@ -562,3 +562,106 @@ table.cct td.on { background: #2b3a6b; }
   .bench-table table.cct td small { font-size: 10px; }
   .bench-table .note { font-size: 12px; }
 }
+
+/* ---------- CMP: 질문형 토글 ---------- */
+.mode-ask { display: grid; gap: 10px; }
+.mode-q b { display: block; font-family: var(--font-num); font-size: 16px; }
+.mode-q span { color: var(--ink-dim); font-size: 13px; }
+.modes {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 4px;
+}
+.mode-btn { flex: none; border: 0; background: transparent; border-radius: 9px; padding: 11px 8px; text-align: center; font-weight: 500; }
+.mode-btn[aria-pressed="true"] { background: var(--accent); color: #1a1405; font-weight: 700; border: 0; }
+.mode-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- CMP: 승률 막대·경계 문장 ---------- */
+.answer-label { font-size: 13px; color: var(--ink-dim); margin-bottom: 2px; }
+.wl { display: flex; height: 14px; border-radius: 7px; overflow: hidden; gap: 2px; margin-top: 14px; }
+.wl i { display: block; }
+.wl .w, .wl-legend i.w { background: var(--good); }
+.wl .t, .wl-legend i.t { background: var(--accent); }
+.wl .l, .wl-legend i.l { background: var(--t5); }
+.wl-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; font-size: 13px; color: var(--ink-dim); }
+.wl-legend b { color: var(--ink); font-family: var(--font-num); margin-left: 3px; }
+.wl-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; }
+.bound { margin: 10px 0 0; font-size: 14px; color: var(--ink-dim); }
+.bound b { color: var(--accent); font-family: var(--font-num); }
+
+/* ---------- CMP: 넓은 화면에서 입력 왼쪽, 결과 오른쪽 ---------- */
+.bench { display: grid; gap: 22px; }
+.bench > * { min-width: 0; }
+@media (min-width: 1280px) {
+  body:has(.bench) .wrap { width: min(1160px, 100% - 48px); }
+  .bench:has(.cmp-picker) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: start; }
+  .bench .pickers { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- 버튼 크기 줄이기 ---------- */
+.modes { display: inline-grid; grid-template-columns: auto auto; width: fit-content; max-width: 100%; border-radius: 10px; padding: 3px; }
+.mode-btn { padding: 6px 14px; font-size: 13px; border-radius: 8px; }
+.mode-q b { font-size: 15px; }
+.turn-seg { gap: 5px; }
+.turn-seg button { flex: 0 0 auto; min-width: 46px; padding: 6px 10px; font-size: 13px; border-radius: 8px; }
+
+/* ---------- 입력부 압축: 결과가 스크롤 없이 보이도록 (답답하지 않게 간격은 유지) ---------- */
+main { gap: 18px; }
+.picker { padding: 14px 16px; }
+.picker-label { margin-bottom: 10px; }
+.alt-label { display: none; }
+.turn-seg ~ .combo { margin-top: 12px; }
+.chosen { margin-top: 14px; gap: 12px; }
+.chosen-img { width: 44px; height: 44px; }
+.chosen-name { font-size: 16px; }
+.moves { margin-top: 12px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; }
+.moves-label { margin: 0; }
+.result { padding: 18px 20px; }
+@media (max-width: 680px) {
+  /* 폰: 한 화면에 입력·결과가 다 들어오도록 한 줄씩 압축 */
+  body:has(.bench) .top { padding-block: 8px 6px; }
+  body:has(.bench) .top .sub, body:has(.bench) .top .meta { display: none; }
+  main { gap: 12px; }
+  .picker { padding: 10px 12px; }
+  .picker:has(.turn-seg) { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 10px; row-gap: 8px; align-items: center; }
+  .picker:has(.turn-seg) > * { grid-column: 1 / -1; margin: 0; }
+  .picker:has(.turn-seg) > .picker-label { grid-column: 1; white-space: nowrap; }
+  .picker:has(.turn-seg) > .turn-seg { grid-column: 2; }
+  .turn-seg { gap: 4px; }
+  .turn-seg button { flex: 1 1 0; min-width: 0; min-height: 34px; padding: 0; }
+  .picker:has(.chosen:not([hidden])) > .combo { display: none; }
+  .chosen { gap: 10px; }
+  .chosen-img { width: 36px; height: 36px; }
+  .chosen-name { font-size: 15px; }
+  .clear { width: 34px; height: 34px; }
+  .moves-label { display: none; }
+  .moves { gap: 6px; }
+  .chip { padding: 5px 11px; }
+  .result { padding: 14px; min-height: 0; }
+  .matchup { margin-bottom: 10px; font-size: 13px; }
+  /* CMP */
+  .mode-q span, .side-hint { display: none; }
+  .mode-ask { gap: 8px; }
+  .ivs { margin-top: 8px; }
+  .iv-row { margin-top: 6px; gap: 6px; }
+  .iv-input { padding: 5px 8px; }
+  .iv-summary { margin-top: 6px; }
+  .preset-row { gap: 5px; }
+}
+
+/* ---------- 몰라요/알아요 토글: 질문과 한 줄, 작게 ---------- */
+.mode-ask { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 14px; }
+.modes { padding: 2px; border-radius: 9px; }
+.mode-btn { padding: 4px 14px; font-size: 12px; border-radius: 7px; }
+
+/* ---------- 폰: 사이트 이름과 페이지 이름을 한 줄로 ---------- */
+.brand-page { display: none; }
+@media (max-width: 860px) {
+  .brand { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+  .brand-sub { display: none; }
+  .brand-page { display: block; min-width: 0; font-size: 14px; color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .brand-page::before { content: "-"; margin-right: 8px; }
+  .brand-name { white-space: nowrap; }
+  /* 페이지 제목은 위로 옮겼으니 화면에서는 숨기되 스크린리더용으로 남긴다 */
+  .top h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  body:has(.bench) .top { display: none; }
+}
