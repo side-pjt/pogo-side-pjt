@@ -6,7 +6,7 @@ pogo-image-fetcher + pogo-move-fetcher 결과를 합쳐 정적 도구용 데이�
 - images/        스프라이트를 복사해 자체 완결 폴더로 만든다.
 
 사용법
-  python scripts/build_data.py [--no-images]
+  python pogo-cct-tool/scripts/build_data.py [--no-images]
 """
 
 import argparse
@@ -17,11 +17,11 @@ import shutil
 import sys
 import urllib.request
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
-IMG_MANIFEST = ROOT.parent / 'pogo-image-fetcher' / 'assets' / 'manifest.json'
-IMG_DIR = ROOT.parent / 'pogo-image-fetcher' / 'assets' / 'pokemon'
-MOVE_POKEMON = ROOT.parent / 'pogo-move-fetcher' / 'data' / 'pokemon_moves.json'
-MOVE_TABLE = ROOT.parent / 'pogo-move-fetcher' / 'data' / 'moves.json'
+ROOT = pathlib.Path(__file__).resolve().parent.parent.parent  # 저장소 루트 (웹 파일도 여기 있다 — GitHub Pages)
+IMG_MANIFEST = ROOT / 'pogo-image-fetcher' / 'assets' / 'manifest.json'
+IMG_DIR = ROOT / 'pogo-image-fetcher' / 'assets' / 'pokemon'
+MOVE_POKEMON = ROOT / 'pogo-move-fetcher' / 'data' / 'pokemon_moves.json'
+MOVE_TABLE = ROOT / 'pogo-move-fetcher' / 'data' / 'moves.json'
 
 # CMP 계산용 — 종족값과 CPM 표는 PvPoke 소스에서 직접 받는다.
 # 공격 실수치 = (종족값공격 + 공격개체값) x CPM(레벨)  — 1,152종 전부 재현 검증 완료.
@@ -35,7 +35,7 @@ PVPOKE_POKEMON_JS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
 # 이름으로 적어 둬서 추측할 여지가 없다. 그래서 이쪽을 정본으로 쓴다.
 PVPOKE_DMG_JS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
                  'src/js/battle/DamageCalculator.js')
-TYPE_MOVE_TABLE = ROOT.parent / 'pogo-move-fetcher' / 'data' / 'types.json'
+TYPE_MOVE_TABLE = ROOT / 'pogo-move-fetcher' / 'data' / 'types.json'
 
 SUPER, RESIST, DOUBLE_RESIST = 1.6, 0.625, 0.390625
 

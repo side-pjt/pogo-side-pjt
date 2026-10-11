@@ -1,5 +1,8 @@
 # 포켓몬 GO 슈퍼리그 계산기
 
+> **위치 안내** — GitHub Pages 배포를 위해 웹 파일(`index.html`·`*.js`·`style.css`·`data/`·`images/`)은 **저장소 루트**로 옮겼다. 이 폴더에는 `scripts/build_data.py`와 문서만 남는다. 아래 경로는 루트 기준으로 읽을 것. 빌드는 저장소 루트에서 `python pogo-cct-tool/scripts/build_data.py`.
+
+
 정적 웹 도구 두 개.
 
 | 페이지 | 하는 일 |
