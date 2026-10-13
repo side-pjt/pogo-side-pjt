@@ -16,60 +16,13 @@
    1,152종 전부 PvPoke 수치와 대조해 검증한 식이다.
 ------------------------------------------------------------------ */
 
-const CP_CAP = 1500;
-const MAX_LEVEL = 50;
-
-function statsAt(base, ivs, level) {
-  const c = CPM[Math.round((level - 1) * 2)];
-  const atk = (base[0] + ivs[0]) * c;
-  const def = (base[1] + ivs[1]) * c;
-  const hpRaw = (base[2] + ivs[2]) * c;              // CP는 내림하기 전 체력으로 계산한다 (게임과 같다)
-  const hp = Math.floor(hpRaw);                       // 화면에 보이는 실제 HP·스탯곱은 내림한 값
-  return { atk, def, hp, cp: Math.max(10, Math.floor(atk * Math.sqrt(def) * Math.sqrt(hpRaw) / 10)) };
-}
-
-/* CP 상한을 넘지 않는 가장 높은 레벨. CP는 레벨에 단조증가라 넘는 순간 끊으면 된다. */
-function bestBuild(base, ivs) {
-  let out = null;
-  for (let lv = 1; lv <= MAX_LEVEL; lv += 0.5) {
-    const s = statsAt(base, ivs, lv);
-    if (s.cp > CP_CAP) break;
-    out = Object.assign({ level: lv, ivs: ivs.slice() }, s);
-  }
-  return out || Object.assign({ level: 1, ivs: ivs.slice() }, statsAt(base, ivs, 1));
-}
-
-/* 모든 개체값 조합(4096개)의 최적 빌드. 브라우저에서 즉시 끝난다. */
-function allBuilds(base) {
-  const out = [];
-  for (let a = 0; a < 16; a++)
-    for (let d = 0; d < 16; d++)
-      for (let h = 0; h < 16; h++)
-        out.push(bestBuild(base, [a, d, h]));
-  return out;
-}
-
-const _cache = new Map();
 function buildsFor(mon) {
-  if (!_cache.has(mon.id)) _cache.set(mon.id, allBuilds(mon.base));
-  return _cache.get(mon.id);
+  return BattleCore.allBuilds(mon, 'great');
 }
 
 /* 프리셋 세 가지 */
 function presets(mon) {
-  const all = buildsFor(mon);
-  let rank1 = all[0], maxAtk = all[0];
-  for (const b of all) {
-    if (b.atk * b.def * b.hp > rank1.atk * rank1.def * rank1.hp) rank1 = b;
-    if (b.atk > maxAtk.atk) maxAtk = b;
-  }
-  return {
-    rank1,                                   // 스탯곱 최대 — 대부분이 키우는 빌드
-    maxAtk,                                  // 공격 최대 — CMP를 노린 빌드
-    hundo: bestBuild(mon.base, [15, 15, 15]),
-    // 메가 폼만: PvPoke 메가 에디션 기본 개체값
-    pvpoke: mon.pvIv ? bestBuild(mon.base, mon.pvIv) : undefined,
-  };
+  return BattleCore.presets(mon, 'great');
 }
 
 /* 상대 개체값을 모를 때: 전체 조합 대비 내가 이기는 비율과 공격 개체값별 판정 */
@@ -102,7 +55,7 @@ const S = {
 function buildOf(side) {
   const st = S[side];
   if (!st.mon) return null;
-  if (st.preset === 'custom') return bestBuild(st.mon.base, st.ivs);
+  if (st.preset === 'custom') return BattleCore.bestBuild(st.mon.base, st.ivs, 1500);
   return presets(st.mon)[st.preset];
 }
 

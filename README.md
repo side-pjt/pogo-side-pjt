@@ -1,6 +1,6 @@
 # pogo-side-pjt
 
-포켓몬 GO 슈퍼리그(Great League) CCT 계산기와 그 데이터를 모으는 수집기들.
+포켓몬 GO PvP CCT 계산기와 배틀 시뮬레이터, 그 데이터를 모으는 수집기들.
 
 **CCT** = Charged move Count Timing. 상대 일반기술의 마지막 턴에 차징기를 입력해
 상대에게 주는 ‘공짜 턴’을 최소화하는 기술이다. 1턴 = 0.5초.
@@ -21,12 +21,33 @@
 저장소 루트의 `index.html` 을 브라우저로 열면 끝이다. 빌드도 서버도 설치도 필요 없다.
 순수 HTML/CSS/JS이고 의존성이 없다.
 
+## 배틀 시뮬레이터
+
+`battle.html`에서 슈퍼리그 배틀을 계산한다. 하이퍼·마스터리그는 잠시 막아 두었다.
+
+- **Single**: 포켓몬, IV, 기술, 실드, 능력치 단계를 설정한 1대1 자동 전투
+- **Multi**: 한 포켓몬을 현재 리그 상위 메타와 일괄 비교
+- **Matrix**: 두 포켓몬 그룹의 모든 조합을 레이팅 표로 비교하고 CSV로 내보내기
+- 턴 타임라인, 실드 0~2개 조합표, CMP, CCT, 브레이크포인트·벌크포인트 분석
+- URL에 리그·포켓몬·기술·실드·직접 입력 IV를 저장해 공유 가능
+
+계산은 1턴 0.5초, 에너지 최대 100, 자속 ×1.2, 포켓몬 GO 타입 배율,
+그림자 공격 ×1.2·방어 ÷1.2를 적용한다. 확률 버프는 고정 시드로 재현한다.
+PvPoke의 기능과 공개 데이터를 검증 기준으로 삼았지만 엔진과 화면은 독립 구현이므로,
+동시 행동과 자동 베이팅 판단이 PvPoke 결과와 일부 다를 수 있다.
+
+엔진 회귀 검사는 Node.js가 있을 때 다음처럼 실행한다.
+
+```bash
+node tests/battle-engine.test.js
+```
+
 ## 데이터 갱신
 
 ```bash
 python pogo-image-fetcher/scripts/fetch_assets.py   # 스프라이트·한글명
 python pogo-move-fetcher/scripts/fetch_moves.py     # 기술 턴 수·기술셋
-python pogo-cct-tool/scripts/build_data.py          # 둘을 합쳐 계산기 데이터 생성
+python pogo-cct-tool/scripts/build_data.py          # 계산기 데이터 + 리그별 PvPoke 순위 생성
 ```
 
 Python 3 표준 라이브러리만 쓴다. 설치할 패키지가 없다.

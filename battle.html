@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>포켓몬 GO 배틀 시뮬레이터</title>
+<meta name="description" content="포켓몬 GO 슈퍼·하이퍼·마스터리그 1대1, Multi, Matrix 배틀 시뮬레이터">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="포켓몬 GO 배틀 시뮬레이터">
+<meta property="og:description" content="포켓몬과 기술, 실드를 골라 턴별 배틀 결과를 확인한다">
+<meta property="og:image" content="https://side-pjt.github.io/pogo-side-pjt/og-image.png?v=2">
+<meta name="theme-color" content="#0d1220">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <img class="brand-logo" src="favicon.svg" alt="" width="36" height="36">
+    <img class="brand-img" src="sidebar-brand.png" alt="" width="408" height="152">
+    <span class="brand-sub">포켓몬 GO</span>
+    <span class="brand-name">배틀 가이드</span>
+    <span class="brand-page">배틀 시뮬레이터</span>
+  </a>
+  <nav class="nav">
+    <a href="index.html"><span class="nav-ico" aria-hidden="true">CCT</span>차징 타이밍</a>
+    <a href="cmp.html"><span class="nav-ico" aria-hidden="true">CMP</span>차징 우선권</a>
+    <a href="battle.html"><span class="nav-ico" aria-hidden="true">SIM</span>배틀 시뮬</a>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <a href="ivs.html"><span class="nav-ico" aria-hidden="true">IV</span>개체값 고르기</a>
+    <a href="team.html"><span class="nav-ico" aria-hidden="true">팀</span>팀 조합 유형</a>
+    <a href="types.html"><span class="nav-ico" aria-hidden="true">상성</span>타입 상성</a>
+    <a href="moves.html"><span class="nav-ico" aria-hidden="true">기술</span>기술표</a>
+  </nav>
+  <p class="side-note">CP 1500 · 슈퍼리그<br>데이터 PvPoke · PoGoMate</p>
+</aside>
+
+<div class="content">
+<header class="top">
+  <div class="wrap">
+    <h1>배틀 시뮬레이터</h1>
+    <p class="sub">포켓몬·기술·실드를 설정하고 턴별 전투와 매치업을 분석한다</p>
+    <div class="meta"><span>1턴 = 0.5초</span><span>Single · Multi · Matrix</span></div>
+  </div>
+</header>
+
+<main class="wrap battle-page">
+  <div class="battle-toolbar panel">
+    <div class="battle-tabs" role="tablist" aria-label="시뮬레이션 모드">
+      <button type="button" class="battle-tab" data-mode="single" role="tab" aria-selected="true"><b>1대1</b><small>두 포켓몬 대결</small></button>
+      <button type="button" class="battle-tab" data-mode="multi" role="tab" aria-selected="false"><b>메타 비교</b><small>한 마리 일괄 분석</small></button>
+      <button type="button" class="battle-tab" data-mode="matrix" role="tab" aria-selected="false"><b>그룹 비교</b><small>팀 대 팀 분석</small></button>
+    </div>
+    <label class="league-label">리그
+      <select id="battle-league">
+        <option value="great">슈퍼리그 · CP 1500</option>
+        <!-- <option value="ultra">하이퍼리그 · CP 2500</option>
+        <option value="master">마스터리그 · 무제한</option> -->
+      </select>
+    </label>
+    <p id="battle-mode-help" class="battle-mode-help">두 포켓몬의 기술·실드·개체값을 직접 정해 1대1 결과를 봅니다.</p>
+  </div>
+
+  <section id="mode-single" class="battle-pane" role="tabpanel">
+    <div class="battle-pickers">
+      <article class="battle-picker picker" data-side="left">
+        <label class="picker-label">내 포켓몬</label>
+        <div class="combo"><input type="search" class="search" placeholder="이름으로 검색" autocomplete="off" aria-label="내 포켓몬 검색"><ul class="results" hidden></ul></div>
+        <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="선택 해제">✕</button></div>
+        <div class="battle-options"></div>
+      </article>
+      <article class="battle-picker picker" data-side="right">
+        <label class="picker-label">상대 포켓몬</label>
+        <div class="combo"><input type="search" class="search" placeholder="이름으로 검색" autocomplete="off" aria-label="상대 포켓몬 검색"><ul class="results" hidden></ul></div>
+        <div class="chosen" hidden><img class="chosen-img" alt=""><div class="chosen-text"><strong class="chosen-name"></strong><span class="chosen-rank"></span></div><button type="button" class="clear" aria-label="선택 해제">✕</button></div>
+        <div class="battle-options"></div>
+      </article>
+    </div>
+    <section class="result battle-result" id="battle-result" aria-live="polite"><p class="placeholder">양쪽 포켓몬을 고르면 결과가 나옵니다.</p></section>
+    <section class="panel" id="battle-timeline-panel" hidden>
+      <h2>턴 타임라인</h2>
+      <div class="timeline-controls"><button type="button" id="timeline-play">재생</button><label>속도 <select id="timeline-speed"><option value="500">0.5×</option><option value="250" selected>1×</option><option value="125">2×</option><option value="60">4×</option></select></label><span id="timeline-clock"></span></div>
+      <div id="battle-timeline" class="battle-timeline"></div>
+    </section>
+    <section class="panel" id="shield-panel" hidden><h2>실드 조합표</h2><p class="note">행은 내 실드, 열은 상대 실드입니다. 셀을 누르면 해당 결과를 엽니다.</p><div class="table-scroll"><table id="shield-matrix" class="shield-matrix"></table></div></section>
+    <section class="panel" id="battle-analysis" hidden></section>
+  </section>
+
+  <section id="mode-multi" class="battle-pane" role="tabpanel" hidden>
+    <div class="panel multi-panel">
+      <div class="multi-bar">
+        <div class="picker multi-picker">
+          <div class="combo">
+            <input type="search" class="search" placeholder="내 포켓몬 검색" autocomplete="off" aria-label="메타 비교 포켓몬 검색">
+            <ul class="results" hidden></ul>
+          </div>
+          <div class="chosen multi-chosen" hidden>
+            <img class="chosen-img" alt="">
+            <div class="chosen-text">
+              <strong class="chosen-name"></strong>
+              <span class="chosen-rank"></span>
+            </div>
+            <button type="button" class="clear" aria-label="선택 해제">✕</button>
+          </div>
+        </div>
+        <label class="multi-size">상대
+          <select id="multi-size" aria-label="상대 수">
+            <option>10</option>
+            <option selected>25</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
+        </label>
+      </div>
+      <progress id="multi-progress" value="0" max="1" hidden></progress>
+    </div>
+    <section class="result" id="multi-result"><p class="placeholder">포켓몬을 고르면 상위 메타와 비교합니다.</p></section>
+  </section>
+
+  <section id="mode-matrix" class="battle-pane" role="tabpanel" hidden>
+    <div class="panel">
+      <h2>그룹 비교</h2>
+      <p class="note">양쪽 그룹에 포켓몬을 검색해 추가하면 모든 1대1 조합을 비교합니다. 각 그룹은 최대 12마리입니다.</p>
+      <div class="matrix-builders">
+        <section class="matrix-builder" data-group="left">
+          <h3>내 그룹 <small class="matrix-count">0 / 12</small></h3>
+          <div class="combo"><input type="search" class="search" placeholder="추가할 포켓몬 검색" autocomplete="off" aria-label="내 그룹 포켓몬 검색"><ul class="results" hidden></ul></div>
+          <div class="matrix-selected" aria-live="polite"></div>
+        </section>
+        <section class="matrix-builder" data-group="right">
+          <h3>상대 그룹 <small class="matrix-count">0 / 12</small></h3>
+          <div class="combo"><input type="search" class="search" placeholder="추가할 포켓몬 검색" autocomplete="off" aria-label="상대 그룹 포켓몬 검색"><ul class="results" hidden></ul></div>
+          <div class="matrix-selected" aria-live="polite"></div>
+        </section>
+      </div>
+      <div class="matrix-actions">
+        <button type="button" id="matrix-fill" class="battle-ghost">상위권 예시</button>
+        <button type="button" id="matrix-run" class="battle-action">비교</button>
+        <button type="button" id="matrix-export" class="battle-ghost">CSV</button>
+      </div>
+    </div>
+    <section class="result" id="matrix-result"><p class="placeholder">양쪽 그룹에 포켓몬을 추가하면 모든 조합의 배틀 레이팅을 계산합니다.</p></section>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p class="made-by">made by <strong>kingchickenmayo</strong></p>
+  <p>계산 규칙·순위·기술 데이터 PvPoke 참고 · 독립 구현</p>
+  <p>상표 및 게임 이미지의 권리는 각 권리자에게 있습니다.</p>
+</footer>
+</div>
+</div>
+<script src="data/data.js"></script>
+<script src="data/moves.js"></script>
+<script src="data/league-rankings.js"></script>
+<script src="common.js"></script>
+<script src="battle-core.js"></script>
+<script src="battle-engine.js"></script>
+<script src="battle.js"></script>
+</body>
+</html>

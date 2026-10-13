@@ -35,6 +35,8 @@ PVPOKE_POKEMON_JS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
 # 이름으로 적어 둬서 추측할 여지가 없다. 그래서 이쪽을 정본으로 쓴다.
 PVPOKE_DMG_JS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
                  'src/js/battle/DamageCalculator.js')
+PVPOKE_RANKINGS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
+                   'src/data/rankings/all/overall/rankings-%s.json')
 TYPE_MOVE_TABLE = ROOT / 'pogo-move-fetcher' / 'data' / 'types.json'
 
 SUPER, RESIST, DOUBLE_RESIST = 1.6, 0.625, 0.390625
@@ -121,6 +123,15 @@ def load_type_chart():
             'mult': {'super': SUPER, 'resist': RESIST, 'doubleResist': DOUBLE_RESIST}}
 
 
+def load_league_rankings():
+    """Multi/Matrix에서 쓰는 PvPoke 리그별 종 ID 순위."""
+    out = {}
+    for key, cap in [('great', 1500), ('ultra', 2500), ('master', 10000)]:
+        rows = json.loads(fetch(PVPOKE_RANKINGS % cap))
+        out[key] = [row['speciesId'] for row in rows]
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--no-images', action='store_true', help='스프라이트 복사 건너뛰기')
@@ -138,6 +149,8 @@ def main():
     print('타입 상성표 받는 중…')
     types = load_type_chart()
     print('  타입 %d개 / 상성 %d칸' % (len(types['order']), len(types['order']) ** 2))
+    print('리그별 PvPoke 순위 받는 중…')
+    league_rankings = load_league_rankings()
 
     by_species = {m['speciesId']: m for m in mov}
     rows, skipped = [], []
@@ -196,6 +209,10 @@ def main():
         % (payload,
            json.dumps(cpms, separators=(',', ':')),
            json.dumps(types, ensure_ascii=False, separators=(',', ':'))), encoding='utf-8')
+    (out / 'league-rankings.js').write_text(
+        '// 자동 생성 — scripts/build_data.py\n'
+        'window.LEAGUE_RANKINGS = %s;\n'
+        % json.dumps(league_rankings, separators=(',', ':')), encoding='utf-8')
 
     if not args.no_images:
         dst = ROOT / 'images'

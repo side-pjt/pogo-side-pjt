@@ -1,0 +1,27 @@
+[
+  {
+    "name": "슈퍼리그 파비코리 vs 가라르 메더",
+    "league": "great",
+    "left": {
+      "id": "altaria",
+      "ivs": [0, 15, 15],
+      "fast": "DRAGON_BREATH",
+      "charged": ["SKY_ATTACK", "MOONBLAST"],
+      "shields": 1
+    },
+    "right": {
+      "id": "stunfisk_galarian",
+      "ivs": [0, 15, 15],
+      "fast": "MUD_SHOT",
+      "charged": ["ROCK_SLIDE", "EARTHQUAKE"],
+      "shields": 1
+    },
+    "expected": {
+      "winner": "right",
+      "turns": 49,
+      "rating": 254,
+      "leftHp": 0,
+      "rightHp": 86
+    }
+  }
+]

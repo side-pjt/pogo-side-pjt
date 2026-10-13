@@ -10,46 +10,9 @@
    스탯곱(공격 x 방어 x HP)이 클수록 오래 버틴다. 1등 개체는 이 값이 최대인 조합이다.
 ------------------------------------------------------------------ */
 
-const CAP = 1500;
-const LV_MAX = 50;
-
-function statsAt(base, ivs, level) {
-  const c = CPM[Math.round((level - 1) * 2)];
-  const atk = (base[0] + ivs[0]) * c;
-  const def = (base[1] + ivs[1]) * c;
-  const hpRaw = (base[2] + ivs[2]) * c;              // CP는 내림하기 전 체력으로 계산한다 (게임과 같다)
-  const hp = Math.floor(hpRaw);                       // 화면에 보이는 실제 HP·스탯곱은 내림한 값
-  return { atk, def, hp, cp: Math.max(10, Math.floor(atk * Math.sqrt(def) * Math.sqrt(hpRaw) / 10)) };
-}
-
-function bestBuild(base, ivs) {
-  let out = null;
-  for (let lv = 1; lv <= LV_MAX; lv += 0.5) {
-    const s = statsAt(base, ivs, lv);
-    if (s.cp > CAP) break;
-    out = Object.assign({ level: lv, ivs: ivs.slice() }, s);
-  }
-  if (!out) out = Object.assign({ level: 1, ivs: ivs.slice() }, statsAt(base, ivs, 1));
-  out.product = out.atk * out.def * out.hp;
-  return out;
-}
-
 /* 4096조합 전수 탐색 → 스탯곱 내림차순 */
-function rankAll(base) {
-  const all = [];
-  for (let a = 0; a < 16; a++)
-    for (let d = 0; d < 16; d++)
-      for (let h = 0; h < 16; h++)
-        all.push(bestBuild(base, [a, d, h]));
-  all.sort((x, y) => y.product - x.product);
-  all.forEach((b, i) => { b.rank = i + 1; });
-  return all;
-}
-
-const _cache = new Map();
 function ranked(mon) {
-  if (!_cache.has(mon.id)) _cache.set(mon.id, rankAll(mon.base));
-  return _cache.get(mon.id);
+  return BattleCore.allBuilds(mon, 'great');
 }
 
 function findBuild(mon, ivs) {
