@@ -340,12 +340,12 @@ function recommendationCards(mons) {
     return '상위권 범용 교체 후보';
   };
 
-  return unique.map(item => `<a class="tt-suggest-card" href="moves.html?p=${encodeURIComponent(item.mon.id)}">
+  return unique.map(item => `<button type="button" class="tt-suggest-card" data-suggest="${esc(item.mon.id)}">
     <img src="images/${encodeURIComponent(item.mon.img)}" alt="" loading="lazy">
     <span class="tt-suggest-name">${esc(item.mon.ko)}</span>
     <span class="tt-suggest-moves">${item.moves.map(m => esc(m.name)).join(' · ')}</span>
     <span class="tt-suggest-reason">${esc(reason(item))}</span>
-  </a>`).join('');
+  </button>`).join('');
 }
 
 function recommendationBlock(mons, completeAt = 3) {
@@ -356,7 +356,7 @@ function recommendationBlock(mons, completeAt = 3) {
       <span>현재 ${mons.length}마리 · PvPoke 권장 기술 기준</span>
     </div>
     <div class="tt-suggest-track">${recommendationCards(mons)}</div>
-    <p class="note">${complete ? '현재 팀의 빈 공격 범위와 공통 약점을 줄일 교체 후보입니다.' : '아직 채우지 못한 공격 범위와 현재 포켓몬의 약점을 보완할 후보입니다.'} 카드를 누르면 기술 구성을 볼 수 있습니다.</p>
+    <p class="note">${complete ? '현재 팀의 빈 공격 범위와 공통 약점을 줄일 교체 후보입니다. 누르면 마지막 슬롯을 교체합니다.' : '아직 채우지 못한 공격 범위와 현재 포켓몬의 약점을 보완할 후보입니다. 누르면 빈 슬롯에 추가합니다.'}</p>
   </section>`;
 }
 
@@ -576,6 +576,20 @@ document.querySelector('.tt-tabs').addEventListener('keydown', e => {
 });
 document.querySelectorAll('.tt-opt').forEach(b => b.addEventListener('click', () => { quiz[b.dataset.q] = b.dataset.v; paintQuiz(); }));
 document.addEventListener('click', e => {
+  const suggestion = e.target.closest('.tt-suggest-card');
+  if (suggestion) {
+    const mon = byId(suggestion.dataset.suggest);
+    if (!mon) return;
+    const limit = tournament ? 6 : 3;
+    let slot = diag.slice(0, limit).findIndex(p => !p);
+    if (slot < 0) slot = limit - 1;
+    diag[slot] = mon;
+    const root = document.querySelector(`.tt-dslot[data-slot="${slot}"]`);
+    paintSlot(root, slot);
+    paintDiag();
+    syncDiagUrl();
+    return;
+  }
   const go = e.target.closest('.tt-go');
   if (go) { showTab('types'); select(go.dataset.code, true); return; }
   const code = e.target.closest('.tt-code');
