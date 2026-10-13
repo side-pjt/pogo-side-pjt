@@ -2,7 +2,8 @@
 
 - 기술 수치(위력·에너지·턴)와 포켓몬별 보유 기술: PvPoke gamemaster.json
 - 한글 기술명: pogo-move-fetcher/data/moves.json (nameKo)
-- 추천 기술: pogo-move-fetcher/data/pokemon_moves.json (슈퍼리그 기준)
+- 기본 추천 기술: pogo-move-fetcher/data/pokemon_moves.json (슈퍼리그 우선, 없으면 그 종이 나오는 다른 포맷)
+  포맷별 추천 기술은 data/formats/<key>.js 의 movesets 에 따로 있다.
 - 대상 포켓몬은 data/data.js 의 목록(window.POKEMON 의 id)과 같다.
 """
 import json

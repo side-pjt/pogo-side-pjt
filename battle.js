@@ -39,7 +39,7 @@
 
   function rankedPokemon() {
     const available = new Map(availablePokemon().map(mon => [mon.id, mon]));
-    const ranking = (window.LEAGUE_RANKINGS && window.LEAGUE_RANKINGS[state.league]) || [];
+    const ranking = (FORMAT_DATA[state.league] || {}).ranking || [];
     const ranked = ranking.map(id => available.get(id)).filter(Boolean);
     const included = new Set(ranked.map(mon => mon.id));
     return ranked.concat(availablePokemon().filter(mon => !included.has(mon.id)));

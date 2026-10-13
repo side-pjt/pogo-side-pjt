@@ -2,7 +2,25 @@
 
 /* 두 페이지(CCT·CMP)가 같이 쓰는 것들 — 데이터, 검색, 포켓몬 선택 콤보박스 */
 
-const DATA = (window.POKEMON || []).slice();
+/* 포맷(리그·컵)별 순위·추천 기술·기본 개체값 — data/formats/<key>.js 가 FORMAT_DATA[key] 에 넣는다 */
+const FORMAT_DATA = window.FORMAT_DATA || {};
+
+/* data.js 에는 모든 리그·컵의 종이 들어 있고 순위는 없다.
+   화면은 아직 슈퍼리그 순위 기준이라, 그 순위가 있는 종만 순위 순으로 쓴다.
+   메가·원시 폼은 표준 슈퍼리그 랭킹이 아니라 PvPoke 메가 에디션 랭킹의 순위다 */
+const DATA = (function () {
+  const order = key => new Map(((FORMAT_DATA[key] || {}).ranking || []).map((id, i) => [id, i + 1]));
+  const great = order('great'), mega = order('mega-1500');
+  const megaIvs = (FORMAT_DATA['mega-1500'] || {}).defaultIvs || {};
+  return (window.POKEMON || [])
+    .filter(p => (p.mega ? mega : great).has(p.id))
+    .map(p => {
+      p.rank = (p.mega ? mega : great).get(p.id);
+      if (p.mega && megaIvs[p.id]) p.pvIv = megaIvs[p.id];
+      return p;
+    })
+    .sort((a, b) => a.mega - b.mega || a.rank - b.rank);
+})();
 const CPM = window.CPM || [];
 
 const norm = s => (s || '').toLowerCase().replace(/\s+/g, '');
@@ -12,7 +30,6 @@ function esc(s) {
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 }
 
-/* 메가·원시 폼은 표준 슈퍼리그 랭킹이 아니라 PvPoke 메가 에디션 랭킹의 순위다 */
 /* 주소창 ?키=값 — 고른 포켓몬을 주소에 남겨서 링크로 다시 열 수 있게 한다 */
 function urlGet(key) {
   try { return new URLSearchParams(location.search).get(key); } catch (e) { return null; }

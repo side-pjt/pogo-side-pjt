@@ -1,8 +1,11 @@
 """
 pogo-image-fetcher + pogo-move-fetcher 결과를 합쳐 정적 도구용 데이터를 만든다.
 
-- data/data.js   전역 변수로 내보낸다. fetch()가 아니라 <script>로 읽어야
-                 file:// 로 열었을 때도 동작한다 (정적 빌드의 핵심 제약).
+- data/data.js            종 정보(이름·타입·종족값·일반기술) — 모든 리그·컵의 종. 순위는 없다.
+- data/formats/index.js   포맷(리그·컵) 목록 — key, CP, 한글 이름
+- data/formats/<key>.js   포맷별 PvPoke 순위·추천 기술셋·기본 개체값
+  전부 전역 변수로 내보낸다. fetch()가 아니라 <script>로 읽어야
+  file:// 로 열었을 때도 동작한다 (정적 빌드의 핵심 제약).
 - images/        스프라이트를 복사해 자체 완결 폴더로 만든다.
 
 사용법
@@ -22,6 +25,8 @@ IMG_MANIFEST = ROOT / 'pogo-image-fetcher' / 'assets' / 'manifest.json'
 IMG_DIR = ROOT / 'pogo-image-fetcher' / 'assets' / 'pokemon'
 MOVE_POKEMON = ROOT / 'pogo-move-fetcher' / 'data' / 'pokemon_moves.json'
 MOVE_TABLE = ROOT / 'pogo-move-fetcher' / 'data' / 'moves.json'
+FORMAT_LIST = ROOT / 'pogo-move-fetcher' / 'data' / 'formats.json'
+MEGA_ID = re.compile(r'_(mega|primal)(_[xyz])?$')
 
 # CMP 계산용 — 종족값과 CPM 표는 PvPoke 소스에서 직접 받는다.
 # 공격 실수치 = (종족값공격 + 공격개체값) x CPM(레벨)  — 1,152종 전부 재현 검증 완료.
@@ -35,8 +40,6 @@ PVPOKE_POKEMON_JS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
 # 이름으로 적어 둬서 추측할 여지가 없다. 그래서 이쪽을 정본으로 쓴다.
 PVPOKE_DMG_JS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
                  'src/js/battle/DamageCalculator.js')
-PVPOKE_RANKINGS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/'
-                   'src/data/rankings/all/overall/rankings-%s.json')
 TYPE_MOVE_TABLE = ROOT / 'pogo-move-fetcher' / 'data' / 'types.json'
 
 SUPER, RESIST, DOUBLE_RESIST = 1.6, 0.625, 0.390625
@@ -62,9 +65,13 @@ def load_cmp_source():
     """
     gm = json.loads(fetch(PVPOKE_GM))
     base = {p['speciesId']: p['baseStats'] for p in gm['pokemon'] if 'baseStats' in p}
-    # PvPoke 기본 개체값(CP 1500): [레벨, 공격, 방어, HP]. 메가 폼에 '메가 에디션 기본값' 프리셋으로 쓴다.
-    pv_iv = {p['speciesId']: p['defaultIVs']['cp1500'][1:] for p in gm['pokemon']
-             if p.get('defaultIVs', {}).get('cp1500')}
+    # PvPoke 기본 개체값: defaultIVs['cp1500'] = [레벨, 공격, 방어, HP]. CP별로 [공격, 방어, HP]만 남긴다.
+    # 메가 폼에 '메가 에디션 기본값' 프리셋으로 쓴다.
+    pv_iv = {}
+    for p in gm['pokemon']:
+        for cp_key, iv in (p.get('defaultIVs') or {}).items():
+            if re.fullmatch(r'cp\d+', cp_key):    # cp1500l40 같은 레벨 제한 변형은 뺀다
+                pv_iv.setdefault(int(cp_key[2:]), {})[p['speciesId']] = iv[1:]
 
     js = fetch(PVPOKE_POKEMON_JS)
     m = re.search(r'cpms\s*=\s*\[([^\]]+)\]', js)
@@ -123,12 +130,24 @@ def load_type_chart():
             'mult': {'super': SUPER, 'resist': RESIST, 'doubleResist': DOUBLE_RESIST}}
 
 
-def load_league_rankings():
-    """Multi/Matrix에서 쓰는 PvPoke 리그별 종 ID 순위."""
-    out = {}
-    for key, cap in [('great', 1500), ('ultra', 2500), ('master', 10000)]:
-        rows = json.loads(fetch(PVPOKE_RANKINGS % cap))
-        out[key] = [row['speciesId'] for row in rows]
+def build_formats(mov, pv_iv):
+    """포맷별 데이터. 순위는 pogo-move-fetcher 가 PvPoke 에서 받은 그대로다.
+
+    ranking    종 ID 배열. 위치+1 = 순위 (PvPoke 사이트와 같은 숫자 — 이미지가 없는 종도 자리를 지킨다)
+    movesets   {종: [노말, 스페셜…]} 그 포맷의 추천 기술
+    defaultIvs {종: [공격, 방어, HP]} PvPoke 기본 개체값 — 메가·원시만 (일반 종은 화면에서 계산한다)
+    """
+    meta = load(FORMAT_LIST)['formats']
+    out = []
+    for f in meta:
+        ranked = sorted((p['formats'][f['key']]['rank'], p['speciesId'], p['formats'][f['key']]['moveset'])
+                        for p in mov if f['key'] in p['formats'])
+        ivs = pv_iv.get(f['cp'], {})
+        out.append(({k: f[k] for k in ('key', 'cup', 'cp', 'title', 'ko', 'count')}, {
+            'ranking': [sid for _, sid, _ in ranked],
+            'movesets': {sid: ms for _, sid, ms in ranked if ms},
+            'defaultIvs': {sid: ivs[sid] for _, sid, _ in ranked if MEGA_ID.search(sid) and sid in ivs},
+        }))
     return out
 
 
@@ -149,17 +168,12 @@ def main():
     print('타입 상성표 받는 중…')
     types = load_type_chart()
     print('  타입 %d개 / 상성 %d칸' % (len(types['order']), len(types['order']) ** 2))
-    print('리그별 PvPoke 순위 받는 중…')
-    league_rankings = load_league_rankings()
+    formats = build_formats(mov, pv_iv)
 
     by_species = {m['speciesId']: m for m in mov}
     rows, skipped = [], []
 
     for a in img:
-        # 수집기는 모든 리그·컵의 종을 받지만, 화면은 아직 슈퍼리그·메가 순위로 정렬한다.
-        # 포맷별 순위 파일로 옮기기 전까지는 그 순위가 있는 종만 내보낸다.
-        if a['rank'] is None:
-            continue
         m = by_species.get(a['id'])
         bs = base_stats.get(a['id'])
         if not m or not bs:
@@ -182,23 +196,18 @@ def main():
         # 추천 기술을 맨 앞으로
         fast.sort(key=lambda f: f['id'] != rec)
 
-        extra = {'pvIv': pv_iv[a['id']]} if a.get('isMega') and a['id'] in pv_iv else {}
         rows.append({
-            **extra,
             'id': a['id'],
             'ko': a['displayKo'],
             'en': a['name'],
-            'rank': a['rank'],
             'types': a['types'],
             'shadow': a['isShadow'],
-            'mega': bool(a.get('isMega')),
+            'mega': bool(MEGA_ID.search(a['id'])),
             'img': pathlib.PurePosixPath(a['file']).name,
             'fast': fast,
             'base': [bs['atk'], bs['def'], bs['hp']],   # CMP 계산용 종족값
         })
-
-    # 표준 순위가 먼저, 메가·원시는 뒤에 (둘은 서로 다른 랭킹이라 순위 숫자가 겹친다)
-    rows.sort(key=lambda r: (r['mega'], r['rank']))
+    # 순서는 의미 없다 (화면이 포맷 순위로 정렬한다). diff 가 안정되게 수집기 순서를 그대로 둔다.
 
     out = ROOT / 'data'
     out.mkdir(parents=True, exist_ok=True)
@@ -213,10 +222,29 @@ def main():
         % (payload,
            json.dumps(cpms, separators=(',', ':')),
            json.dumps(types, ensure_ascii=False, separators=(',', ':'))), encoding='utf-8')
-    (out / 'league-rankings.js').write_text(
+    (out / 'league-rankings.js').unlink(missing_ok=True)   # 포맷별 파일로 옮겨 갔다
+
+    fdir = out / 'formats'
+    fdir.mkdir(exist_ok=True)
+    (fdir / 'index.js').write_text(
         '// 자동 생성 — scripts/build_data.py\n'
-        'window.LEAGUE_RANKINGS = %s;\n'
-        % json.dumps(league_rankings, separators=(',', ':')), encoding='utf-8')
+        '// 포맷 목록. 순위·기술셋은 formats/<key>.js 가 FORMAT_DATA[key] 에 넣는다.\n'
+        'window.FORMATS = %s;\n'
+        % json.dumps([meta for meta, _ in formats], ensure_ascii=False, separators=(',', ':')),
+        encoding='utf-8')
+    keep = {'index.js'}
+    for meta, body in formats:
+        keep.add('%s.js' % meta['key'])
+        (fdir / ('%s.js' % meta['key'])).write_text(
+            '// 자동 생성 — scripts/build_data.py · %s (%s, CP %d)\n'
+            'window.FORMAT_DATA = window.FORMAT_DATA || {};\n'
+            'window.FORMAT_DATA[%s] = %s;\n'
+            % (meta['ko'], meta['title'], meta['cp'], json.dumps(meta['key']),
+               json.dumps(body, separators=(',', ':'))), encoding='utf-8')
+    for p in fdir.glob('*.js'):               # 사라진 포맷 정리
+        if p.name not in keep:
+            p.unlink()
+    print('포맷 %d개: %s' % (len(formats), ', '.join(m['key'] for m, _ in formats)))
 
     if not args.no_images:
         dst = ROOT / 'images'
