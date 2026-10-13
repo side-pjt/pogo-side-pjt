@@ -13,3 +13,6 @@ desktop.ini
 _drive.html
 dump.html
 *.tmp
+
+# Claude Code 작업용 worktree — 저장소에 넣지 않는다 (Pages 배포가 서브모듈로 보고 실패한다)
+.claude/worktrees/
