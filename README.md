@@ -10,11 +10,33 @@
 | 폴더 | 하는 일 |
 | --- | --- |
 | [`pogo-cct-tool`](pogo-cct-tool/) | **CCT 계산기** — 포켓몬 둘을 고르면 차징 타이밍이 나온다 |
-| [`pogo-image-fetcher`](pogo-image-fetcher/) | 스프라이트 1,152장과 한글 포켓몬명 수집 |
-| [`pogo-move-fetcher`](pogo-move-fetcher/) | 일반기술 턴 수, 추천 기술셋, 한글 기술명 수집 |
+| [`pogo-image-fetcher`](pogo-image-fetcher/) | 모든 리그·컵 포켓몬 1,583종의 스프라이트와 한글 포켓몬명 수집 |
+| [`pogo-move-fetcher`](pogo-move-fetcher/) | 리그·컵 목록, 포맷별 순위·추천 기술셋, 일반기술 턴 수, 한글 기술·컵 이름 수집 |
 
 수집기 둘은 서로 독립이고, 계산기가 둘의 결과를 합쳐 쓴다.
-종 ID(`speciesId` ↔ `id`)가 1,152종 전부 일치해서 그냥 붙는다.
+종 ID(`speciesId` ↔ `id`)가 전부 일치해서 그냥 붙는다.
+
+## 리그·컵과 시즌
+
+슈퍼·하이퍼·마스터리그와 메가 버전, 리틀컵 같은 시즌 컵을 모두 같은 "포맷"으로 다룬다.
+사이드바의 리그·컵 선택기로 고르면 모든 페이지의 순위·CP 상한·추천 기술이 그 포맷 기준으로 바뀐다.
+고른 포맷은 주소(`?f=ultra`)와 브라우저에 남는다. 예전 `?league=` 주소도 그대로 열린다.
+
+- `data/data.js` — 모든 리그·컵의 종 정보 (순위 없음)
+- `data/formats/index.js` — 포맷 목록과 한글 이름 · `data/formats/<key>.js` — 그 포맷의 순위·추천 기술·기본 개체값
+- `data/seasons.js` — **직접 관리하는** GO배틀리그 시즌 주차별 일정. 사이드바 "지금 열린 리그"와 `season.html`이 쓴다.
+  처음 오는 사람은 이번 주 열린 포맷으로 연다
+
+### 시즌이 바뀌거나 새 컵이 열릴 때
+
+1. 포켓몬 GO 한국어 공지(`pokemongo.com/ko/news/...`)를 보고 `data/seasons.js`에 새 시즌을 적는다.
+   한 주를 한 줄로, 시각은 공지의 태평양 시간 ISO(`13:00:00-07:00`, 서머타임이 끝나면 `-08:00`), 이름은 공지 표기
+2. PvPoke에 아직 없는 컵은 `fetch_moves.py`의 `EXTRA_FORMATS`에 `(컵id, CP)`를 더한다. 컵 id는 PvPoke 주소의 이름
+3. `python pogo-cct-tool/scripts/update_all.py` — 일정에 있는데 순위가 없는 컵은 경고로 나온다
+4. `node tests/season.test.js && node tests/battle-engine.test.js`
+
+순위가 아직 없는 컵은 화면에 "순위 준비 중"으로 나오고, PvPoke에 올라온 뒤 3번을 다시 돌리면 들어간다.
+등록된 시즌이 모두 끝나면 사이드바에 "다음 시즌 일정이 아직 등록되지 않았습니다"가 뜬다.
 
 ## 써보기
 
@@ -23,7 +45,7 @@
 
 ## 배틀 시뮬레이터
 
-`battle.html`에서 슈퍼리그 배틀을 계산한다. 하이퍼·마스터리그는 잠시 막아 두었다.
+`battle.html`에서 고른 리그·컵의 배틀을 계산한다. CP 상한이 없는 마스터 계열은 15/15/15가 기본이다.
 
 - **Single**: 포켓몬, IV, 기술, 실드, 능력치 단계를 설정한 1대1 자동 전투
 - **Multi**: 한 포켓몬을 현재 리그 상위 메타와 일괄 비교
@@ -40,6 +62,7 @@ PvPoke의 기능과 공개 데이터를 검증 기준으로 삼았지만 엔진�
 
 ```bash
 node tests/battle-engine.test.js
+node tests/season.test.js
 ```
 
 ## 데이터 갱신
@@ -51,7 +74,8 @@ python pogo-cct-tool/scripts/update_all.py          # 아래 셋을 순서대로
 ```bash
 python pogo-image-fetcher/scripts/fetch_assets.py   # 모든 리그·컵 종의 스프라이트·한글명
 python pogo-move-fetcher/scripts/fetch_moves.py     # 포맷 목록·포맷별 순위·기술셋·기술 턴 수
-python pogo-cct-tool/scripts/build_data.py          # 계산기 데이터 + 리그별 PvPoke 순위 생성
+python pogo-cct-tool/scripts/build_data.py          # data.js + 포맷별 순위 파일 + 시즌 일정 대조
+python pogo-cct-tool/scripts/build_moves.py         # 기술표 데이터
 ```
 
 Python 3.9+ 표준 라이브러리만 쓴다. 설치할 패키지가 없다.
@@ -61,9 +85,10 @@ Python 3.9+ 표준 라이브러리만 쓴다. 설치할 패키지가 없다.
 `fetch_moves.py`의 `EXTRA_FORMATS`나 `--extra 컵:CP`로 넣으면 순위 파일이 올라온 뒤부터 들어간다.
 한글 컵 이름은 게임 로케일의 공식 표기를 쓰고, 없으면 공식 단어로 조합하며, 그것도 안 되면 영문으로 두고 경고한다
 (`FORMAT_NAME_KO`에 직접 적으면 우선한다). 결과는 `pogo-move-fetcher/data/formats.json`.
-화면은 아직 슈퍼리그·메가 에디션 순위가 있는 종만 쓴다.
+순위 숫자는 PvPoke 사이트와 같다 (이미지가 없는 종 자리는 비어 있을 수 있다).
 
-메가 진화·원시회귀 56종은 표준 슈퍼리그 랭킹에 없어서, PvPoke 메가 에디션 랭킹(`rankings/mega/overall/rankings-1500.json`)에서 따로 가져와 `mega: true`로 표시한다. 순위는 그 랭킹 전체에서의 순위(PvPoke 사이트와 같은 숫자, "메가 에디션 N위")이고, PvPoke 기본 개체값을 프리셋으로 쓴다. 전투 중 CP 보정은 계산에 반영하지 않는다.
+메가 진화·원시회귀 폼은 메가 버전 포맷에만 나온다. 그 포맷에서는 PvPoke 기본 개체값을 프리셋으로 쓴다.
+전투 중 CP 보정은 계산에 반영하지 않는다.
 
 ## CCT 계산식
 
@@ -94,7 +119,8 @@ k × m  ≡  o − 1   (mod o)
 | --- | --- |
 | 순위 · 기술 턴 수 · 추천 기술셋 | [PvPoke](https://github.com/pvpoke/pvpoke) |
 | 스프라이트 · 한글 포켓몬명 | [PoGoMate](https://pogomate.com) |
-| 한글 기술명 | [PokeMiners](https://github.com/PokeMiners) 포켓몬 GO 한국어 로케일 |
+| 한글 기술명 · 컵 이름 | [PokeMiners](https://github.com/PokeMiners) 포켓몬 GO 한국어 로케일 |
+| 시즌 일정 · 출전 조건 | 포켓몬 GO 공식 공지 (직접 옮겨 적음) |
 
 순위는 PvPoke가 정본이다. PoGoMate도 자체 순위를 내지만 둘이 다르다
 (상위 300 집합이 16종 차이). PoGoMate 순위는 `pogomateRank` 에 참고용으로 남겨 둔다.

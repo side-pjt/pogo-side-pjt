@@ -1,10 +1,10 @@
 ---
 name: pogo-cct-tool
-description: 슈퍼리그 CCT·CMP 계산기 웹 도구를 고치거나 데이터를 갱신한다. CCT/CMP 계산식을 수정할 때, 화면·검색·표를 손볼 때, 페이지를 추가할 때, 수집기를 돌린 뒤 도구 데이터를 다시 만들 때 사용한다. 트리거 "CCT 계산기", "CMP 계산기", "차징 타이밍", "개체값", "도구 갱신", "data.js 다시 만들어".
+description: 포켓몬 GO PvP(모든 리그·컵) CCT·CMP·배틀 계산기 웹 도구를 고치거나 데이터를 갱신한다. CCT/CMP 계산식을 수정할 때, 화면·검색·표를 손볼 때, 페이지를 추가할 때, 수집기를 돌린 뒤 도구 데이터를 다시 만들 때 사용한다. 트리거 "CCT 계산기", "CMP 계산기", "차징 타이밍", "개체값", "도구 갱신", "data.js 다시 만들어", "리그 추가", "컵 추가", "시즌 일정".
 ---
 > **위치 안내** — GitHub Pages 배포를 위해 웹 파일(`index.html`·`*.js`·`style.css`·`data/`·`images/`)은 **저장소 루트**로 옮겼다. 이 폴더에는 `scripts/build_data.py`와 문서만 남는다. 아래 경로는 루트 기준으로 읽을 것. 빌드는 저장소 루트에서 `python pogo-cct-tool/scripts/build_data.py`.
 
-# 슈퍼리그 계산기 모음
+# 포켓몬 GO PvP 계산기 모음
 
 페이지 다섯. 전부 같은 껍데기와 `common.js` 를 공유한다.
 
@@ -15,6 +15,9 @@ description: 슈퍼리그 CCT·CMP 계산기 웹 도구를 고치거나 데이�
 | `ivs.html` | `ivs.js` | 개체값 가이드 (초보자용) |
 | `team.html` | `team.js` | 팀 조합 유형 (초보자용) |
 | `types.html` | `types.js` | 타입 상성 (초보자용) |
+| `battle.html` | `battle.js` (+ `battle-core.js`·`battle-engine.js`) | 배틀 시뮬레이터 Single·Multi·Matrix |
+| `moves.html` | `moves.js` | 기술표 |
+| `season.html` | `season-page.js` | 시즌 일정 — 이번 주·다음 주 리그·컵, 주차별 표 |
 
 정적 HTML/CSS/JS. **빌드 도구도 프레임워크도 쓰지 않는다** — `index.html` 을 그냥 열면 돈다.
 
@@ -48,15 +51,43 @@ print({k:v for k,v in d.items() if len(set(v))>1})
 "
 ```
 
+## 포맷(리그·컵)과 시즌 — 페이지 뼈대
+
+모든 페이지가 슈퍼리그 전용이 아니라 **지금 고른 포맷** 기준이다. 스크립트 순서가 곧 의존 관계다:
+
+```html
+<script src="data/data.js"></script>            <!-- POKEMON(모든 종, 순위 없음)·CPM·TYPES -->
+<script src="data/formats/index.js"></script>   <!-- FORMATS: key·cup·cp·ko -->
+<script src="data/seasons.js"></script>         <!-- SEASONS (직접 관리) -->
+<script src="season.js"></script>               <!-- Season.at() — 지금 열린 포맷 -->
+<script src="format.js"></script>               <!-- Format: ?f= → ?league= → localStorage → 이번 주 → great -->
+<script src="data/moves.js"></script>           <!-- 필요한 페이지만. common.js 보다 앞 -->
+<script src="common.js"></script>               <!-- DATA·FORMAT·FORMAT_DATA·rankText·search -->
+<script src="페이지.js"></script>
+```
+
+- `format.js` 가 고른 포맷의 `data/formats/<key>.js` 를 **`document.write` 로** 넣는다. 그래야
+  `common.js` 전에 실행되고 `file://` 에서도 돈다. 비동기 로딩으로 바꾸지 말 것 (제약 1과 같은 이유)
+- `common.js` 의 `DATA` 는 지금 포맷 순위에 있는 종만, 순위 순. `p.rank` 는 PvPoke 순위 숫자라
+  빈자리가 있을 수 있어서 `byRank(r)` 는 위치(`DATA[r-1]`)로 찾는다
+- 추천 기술은 `common.js` 가 `MOVESETS[id][2]`·`[3]` 과 `p.fast` 순서를 포맷 기준으로 바꿔 끼운다
+- CP 상한은 `BattleCore.league()` 가 포맷 목록에서 찾는다. 인자를 안 주면 지금 포맷. CP 10000 = 상한 없음(15/15/15)
+- 포맷을 바꾸면 `Format.go(key)` 로 페이지를 다시 연다 — 순위·개체값 계산이 전부 포맷에 묶여 있다
+- 본문에서 포맷 이름·CP 를 보여 줄 자리는 `<em class="fmt" data-format="name|cap">` — `format.js` 가 채운다
+- `common.js` 전역에 `FORMAT`·`FORMAT_DATA`·`FORMAT_RANKS`·`FORMAT_SETS` 가 늘었다. 제약 2(이름 중복) 검사 대상
+
+시즌 일정 `data/seasons.js` 는 손으로 적는다 (공식 공지 → 한 주 한 줄, 태평양 시간 ISO, 공지의 한글 표기).
+`build_data.py` 가 그 줄을 정규식으로 읽어 앞으로 열릴 컵의 순위가 없으면 경고하니 형식을 지킬 것.
+판정 경계·겹친 주는 `node tests/season.test.js`.
+
 ## 데이터 갱신
 
 ```bash
-python ../pogo-image-fetcher/scripts/fetch_assets.py   # 스프라이트·한글명
-python ../pogo-move-fetcher/scripts/fetch_moves.py     # 기술 턴 수·기술셋
-python scripts/build_data.py                           # 둘을 합쳐 data/data.js + images/
+python pogo-cct-tool/scripts/update_all.py    # 수집기 둘 + build_data + build_moves, 끝에 확인할 경고 요약
 ```
 
-`build_data.py` 는 `speciesId` ↔ `id` 로 조인한다 (1,152종 전부 일치).
+`build_data.py` 는 `speciesId` ↔ `id` 로 조인한다. `data/formats/` 의 사라진 포맷 파일과
+`images/` 의 고아 파일은 자동 정리된다. `data/seasons.js` 는 건드리지 않는다.
 `images/` 의 고아 파일은 자동 정리된다.
 
 ## CCT 계산식 — 고치기 전에 읽을 것
