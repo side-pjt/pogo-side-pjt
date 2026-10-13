@@ -72,6 +72,8 @@ const roleBadge = r => `<i class="role r-${r}">${r}</i>`;
 
 const T = window.TYPES || { order: [], ko: {}, chart: {} };
 const TKO = t => T.ko[t] || t;
+const MOVE_DATA = window.MOVES || {};
+const MOVE_SETS = window.MOVESETS || {};
 
 let selected = 'ABC';
 
@@ -178,6 +180,25 @@ const diag = [null, null, null, null, null, null];
 let tournament = false;   // 대회 룰: 6마리 등록, 3마리 출전
 const LABELS3 = ['선봉', '중견', '마무리'];
 
+function syncDiagUrl() {
+  let last = diag.length - 1;
+  while (last >= 0 && !diag[last]) last--;
+  const value = last < 0 ? '-' : diag.slice(0, last + 1).map(mon => mon ? mon.id : '').join(',');
+  urlSet('team', value);
+  urlSet('six', tournament ? '1' : null);
+}
+
+function restoreDiagUrl() {
+  const value = urlGet('team');
+  if (value == null) return false;
+  const ids = value === '-' ? [] : value.split(',').slice(0, diag.length);
+  if (value !== '-') {
+    ids.forEach((id, i) => { diag[i] = byId(id) || null; });
+  }
+  tournament = urlGet('six') === '1' || ids.length > 3;
+  return true;
+}
+
 /* 약점 = 방어 타입 조합의 배율이 1.6배 이상인 공격 타입 */
 function weakSet(mon) {
   const out = new Set();
@@ -234,6 +255,111 @@ function strongSet(mon) {
   return out;
 }
 
+/* PvPoke 권장 기술 기준으로 현재 팀의 약점과 공격 범위를 보완하는 후보를 고른다. */
+function recommendedMoves(mon) {
+  const set = MOVE_SETS[mon.id];
+  if (!set) return [];
+  return [set[2], ...(set[3] || [])]
+    .filter(Boolean)
+    .map(id => ({ id, data: MOVE_DATA[id] }))
+    .filter(m => m.data)
+    .map(m => ({ id: m.id, name: m.data[0], type: m.data[1], power: m.data[2], pace: m.data[3], gain: m.data[4] || 0 }));
+}
+
+function defendMult(atk, mon) {
+  return mon.types.reduce((m, d) => m * (((T.chart[atk] || {})[d]) ?? 1), 1);
+}
+
+function recommendationCards(mons) {
+  const selectedIds = new Set(mons.map(m => m.id));
+  const selectedBases = new Set(mons.map(m => m.id.replace(/_shadow$/, '')));
+  const weakCounts = new Map(T.order.map(t => [t, mons.filter(m => weakSet(m).has(t)).length]));
+  const teamMoveTypes = new Set(mons.flatMap(recommendedMoves).map(m => m.type));
+  const uncovered = T.order.filter(def => ![...teamMoveTypes].some(atk => (T.chart[atk] || {})[def] > 1.1));
+
+  const scored = DATA
+    .filter(p => !p.mega && p.rank <= 100 && !selectedIds.has(p.id) && !selectedBases.has(p.id.replace(/_shadow$/, '')))
+    .map(mon => {
+      const moves = recommendedMoves(mon);
+      if (!moves.length) return null;
+      const moveTypes = new Set(moves.map(m => m.type));
+      let score = Math.max(0, 101 - mon.rank) * 0.04;
+
+      for (const [threat, count] of weakCounts) {
+        if (!count) continue;
+        const dm = defendMult(threat, mon);
+        if (dm < 0.9) score += count * (dm < 0.5 ? 5 : 3);
+        if (dm > 1.1) score -= count * 4;
+        if ([...moveTypes].some(atk => (T.chart[atk] || {})[threat] > 1.1)) score += count * 2;
+      }
+      const added = uncovered.filter(def => [...moveTypes].some(atk => (T.chart[atk] || {})[def] > 1.1));
+      score += added.length * 1.2;
+      return { mon, moves, score, added };
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.score - a.score || a.mon.rank - b.mon.rank);
+
+  const pool = [];
+  const bases = new Set();
+  for (const item of scored) {
+    const base = item.mon.id.replace(/_shadow$/, '');
+    if (bases.has(base)) continue;
+    bases.add(base);
+    pool.push(item);
+  }
+
+  /* 같은 타입 후보만 줄 세우지 않도록 이미 뽑힌 타입에는 작은 중복 감점을 준다. */
+  const unique = [];
+  const typeCounts = new Map();
+  while (pool.length && unique.length < 8) {
+    let bestIndex = 0;
+    let bestScore = -Infinity;
+    pool.forEach((item, i) => {
+      const diversityPenalty = item.mon.types.reduce((sum, t) => sum + (typeCounts.get(t) || 0) * 4, 0);
+      const adjusted = item.score - diversityPenalty;
+      if (adjusted > bestScore) { bestScore = adjusted; bestIndex = i; }
+    });
+    const [picked] = pool.splice(bestIndex, 1);
+    unique.push(picked);
+    picked.mon.types.forEach(t => typeCounts.set(t, (typeCounts.get(t) || 0) + 1));
+  }
+
+  const reason = item => {
+    const resisted = [...weakCounts]
+      .filter(([t, count]) => count && defendMult(t, item.mon) < 0.9)
+      .sort((a, b) => b[1] - a[1]);
+    if (resisted.length) {
+      const added = item.added.find(t => t !== resisted[0][0]);
+      return added ? `${TKO(resisted[0][0])} 저항 · ${TKO(added)} 대응` : `${TKO(resisted[0][0])} 약점 보완`;
+    }
+    const countered = [...weakCounts]
+      .filter(([t, count]) => count && item.moves.some(m => (T.chart[m.type] || {})[t] > 1.1))
+      .sort((a, b) => b[1] - a[1]);
+    if (countered.length) return `${TKO(countered[0][0])} 대응 기술 보강`;
+    if (item.added.length) return `${item.added.slice(0, 2).map(TKO).join('·')} 대응 추가`;
+    return '상위권 범용 교체 후보';
+  };
+
+  return unique.map(item => `<a class="tt-suggest-card" href="moves.html?p=${encodeURIComponent(item.mon.id)}">
+    <img src="images/${encodeURIComponent(item.mon.img)}" alt="" loading="lazy">
+    <span class="tt-suggest-name">${esc(item.mon.ko)}</span>
+    <span class="tt-suggest-moves">${item.moves.map(m => esc(m.name)).join(' · ')}</span>
+    <span class="tt-suggest-reason">${esc(reason(item))}</span>
+  </a>`).join('');
+}
+
+function recommendationBlock(mons, completeAt = 3) {
+  const complete = mons.length >= completeAt;
+  return `<section class="tt-suggest" aria-labelledby="tt-suggest-title">
+    <div class="tt-suggest-head">
+      <h3 id="tt-suggest-title">${complete ? '교체 후보 추천' : '다음 포켓몬 추천'}</h3>
+      <span>현재 ${mons.length}마리 · PvPoke 권장 기술 기준</span>
+    </div>
+    <div class="tt-suggest-track">${recommendationCards(mons)}</div>
+    <p class="note">${complete ? '현재 팀의 빈 공격 범위와 공통 약점을 줄일 교체 후보입니다.' : '아직 채우지 못한 공격 범위와 현재 포켓몬의 약점을 보완할 후보입니다.'} 카드를 누르면 기술 구성을 볼 수 있습니다.</p>
+  </section>`;
+}
+
 function strongGrid(strong) {
   return T.order.map(t => {
     const n = strong.filter(s => s.has(t)).length;
@@ -249,10 +375,10 @@ function strongBlock(mons) {
   const msg = none.length
     ? `<p class="tt-warn">팀의 자속 기술로 약점을 못 찌르는 타입: <b>${none.join(', ')}</b>. 이 타입 상대에게는 다른 타입 기술이 필요합니다.</p>`
     : '<p class="tt-warn good">18개 타입 모두를 약점으로 찌를 수 있는 포켓몬이 팀에 있습니다.</p>';
-  return `<h3 class="tt-h3">팀이 강한 타입 <small>칸의 숫자 = 그 타입에 자속 기술이 잘 통하는 포켓몬 수</small></h3>
+  return `<h3 class="tt-h3">공격 가능한 타입 <small>숫자 = 자속으로 약점을 찌를 수 있는 포켓몬 수</small></h3>
     ${msg}
     <div class="tt-grid">${strongGrid(strong)}</div>
-    <p class="note">자기 타입 기준이라 실제 보유 기술은 반영하지 않았고, 듀얼 타입 상대는 따로 계산하지 않았습니다.</p>`;
+    <p class="note tt-method-note">자기 타입 기준이라 실제 보유 기술은 반영하지 않았고, 듀얼 타입 상대는 따로 계산하지 않았습니다.</p>`;
 }
 
 /* 6마리 중 3마리를 고르는 모든 조합(20가지)을 약점 겹침이 적은 순으로 */
@@ -309,9 +435,10 @@ function paintDiag() {
     } else {
       trios = '<p class="note">세 마리 이상 고르면 출전 조합을 추천해 드립니다.</p>';
     }
-    box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">등록 ${mons.length}마리가 약한 타입 <small>칸의 숫자 = 그 타입에 약한 포켓몬 수</small></h3>
+    box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">팀 약점 <small>숫자 = 해당 타입에 약한 포켓몬 수</small></h3>
       ${summary}
       <div class="tt-grid">${grid}</div>
+      ${recommendationBlock(mons, 6)}
       ${strongBlock(mons)}
       ${trios}`;
     return;
@@ -324,6 +451,7 @@ function paintDiag() {
   else if (two.length) summary = `<p class="tt-warn">두 마리가 함께 약한 타입: <b>${two.join(', ')}</b>. 이 타입을 쓰는 상대는 조심하세요.</p>`;
   else summary = '<p class="tt-warn good">두 마리 이상이 함께 약한 타입이 없습니다. 한 가지 타입에 팀 전체가 무너지지 않습니다.</p>';
 
+  const suggestions = recommendationBlock(mons, 3);
   let guess = '<p class="note">세 마리를 모두 고르면 유형을 추정해 드립니다.</p>';
   if (mons.length === 3) {
     const g = guessType(weak);
@@ -335,9 +463,10 @@ function paintDiag() {
     </div>`;
   }
 
-  box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">팀이 약한 타입 <small>칸의 숫자 = 그 타입에 약한 포켓몬 수</small></h3>
+  box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">팀 약점 <small>숫자 = 해당 타입에 약한 포켓몬 수</small></h3>
     ${summary}
     <div class="tt-grid">${grid}</div>
+    ${suggestions}
     ${strongBlock(mons)}
     ${guess}`;
 }
@@ -365,16 +494,18 @@ function setTournament(on) {
   relabelSlots();
   document.querySelectorAll('.tt-dslot').forEach(root => paintSlot(root, Number(root.dataset.slot)));
   paintDiag();
+  syncDiagUrl();
 }
 
 function setupDiag() {
   document.querySelectorAll('.tt-dslot').forEach(root => {
     const i = Number(root.dataset.slot);
-    setupSearch(root, mon => { diag[i] = mon; paintSlot(root, i); paintDiag(); });
-    root.querySelector('.clear').addEventListener('click', () => { diag[i] = null; paintSlot(root, i); paintDiag(); });
+    setupSearch(root, mon => { diag[i] = mon; paintSlot(root, i); paintDiag(); syncDiagUrl(); });
+    root.querySelector('.clear').addEventListener('click', () => { diag[i] = null; paintSlot(root, i); paintDiag(); syncDiagUrl(); });
   });
-  // 처음 열 때 보여줄 예시: ABC 유형의 예시 팀
-  byCode('ABC').members.forEach((id, i) => { diag[i] = byId(id) || null; });
+  // 주소에 저장된 팀이 없을 때만 ABC 예시 팀을 보여준다.
+  if (!restoreDiagUrl()) byCode('ABC').members.forEach((id, i) => { diag[i] = byId(id) || null; });
+  document.getElementById('diag-6').checked = tournament;
   relabelSlots();
   document.querySelectorAll('.tt-dslot').forEach(root => paintSlot(root, Number(root.dataset.slot)));
   document.getElementById('diag-6').addEventListener('change', e => setTournament(e.target.checked));
@@ -417,7 +548,10 @@ function showTab(name) {
     b.tabIndex = selected ? 0 : -1;
   });
   document.querySelectorAll('.tt-pane').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
-  try { history.replaceState(null, '', name === 'diag' ? location.pathname : '#' + name); } catch (e) { /* file:// 등 */ }
+  try {
+    const base = location.pathname + location.search;
+    history.replaceState(null, '', name === 'diag' ? base : base + '#' + name);
+  } catch (e) { /* file:// 등 */ }
 }
 
 /* ------------------------------------------------------------------ */
