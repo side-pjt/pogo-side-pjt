@@ -1,8 +1,9 @@
 """
-PoGoMate 슈퍼리그(Great League) 상위 N위 포켓몬 스프라이트 에셋 수집기.
+PoGoMate 포켓몬 스프라이트 에셋 수집기 — 모든 리그·컵에 나오는 종 전부.
 
 소스
-  - 랭킹/이름 데이터 : https://pogomate.com/battles/great-league (Next.js RSC 페이로드에 내장)
+  - 종/이름 데이터 : https://pogomate.com/battles/great-league (Next.js RSC 페이로드에 내장)
+                    페이지 이름과 달리 슈퍼·하이퍼·마스터·메가·리틀컵 종이 모두 들어 있다.
   - 스프라이트 이미지 : cdn.pogomate.com (페이지 JS 번들의 해시 매핑에서 추출)
 
 출력
@@ -308,7 +309,7 @@ def download(rows, out_dir, force):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--top', type=int, default=0,
-                    help='상위 N종만 (기본 0 = 슈퍼리그 랭크 보유 전체)')
+                    help='슈퍼리그 순위 상위 N종만 (기본 0 = 모든 리그·컵의 종 전체)')
     ap.add_argument('--out', default=str(pathlib.Path(__file__).resolve().parent.parent / 'assets'),
                     help='출력 폴더 (기본: 저장소의 assets/ — 실행 위치와 무관)')
     ap.add_argument('--force', action='store_true', help='이미 받은 파일도 다시 내려받기')
@@ -340,14 +341,16 @@ def main():
     if lost:
         print('    [경고] PoGoMate에 없는 메가: %s' % ', '.join(lost))
 
-    ranked = sorted([p for p in data if p['pvpokeRank']],
-                    key=lambda p: (bool(p.get('isMega')), p['pvpokeRank']))
+    # 슈퍼리그 순위가 없는 종(하이퍼·마스터·리틀컵 전용 등)도 모두 받는다. 순위는 비워 두고
+    # 포맷별 순위는 기술 수집기의 pokemon_moves.json 이 담당한다. 순위 있는 종이 앞에 온다.
+    ranked = sorted(data, key=lambda p: (p['pvpokeRank'] is None, bool(p.get('isMega')),
+                                         p['pvpokeRank'] or 0))
     unmatched = [p['id'] for p in data
                  if isinstance(p.get('greatRank'), int) and not p['pvpokeRank']]
     if args.top:
-        ranked = ranked[:args.top]
-    print('    PvPoke 랭킹 %d종 / PoGoMate 데이터 %d종 → %d종 사용'
-          % (len(pv), len(data), len(ranked)))
+        ranked = [p for p in ranked if p['pvpokeRank']][:args.top]
+    print('    PvPoke 슈퍼리그·메가 순위 보유 %d종 / PoGoMate 데이터 %d종 → %d종 사용'
+          % (sum(1 for p in data if p['pvpokeRank']), len(data), len(ranked)))
     if unmatched:
         print('    [경고] PvPoke에 없는 종: %s' % ', '.join(unmatched[:10]))
 
@@ -369,7 +372,7 @@ def main():
         json.dump({
             'source': PAGE_URL,
             'rankSource': PVPOKE_RANKS,
-            'league': 'great',
+            'league': 'all',
             'top': args.top or len(rows),
             'count': len(rows),
             'pokemon': rows,

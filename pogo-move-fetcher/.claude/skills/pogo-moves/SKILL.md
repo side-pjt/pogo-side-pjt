@@ -21,7 +21,9 @@ python scripts/fetch_moves.py
 | 항목 | 출처 |
 | --- | --- |
 | 기술 제원 (턴·위력·에너지) | PvPoke `gamemaster.json` |
-| 포켓몬별 추천 기술셋·사용률 | PvPoke `rankings/all/overall/rankings-1500.json` |
+| 포맷(리그·컵) 목록 | PvPoke `gamemaster.json` 의 `formats` (자동) + 기본 3리그 + `EXTRA_FORMATS` |
+| 포켓몬별 추천 기술셋·사용률 | PvPoke `rankings/<컵>/overall/rankings-<CP>.json` (포맷마다) |
+| 한글 컵 이름 | 같은 로케일의 `*_title`·`combat_*_league` 공식 표기 |
 | 한글 기술명·타입명 | PokeMiners 포켓몬 GO 한국어 로케일 (공식 인게임 표기) |
 
 ## 순위 기준은 PvPoke다
@@ -32,7 +34,7 @@ PoGoMate도 자체 슈퍼리그 순위를 내지만 **둘이 서로 다르다** 
 PoGoMate는 스프라이트와 한글 포켓몬명만 담당한다 (`pogo-image-fetcher`).
 두 소스의 종 ID는 **1,152종 전부 일치**하므로 `speciesId` ↔ `id` 로 그냥 붙는다.
 
-범위를 좁히지 않고 1,152종 전부 받는다. 이미지와 달리 기술 데이터는 파일 몇 개로 끝나서
+범위를 좁히지 않고 모든 포맷 순위의 합집합(약 1,580종)을 전부 받는다. 이미지와 달리 기술 데이터는 파일 몇 개로 끝나서
 범위를 줄여도 비용이 같다.
 
 ## 한글 기술명을 얻는 법
@@ -61,7 +63,8 @@ GAME_MASTER(19MB)의 숫자 ID를 거치는 방법도 있지만 더 무겁고 �
 ```
 data/
   moves.json          기술 352종 — moveId, nameKo, nameDisplay, type, kind, turns, seconds, power, energy
-  pokemon_moves.json  1,152종 — rank, score, recommended{fast,charged}, fastMoves[{moveId,nameKo,turns,share}]
+  formats.json        포맷 목록 — key(great/ultra/master, 그 외 <컵>-<CP>), cup, cp, title, ko, nameSource, count
+  pokemon_moves.json  약 1,580종 — rank, score, formats{key:{rank,score,moveset}}, recommended{fast,charged}, fastMoves[…]
   fast_moves.csv      일반기술 98종 턴별 요약 (표 작업용)
 ```
 
@@ -89,3 +92,15 @@ PvPoke 저장소 경로나 로케일 배열 구조가 바뀌면 조용히 빈 �
 ## 권리
 
 기술명과 게임 데이터의 권리는 Niantic · The Pokémon Company에 있다. PvPoke 데이터는 해당 프로젝트 라이선스를 따른다.
+
+## 포맷과 한글 컵 이름
+
+포맷 목록은 PvPoke `formats` 를 자동으로 따라간다. `EXCLUDE_CUPS`·`EXCLUDE_TITLE`(Battle Frontier, Devon,
+Invitational)과 `hideRankings` 포맷은 뺀다 — GO배틀리그가 아닌 커뮤니티 대회다. 순위 파일이 404면 경고만 하고 건너뛴다.
+
+`recommended`·`fastMoves` 는 `PRIMARY_FORMATS` 순서(슈퍼 → 메가 슈퍼 → 하이퍼 → …)로 처음 나오는 포맷의 것이다.
+`rank`·`mega` 는 기존 화면용(슈퍼리그, 메가·원시는 메가 에디션 순위)이고, 포맷별 값은 `formats` 에 있다.
+
+한글 컵 이름 순서: `FORMAT_NAME_KO`(override) → 로케일에 같은 영문 표기(official, `Fantasy Cup: Great League Edition`
+같은 버전 표기도 시도) → 공식 컵 이름에서 뽑은 단어 조합(rule, 예: `Mega Color Cup` → `메가 4색컵`) → 영문(fallback, 경고).
+rule·fallback 은 사람이 확인할 대상이다. 이름을 지어내지 말고 공식 표기가 확인되면 `FORMAT_NAME_KO` 에 적는다.

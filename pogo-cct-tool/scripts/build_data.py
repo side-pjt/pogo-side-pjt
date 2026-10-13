@@ -156,6 +156,10 @@ def main():
     rows, skipped = [], []
 
     for a in img:
+        # 수집기는 모든 리그·컵의 종을 받지만, 화면은 아직 슈퍼리그·메가 순위로 정렬한다.
+        # 포맷별 순위 파일로 옮기기 전까지는 그 순위가 있는 종만 내보낸다.
+        if a['rank'] is None:
+            continue
         m = by_species.get(a['id'])
         bs = base_stats.get(a['id'])
         if not m or not bs:

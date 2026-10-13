@@ -1,0 +1,118 @@
+{
+ "count": 10,
+ "formats": [
+  {
+   "key": "great",
+   "cup": "all",
+   "cp": 1500,
+   "title": "Great League",
+   "ko": "슈퍼리그",
+   "nameSource": "official",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/all/overall/rankings-1500.json",
+   "count": 1153
+  },
+  {
+   "key": "ultra",
+   "cup": "all",
+   "cp": 2500,
+   "title": "Ultra League",
+   "ko": "하이퍼리그",
+   "nameSource": "official",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/all/overall/rankings-2500.json",
+   "count": 850
+  },
+  {
+   "key": "master",
+   "cup": "all",
+   "cp": 10000,
+   "title": "Master League",
+   "ko": "마스터리그",
+   "nameSource": "official",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/all/overall/rankings-10000.json",
+   "count": 409
+  },
+  {
+   "key": "mega-1500",
+   "cup": "mega",
+   "cp": 1500,
+   "title": "Mega Great League",
+   "ko": "슈퍼리그: 메가 버전",
+   "nameSource": "rule",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/mega/overall/rankings-1500.json",
+   "count": 1210
+  },
+  {
+   "key": "mega-2500",
+   "cup": "mega",
+   "cp": 2500,
+   "title": "Mega Ultra League",
+   "ko": "하이퍼리그: 메가 버전",
+   "nameSource": "rule",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/mega/overall/rankings-2500.json",
+   "count": 912
+  },
+  {
+   "key": "mega-10000",
+   "cup": "mega",
+   "cp": 10000,
+   "title": "Mega Master League",
+   "ko": "마스터리그: 메가 버전",
+   "nameSource": "official",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/mega/overall/rankings-10000.json",
+   "count": 470
+  },
+  {
+   "key": "colormega-1500",
+   "cup": "colormega",
+   "cp": 1500,
+   "title": "Mega Color Cup",
+   "ko": "메가 4색컵",
+   "nameSource": "rule",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/colormega/overall/rankings-1500.json",
+   "count": 493
+  },
+  {
+   "key": "little-500",
+   "cup": "little",
+   "cp": 500,
+   "title": "Little Cup",
+   "ko": "리틀컵",
+   "nameSource": "official",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/little/overall/rankings-500.json",
+   "count": 528
+  },
+  {
+   "key": "laic2027-1500",
+   "cup": "laic2027",
+   "cp": 1500,
+   "title": "LAIC 2027 Championship Series Cup",
+   "ko": "LAIC 2027 Championship Series Cup",
+   "nameSource": "fallback",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/laic2027/overall/rankings-1500.json",
+   "count": 828
+  },
+  {
+   "key": "catch-1500",
+   "cup": "catch",
+   "cp": 1500,
+   "title": "Catch Cup",
+   "ko": "캐치컵",
+   "nameSource": "official",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/catch/overall/rankings-1500.json",
+   "count": 995
+  }
+ ],
+ "skipped": [
+  "P!P Championship Series",
+  "Battle Frontier (Spectral)",
+  "Battle Frontier (Cauldron)",
+  "Battle Frontier (Master)",
+  "Devon Trail Cup",
+  "Gymbreakers Invitational Season 7",
+  "Master Premier Cup",
+  "Custom"
+ ],
+ "noRanking": [
+  "fantasy-1500"
+ ]
+}

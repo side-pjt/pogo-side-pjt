@@ -45,12 +45,23 @@ node tests/battle-engine.test.js
 ## 데이터 갱신
 
 ```bash
-python pogo-image-fetcher/scripts/fetch_assets.py   # 스프라이트·한글명
-python pogo-move-fetcher/scripts/fetch_moves.py     # 기술 턴 수·기술셋
+python pogo-cct-tool/scripts/update_all.py          # 아래 셋을 순서대로 + 요약
+```
+
+```bash
+python pogo-image-fetcher/scripts/fetch_assets.py   # 모든 리그·컵 종의 스프라이트·한글명
+python pogo-move-fetcher/scripts/fetch_moves.py     # 포맷 목록·포맷별 순위·기술셋·기술 턴 수
 python pogo-cct-tool/scripts/build_data.py          # 계산기 데이터 + 리그별 PvPoke 순위 생성
 ```
 
-Python 3 표준 라이브러리만 쓴다. 설치할 패키지가 없다.
+Python 3.9+ 표준 라이브러리만 쓴다. 설치할 패키지가 없다.
+
+리그·컵(포맷) 목록은 PvPoke `gamemaster.json`의 `formats`를 자동으로 따라간다. 기본 3리그는 항상 넣고,
+커뮤니티 대회(Battle Frontier 등)·사용자 정의·순위 비공개 포맷은 뺀다. 시즌 일정에는 있지만 PvPoke에 아직 없는 컵은
+`fetch_moves.py`의 `EXTRA_FORMATS`나 `--extra 컵:CP`로 넣으면 순위 파일이 올라온 뒤부터 들어간다.
+한글 컵 이름은 게임 로케일의 공식 표기를 쓰고, 없으면 공식 단어로 조합하며, 그것도 안 되면 영문으로 두고 경고한다
+(`FORMAT_NAME_KO`에 직접 적으면 우선한다). 결과는 `pogo-move-fetcher/data/formats.json`.
+화면은 아직 슈퍼리그·메가 에디션 순위가 있는 종만 쓴다.
 
 메가 진화·원시회귀 56종은 표준 슈퍼리그 랭킹에 없어서, PvPoke 메가 에디션 랭킹(`rankings/mega/overall/rankings-1500.json`)에서 따로 가져와 `mega: true`로 표시한다. 순위는 그 랭킹 전체에서의 순위(PvPoke 사이트와 같은 숫자, "메가 에디션 N위")이고, PvPoke 기본 개체값을 프리셋으로 쓴다. 전투 중 CP 보정은 계산에 반영하지 않는다.
 

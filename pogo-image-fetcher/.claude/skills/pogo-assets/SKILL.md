@@ -1,15 +1,15 @@
 ---
 name: pogo-assets
-description: 포켓몬 GO 슈퍼리그(Great League) 랭킹 포켓몬의 스프라이트 이미지와 메타데이터를 PoGoMate에서 수집한다. CCT 치트시트나 표에 쓸 포켓몬 아이콘이 필요할 때, 랭킹이 갱신돼 에셋을 다시 받아야 할 때, 수집 범위를 바꾸고 싶을 때 사용한다. 트리거: "에셋 가져와", "스프라이트 받아", "랭킹 갱신", "포켓몬 아이콘", "pogomate".
+description: 포켓몬 GO PvP 모든 리그·컵(슈퍼·하이퍼·마스터·메가·리틀컵 등)에 나오는 포켓몬의 스프라이트 이미지와 메타데이터를 PoGoMate에서 수집한다. CCT 치트시트나 표에 쓸 포켓몬 아이콘이 필요할 때, 랭킹이 갱신돼 에셋을 다시 받아야 할 때, 수집 범위를 바꾸고 싶을 때 사용한다. 트리거: "에셋 가져와", "스프라이트 받아", "랭킹 갱신", "포켓몬 아이콘", "pogomate".
 ---
 
-# 포켓몬 GO 슈퍼리그 에셋 수집
+# 포켓몬 GO PvP 에셋 수집
 
 ## 실행
 
 ```bash
-python scripts/fetch_assets.py              # 슈퍼리그 랭크 보유 전체 1,152종 (기본값)
-python scripts/fetch_assets.py --top 300    # 상위 N종만
+python scripts/fetch_assets.py              # 모든 리그·컵의 종 전체 약 1,580종 (기본값)
+python scripts/fetch_assets.py --top 300    # 슈퍼리그 순위 상위 N종만
 python scripts/fetch_assets.py --force      # 전체 다시 내려받기
 ```
 
@@ -35,7 +35,9 @@ PoGoMate도 자체 `greatRank` 를 내지만 **둘이 서로 다르다** — 상
 배열 끝은 정규식으로 못 찾으므로 문자열 리터럴을 인식하는 괄호 매칭으로 잘라낸다.
 
 항목당 `id`, `name`, `nameKo`, `nameJa`, `dex`, `types`, `isShadow`, `imageForm`,
-`greatRank`, `greatLevel` 등이 들어 있다. 전체 1,582종 중 슈퍼리그 랭크 보유는 약 1,152종.
+`greatRank`, `ultraRank`, `masterRank`, `megaRank` 등이 들어 있다. 페이지 이름과 달리 전체 약 1,580종이
+들어 있고, 이것이 PvPoke 모든 포맷 순위의 합집합과 같다. 그래서 순위로 거르지 않고 전부 받는다.
+`rank` 는 슈퍼리그(메가·원시는 메가 에디션) 순위이고 없으면 `null` 이다. 포맷별 순위는 `pogo-move-fetcher` 담당.
 
 단 `nameKo` 는 종 이름뿐이고 폼·그림자가 빠져 있다 (아래 '한글 이름을 만드는 법' 참고).
 
