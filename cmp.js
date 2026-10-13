@@ -17,12 +17,12 @@
 ------------------------------------------------------------------ */
 
 function buildsFor(mon) {
-  return BattleCore.allBuilds(mon, 'great');
+  return BattleCore.allBuilds(mon);
 }
 
 /* 프리셋 세 가지 */
 function presets(mon) {
-  return BattleCore.presets(mon, 'great');
+  return BattleCore.presets(mon);
 }
 
 /* 상대 개체값을 모를 때: 전체 조합 대비 내가 이기는 비율과 공격 개체값별 판정 */
@@ -55,7 +55,7 @@ const S = {
 function buildOf(side) {
   const st = S[side];
   if (!st.mon) return null;
-  if (st.preset === 'custom') return BattleCore.bestBuild(st.mon.base, st.ivs, 1500);
+  if (st.preset === 'custom') return BattleCore.bestBuild(st.mon.base, st.ivs, FORMAT.cp);
   return presets(st.mon)[st.preset];
 }
 

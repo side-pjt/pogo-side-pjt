@@ -8,7 +8,7 @@
   const T = window.TYPES || { ko: {} };
   const state = {
     mode: 'single',
-    league: BattleCore.LEAGUES[urlGet('league')] ? urlGet('league') : 'great',
+    league: FORMAT.key,   // 포맷은 format.js 가 정한다 (?f=)
     left: makeSide(),
     right: makeSide(),
     result: null,
@@ -34,7 +34,7 @@
   const typeName = id => T.ko[id] || id;
 
   function availablePokemon() {
-    return DATA.filter(mon => !mon.mega && SETS[mon.id] && SETS[mon.id][0].length && SETS[mon.id][1].length);
+    return DATA.filter(mon => SETS[mon.id] && SETS[mon.id][0].length && SETS[mon.id][1].length);
   }
 
   function rankedPokemon() {
@@ -64,7 +64,7 @@
       const defaults = defaultsFor(mon);
       current.fast = defaults.fast;
       current.charged = defaults.charged;
-      current.preset = state.league === 'master' ? 'hundo' : 'rank1';
+      current.preset = C.isUncapped(C.league(state.league)) ? 'hundo' : 'rank1';
     }
     paintSide(side);
     syncUrl();
@@ -193,7 +193,6 @@
   }
 
   function syncUrl() {
-    urlSet('league', state.league === 'great' ? null : state.league);
     for (const side of ['left', 'right']) {
       const data = state[side];
       urlSet(side, data.mon && data.mon.id);
@@ -216,7 +215,7 @@
     if (ivs.length === 3 && ivs.every(n => n >= 0 && n <= 15)) {
       state[side].ivs = ivs;
       state[side].preset = 'custom';
-    } else state[side].preset = state.league === 'master' ? 'hundo' : 'rank1';
+    } else state[side].preset = C.isUncapped(C.league(state.league)) ? 'hundo' : 'rank1';
   }
 
   function runBattle(config = buildConfig()) {
@@ -365,7 +364,7 @@
 
   function defaultInput(mon, shields = 1) {
     const defaults = defaultsFor(mon);
-    const preset = state.league === 'master' ? 'hundo' : 'rank1';
+    const preset = C.isUncapped(C.league(state.league)) ? 'hundo' : 'rank1';
     return {
       mon,
       build: C.presets(mon, state.league)[preset],
@@ -543,7 +542,8 @@
   setupSides();
   restoreSide('left', defaultMon(1));
   restoreSide('right', defaultMon(2));
-  document.getElementById('battle-league').value = state.league;
+  document.getElementById('battle-league').innerHTML = Format.list.map(f =>
+    option(f.key, `${f.ko} · ${Format.capTextOf(f)}`, state.league)).join('');
   paintSide('left');
   paintSide('right');
   setupMulti();
@@ -559,14 +559,7 @@
     runBattle(config);
   });
   document.getElementById('battle-league').addEventListener('change', event => {
-    state.league = event.target.value;
-    for (const side of ['left', 'right']) {
-      state[side].preset = state.league === 'master' ? 'hundo' : 'rank1';
-      paintSide(side);
-    }
-    syncUrl();
-    if (state.mode === 'multi') runMulti();
-    else runBattle();
+    Format.go(event.target.value);   // 순위·추천 기술이 전부 바뀌어서 다시 연다
   });
   document.querySelectorAll('.battle-tab').forEach(tab => tab.addEventListener('click', () => setMode(tab.dataset.mode)));
   setMode(['multi', 'matrix'].includes(location.hash.slice(1)) ? location.hash.slice(1) : 'single');

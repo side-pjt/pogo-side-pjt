@@ -1,0 +1,102 @@
+'use strict';
+
+/* 포맷(리그·컵) — 지금 보고 있는 포맷을 정하고 그 포맷 데이터를 읽는다.
+   정하는 순서: 주소 ?f= → 예전 주소 ?league= → localStorage → 슈퍼리그.
+   data/formats/index.js 다음, common.js 앞에 둔다. 포맷 파일을 document.write 로 넣어야
+   common.js 보다 먼저 실행되고 file:// 로 열어도 동작한다 (fetch 를 쓸 수 없다).
+   포맷을 바꾸면 페이지를 다시 연다 — 순위·개체값 계산이 전부 포맷에 묶여 있어서다. */
+(function (root) {
+  const KEY = 'pogo-format';
+  const DEFAULT = 'great';
+  const LIST = root.FORMATS || [];
+  const byKey = key => LIST.find(f => f.key === key) || null;
+
+  function param(name) {
+    try { return new URLSearchParams(location.search).get(name); } catch (e) { return null; }
+  }
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function save(key) {
+    try { localStorage.setItem(KEY, key); } catch (e) { /* 사생활 보호 모드 등 */ }
+  }
+
+  const asked = param('f') || param('league');
+  const current = byKey(asked) || byKey(stored()) || byKey(DEFAULT) || LIST[0] ||
+    { key: DEFAULT, cup: 'all', cp: 1500, title: 'Great League', ko: '슈퍼리그' };
+  /* 주소로 연 포맷은 다음 방문에도 이어지게 남긴다. 없어진 포맷이면 알림을 띄운다 */
+  if (asked && byKey(asked)) save(current.key);
+  const missing = asked && !byKey(asked) ? asked : null;
+
+  const isLeague = f => f.cup === 'all';
+  const isMega = f => f.cup === 'mega';
+  const capText = f => f.cp >= 10000 ? '무제한' : `CP ${f.cp}`;
+
+  if (document.readyState === 'loading')
+    document.write(`<script src="data/formats/${encodeURIComponent(current.key)}.js"><\/script>`);
+
+  /* 다른 포맷으로 다시 연다. 주소의 다른 값(고른 포켓몬 등)은 그대로 둔다 */
+  function go(key) {
+    if (!byKey(key)) return;
+    save(key);
+    const q = new URLSearchParams(location.search);
+    q.delete('league');
+    if (key === DEFAULT) q.delete('f'); else q.set('f', key);
+    const s = q.toString();
+    location.href = location.pathname + (s ? '?' + s : '') + location.hash;
+  }
+
+  function options() {
+    const groups = [
+      ['리그', LIST.filter(isLeague)],
+      ['메가 버전', LIST.filter(isMega)],
+      ['컵', LIST.filter(f => !isLeague(f) && !isMega(f))],
+    ];
+    return groups.filter(([, fs]) => fs.length).map(([label, fs]) =>
+      `<optgroup label="${label}">${fs.map(f =>
+        `<option value="${f.key}"${f.key === current.key ? ' selected' : ''}>${f.ko} · ${capText(f)}</option>`).join('')}</optgroup>`).join('');
+  }
+
+  function buildPicker() {
+    const sidebar = document.querySelector('.sidebar');
+    if (!sidebar || sidebar.querySelector('.format-pick')) return;
+    const box = document.createElement('label');
+    box.className = 'format-pick';
+    box.innerHTML = `<span>리그·컵</span><select aria-label="리그·컵 고르기">${options()}</select>`;
+    const nav = sidebar.querySelector('.nav');
+    sidebar.insertBefore(box, nav ? nav.nextSibling : sidebar.firstChild);
+    box.querySelector('select').addEventListener('change', e => go(e.target.value));
+
+    const note = sidebar.querySelector('.side-note');
+    if (note && note.firstChild && note.firstChild.nodeType === 3)
+      note.firstChild.nodeValue = `${capText(current)} · ${current.ko}`;
+    /* 페이지 본문에서 포맷 이름·CP 를 그대로 받아 쓰는 자리 */
+    document.querySelectorAll('[data-format="name"]').forEach(el => { el.textContent = current.ko; });
+    document.querySelectorAll('[data-format="cap"]').forEach(el => { el.textContent = capText(current); });
+
+    if (missing) {
+      const warn = document.createElement('p');
+      warn.className = 'format-warn';
+      warn.setAttribute('role', 'status');
+      warn.textContent = `'${missing}' 포맷은 지금 데이터에 없어 ${current.ko}로 열었습니다.`;
+      box.after(warn);
+    }
+  }
+
+  root.Format = {
+    list: LIST,
+    current,
+    key: current.key,
+    cap: current.cp,
+    name: current.ko,
+    capText: capText(current),
+    isMaster: current.cp >= 10000,
+    isLeague: isLeague(current),
+    byKey,
+    capTextOf: capText,
+    go,
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildPicker);
+  else buildPicker();
+})(window);

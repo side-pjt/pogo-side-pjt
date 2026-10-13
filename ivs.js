@@ -12,7 +12,7 @@
 
 /* 4096조합 전수 탐색 → 스탯곱 내림차순 */
 function ranked(mon) {
-  return BattleCore.allBuilds(mon, 'great');
+  return BattleCore.allBuilds(mon);
 }
 
 function findBuild(mon, ivs) {
@@ -72,7 +72,7 @@ function paint() {
     <details class="more">
       <summary>숫자로 자세히 보기</summary>
       <p class="answer-sub" style="margin-top:8px"><b>${esc(mon.ko)}</b> 의 개체값 4,096조합을 전부 계산했습니다.
-      각 조합은 CP 1500을 넘지 않는 가장 높은 레벨 기준입니다.</p>
+      각 조합은 ${Format.capText}을 넘지 않는 가장 높은 레벨 기준입니다.</p>
     <p class="scroll-hint">표를 좌우로 밀어 전체 수치를 확인하세요.</p>
     <div class="table-scroll" tabindex="0" aria-label="개체값 상세 수치, 가로로 스크롤 가능">
       <table class="cmp-table">
@@ -160,7 +160,7 @@ function statBars(mine, best, hundo) {
   }).join('');
   return `
     <div class="iv-bars">
-      <div class="iv-bars-title">같은 CP 1500에서 이렇게 달라집니다</div>
+      <div class="iv-bars-title">같은 ${Format.capText}에서 이렇게 달라집니다</div>
       ${rows}
       <div class="iv-bars-leg">
         <span><i class="me"></i>내 개체 ${mine.ivs.join('/')}</span>
@@ -196,7 +196,7 @@ function verdictBlock(mine, best, hundo) {
     <h3>이 포켓몬은 이렇습니다</h3>
     <ul class="tips">
       <li><strong>1등 개체가 ${gap.toFixed(1)}% 더 버팁니다</strong>
-        같은 CP 1500인데 공격 개체값이 ${best.ivs[0]}이라 레벨을 ${lvGap > 0 ? `Lv${lvGap} 더` : '비슷하게'}
+        같은 ${Format.capText}인데 공격 개체값이 ${best.ivs[0]}이라 레벨을 ${lvGap > 0 ? `Lv${lvGap} 더` : '비슷하게'}
         올릴 수 있어서입니다</li>
       <li><strong>공격은 15·15·15가 더 높습니다</strong>
         ${hundo.atk.toFixed(1)} 대 ${best.atk.toFixed(1)} — 차징 우선권(CMP)만 보면 이쪽이 유리합니다</li>

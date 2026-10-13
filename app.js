@@ -259,7 +259,7 @@ function highlightCell(m, o) {
 
 function buildGroups() {
   const seen = new Map();
-  DATA.filter(p => !p.mega && p.rank <= 100).forEach(p => {
+  DATA.filter(p => p.rank <= 100).forEach(p => {
     const f = p.fast[0];
     if (f && !seen.has(f.name)) seen.set(f.name, f.turns);
   });

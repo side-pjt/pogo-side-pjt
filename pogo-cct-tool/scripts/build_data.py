@@ -145,7 +145,8 @@ def build_formats(mov, pv_iv):
         ivs = pv_iv.get(f['cp'], {})
         out.append(({k: f[k] for k in ('key', 'cup', 'cp', 'title', 'ko', 'count')}, {
             'ranking': [sid for _, sid, _ in ranked],
-            'movesets': {sid: ms for _, sid, ms in ranked if ms},
+            # 스페셜어택이 하나뿐인 종은 PvPoke 가 빈자리를 'none' 으로 채운다
+            'movesets': {sid: [m for m in ms if m and m != 'none'] for _, sid, ms in ranked if ms},
             'defaultIvs': {sid: ivs[sid] for _, sid, _ in ranked if MEGA_ID.search(sid) and sid in ivs},
         }))
     return out

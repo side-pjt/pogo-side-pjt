@@ -3,11 +3,14 @@
 /* Shared Pokemon GO PvP math. Kept behind one global to avoid collisions
    between classic scripts loaded by file:// pages. */
 (function (root) {
+  /* 기본 3리그. 컵(메가 버전·리틀컵 등)은 data/formats/index.js 의 FORMATS 에서 찾는다 */
   const LEAGUES = {
     great: { key: 'great', name: '슈퍼리그', cap: 1500 },
-    // ultra: { key: 'ultra', name: '하이퍼리그', cap: 2500 },
-    // master: { key: 'master', name: '마스터리그', cap: Infinity },
+    ultra: { key: 'ultra', name: '하이퍼리그', cap: 2500 },
+    master: { key: 'master', name: '마스터리그', cap: 10000 },
   };
+  /* CP 10000 = 상한 없음. 개체값은 높을수록 좋아서 15/15/15 가 기본이다 */
+  const isUncapped = lg => lg.cap >= 10000;
   const MAX_LEVEL = 50;
   const STAB = 1.2;
   const PVP_BONUS = 1.2999999523162841796875; // PvPoke DamageMultiplier.BONUS
@@ -20,8 +23,12 @@
   const TYPE_DATA = () => root.TYPES || { chart: {} };
   const buildCache = new Map();
 
+  /* 키를 안 주면 지금 보고 있는 포맷(format.js) */
   function league(value) {
-    return LEAGUES[value] || LEAGUES.great;
+    if (value == null && root.Format) value = root.Format.key;
+    if (LEAGUES[value]) return LEAGUES[value];
+    const f = (root.FORMATS || []).find(x => x.key === value);
+    return f ? { key: f.key, name: f.ko, cap: f.cp } : LEAGUES.great;
   }
 
   function statsAt(base, ivs, level) {
@@ -50,9 +57,9 @@
     return out;
   }
 
-  function allBuilds(mon, leagueKey = 'great') {
+  function allBuilds(mon, leagueKey) {
     const lg = league(leagueKey);
-    const cacheKey = `${mon.id}:${lg.key}`;
+    const cacheKey = `${mon.id}:${lg.cap}`;   // CP 상한이 같은 컵끼리는 결과가 같다
     if (buildCache.has(cacheKey)) return buildCache.get(cacheKey);
     const out = [];
     for (let atk = 0; atk < 16; atk++)
@@ -65,11 +72,12 @@
     return out;
   }
 
-  function presets(mon, leagueKey = 'great') {
+  function presets(mon, leagueKey) {
     const lg = league(leagueKey);
-    if (lg.key === 'master') {
+    if (isUncapped(lg)) {
       const hundo = bestBuild(mon.base, [15, 15, 15], lg.cap);
-      return { rank1: hundo, maxAtk: hundo, hundo, pvpoke: hundo };
+      return { rank1: hundo, maxAtk: hundo, hundo,
+        pvpoke: mon.pvIv ? bestBuild(mon.base, mon.pvIv, lg.cap) : hundo };
     }
     const all = allBuilds(mon, lg.key);
     let maxAtk = all[0];
@@ -84,7 +92,7 @@
 
   function buildFor(mon, options = {}) {
     const lg = league(options.league);
-    const ivs = (options.ivs || (lg.key === 'master' ? [15, 15, 15] : presets(mon, lg.key).rank1.ivs)).slice();
+    const ivs = (options.ivs || (isUncapped(lg) ? [15, 15, 15] : presets(mon, lg.key).rank1.ivs)).slice();
     if (options.level) return Object.assign(
       { level: options.level, ivs },
       statsAt(mon.base, ivs, options.level),
@@ -133,6 +141,8 @@
 
   root.BattleCore = {
     LEAGUES,
+    league,
+    isUncapped,
     MAX_LEVEL,
     ENERGY_CAP,
     BOOST_MIN,

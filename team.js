@@ -278,7 +278,7 @@ function recommendationCards(mons) {
   const uncovered = T.order.filter(def => ![...teamMoveTypes].some(atk => (T.chart[atk] || {})[def] > 1.1));
 
   const scored = DATA
-    .filter(p => !p.mega && p.rank <= 100 && !selectedIds.has(p.id) && !selectedBases.has(p.id.replace(/_shadow$/, '')))
+    .filter(p => p.rank <= 100 && !selectedIds.has(p.id) && !selectedBases.has(p.id.replace(/_shadow$/, '')))
     .map(mon => {
       const moves = recommendedMoves(mon);
       if (!moves.length) return null;
@@ -512,9 +512,9 @@ function setupDiag() {
   paintDiag();
 }
 
-/* ---------- 5. 메가 에디션 탭 ---------- */
+/* ---------- 5. 메가 탭 — 지금 포맷에 나오는 메가·원시 포켓몬 ---------- */
 
-const MEGAS = DATA.filter(p => p.mega).sort((a, b) => a.rank - b.rank);
+const MEGAS = DATA.filter(p => p.mega);
 let megaType = '', megaQuery = '';
 
 function paintMega() {
@@ -529,7 +529,14 @@ function paintMega() {
   const q = norm(megaQuery);
   const list = MEGAS.filter(p => (!megaType || p.types.includes(megaType)) &&
     (!q || norm(p.ko).includes(q) || norm(p.en).includes(q)));
-  document.getElementById('mega-count').textContent = `메가 에디션 순위순 · ${list.length}종 / 전체 ${MEGAS.length}종`;
+  /* 메가가 나오지 않는 포맷이면 메가 버전 포맷으로 바꾸는 버튼을 보여 준다 */
+  if (!MEGAS.length) {
+    document.getElementById('mega-count').textContent = `지금 고른 ${FORMAT.ko}에는 메가·원시 포켓몬이 나오지 않습니다.`;
+    document.getElementById('mega-list').innerHTML = Format.list.filter(f => f.cup === 'mega').map(f =>
+      `<button type="button" class="tt-chip" data-go="${esc(f.key)}">${esc(f.ko)}로 보기</button>`).join('');
+    return;
+  }
+  document.getElementById('mega-count').textContent = `${FORMAT.ko} 순위순 · ${list.length}종 / 전체 ${MEGAS.length}종`;
   document.getElementById('mega-list').innerHTML = list.map(p => `<figure class="tm">
     <img src="images/${encodeURIComponent(p.img)}" alt="${esc(p.ko)} 이미지" loading="lazy">
     <figcaption>
@@ -595,6 +602,7 @@ document.addEventListener('click', e => {
   const code = e.target.closest('.tt-code');
   if (code) select(code.dataset.code, false);
   const chip = e.target.closest('.tt-chip');
+  if (chip && chip.dataset.go) { Format.go(chip.dataset.go); return; }
   if (chip) { megaType = chip.dataset.t; paintMega(); }
   const row = e.target.closest('#cmp-types tbody tr');
   if (row) select(row.dataset.code, true);
