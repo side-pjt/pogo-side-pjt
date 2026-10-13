@@ -193,7 +193,7 @@ function restoreDiagUrl() {
   if (value == null) return false;
   const ids = value === '-' ? [] : value.split(',').slice(0, diag.length);
   if (value !== '-') {
-    ids.forEach((id, i) => { diag[i] = byId(id) || null; });
+    ids.forEach((id, i) => { diag[i] = ALL.find(p => p.id === id) || null; });
   }
   tournament = urlGet('six') === '1' || ids.length > 3;
   return true;

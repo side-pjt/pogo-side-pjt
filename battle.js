@@ -204,7 +204,7 @@
 
   function restoreSide(side, fallback) {
     const id = urlGet(side);
-    const mon = DATA.find(item => item.id === id) || fallback;
+    const mon = ALL.find(item => item.id === id) || fallback;
     state[side].mon = mon;
     const defaults = defaultsFor(mon);
     const ids = (urlGet(`${side}m`) || '').split('.');

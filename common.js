@@ -27,6 +27,13 @@ const DATA = (function () {
     .sort((a, b) => a.rank - b.rank);
 })();
 
+/* 검색·주소 복원용 — 지금 포맷 순위 밖의 종도 뒤에 붙인다 (rank 없음 → '순위 외').
+   순위 목록에만 기대면 리틀컵의 갑주무사, 마스터리그의 따라큐처럼 아예 찾을 수 없다 */
+const ALL = (function () {
+  const ranked = new Set(DATA.map(p => p.id));
+  return DATA.concat((window.POKEMON || []).filter(p => !ranked.has(p.id)));
+})();
+
 /* 추천 기술도 지금 포맷 기준 — MOVESETS[id] 의 [2] 추천 노말, [3] 추천 스페셜들을 바꿔 끼운다.
    data/moves.js 를 쓰는 페이지는 이 파일보다 먼저 읽는다 */
 if (window.MOVESETS) {
@@ -58,7 +65,7 @@ function urlSet(key, val) {
 }
 function monFromUrl(key) {
   const id = urlGet(key);
-  return id ? DATA.find(p => p.id === id) || null : null;
+  return id ? ALL.find(p => p.id === id) || null : null;
 }
 
 /* 영문 이름 — 그림자는 data 의 en 에 'Shadow' 가 없어서 붙여준다 */
@@ -78,16 +85,17 @@ function search(q, limit) {
   if (!n) return DATA.slice(0, limit);
 
   const scored = [];
-  for (const p of DATA) {
+  for (const p of ALL) {
     const ko = norm(p.ko), en = norm(p.en), id = norm(p.id);
     let s = -1;
     if (ko === n || en === n) s = 0;
     else if (ko.startsWith(n) || en.startsWith(n)) s = 1;
     else if (ko.includes(n) || en.includes(n) || id.includes(n)) s = 2;
-    if (s >= 0) scored.push([s, p.rank, p]);
+    // 순위 밖 종은 이름이 더 잘 맞아도 순위 안 종 뒤로
+    if (s >= 0) scored.push([p.rank ? 0 : 1, s, p.rank || 0, p]);
   }
-  scored.sort((a, b) => a[0] - b[0] || a[1] - b[1]);
-  return scored.slice(0, limit).map(x => x[2]);
+  scored.sort((a, b) => a[0] - b[0] || a[1] - b[1] || a[2] - b[2]);
+  return scored.slice(0, limit).map(x => x[3]);
 }
 
 /* 검색 콤보박스. 고른 뒤에 무엇을 할지는 페이지마다 달라서 onPick으로 넘긴다. */
@@ -151,7 +159,12 @@ function setupSearch(root, onPick) {
   }
 
   input.addEventListener('input', () => renderList(search(input.value, LIST_LIMIT)));
-  input.addEventListener('focus', () => renderList(search(input.value, LIST_LIMIT)));
+  input.addEventListener('focus', () => {
+    renderList(search(input.value, LIST_LIMIT));
+    // 폰: 키보드가 올라온 뒤 입력창을 위로 올려서 아래 목록이 키보드에 가리지 않게 한다
+    if (matchMedia('(max-width: 860px)').matches)
+      setTimeout(() => { if (document.activeElement === input) input.scrollIntoView({ block: 'start', behavior: 'smooth' }); }, 300);
+  });
   input.addEventListener('click', () => { if (list.hidden) renderList(search(input.value, LIST_LIMIT)); });
   input.addEventListener('blur', () => setTimeout(close, 120));
   input.addEventListener('keydown', e => {

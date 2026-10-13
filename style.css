@@ -1185,11 +1185,12 @@ main { gap: 18px; }
     place-items: center;
   }
   body { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+  /* 결과는 입력창 바로 밑에. 화면 아래에 고정하면 폰 키보드에 가려 '검색이 안 되는' 것처럼 보인다.
+     대신 포커스 때 입력창을 상단 바 아래로 올려(common.js) 목록이 들어갈 자리를 만든다 */
+  .search { scroll-margin-top: 104px; }
   .combo:focus-within .results {
-    position: fixed;
-    inset: auto 12px calc(78px + env(safe-area-inset-bottom));
-    max-height: min(48vh, 420px);
-    max-height: min(48dvh, 420px);
+    max-height: min(40vh, 360px);
+    max-height: min(40dvh, 360px);
     z-index: 60;
   }
 }
