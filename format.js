@@ -100,14 +100,28 @@
     return el;
   }
 
+  /* 선택기·열린 리그·알림을 한 묶음(.format-bar)으로 만들어 넓은 화면에서는 머리글 오른쪽 위,
+     좁은 화면에서는 사이드바(상단 고정 바) 안에 한 줄로 둔다 */
+  const WIDE = '(min-width: 861px)';
+
+  function placeBar(bar, sidebar) {
+    const head = document.querySelector('.top .wrap');
+    const wide = head && root.matchMedia && root.matchMedia(WIDE).matches;
+    if (wide) { if (bar.parentNode !== head) head.appendChild(bar); return; }
+    const nav = sidebar.querySelector('.nav');
+    if (bar.parentNode !== sidebar || bar.previousSibling !== nav)
+      sidebar.insertBefore(bar, nav ? nav.nextSibling : sidebar.firstChild);
+  }
+
   function buildPicker() {
     const sidebar = document.querySelector('.sidebar');
-    if (!sidebar || sidebar.querySelector('.format-pick')) return;
+    if (!sidebar || document.querySelector('.format-bar')) return;
+    const bar = document.createElement('div');
+    bar.className = 'format-bar';
     const box = document.createElement('label');
     box.className = 'format-pick';
     box.innerHTML = `<span>리그·컵</span><select aria-label="리그·컵 고르기">${options()}</select>`;
-    const nav = sidebar.querySelector('.nav');
-    sidebar.insertBefore(box, nav ? nav.nextSibling : sidebar.firstChild);
+    bar.appendChild(box);
     box.querySelector('select').addEventListener('change', e => go(e.target.value));
 
     const note = sidebar.querySelector('.side-note');
@@ -118,7 +132,7 @@
     document.querySelectorAll('[data-format="cap"]').forEach(el => { el.textContent = capText(current); });
 
     const now = seasonBadge();
-    if (now) box.after(now);
+    if (now) bar.appendChild(now);
 
     if (missing) {
       const warn = document.createElement('p');
@@ -126,6 +140,13 @@
       warn.setAttribute('role', 'status');
       warn.textContent = `'${missing}' 포맷은 지금 데이터에 없어 ${current.ko}로 열었습니다.`;
       box.after(warn);
+    }
+
+    placeBar(bar, sidebar);
+    if (root.matchMedia) {
+      const mq = root.matchMedia(WIDE);
+      const move = () => placeBar(bar, sidebar);
+      if (mq.addEventListener) mq.addEventListener('change', move); else if (mq.addListener) mq.addListener(move);
     }
   }
 
