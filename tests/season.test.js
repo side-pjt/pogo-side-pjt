@@ -63,7 +63,9 @@ assert.deepEqual(keys(at('2026-11-25T00:00:00Z')), ['ultra', 'mega-10000', 'laic
 }
 
 /* 등록된 시즌이 다 끝나면 stale — 화면이 '다음 시즌 일정 미등록' 을 띄운다 */
-assert.equal(at('2026-12-02T00:00:00Z').stale, true);
+/* 날짜는 마지막 시즌 끝 다음 날 — 새 시즌이 자동으로 더해져도 깨지지 않게 */
+assert.equal(S.at(Math.max(...Array.from(S.list, s => Date.parse(s.end))) + 864e5).stale, true);
+assert.equal(at('2026-12-02T00:00:00Z').stale, S.list.every(s => Date.parse(s.end) < Date.parse('2026-12-02T00:00:00Z')));
 assert.equal(at('2026-10-14T00:00:00Z').stale, false);
 
 console.log('season tests passed');

@@ -76,8 +76,10 @@ print({k:v for k,v in d.items() if len(set(v))>1})
 - 본문에서 포맷 이름·CP 를 보여 줄 자리는 `<em class="fmt" data-format="name|cap">` — `format.js` 가 채운다
 - `common.js` 전역에 `FORMAT`·`FORMAT_DATA`·`FORMAT_RANKS`·`FORMAT_SETS` 가 늘었다. 제약 2(이름 중복) 검사 대상
 
-시즌 일정 `data/seasons.js` 는 손으로 적는다 (공식 공지 → 한 주 한 줄, 태평양 시간 ISO, 공지의 한글 표기).
-`build_data.py` 가 그 줄을 정규식으로 읽어 앞으로 열릴 컵의 순위가 없으면 경고하니 형식을 지킬 것.
+시즌 일정 `data/seasons.js` 는 `scripts/sync_season.py` 가 공식 공지에서 새 시즌을 더한다 (매일 GitHub Actions
+`update-data.yml`). 이미 있는 시즌은 고치지 않으니 손으로 다듬어도 된다. 한 주 한 줄, 태평양 시간 ISO, 공지의 한글 표기.
+`build_data.py`·`fetch_moves.py`·`sync_season.py` 가 그 줄을 정규식으로 읽으니 형식을 지킬 것.
+공지 파싱은 `python tests/sync_season_test.py`.
 판정 경계·겹친 주는 `node tests/season.test.js`.
 
 ## 데이터 갱신

@@ -25,6 +25,7 @@
 
 import argparse
 import csv
+import datetime
 import json
 import pathlib
 import re
@@ -47,8 +48,10 @@ NAME_FIXES = {
 # PvPoke formats 를 자동으로 따라가되, GO배틀리그가 아닌 커뮤니티 대회·사용자 정의 포맷은 뺀다.
 EXCLUDE_CUPS = {'custom', 'championshipseries'}
 EXCLUDE_TITLE = re.compile(r'Battle Frontier|Devon|Invitational')
-# 시즌 일정에는 있는데 PvPoke formats 에 아직 안 올라온 컵. 순위 파일이 있을 때만 들어간다.
-EXTRA_FORMATS = [('fantasy', 1500), ('halloweenmega', 1500)]
+# PvPoke formats 에 아직 안 올라온 컵. 순위 파일이 있을 때만 들어간다.
+# data/seasons.js 에 적힌 컵은 season_formats() 가 알아서 더하니 여기에는 그 밖의 컵만 적는다.
+EXTRA_FORMATS = []
+SEASONS = pathlib.Path(__file__).resolve().parent.parent.parent / 'data' / 'seasons.js'
 # 순위가 겹치는 종의 기본 기술셋·일반기술 사용률을 어느 포맷에서 가져올지 (앞이 우선)
 PRIMARY_FORMATS = ['great', 'mega-1500', 'ultra', 'mega-2500', 'master', 'mega-10000']
 
@@ -64,6 +67,30 @@ FORMAT_NAME_KO = {
     'laic2027-1500': '2026 GO 챔피언십LA 컵',
 }
 MEGA_ID = re.compile(r'_(mega|primal)(_[xyz])?$')
+
+
+def season_formats():
+    """data/seasons.js 에서 앞으로 열릴(또는 지금 열린) 주의 컵 key(<컵>-<CP>) 를 (컵, CP) 로.
+    주가 지나도 이미 받아 둔 컵(data/formats/<key>.js)은 시즌이 끝날 때까지 남긴다 — 저장된 주소가 계속 열리게.
+    기본 리그 key(great 등)는 모양이 달라 빠진다."""
+    if not SEASONS.exists():
+        return []
+    have = SEASONS.parent / 'formats'
+    now = datetime.datetime.now(datetime.timezone.utc)
+    out, season_end = [], None
+    for line in SEASONS.read_text(encoding='utf-8').splitlines():
+        m = re.match(r"\s*end: '([^']+)',\s*$", line)          # 시즌 줄 (주 줄은 '{ start:' 로 시작)
+        if m:
+            season_end = datetime.datetime.fromisoformat(m.group(1))
+        m = re.search(r"end: '([^']+)', formats: \[(.*)\]", line)
+        if not m:
+            continue
+        upcoming = datetime.datetime.fromisoformat(m.group(1)) > now
+        for cup, cp in re.findall(r"'([a-z0-9]+)-(\d+)'", m.group(2)):
+            kept = season_end and season_end > now and (have / ('%s-%s.js' % (cup, cp))).exists()
+            if upcoming or kept:
+                out.append((cup, int(cp)))
+    return list(dict.fromkeys(out))
 
 
 def fetch_json(url):
@@ -220,7 +247,7 @@ def main():
     args = ap.parse_args()
     out_dir = pathlib.Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
-    extra = EXTRA_FORMATS + [(s.split(':')[0], int(s.split(':')[1])) for s in args.extra]
+    extra = EXTRA_FORMATS + season_formats() + [(s.split(':')[0], int(s.split(':')[1])) for s in args.extra]
 
     print('1/4 PvPoke 기술 제원…')
     gm = fetch_json(PVPOKE + 'gamemaster.json')

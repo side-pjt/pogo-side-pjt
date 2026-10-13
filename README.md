@@ -24,16 +24,31 @@
 
 - `data/data.js` — 모든 리그·컵의 종 정보 (순위 없음)
 - `data/formats/index.js` — 포맷 목록과 한글 이름 · `data/formats/<key>.js` — 그 포맷의 순위·추천 기술·기본 개체값
-- `data/seasons.js` — **직접 관리하는** GO배틀리그 시즌 주차별 일정. 사이드바 "지금 열린 리그"와 `season.html`이 쓴다.
+- `data/seasons.js` — GO배틀리그 시즌 주차별 일정. 사이드바 "지금 열린 리그"와 `season.html`이 쓴다.
+  새 시즌은 공식 공지에서 자동으로 더해지고(아래), 더해진 뒤에는 손으로 다듬어도 덮어쓰지 않는다.
   처음 오는 사람은 이번 주 열린 포맷으로 연다
 
-### 시즌이 바뀌거나 새 컵이 열릴 때
+### 자동 갱신 (GitHub Actions)
 
-1. 포켓몬 GO 한국어 공지(`pokemongo.com/ko/news/...`)를 보고 `data/seasons.js`에 새 시즌을 적는다.
-   한 주를 한 줄로, 시각은 공지의 태평양 시간 ISO(`13:00:00-07:00`, 서머타임이 끝나면 `-08:00`), 이름은 공지 표기
-2. PvPoke에 아직 없는 컵은 `fetch_moves.py`의 `EXTRA_FORMATS`에 `(컵id, CP)`를 더한다. 컵 id는 PvPoke 주소의 이름
+`.github/workflows/update-data.yml`이 매일 한국시간 06:00에 돈다 (Actions 탭에서 손으로도 돌릴 수 있다).
+
+1. `sync_season.py` — 공식 공지 목록에서 GO배틀리그 공지를 찾아, 아직 없는 시즌이면 `data/seasons.js`에 더한다.
+   공지의 일정표 블록(주마다 UTC 시각 + 리그·컵 이름)과 '컵' 절(출전 조건)을 읽는다.
+   이미 있는 시즌은 고치지 않고, 공지와 주차·포맷이 달라졌으면 보고만 한다
+2. `update_all.py` — 순위·기술·스프라이트를 다시 받는다. `seasons.js`에 적힌 앞으로 열릴 컵은 자동으로 순위를 찾는다
+3. 테스트가 모두 통과하면 main에 커밋·푸시한다. 바뀐 게 없으면 커밋하지 않는다
+4. 사람이 볼 것(PvPoke에 아직 없어 추정한 컵 id, 공지 데이터의 어긋난 시각, 공지와 달라진 주)이 있으면 이슈를 연다
+
+이슈가 열리면 `seasons.js`의 그 줄만 확인해 고치면 된다. 저장소 Settings → Actions → General →
+Workflow permissions가 "Read and write"여야 푸시·이슈 생성이 된다.
+
+### 손으로 할 때
+
+1. `python pogo-cct-tool/scripts/sync_season.py` — 공지에서 새 시즌을 더한다 (`--dry-run`이면 출력만, `--url 공지주소`로 지정)
+   손으로 적을 때는 한 주를 한 줄로, 시각은 태평양 시간 ISO(`13:00:00-07:00`, 서머타임이 끝나면 `-08:00`), 이름은 공지 표기
+2. PvPoke 컵 id가 추정과 다르면 `seasons.js`의 key를 고친다. 컵 id는 PvPoke 주소의 이름
 3. `python pogo-cct-tool/scripts/update_all.py` — 일정에 있는데 순위가 없는 컵은 경고로 나온다
-4. `node tests/season.test.js && node tests/formats.test.js && node tests/battle-engine.test.js`
+4. `python tests/sync_season_test.py && node tests/season.test.js && node tests/formats.test.js && node tests/battle-engine.test.js`
 
 순위가 아직 없는 컵은 화면에 "순위 준비 중"으로 나오고, PvPoke에 올라온 뒤 3번을 다시 돌리면 들어간다.
 등록된 시즌이 모두 끝나면 사이드바에 "다음 시즌 일정이 아직 등록되지 않았습니다"가 뜬다.
@@ -63,6 +78,7 @@ PvPoke의 기능과 공개 데이터를 검증 기준으로 삼았지만 엔진�
 ```bash
 node tests/battle-engine.test.js
 node tests/season.test.js
+python tests/sync_season_test.py
 node tests/formats.test.js
 ```
 
@@ -83,7 +99,7 @@ Python 3.9+ 표준 라이브러리만 쓴다. 설치할 패키지가 없다.
 
 리그·컵(포맷) 목록은 PvPoke `gamemaster.json`의 `formats`를 자동으로 따라간다. 기본 3리그는 항상 넣고,
 커뮤니티 대회(Battle Frontier 등)·사용자 정의·순위 비공개 포맷은 뺀다. 시즌 일정에는 있지만 PvPoke에 아직 없는 컵은
-`fetch_moves.py`의 `EXTRA_FORMATS`나 `--extra 컵:CP`로 넣으면 순위 파일이 올라온 뒤부터 들어간다.
+`data/seasons.js`의 key로 자동으로 찾고(그 밖의 컵은 `EXTRA_FORMATS`나 `--extra 컵:CP`), 순위 파일이 올라온 뒤부터 들어간다.
 한글 컵 이름은 게임 로케일의 공식 표기를 쓰고, 없으면 공식 단어로 조합하며, 그것도 안 되면 영문으로 두고 경고한다
 (`FORMAT_NAME_KO`에 직접 적으면 우선한다). 결과는 `pogo-move-fetcher/data/formats.json`.
 순위 숫자는 PvPoke 사이트와 같다 (이미지가 없는 종 자리는 비어 있을 수 있다).
@@ -121,7 +137,7 @@ k × m  ≡  o − 1   (mod o)
 | 순위 · 기술 턴 수 · 추천 기술셋 | [PvPoke](https://github.com/pvpoke/pvpoke) |
 | 스프라이트 · 한글 포켓몬명 | [PoGoMate](https://pogomate.com) |
 | 한글 기술명 · 컵 이름 | [PokeMiners](https://github.com/PokeMiners) 포켓몬 GO 한국어 로케일 |
-| 시즌 일정 · 출전 조건 | 포켓몬 GO 공식 공지 (직접 옮겨 적음) |
+| 시즌 일정 · 출전 조건 | 포켓몬 GO 공식 공지 (`sync_season.py`가 옮겨 적음) |
 
 순위는 PvPoke가 정본이다. PoGoMate도 자체 순위를 내지만 둘이 다르다
 (상위 300 집합이 16종 차이). PoGoMate 순위는 `pogomateRank` 에 참고용으로 남겨 둔다.
