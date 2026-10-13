@@ -37,7 +37,7 @@
    "cp": 1500,
    "title": "Mega Great League",
    "ko": "슈퍼리그: 메가 버전",
-   "nameSource": "rule",
+   "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/mega/overall/rankings-1500.json",
    "count": 1210
   },
@@ -47,7 +47,7 @@
    "cp": 2500,
    "title": "Mega Ultra League",
    "ko": "하이퍼리그: 메가 버전",
-   "nameSource": "rule",
+   "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/mega/overall/rankings-2500.json",
    "count": 912
   },
@@ -66,8 +66,8 @@
    "cup": "colormega",
    "cp": 1500,
    "title": "Mega Color Cup",
-   "ko": "메가 4색컵",
-   "nameSource": "rule",
+   "ko": "메가 4색컵: 슈퍼리그 버전",
+   "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/colormega/overall/rankings-1500.json",
    "count": 493
   },
@@ -86,8 +86,8 @@
    "cup": "laic2027",
    "cp": 1500,
    "title": "LAIC 2027 Championship Series Cup",
-   "ko": "LAIC 2027 Championship Series Cup",
-   "nameSource": "fallback",
+   "ko": "2026 GO 챔피언십LA 컵",
+   "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/laic2027/overall/rankings-1500.json",
    "count": 828
   },
@@ -113,6 +113,7 @@
   "Custom"
  ],
  "noRanking": [
-  "fantasy-1500"
+  "fantasy-1500",
+  "halloweenmega-1500"
  ]
 }

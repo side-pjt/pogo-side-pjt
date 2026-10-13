@@ -13,6 +13,7 @@ pogo-image-fetcher + pogo-move-fetcher 결과를 합쳐 정적 도구용 데이�
 """
 
 import argparse
+import datetime
 import json
 import pathlib
 import re
@@ -152,6 +153,35 @@ def build_formats(mov, pv_iv):
     return out
 
 
+def check_seasons(have):
+    """data/seasons.js(직접 관리)와 포맷 데이터를 대조한다. 앞으로 열릴 컵의 순위가 없으면 경고.
+
+    일정은 JS 파일이라 정규식으로 주 단위 줄만 읽는다 — 한 주를 한 줄에 적는 형식을 지킬 것.
+    """
+    p = ROOT / 'data' / 'seasons.js'
+    if not p.exists():
+        print('[경고] data/seasons.js 없음 — 시즌 일정이 화면에 안 나온다')
+        return
+    now = datetime.datetime.now(datetime.timezone.utc)
+    ends, waiting = [], {}
+    for line in p.read_text(encoding='utf-8').splitlines():
+        m = re.search(r"start: '([^']+)', end: '([^']+)', formats: \[(.*)\]", line)
+        if not m:
+            continue
+        start, end = (datetime.datetime.fromisoformat(s) for s in m.group(1, 2))
+        ends.append(end)
+        if end <= now:
+            continue
+        for key in re.findall(r"'([a-z0-9]+(?:-\d+)?)'", m.group(3)):
+            if key not in have:
+                waiting.setdefault(key, start)
+    for key, start in sorted(waiting.items(), key=lambda kv: kv[1]):
+        print('[경고] 일정에 있는데 순위 데이터 없음: %s (%s 시작) — PvPoke 에 올라오면 update_all.py'
+              % (key, start.date()))
+    if not ends or max(ends) <= now:
+        print('[경고] 등록된 시즌 일정이 모두 끝났다 — data/seasons.js 에 다음 시즌을 적을 것')
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--no-images', action='store_true', help='스프라이트 복사 건너뛰기')
@@ -246,6 +276,7 @@ def main():
         if p.name not in keep:
             p.unlink()
     print('포맷 %d개: %s' % (len(formats), ', '.join(m['key'] for m, _ in formats)))
+    check_seasons({m['key'] for m, _ in formats})
 
     if not args.no_images:
         dst = ROOT / 'images'

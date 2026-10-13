@@ -48,7 +48,7 @@ NAME_FIXES = {
 EXCLUDE_CUPS = {'custom', 'championshipseries'}
 EXCLUDE_TITLE = re.compile(r'Battle Frontier|Devon|Invitational')
 # 시즌 일정에는 있는데 PvPoke formats 에 아직 안 올라온 컵. 순위 파일이 있을 때만 들어간다.
-EXTRA_FORMATS = [('fantasy', 1500)]
+EXTRA_FORMATS = [('fantasy', 1500), ('halloweenmega', 1500)]
 # 순위가 겹치는 종의 기본 기술셋·일반기술 사용률을 어느 포맷에서 가져올지 (앞이 우선)
 PRIMARY_FORMATS = ['great', 'mega-1500', 'ultra', 'mega-2500', 'master', 'mega-10000']
 
@@ -56,7 +56,13 @@ LEAGUE_KEY = {1500: 'great', 2500: 'ultra', 10000: 'master'}
 LEAGUE_EN = {500: 'Little', 1500: 'Great League', 2500: 'Ultra League', 10000: 'Master League'}
 LEAGUE_KO = {500: '리틀', 1500: '슈퍼리그', 2500: '하이퍼리그', 10000: '마스터리그'}
 # 공식 표기가 없거나 어색할 때만 적는다. 키는 포맷 key.
-FORMAT_NAME_KO = {}
+FORMAT_NAME_KO = {
+    # 게임 텍스트에 없다. '황혼의 여정' 시즌 한국어 공지 표기 (data/seasons.js 와 같게)
+    'mega-1500': '슈퍼리그: 메가 버전',
+    'mega-2500': '하이퍼리그: 메가 버전',
+    'colormega-1500': '메가 4색컵: 슈퍼리그 버전',
+    'laic2027-1500': '2026 GO 챔피언십LA 컵',
+}
 MEGA_ID = re.compile(r'_(mega|primal)(_[xyz])?$')
 
 
