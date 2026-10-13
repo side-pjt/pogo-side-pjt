@@ -41,12 +41,18 @@
   if (document.readyState === 'loading')
     document.write(`<script src="data/formats/${encodeURIComponent(current.key)}.js"><\/script>`);
 
-  /* 다른 포맷으로 다시 연다. 주소의 다른 값(고른 포켓몬 등)은 그대로 둔다 */
+  /* 포맷을 바꿔도 남길 주소 값 — 타입 상성의 고른 타입(t), 팀 조합의 대회 룰(six).
+     고른 포켓몬·기술·개체값은 버린다. 배틀·팀 페이지는 기본으로 띄운 포켓몬도 주소에 적어서,
+     남겨 두면 이전 포맷의 포켓몬이 새 포맷에서 고른 것처럼 뜬다 */
+  const KEEP = ['t', 'six'];
+
+  /* 다른 포맷으로 다시 연다. 포켓몬은 새 포맷의 기본(1·2위)으로 시작한다 */
   function go(key) {
     if (!byKey(key)) return;
     save(key);
-    const q = new URLSearchParams(location.search);
-    q.delete('league');
+    const old = new URLSearchParams(location.search);
+    const q = new URLSearchParams();
+    KEEP.forEach(k => { if (old.has(k)) q.set(k, old.get(k)); });
     if (key === DEFAULT) q.delete('f'); else q.set('f', key);
     const s = q.toString();
     location.href = location.pathname + (s ? '?' + s : '') + location.hash;
