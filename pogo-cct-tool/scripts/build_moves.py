@@ -28,6 +28,24 @@ KO_FALLBACK = {
 }
 
 
+def format_movesets():
+    """data/formats/*.js(build_data.py 가 먼저 만든다)의 추천 기술 → {종: (노말들, 스페셜들)}.
+
+    PvPoke 추천에는 종의 기본 기술 목록에 없는 기술이 섞인다 — 은혜갚기(정화)·프러스트레이션(그림자)·
+    메가 전용 '…_PLUS'. 기술표에 없으면 배틀 기본 기술이 깨지므로 그 종의 목록에 더한다.
+    """
+    out = {}
+    for p in sorted((ROOT / 'data' / 'formats').glob('*.js')):
+        m = re.search(r'window\.FORMAT_DATA\["[^"]+"\] = (\{.*\});', p.read_text(encoding='utf-8'))
+        if not m:
+            continue
+        for sid, ms in json.loads(m.group(1))['movesets'].items():
+            fast, chg = out.setdefault(sid, (set(), set()))
+            fast.add(ms[0])
+            chg.update(ms[1:])
+    return out
+
+
 def main():
     gm = json.load(urllib.request.urlopen(GM, timeout=60))
     ko = {m['moveId']: m.get('nameKo') or KO_FALLBACK.get(m['moveId']) or m['name']
@@ -37,7 +55,8 @@ def main():
     mon = {p['speciesId']: p for p in gm['pokemon']}
     mv = {m['moveId']: m for m in gm['moves']}
 
-    sets, used = {}, set()
+    fmt = format_movesets()
+    sets, used, added = {}, set(), 0
     for i in sorted(ids):
         p = mon.get(i)
         if not p:
@@ -45,6 +64,14 @@ def main():
         fast = [m for m in p.get('fastMoves', []) if m in mv]
         chg = [m for m in p.get('chargedMoves', []) if m in mv]
         r = rec.get(i) or {}
+        extra_fast, extra_chg = fmt.get(i, (set(), set()))
+        extra_fast = extra_fast | ({r['fast']} if r.get('fast') else set())
+        extra_chg = extra_chg | {c for c in r.get('charged', []) if c}
+        for lst, extra in ((fast, extra_fast), (chg, extra_chg)):
+            for m in sorted(extra):
+                if m in mv and m not in lst:
+                    lst.append(m)
+                    added += 1
         # [노말어택들, 스페셜어택들, 추천 노말, 추천 스페셜들, 대단한 기술 머신 필요, 이벤트 한정]
         sets[i] = [fast, chg, r.get('fast'), [c for c in r.get('charged', []) if c],
                    [m for m in (p.get('eliteMoves') or []) if m in mv],
@@ -68,7 +95,8 @@ def main():
           'window.MOVES = ' + json.dumps(table, ensure_ascii=False, separators=(',', ':')) + ';\n'
           'window.MOVESETS = ' + json.dumps(sets, ensure_ascii=False, separators=(',', ':')) + ';\n')
     OUT.write_text(js, encoding='utf-8')
-    print(len(table), 'moves,', len(sets), 'pokemon,', len(js) // 1024, 'KB')
+    print(len(table), 'moves,', len(sets), 'pokemon,', len(js) // 1024, 'KB',
+          '(추천 기술 중 기본 목록에 없던 것 %d개 추가)' % added)
 
 
 if __name__ == '__main__':

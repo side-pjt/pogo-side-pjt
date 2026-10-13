@@ -33,7 +33,7 @@
    한 주를 한 줄로, 시각은 공지의 태평양 시간 ISO(`13:00:00-07:00`, 서머타임이 끝나면 `-08:00`), 이름은 공지 표기
 2. PvPoke에 아직 없는 컵은 `fetch_moves.py`의 `EXTRA_FORMATS`에 `(컵id, CP)`를 더한다. 컵 id는 PvPoke 주소의 이름
 3. `python pogo-cct-tool/scripts/update_all.py` — 일정에 있는데 순위가 없는 컵은 경고로 나온다
-4. `node tests/season.test.js && node tests/battle-engine.test.js`
+4. `node tests/season.test.js && node tests/formats.test.js && node tests/battle-engine.test.js`
 
 순위가 아직 없는 컵은 화면에 "순위 준비 중"으로 나오고, PvPoke에 올라온 뒤 3번을 다시 돌리면 들어간다.
 등록된 시즌이 모두 끝나면 사이드바에 "다음 시즌 일정이 아직 등록되지 않았습니다"가 뜬다.
@@ -63,6 +63,7 @@ PvPoke의 기능과 공개 데이터를 검증 기준으로 삼았지만 엔진�
 ```bash
 node tests/battle-engine.test.js
 node tests/season.test.js
+node tests/formats.test.js
 ```
 
 ## 데이터 갱신
