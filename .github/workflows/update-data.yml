@@ -48,8 +48,13 @@ jobs:
         # 경고(아직 순위가 없는 컵 등)로 끝나도 계속한다. 실제로 깨졌는지는 다음 단계 테스트가 본다
         run: python pogo-cct-tool/scripts/update_all.py || echo "::warning::update_all.py 가 경고로 끝났다 — 로그의 [경고] 확인"
 
+      - name: 자산 버전 갱신
+        # 바뀐 data/*.js·CSS·JS 주소의 ?v= 를 새 해시로 — Pages 캐시에 예전 파일이 남지 않게
+        run: node scripts/stamp_assets.js
+
       - name: 테스트
         run: |
+          node scripts/stamp_assets.js --check
           python tests/sync_season_test.py
           node tests/season.test.js
           node tests/formats.test.js

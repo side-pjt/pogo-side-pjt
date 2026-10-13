@@ -80,7 +80,11 @@ node tests/battle-engine.test.js
 node tests/season.test.js
 python tests/sync_season_test.py
 node tests/formats.test.js
+node scripts/stamp_assets.js --check
 ```
+
+CSS·JS·data 파일을 고쳤으면 커밋 전에 `node scripts/stamp_assets.js` 를 돌린다.
+HTML 이 읽는 주소 끝의 `?v=` 를 파일 내용 해시로 바꿔서, GitHub Pages 캐시에 남은 예전 파일이 뜨지 않게 한다.
 
 ## 데이터 갱신
 
