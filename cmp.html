@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>포켓몬 GO 슈퍼리그 CMP 계산기</title>
+<title>포켓몬 GO CMP 계산기</title>
 <meta name="description" content="같은 턴에 차징기를 쓰면 공격 실수치가 높은 쪽이 먼저 나간다">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="포켓몬 GO 슈퍼리그 CMP 계산기">
+<meta property="og:title" content="포켓몬 GO CMP 계산기">
 <meta property="og:description" content="같은 턴에 차징기를 쓰면 공격 실수치가 높은 쪽이 먼저 나간다">
 <meta property="og:image" content="https://side-pjt.github.io/pogo-side-pjt/og-image.png?v=2">
 <meta property="og:image:width" content="1200">
@@ -33,7 +33,7 @@
     <img class="brand-logo" src="favicon.svg" alt="" width="36" height="36">
     <img class="brand-img" src="sidebar-brand.png" alt="" width="408" height="152">
     <span class="brand-sub">포켓몬 GO</span>
-    <span class="brand-name">슈퍼리그 가이드</span>
+    <span class="brand-name">PvP 가이드</span>
     <span class="brand-page">CMP 계산기</span>
   </a>
   <nav class="nav">
@@ -55,11 +55,11 @@
 
 <header class="top">
   <div class="wrap">
-    <h1>슈퍼리그 CMP 계산기</h1>
+    <h1><em class="fmt" data-format="name">슈퍼리그</em> CMP 계산기</h1>
     <p class="sub">같은 턴에 차징기를 쓰면 공격 실수치가 높은 쪽이 먼저 나간다</p>
     <div class="meta">
       <span>그림자는 CMP에 영향 없음</span>
-      <span>CP 1500 기준</span>
+      <span><em class="fmt" data-format="cap">CP 1500</em> 기준</span>
     </div>
   </div>
 </header>
@@ -159,7 +159,7 @@
       <li><strong>그림자는 무관</strong> 그림자 보정(×1.2)은 데미지에만 붙고 공격 실수치는 그대로다</li>
       <li><strong>동점이면 랜덤</strong> 공격 실수치가 완전히 같으면 어느 쪽도 우선권이 없다</li>
       <li><strong>1등 개체는 CMP에 불리</strong> 스탯곱을 최대로 하려고 공격 개체값을 0으로 깎기 때문이다</li>
-      <li><strong>레벨이 같이 움직인다</strong> CP 1500 상한 때문에 공격 개체값이 낮으면 레벨을 더 올릴 수 있다</li>
+      <li><strong>레벨이 같이 움직인다</strong> CP 상한이 있는 리그에서는 공격 개체값이 낮으면 레벨을 더 올릴 수 있다</li>
     </ul>
     <p class="note">
       공격 실수치 = (종족값 공격 + 공격 개체값) × CPM(레벨) ·

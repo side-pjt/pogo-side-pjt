@@ -1553,3 +1553,6 @@ main { gap: 18px; }
 .sn-chip:hover { border-color: var(--accent); }
 .sn-chip.off { cursor: default; color: var(--muted); border-style: dashed; }
 .sn-alert { border-color: var(--bad); }
+
+/* 본문 속 지금 리그·컵 이름 (format.js 가 채운다) */
+.fmt { font-style: normal; }

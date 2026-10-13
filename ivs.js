@@ -225,5 +225,16 @@ document.querySelectorAll('.iv-quick').forEach(btn => {
   });
 });
 
+/* CP 상한이 없는 포맷(마스터리그 계열)은 '공격을 낮춰 레벨을 올린다' 는 이야기가 성립하지 않는다 */
+if (Format.isMaster) {
+  const note = document.createElement('section');
+  note.className = 'panel sn-alert';
+  note.innerHTML = `<h2>${esc(FORMAT.ko)}는 CP 상한이 없습니다</h2>
+    <p class="note">모든 포켓몬이 최대 레벨까지 올라가므로 개체값이 높을수록 강합니다. 15 · 15 · 15가 1등이고,
+    아래의 '공격이 낮은 개체가 좋은 이유' 는 슈퍼·하이퍼리그 같은 CP 상한 리그 이야기입니다.</p>`;
+  document.querySelector('main.wrap').prepend(note);
+  document.querySelector('.top .meta span').textContent = 'CP 제한 없음';
+}
+
 mon = monFromUrl('p') || byRank(1);
 paint();

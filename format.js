@@ -66,8 +66,8 @@
       ['메가 버전', rest.filter(isMega)],
       ['컵', rest.filter(f => !isLeague(f) && !isMega(f))],
     ];
-    return groups.filter(([, fs]) => fs.length).map(([label, fs]) =>
-      `<optgroup label="${label}">${fs.map(f =>
+    return groups.filter(([, fs]) => fs.length).map(([group, fs]) =>
+      `<optgroup label="${group}">${fs.map(f =>
         `<option value="${f.key}"${f.key === current.key ? ' selected' : ''}>${label(f)}</option>`).join('')}</optgroup>`).join('');
   }
 
