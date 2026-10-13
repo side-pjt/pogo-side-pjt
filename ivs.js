@@ -79,6 +79,7 @@ function paint() {
   chosen.hidden = false;
   document.querySelector('.ivs').hidden = false;
   chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(mon.img);
+  chosen.querySelector('.chosen-img').alt = `${mon.ko} 이미지`;
   chosen.querySelector('.chosen-name').innerHTML = nameHtml(mon);
   chosen.querySelector('.chosen-rank').textContent = `${rankText(mon)} · ${mon.types.join(' / ')}${mon.mega ? ' · 메가 전투용 CP 보정 미반영' : ''}`;
 
@@ -109,16 +110,19 @@ function paint() {
       <summary>숫자로 자세히 보기</summary>
       <p class="answer-sub" style="margin-top:8px"><b>${esc(mon.ko)}</b> 의 개체값 4,096조합을 전부 계산했습니다.
       각 조합은 CP 1500을 넘지 않는 가장 높은 레벨 기준입니다.</p>
-    <table class="cmp-table">
-      <thead><tr><th>구분</th><th>개체값</th><th>레벨</th><th>CP</th>
-        <th>공격</th><th>방어</th><th>HP</th><th>버티는 정도</th></tr></thead>
-      <tbody>
-        ${row('내 개체값', mine, pct(mine))}
-        ${row('1등 개체', best, pct(best))}
-        ${row('15 · 15 · 15', hundo, pct(hundo))}
-        ${mon.pvIv ? row('PvPoke 기본', findBuild(mon, mon.pvIv), pct(findBuild(mon, mon.pvIv))) : ''}
-      </tbody>
-    </table>
+    <p class="scroll-hint">표를 좌우로 밀어 전체 수치를 확인하세요.</p>
+    <div class="table-scroll" tabindex="0" aria-label="개체값 상세 수치, 가로로 스크롤 가능">
+      <table class="cmp-table">
+        <thead><tr><th>구분</th><th>개체값</th><th>레벨</th><th>CP</th>
+          <th>공격</th><th>방어</th><th>HP</th><th>버티는 정도</th></tr></thead>
+        <tbody>
+          ${row('내 개체값', mine, pct(mine))}
+          ${row('1등 개체', best, pct(best))}
+          ${row('15 · 15 · 15', hundo, pct(hundo))}
+          ${mon.pvIv ? row('PvPoke 기본', findBuild(mon, mon.pvIv), pct(findBuild(mon, mon.pvIv))) : ''}
+        </tbody>
+      </table>
+    </div>
 
     <p class="answer-sub">
       ‘버티는 정도’는 스탯곱(공격 × 방어 × HP)을 1등 개체 대비 비율로 본 값입니다.

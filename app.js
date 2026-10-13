@@ -101,6 +101,7 @@ function setupPicker(root, side, initial) {
 
     chosen.hidden = false;
     chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(p.img);
+    chosen.querySelector('.chosen-img').alt = `${p.ko} 이미지`;
     chosen.querySelector('.chosen-name').innerHTML = nameHtml(p);
     chosen.querySelector('.chosen-rank').textContent = `${rankText(p)} · ${p.types.join(' / ')}`;
 

@@ -212,6 +212,7 @@ function paintSlot(root, i) {
   chosen.hidden = !mon;
   if (!mon) return;
   chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(mon.img);
+  chosen.querySelector('.chosen-img').alt = `${mon.ko} 이미지`;
   chosen.querySelector('.chosen-name').innerHTML = nameHtml(mon);
   chosen.querySelector('.chosen-rank').textContent = `${rankText(mon)} · ${mon.types.map(TKO).join(' / ')}`;
 }
@@ -249,8 +250,8 @@ function strongBlock(mons) {
     ? `<p class="tt-warn">팀의 자속 기술로 약점을 못 찌르는 타입: <b>${none.join(', ')}</b>. 이 타입 상대에게는 다른 타입 기술이 필요합니다.</p>`
     : '<p class="tt-warn good">18개 타입 모두를 약점으로 찌를 수 있는 포켓몬이 팀에 있습니다.</p>';
   return `<h3 class="tt-h3">팀이 강한 타입 <small>칸의 숫자 = 그 타입에 자속 기술이 잘 통하는 포켓몬 수</small></h3>
-    <div class="tt-grid">${strongGrid(strong)}</div>
     ${msg}
+    <div class="tt-grid">${strongGrid(strong)}</div>
     <p class="note">자기 타입 기준이라 실제 보유 기술은 반영하지 않았고, 듀얼 타입 상대는 따로 계산하지 않았습니다.</p>`;
 }
 
@@ -309,8 +310,8 @@ function paintDiag() {
       trios = '<p class="note">세 마리 이상 고르면 출전 조합을 추천해 드립니다.</p>';
     }
     box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">등록 ${mons.length}마리가 약한 타입 <small>칸의 숫자 = 그 타입에 약한 포켓몬 수</small></h3>
-      <div class="tt-grid">${grid}</div>
       ${summary}
+      <div class="tt-grid">${grid}</div>
       ${strongBlock(mons)}
       ${trios}`;
     return;
@@ -335,8 +336,8 @@ function paintDiag() {
   }
 
   box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">팀이 약한 타입 <small>칸의 숫자 = 그 타입에 약한 포켓몬 수</small></h3>
-    <div class="tt-grid">${grid}</div>
     ${summary}
+    <div class="tt-grid">${grid}</div>
     ${strongBlock(mons)}
     ${guess}`;
 }
@@ -399,7 +400,7 @@ function paintMega() {
     (!q || norm(p.ko).includes(q) || norm(p.en).includes(q)));
   document.getElementById('mega-count').textContent = `메가 에디션 순위순 · ${list.length}종 / 전체 ${MEGAS.length}종`;
   document.getElementById('mega-list').innerHTML = list.map(p => `<figure class="tm">
-    <img src="images/${encodeURIComponent(p.img)}" alt="" loading="lazy">
+    <img src="images/${encodeURIComponent(p.img)}" alt="${esc(p.ko)} 이미지" loading="lazy">
     <figcaption>
       <span class="tm-name">${esc(p.ko)}</span>
       <span class="tm-rank">${rankText(p)}</span>
@@ -410,7 +411,11 @@ function paintMega() {
 /* ---------- 탭 ---------- */
 
 function showTab(name) {
-  document.querySelectorAll('.tt-tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  document.querySelectorAll('.tt-tab').forEach(b => {
+    const selected = b.dataset.tab === name;
+    b.setAttribute('aria-selected', String(selected));
+    b.tabIndex = selected ? 0 : -1;
+  });
   document.querySelectorAll('.tt-pane').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
   try { history.replaceState(null, '', name === 'diag' ? location.pathname : '#' + name); } catch (e) { /* file:// 등 */ }
 }
@@ -424,6 +429,17 @@ setupDiag();
 paintMega();
 
 document.querySelectorAll('.tt-tab').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+document.querySelector('.tt-tabs').addEventListener('keydown', e => {
+  if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return;
+  const tabs = [...document.querySelectorAll('.tt-tab')];
+  const current = tabs.indexOf(document.activeElement);
+  if (current < 0) return;
+  e.preventDefault();
+  let next = e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 :
+    (current + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+  showTab(tabs[next].dataset.tab);
+  tabs[next].focus();
+});
 document.querySelectorAll('.tt-opt').forEach(b => b.addEventListener('click', () => { quiz[b.dataset.q] = b.dataset.v; paintQuiz(); }));
 document.addEventListener('click', e => {
   const go = e.target.closest('.tt-go');
@@ -442,4 +458,4 @@ document.addEventListener('keydown', e => {
 document.getElementById('mega-q').addEventListener('input', e => { megaQuery = e.target.value; paintMega(); });
 
 const startTab = location.hash.replace('#', '');
-if (['types', 'mega'].includes(startTab)) showTab(startTab);
+showTab(['types', 'mega'].includes(startTab) ? startTab : 'diag');

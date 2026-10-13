@@ -61,7 +61,7 @@
 
   <section class="panel">
     <h2>포켓몬 또는 타입 고르기</h2>
-    <div id="src-mon" style="margin-top:8px">
+    <div id="src-mon" class="src-mon">
       <div class="combo">
         <input type="search" class="search" placeholder="포켓몬 이름으로 검색 (한글·영문)" autocomplete="off" aria-label="포켓몬 검색">
         <ul class="results" hidden></ul>
@@ -86,14 +86,15 @@
     <p class="note">
       세로 = 맞는 쪽(방어) 타입 · 가로 = 때리는 기술 타입 · 칸을 누르면 설명이 나오고 줄이 강조됩니다 · 맨 아래 숫자는 그 타입 기술이 약점을 찌르는 타입 수
     </p>
+    <p class="scroll-hint">표를 상하좌우로 밀어 보고, 칸을 누르면 상세 배율을 확인할 수 있습니다.</p>
     <div class="tlegend">
       <span>● 효과가 굉장하다 ×1.6</span>
       <span>▲ 효과가 별로다 ×0.625</span>
       <span>✕ 이중 저항 ×0.39</span>
       <span>빈칸 보통 ×1</span>
     </div>
-    <div class="tchart-wrap"><table class="tchart" id="type-table"></table></div>
-    <div class="cell-detail" id="cell-detail">칸을 눌러보세요.</div>
+    <div class="tchart-wrap" tabindex="0" aria-label="전체 타입 상성표, 상하좌우로 스크롤 가능"><table class="tchart" id="type-table"></table></div>
+    <div class="cell-detail" id="cell-detail" role="status" aria-live="polite">칸을 눌러보세요.</div>
   </section>
 
   <section class="panel">

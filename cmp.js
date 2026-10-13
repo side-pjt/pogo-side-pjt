@@ -152,6 +152,7 @@ function paintSide(root, side) {
 
   chosen.hidden = false;
   chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(st.mon.img);
+  chosen.querySelector('.chosen-img').alt = `${st.mon.ko} 이미지`;
   chosen.querySelector('.chosen-name').innerHTML = nameHtml(st.mon);
   chosen.querySelector('.chosen-rank').textContent = `${rankText(st.mon)} · ${st.mon.types.join(' / ')}${st.mon.mega ? ' · 메가 전투용 CP 보정 미반영' : ''}`;
 
@@ -222,7 +223,7 @@ function renderHead(me, foe, mb) {
 function sideCard(mon, b, preset, label) {
   return `<div class="cmp-side">
     <div class="cmp-side-label">${label}</div>
-    <img src="images/${encodeURIComponent(mon.img)}" alt="">
+    <img src="images/${encodeURIComponent(mon.img)}" alt="${esc(mon.ko)} 이미지">
     <strong>${esc(mon.ko)}</strong>
     <div class="cmp-atk">${b.atk.toFixed(1)}</div>
     <div class="cmp-meta">${esc(PRESET_LABEL[preset])} · ${b.ivs.join('/')} · Lv${b.level}</div>
@@ -270,7 +271,7 @@ function renderSpread(me, foe, mb) {
   // 공격 개체값별 — 내가 전부 이기는지 / 일부만인지 / 전부 지는지
   const strip = sp.perAtkIV.map((s, iv) => {
     const cls = s.win === s.total ? 'all' : s.win === 0 ? 'none' : 'some';
-    return `<span class="iv-cell ${cls}" title="공격 개체값 ${iv}: ${s.total}개 중 ${s.win}개 승">${iv}</span>`;
+    return `<span class="iv-cell ${cls}" aria-label="공격 개체값 ${iv}: ${s.total}개 중 ${s.win}개 승">${iv}</span>`;
   }).join('');
 
   const rows = [['rank1', '1등 개체'], ['maxAtk', '공격 최대'], ['hundo', '15·15·15'], ['pvpoke', 'PvPoke 기본']].filter(([k]) => fp[k]).map(([k, name]) => {
@@ -307,10 +308,13 @@ function renderSpread(me, foe, mb) {
       </div>
     </div>
 
-    <table class="cmp-table">
-      <thead><tr><th>상대 빌드</th><th>개체값</th><th>공격</th><th>결과</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
+    <p class="scroll-hint">표를 좌우로 밀어 전체 내용을 확인하세요.</p>
+    <div class="table-scroll" tabindex="0" aria-label="상대 빌드별 CMP 결과, 가로로 스크롤 가능">
+      <table class="cmp-table">
+        <thead><tr><th>상대 빌드</th><th>개체값</th><th>공격</th><th>결과</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
 }
 
 /* ------------------------------------------------------------------ */

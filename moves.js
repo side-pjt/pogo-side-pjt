@@ -112,6 +112,7 @@ function paintMon(m) {
   chosen.hidden = !m;
   if (m) {
     chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(m.img);
+    chosen.querySelector('.chosen-img').alt = `${m.ko} 이미지`;
     chosen.querySelector('.chosen-name').innerHTML = nameHtml(m);
     chosen.querySelector('.chosen-rank').textContent = `${rankText(m)} · ${m.types.map(TKO).join(' / ')}`;
   }

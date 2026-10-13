@@ -32,13 +32,14 @@ let mon = null;
 
 function buildPick(host) {
   host.innerHTML = T.order.map(t =>
-    `<button type="button" class="ty ty-${t}" data-t="${t}">${esc(TKO(t))}</button>`).join('');
+    `<button type="button" class="ty ty-${t}" data-t="${t}" aria-pressed="false">${esc(TKO(t))}</button>`).join('');
   host.addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
     const max = +host.dataset.multi;
     const on = [...host.querySelectorAll('.on')];
     if (b.classList.contains('on')) b.classList.remove('on');
     else { if (on.length >= max) on[0].classList.remove('on'); b.classList.add('on'); }
+    host.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x.classList.contains('on'))));
     // 타입을 직접 만지면 포켓몬 선택은 풀린다
     if (host === defHost) { mon = null; document.querySelector('#src-mon .chosen').hidden = true; }
     render();
@@ -46,7 +47,11 @@ function buildPick(host) {
   });
 }
 function setPick(host, types) {
-  host.querySelectorAll('button').forEach(b => b.classList.toggle('on', types.includes(b.dataset.t)));
+  host.querySelectorAll('button').forEach(b => {
+    const on = types.includes(b.dataset.t);
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
 }
 
 /* 받는 피해: 이 타입(조합)이 어떤 기술에 약한가 */
@@ -135,6 +140,7 @@ function paintMon(m) {
   chosen.hidden = !m;
   if (m) {
     chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(m.img);
+    chosen.querySelector('.chosen-img').alt = `${m.ko} 이미지`;
     chosen.querySelector('.chosen-name').innerHTML = nameHtml(m);
     chosen.querySelector('.chosen-rank').textContent = `${rankText(m)} · ${m.types.map(TKO).join(' / ')}`;
     setPick(defHost, m.types);
@@ -150,6 +156,7 @@ function buildChart() {
   const host = document.getElementById('type-table');
   const types = T.order;
   const mark = { super: '●', resist: '▲', double: '✕', neutral: '' };
+  let cellIndex = 0;
 
   let html = '<thead><tr><th class="corner">방어↓ 공격→</th>' +
     types.map(a => `<th class="ty ty-${a}" data-atk="${a}">${esc(TKO(a))}</th>`).join('') + '</tr></thead><tbody>';
@@ -157,7 +164,7 @@ function buildChart() {
     html += `<tr><th class="ty ty-${d}" data-def="${d}">${esc(TKO(d))}</th>`;
     for (const a of types) {
       const b = bucket(T.chart[a][d]);
-      html += `<td class="${b.cls}" data-atk="${a}" data-def="${d}">${mark[b.cls]}</td>`;
+      html += `<td class="${b.cls}" data-atk="${a}" data-def="${d}" role="button" tabindex="${cellIndex++ === 0 ? '0' : '-1'}" aria-label="${esc(TKO(a))} 기술이 ${esc(TKO(d))} 타입을 공격: ${b.label} ${b.x}">${mark[b.cls]}</td>`;
     }
     html += '</tr>';
   }
@@ -167,8 +174,8 @@ function buildChart() {
   host.innerHTML = html;
 
   // 칸을 누르면 같은 행·열을 강조하고 설명을 보여준다 (폰에는 hover가 없다)
-  host.addEventListener('click', e => {
-    const td = e.target.closest('td[data-atk]'); if (!td) return;
+  function selectCell(td) {
+    host.querySelectorAll('td[data-atk]').forEach(cell => { cell.tabIndex = cell === td ? 0 : -1; });
     host.querySelectorAll('.sel,.hl').forEach(el => el.classList.remove('sel', 'hl'));
     td.classList.add('sel');
     const { atk, def } = td.dataset;
@@ -176,6 +183,28 @@ function buildChart() {
     const b = bucket(T.chart[atk][def]);
     document.getElementById('cell-detail').innerHTML =
       `${badge(atk)} 기술 → ${badge(def)} 타입 &nbsp;<b>${b.label}</b> ${b.x}`;
+  }
+  host.addEventListener('click', e => {
+    const td = e.target.closest('td[data-atk]'); if (!td) return;
+    selectCell(td);
+  });
+  host.addEventListener('keydown', e => {
+    const td = e.target.closest('td[data-atk]'); if (!td) return;
+    if (['Enter', ' '].includes(e.key)) {
+      e.preventDefault();
+      selectCell(td);
+      return;
+    }
+    const move = { ArrowLeft: [0, -1], ArrowRight: [0, 1], ArrowUp: [-1, 0], ArrowDown: [1, 0] }[e.key];
+    if (!move) return;
+    e.preventDefault();
+    const row = types.indexOf(td.dataset.def);
+    const col = types.indexOf(td.dataset.atk);
+    const nextRow = Math.max(0, Math.min(types.length - 1, row + move[0]));
+    const nextCol = Math.max(0, Math.min(types.length - 1, col + move[1]));
+    const next = host.querySelector(`td[data-def="${types[nextRow]}"][data-atk="${types[nextCol]}"]`);
+    selectCell(next);
+    next.focus();
   });
 }
 

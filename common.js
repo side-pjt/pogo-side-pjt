@@ -67,8 +67,20 @@ function setupSearch(root, onPick) {
   const input = root.querySelector('.search');
   const list = root.querySelector('.results');
   let cursor = -1, shown = [];
+  const listId = list.id || `search-list-${setupSearch.nextId++}`;
+  list.id = listId;
+  list.setAttribute('role', 'listbox');
+  input.setAttribute('role', 'combobox');
+  input.setAttribute('aria-autocomplete', 'list');
+  input.setAttribute('aria-controls', listId);
+  input.setAttribute('aria-expanded', 'false');
 
-  function close() { list.hidden = true; cursor = -1; }
+  function close() {
+    list.hidden = true;
+    cursor = -1;
+    input.setAttribute('aria-expanded', 'false');
+    input.removeAttribute('aria-activedescendant');
+  }
 
   // 고른 뒤 포커스를 풀어야 같은 입력창을 다시 눌렀을 때 focus가 다시 발생하고(모바일은 키보드도 내려감) 목록이 열린다
   function pick(p) { input.value = ''; close(); input.blur(); onPick(p); }
@@ -79,13 +91,17 @@ function setupSearch(root, onPick) {
     if (!items.length) {
       const li = document.createElement('li');
       li.className = 'empty';
+      li.setAttribute('role', 'option');
+      li.setAttribute('aria-disabled', 'true');
       li.textContent = '검색 결과 없음';
       list.append(li);
       list.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
       return;
     }
     items.forEach((p, i) => {
       const li = document.createElement('li');
+      li.id = `${listId}-option-${i}`;
       li.setAttribute('role', 'option');
       li.setAttribute('aria-selected', String(i === cursor));
       li.innerHTML = `<img src="images/${encodeURIComponent(p.img)}" alt="" loading="lazy">` +
@@ -95,12 +111,14 @@ function setupSearch(root, onPick) {
       list.append(li);
     });
     list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
   }
 
   function moveCursor(d) {
     if (list.hidden || !shown.length) return;
     cursor = (cursor + d + shown.length) % shown.length;
     [...list.children].forEach((li, i) => li.setAttribute('aria-selected', String(i === cursor)));
+    input.setAttribute('aria-activedescendant', list.children[cursor].id);
     list.children[cursor].scrollIntoView({ block: 'nearest' });
   }
 
@@ -116,6 +134,7 @@ function setupSearch(root, onPick) {
     } else if (e.key === 'Escape') close();
   });
 }
+setupSearch.nextId = 1;
 
 /* 상단 네비게이션의 현재 페이지 표시 */
 (function markNav() {
