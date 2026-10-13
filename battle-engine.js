@@ -52,8 +52,54 @@
 
   function chargedValue(move, attacker, defender) {
     const raw = Core.damage(attacker, defender, move);
-    const buffValue = move.buff ? (Math.abs(move.buff[1]) + Math.abs(move.buff[2])) * 8 * move.buff[3] : 0;
+    let buffValue = 0;
+    if (move.buff) {
+      /* Stage changes on the user help as written; on the opponent they help when negative. */
+      const sign = move.buff[0] === 's' ? 1 : -1;
+      buffValue = sign * (move.buff[1] + move.buff[2]) * 8 * move.buff[3];
+    }
     return raw / Math.max(1, move.energyCost) + buffValue / 100;
+  }
+
+  /* True when the foe could KO the fighter within `turns` turns, counting its fast moves and
+     one Charged Move it can afford (a shield reduces that Charged Move to 1 damage). */
+  function dies(fighter, defender, turns) {
+    if (!defender.fast) return false;
+    const fastDamage = Core.damage(defender, fighter, defender.fast);
+    const hits = Math.floor(turns / Math.max(1, defender.fast.turns));
+    for (let n = 0; n <= hits; n++) {
+      const energy = defender.energy + n * defender.fast.energyGain;
+      let burst = 0;
+      for (const move of defender.charged) {
+        if (!move || energy < move.energyCost) continue;
+        burst = Math.max(burst, fighter.shields > 0 ? 1 : Core.damage(defender, fighter, move));
+      }
+      if (n * fastDamage + burst >= fighter.hp) return true;
+    }
+    return false;
+  }
+
+  /* Turns needed to KO the foe by farming with the fast move and throwing only `move`. */
+  function turnsToKo(fighter, defender, move) {
+    const fastDamage = Core.damage(fighter, defender, fighter.fast);
+    const throwDamage = Core.damage(fighter, defender, move);
+    let hp = defender.hp;
+    let energy = fighter.energy;
+    let shields = defender.shields;
+    let turns = 0;
+    for (let guard = 0; guard < 500; guard++) {
+      while (energy < move.energyCost) {
+        hp -= fastDamage;
+        energy += Math.max(1, fighter.fast.energyGain);
+        turns += fighter.fast.turns;
+        if (hp <= 0) return turns;
+      }
+      energy -= move.energyCost;
+      turns += 1;
+      if (shields > 0) { shields--; hp -= 1; } else hp -= throwDamage;
+      if (hp <= 0) return turns;
+    }
+    return Infinity;
   }
 
   function chooseCharged(fighter, defender) {
@@ -72,13 +118,36 @@
     if (fighter.strategy === 'nuke') {
       return ready.slice().sort((a, b) => b.power - a.power || a.energyCost - b.energyCost)[0];
     }
+    if (defender.shields === 0) {
+      const lethal = ready.filter(move => Core.damage(fighter, defender, move) >= defender.hp);
+      if (lethal.length) {
+        return lethal.sort((a, b) => a.energyCost - b.energyCost)[0];
+      }
+    }
     if (fighter.bait && defender.shields && ready.length > 1) {
       const cheap = ready.slice().sort((a, b) => a.energyCost - b.energyCost)[0];
       const expensive = ready.slice().sort((a, b) => b.energyCost - a.energyCost)[0];
       if (fighter.energy < expensive.energyCost + 10) return cheap;
     }
-    return ready.slice().sort((a, b) =>
-      chargedValue(b, fighter, defender) - chargedValue(a, fighter, defender))[0];
+    const byValue = (a, b) => chargedValue(b, fighter, defender) - chargedValue(a, fighter, defender);
+    const best = fighter.charged.slice().sort(byValue)[0];
+    if (best && fighter.fast) {
+      const fastDamage = Core.damage(fighter, defender, fighter.fast);
+      const gain = Math.max(1, fighter.fast.energyGain);
+      const cycle = Core.damage(fighter, defender, best) +
+        fastDamage * Math.ceil(best.energyCost / gain);
+      let target = best;
+      if (defender.hp / cycle <= 2) {
+        /* Close to a KO: pick the move whose repeated use finishes the foe soonest. */
+        target = fighter.charged.slice().sort((a, b) =>
+          turnsToKo(fighter, defender, a) - turnsToKo(fighter, defender, b) || byValue(a, b))[0];
+      }
+      if (ready.includes(target)) return target;
+      const fastsNeeded = Math.ceil((target.energyCost - fighter.energy) / gain);
+      /* Like PvPoke: build up to the chosen move rather than spend energy on a weaker one. */
+      if (!dies(fighter, defender, fastsNeeded * fighter.fast.turns)) return null;
+    }
+    return ready.slice().sort(byValue)[0];
   }
 
   function logEvent(log, turn, fighter, kind, move, extra) {
@@ -175,29 +244,27 @@
       const leftCharge = left.cooldown === 0 ? chooseCharged(left, right) : null;
       const rightCharge = right.cooldown === 0 ? chooseCharged(right, left) : null;
 
-      if (leftCharge || rightCharge) {
-        const order = [];
-        if (leftCharge) order.push([left, right, leftCharge]);
-        if (rightCharge) order.push([right, left, rightCharge]);
-        order.sort((a, b) => b[0].stats.atk - a[0].stats.atk ||
-          (a[0].side === 'left' ? -1 : 1));
-        for (const [attacker, defender, move] of order) {
-          if (attacker.hp <= 0 || defender.hp <= 0) continue;
-          useCharged(attacker, defender, move, turn, random, log);
-        }
-        continue;
+      const charging = [];
+      if (leftCharge) charging.push([left, right, leftCharge]);
+      if (rightCharge) charging.push([right, left, rightCharge]);
+
+      /* A Charged Move takes the thrower's turn; the other side keeps ticking its fast move. */
+      const finishing = [];
+      for (const [fighter, foe] of [[left, right], [right, left]]) {
+        if (charging.some(entry => entry[0] === fighter)) continue;
+        if (fighter.cooldown === 0) beginFast(fighter);
+        fighter.cooldown = Math.max(0, fighter.cooldown - 1);
+        if (fighter.cooldown === 0 && fighter.pendingFast) finishing.push([fighter, foe]);
       }
+      /* Fast moves finishing this turn land together, before any Charged Move resolves. */
+      for (const [fighter, foe] of finishing) finishFast(fighter, foe, turn, log);
 
-      if (left.cooldown === 0) beginFast(left);
-      if (right.cooldown === 0) beginFast(right);
-      left.cooldown = Math.max(0, left.cooldown - 1);
-      right.cooldown = Math.max(0, right.cooldown - 1);
-
-      /* Damage lands together when fast moves finish on the same turn. */
-      const finishingLeft = left.cooldown === 0 && left.pendingFast;
-      const finishingRight = right.cooldown === 0 && right.pendingFast;
-      if (finishingLeft) finishFast(left, right, turn, log);
-      if (finishingRight) finishFast(right, left, turn, log);
+      charging.sort((a, b) => b[0].stats.atk - a[0].stats.atk ||
+        (a[0].side === 'left' ? -1 : 1));
+      for (const [attacker, defender, move] of charging) {
+        if (attacker.hp <= 0 || defender.hp <= 0) continue;
+        useCharged(attacker, defender, move, turn, random, log);
+      }
     }
 
     const timedOut = turn >= maxTurns && left.hp > 0 && right.hp > 0;

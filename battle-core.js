@@ -10,6 +10,7 @@
   };
   const MAX_LEVEL = 50;
   const STAB = 1.2;
+  const PVP_BONUS = 1.2999999523162841796875; // PvPoke DamageMultiplier.BONUS
   const SHADOW_ATTACK = 1.2;
   const SHADOW_DEFENSE = 1 / 1.2;
   const ENERGY_CAP = 100;
@@ -111,7 +112,7 @@
       (attacker.shadow ? SHADOW_ATTACK : 1);
     const defense = defender.stats.def * boostMultiplier(defender.boosts.def) *
       (defender.shadow ? SHADOW_DEFENSE : 1);
-    return Math.max(1, Math.floor(0.5 * move.power * attack / defense * stab * effectiveness) + 1);
+    return Math.max(1, Math.floor(0.5 * move.power * attack / defense * stab * effectiveness * PVP_BONUS) + 1);
   }
 
   function moveFromRow(id, row) {

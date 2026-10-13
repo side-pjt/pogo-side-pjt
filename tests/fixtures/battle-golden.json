@@ -18,10 +18,10 @@
     },
     "expected": {
       "winner": "right",
-      "turns": 49,
-      "rating": 254,
+      "turns": 44,
+      "rating": 403,
       "leftHp": 0,
-      "rightHp": 86
+      "rightHp": 34
     }
   }
 ]

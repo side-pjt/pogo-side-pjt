@@ -38,7 +38,7 @@ assert.equal(C.boostMultiplier(-4), 0.5);
 const neutral = {
   types: ['normal'], shadow: false, stats: { atk: 100, def: 100 }, boosts: { atk: 0, def: 0 },
 };
-assert.equal(C.damage(neutral, neutral, { type: 'normal', power: 10 }), 7);
+assert.equal(C.damage(neutral, neutral, { type: 'normal', power: 10 }), 8);
 
 const left = fighter('altaria', 'DRAGON_BREATH', ['SKY_ATTACK', 'MOONBLAST']);
 const right = fighter('stunfisk_galarian', 'MUD_SHOT', ['ROCK_SLIDE', 'EARTHQUAKE']);
@@ -68,5 +68,33 @@ const matrix = E.shieldMatrix({ left, right, seed: 3 });
 assert.equal(matrix.length, 3);
 assert.equal(matrix[0].length, 3);
 assert.equal(matrix[2][2].left.shields >= 0, true);
+
+/* Regression: Melmetal (Dynamic Punch) must beat Umbreon (weak to Fighting) with no shields,
+   and the engine must throw the Fighting move at some point. */
+{
+  const mel = (shields) => fighter('melmetal', 'THUNDER_SHOCK', ['DOUBLE_IRON_BASH', 'DYNAMIC_PUNCH'], shields, C.presets(mon('melmetal'), 'great').rank1.ivs);
+  const umb = (shields) => fighter('umbreon', 'SNARL', ['DARK_PULSE', 'LAST_RESORT'], shields, C.presets(mon('umbreon'), 'great').rank1.ivs);
+  assert.equal(E.simulate({ left: mel(0), right: umb(0), seed: 1 }).winner, 'left');
+  assert.equal(E.simulate({ left: mel(2), right: umb(2), seed: 1 }).winner, 'left');
+  const used = E.simulate({ left: mel(1), right: umb(1), seed: 1 }).log
+    .some(event => event.side === 'left' && event.move === 'DYNAMIC_PUNCH');
+  assert.equal(used, true);
+}
+
+/* A Charged Move must not stall the opponent's fast move cadence (Snarl = 3 turns). */
+{
+  const result = E.simulate({
+    left: fighter('melmetal', 'THUNDER_SHOCK', ['DOUBLE_IRON_BASH', 'DYNAMIC_PUNCH'], 0),
+    right: fighter('umbreon', 'SNARL', ['DARK_PULSE', 'LAST_RESORT'], 0),
+    seed: 1,
+  });
+  const snarls = result.log.filter(e => e.side === 'right' && e.kind === 'fast').map(e => e.turn);
+  const throws = result.log.filter(e => e.side === 'right' && e.kind === 'charged').map(e => e.turn);
+  for (let i = 1; i < snarls.length; i++) {
+    const gap = snarls[i] - snarls[i - 1];
+    const hadThrow = throws.some(t => t > snarls[i - 1] && t <= snarls[i]);
+    assert.equal(gap, hadThrow ? 4 : 3);
+  }
+}
 
 console.log('battle-engine tests passed');
