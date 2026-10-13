@@ -21,8 +21,12 @@
     try { localStorage.setItem(KEY, key); } catch (e) { /* 사생활 보호 모드 등 */ }
   }
 
+  /* 시즌 일정(season.js) — 있으면 처음 오는 사람에게 이번 주 열린 포맷을 먼저 보여 준다 */
+  const season = root.Season ? root.Season.at() : null;
+  const liveReady = season ? season.live.filter(e => e.ready).map(e => e.key) : [];
+
   const asked = param('f') || param('league');
-  const current = byKey(asked) || byKey(stored()) || byKey(DEFAULT) || LIST[0] ||
+  const current = byKey(asked) || byKey(stored()) || byKey(liveReady[0]) || byKey(DEFAULT) || LIST[0] ||
     { key: DEFAULT, cup: 'all', cp: 1500, title: 'Great League', ko: '슈퍼리그' };
   /* 주소로 연 포맷은 다음 방문에도 이어지게 남긴다. 없어진 포맷이면 알림을 띄운다 */
   if (asked && byKey(asked)) save(current.key);
@@ -31,6 +35,8 @@
   const isLeague = f => f.cup === 'all';
   const isMega = f => f.cup === 'mega';
   const capText = f => f.cp >= 10000 ? '무제한' : `CP ${f.cp}`;
+  /* 선택기 칸이 좁아서 컵은 이름만 (이름에 리그가 들어 있다) */
+  const label = f => isLeague(f) ? `${f.ko} · ${capText(f)}` : f.ko;
 
   if (document.readyState === 'loading')
     document.write(`<script src="data/formats/${encodeURIComponent(current.key)}.js"><\/script>`);
@@ -46,15 +52,52 @@
     location.href = location.pathname + (s ? '?' + s : '') + location.hash;
   }
 
+  /* 지금 열린 포맷 → 다음 주 → 나머지 리그 → 메가 버전 → 컵 */
   function options() {
+    const nextReady = season && season.next
+      ? season.next.formats.map(root.Season.entry).filter(e => e.ready && !liveReady.includes(e.key)).map(e => e.key)
+      : [];
+    const used = new Set(liveReady.concat(nextReady));
+    const rest = LIST.filter(f => !used.has(f.key));
     const groups = [
-      ['리그', LIST.filter(isLeague)],
-      ['메가 버전', LIST.filter(isMega)],
-      ['컵', LIST.filter(f => !isLeague(f) && !isMega(f))],
+      ['지금 열림', liveReady.map(byKey)],
+      ['다음 주', nextReady.map(byKey)],
+      ['리그', rest.filter(isLeague)],
+      ['메가 버전', rest.filter(isMega)],
+      ['컵', rest.filter(f => !isLeague(f) && !isMega(f))],
     ];
     return groups.filter(([, fs]) => fs.length).map(([label, fs]) =>
       `<optgroup label="${label}">${fs.map(f =>
-        `<option value="${f.key}"${f.key === current.key ? ' selected' : ''}>${f.ko} · ${capText(f)}</option>`).join('')}</optgroup>`).join('');
+        `<option value="${f.key}"${f.key === current.key ? ' selected' : ''}>${label(f)}</option>`).join('')}</optgroup>`).join('');
+  }
+
+  /* 사이드바 '지금 열린 리그' — 누르면 그 포맷으로 바뀐다. 순위가 아직 없는 컵은 누를 수 없다 */
+  function seasonBadge() {
+    if (!season) return null;
+    const S = root.Season;
+    const el = document.createElement('div');
+    el.className = 'season-now';
+    const link = '<a href="season.html">시즌 일정</a>';
+    if (season.stale) {
+      el.innerHTML = `<p>다음 시즌 일정이 아직 등록되지 않았습니다. ${link}</p>`;
+      return el;
+    }
+    if (!season.live.length) {
+      const w = season.next || (season.nextSeason && season.nextSeason.weeks[0]);
+      el.innerHTML = `<p>${w ? `다음 일정 ${S.kstDate(w.start, true)} 시작` : '이번 주 일정이 없습니다'} · ${link}</p>`;
+      return el;
+    }
+    const left = S.daysLeft(season.endsAt);
+    el.innerHTML = `
+      <p class="season-now-title"><b>지금 열린 리그</b><span>${left ? `D-${left}` : 'D-day'}</span>${link}</p>
+      <div class="season-now-chips">${season.live.map(e => e.ready
+        ? `<button type="button" data-key="${e.key}"${e.key === current.key ? ' aria-pressed="true"' : ''}>${e.ko}</button>`
+        : `<span title="PvPoke 순위가 아직 없습니다">${e.ko} · 순위 준비 중</span>`).join('')}</div>`;
+    el.addEventListener('click', e => {
+      const b = e.target.closest('button[data-key]');
+      if (b) go(b.dataset.key);
+    });
+    return el;
   }
 
   function buildPicker() {
@@ -73,6 +116,9 @@
     /* 페이지 본문에서 포맷 이름·CP 를 그대로 받아 쓰는 자리 */
     document.querySelectorAll('[data-format="name"]').forEach(el => { el.textContent = current.ko; });
     document.querySelectorAll('[data-format="cap"]').forEach(el => { el.textContent = capText(current); });
+
+    const now = seasonBadge();
+    if (now) box.after(now);
 
     if (missing) {
       const warn = document.createElement('p');

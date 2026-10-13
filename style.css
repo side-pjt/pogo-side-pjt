@@ -1503,3 +1503,53 @@ main { gap: 18px; }
   .format-pick { order: 3; flex: 1 1 100%; grid-template-columns: auto 1fr; align-items: center; padding: 0; }
   .format-warn { order: 4; flex: 1 1 100%; margin: 0; padding: 0; }
 }
+
+/* ---------- 지금 열린 리그 (format.js 사이드바 배지) ---------- */
+.season-now { display: grid; gap: 6px; padding-inline: 10px; margin-top: -10px; font-size: 12px; color: var(--ink-dim); }
+.season-now p { margin: 0; line-height: 1.5; }
+.season-now a { color: var(--ink-dim); }
+.season-now-title { display: flex; align-items: center; gap: 6px; }
+.season-now-title b { color: var(--ink); font-weight: 500; }
+.season-now-title span { color: var(--accent); font-family: var(--font-num); }
+.season-now-title a { margin-left: auto; }
+.season-now-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.season-now-chips button, .season-now-chips span {
+  background: var(--panel-2); color: var(--ink); font: inherit; font-size: 12px;
+  border: var(--bw) solid var(--line); border-radius: 999px; padding: 3px 9px; cursor: pointer;
+}
+.season-now-chips button:hover { border-color: var(--accent); }
+.season-now-chips button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.season-now-chips span { cursor: default; color: var(--muted); border-style: dashed; }
+@media (max-width: 860px) {
+  .season-now { order: 4; flex: 1 1 100%; margin: 0; padding: 0; }
+}
+
+/* ---------- 시즌 일정 페이지 ---------- */
+.sn-cups { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.sn-cup { background: var(--panel-2); border: var(--bw) solid var(--line); border-radius: calc(12px * var(--rk)); padding: 14px; min-width: 0; }
+.sn-cup.waiting { border-style: dashed; }
+.sn-cup h3 { margin: 0 0 4px; font-size: 15px; }
+.sn-rule { margin: 0 0 10px; font-size: 12px; color: var(--ink-dim); line-height: 1.5; }
+.sn-top { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.sn-top figure { margin: 0; text-align: center; min-width: 0; }
+.sn-top img { width: 100%; max-width: 48px; aspect-ratio: 1; object-fit: contain; }
+.sn-top figcaption { font-size: 10px; color: var(--ink-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sn-go { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.sn-btn {
+  background: var(--accent); color: var(--on-accent); border: var(--bw) solid var(--accent);
+  border-radius: calc(8px * var(--rk)); padding: 6px 10px; font: inherit; font-size: 13px; cursor: pointer; text-decoration: none;
+}
+.sn-btn.ghost { background: none; color: var(--ink); border-color: var(--line); }
+.sn-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.sn-table th, .sn-table td { border-top: 1px solid var(--line); padding: 8px 6px; text-align: left; vertical-align: top; }
+.sn-table th { white-space: nowrap; font-weight: 500; color: var(--ink-dim); }
+.sn-table tr.past { opacity: .45; }
+.sn-table tr.now { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.sn-table tr.now th { color: var(--accent); }
+.sn-chip {
+  display: inline-block; margin: 2px 4px 2px 0; background: var(--panel-2); color: var(--ink);
+  border: var(--bw) solid var(--line); border-radius: 999px; padding: 3px 9px; font: inherit; font-size: 12px; cursor: pointer;
+}
+.sn-chip:hover { border-color: var(--accent); }
+.sn-chip.off { cursor: default; color: var(--muted); border-style: dashed; }
+.sn-alert { border-color: var(--bad); }

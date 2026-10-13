@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>포켓몬 GO 배틀리그 시즌 일정</title>
+<meta name="description" content="포켓몬 GO 배틀리그 이번 주 열린 리그·컵과 시즌 주차별 일정 — 출전 조건과 상위 포켓몬">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="포켓몬 GO 배틀리그 시즌 일정">
+<meta property="og:description" content="포켓몬 GO 배틀리그 이번 주 열린 리그·컵과 시즌 주차별 일정 — 출전 조건과 상위 포켓몬">
+<meta property="og:image" content="https://side-pjt.github.io/pogo-side-pjt/og-image.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a0613">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="alternate icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="theme.js"></script>
+</head>
+<body>
+
+<div class="shell">
+
+<aside class="sidebar">
+  <a class="brand" href="index.html">
+    <img class="brand-logo" src="favicon.svg" alt="" width="36" height="36">
+    <img class="brand-img" src="sidebar-brand.png" alt="" width="408" height="152">
+    <span class="brand-sub">포켓몬 GO</span>
+    <span class="brand-name">PvP 가이드</span>
+    <span class="brand-page">시즌 일정</span>
+  </a>
+  <nav class="nav">
+    <a href="season.html"><span class="nav-ico" aria-hidden="true">시즌</span>시즌 일정</a>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <a href="index.html"><span class="nav-ico" aria-hidden="true">CCT</span>차징 타이밍</a>
+    <a href="cmp.html"><span class="nav-ico" aria-hidden="true">CMP</span>차징 우선권</a>
+    <a href="battle.html"><span class="nav-ico" aria-hidden="true">SIM</span>배틀 시뮬</a>
+    <span class="nav-sep" aria-hidden="true"></span>
+    <a href="ivs.html"><span class="nav-ico" aria-hidden="true">IV</span>개체값 고르기</a>
+    <a href="team.html"><span class="nav-ico" aria-hidden="true">팀</span>팀 조합 유형</a>
+    <a href="types.html"><span class="nav-ico" aria-hidden="true">상성</span>타입 상성</a>
+    <a href="moves.html"><span class="nav-ico" aria-hidden="true">기술</span>기술표</a>
+  </nav>
+  <p class="side-note">CP 1500 · 슈퍼리그<br>데이터 PvPoke · PoGoMate</p>
+</aside>
+
+<div class="content">
+
+<header class="top">
+  <div class="wrap">
+    <h1>시즌 일정</h1>
+    <p class="sub" id="season-name">GO배틀리그</p>
+    <div class="meta"><span id="season-period"></span><span>순위 PvPoke</span></div>
+  </div>
+</header>
+
+<main class="wrap" id="season-out" aria-live="polite"></main>
+
+<footer class="wrap foot">
+  <p class="made-by">made by <strong>kingchickenmayo</strong></p>
+  <p>일정 포켓몬 GO 공식 공지 · 순위·스프라이트 PvPoke · PoGoMate</p>
+  <p>상표 및 게임 이미지의 권리는 각 권리자에게 있습니다.</p>
+</footer>
+
+</div><!-- /content -->
+</div><!-- /shell -->
+
+<script src="data/data.js"></script>
+<script src="data/formats/index.js"></script>
+<script src="data/seasons.js"></script>
+<script src="season.js"></script>
+<script src="format.js"></script>
+<script>
+/* 이번 주·다음 주 포맷 순위 파일을 미리 읽는다 (상위 10종 표시용). format.js 와 같은 이유로 document.write */
+(function () {
+  const s = Season.at();
+  const next = s.next || (s.nextSeason && s.nextSeason.weeks[0]);
+  const keys = s.live.concat(next ? next.formats.map(Season.entry) : [])
+    .filter(e => e.ready && e.key !== Format.key).map(e => e.key);
+  [...new Set(keys)].forEach(k => document.write('<script src="data/formats/' + encodeURIComponent(k) + '.js"><\/script>'));
+})();
+</script>
+<script src="common.js"></script>
+<script src="season-page.js"></script>
+</body>
+</html>
