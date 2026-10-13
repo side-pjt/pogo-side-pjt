@@ -55,6 +55,21 @@ function paint() {
   if (SN.stale)
     parts.push('<section class="panel sn-alert"><p><b>다음 시즌 일정이 아직 등록되지 않았습니다.</b> 아래는 지난 시즌 일정입니다.</p></section>');
 
+  /* 끝난 주는 빼고 이번 주부터 보여 준다. 시즌이 통째로 끝났을 때(stale)만 전부 남긴다 */
+  const weeks = SN.stale ? season.weeks : season.weeks.filter(w => Season.weekState(w) !== 'past');
+  const rows = weeks.map(w => {
+    const state = Season.weekState(w);
+    const chips = w.formats.map(Season.entry).map(e => e.ready
+      ? `<button type="button" class="sn-chip" data-key="${esc(e.key)}">${esc(e.ko)}</button>`
+      : `<span class="sn-chip off" title="순위 준비 중">${esc(e.ko)}</span>`).join('');
+    return `<tr class="${state}"><th scope="row">${weekRange(w)}${state === 'now' ? ' <span class="pill-note">이번 주</span>' : ''}</th><td>${chips}</td></tr>`;
+  }).join('');
+  parts.push(`<section class="panel">
+    <h2>주차별 일정</h2>
+    <p class="note">날짜는 한국시간입니다. 매주 수요일 오전 5시(11/7부터 오전 6시)에 바뀝니다. 누르면 그 리그·컵으로 봅니다.</p>
+    <div class="table-scroll" tabindex="0" aria-label="주차별 일정표"><table class="sn-table"><tbody>${rows}</tbody></table></div>
+  </section>`);
+
   if (SN.live.length) {
     const left = Season.daysLeft(SN.endsAt);
     parts.push(`<section class="panel">
@@ -69,19 +84,6 @@ function paint() {
       <div class="sn-cups">${next.formats.map(Season.entry).map(e => cupCard(season, e)).join('')}</div>
     </section>`);
   }
-
-  const rows = season.weeks.map(w => {
-    const state = Season.weekState(w);
-    const chips = w.formats.map(Season.entry).map(e => e.ready
-      ? `<button type="button" class="sn-chip" data-key="${esc(e.key)}">${esc(e.ko)}</button>`
-      : `<span class="sn-chip off" title="순위 준비 중">${esc(e.ko)}</span>`).join('');
-    return `<tr class="${state}"><th scope="row">${weekRange(w)}${state === 'now' ? ' <span class="pill-note">이번 주</span>' : ''}</th><td>${chips}</td></tr>`;
-  }).join('');
-  parts.push(`<section class="panel">
-    <h2>주차별 일정</h2>
-    <p class="note">날짜는 한국시간입니다. 매주 수요일 오전 5시(11/7부터 오전 6시)에 바뀝니다. 누르면 그 리그·컵으로 봅니다.</p>
-    <div class="table-scroll" tabindex="0" aria-label="주차별 일정표"><table class="sn-table"><tbody>${rows}</tbody></table></div>
-  </section>`);
 
   parts.push(`<section class="panel">
     <h2>이번 시즌 알아둘 것</h2>
