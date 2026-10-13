@@ -4,7 +4,7 @@ description: 포켓몬 GO PvP(모든 리그·컵) CCT·CMP·배틀 계산기 웹
 ---
 > **위치 안내** — GitHub Pages 배포를 위해 웹 파일(`index.html`·`*.js`·`style.css`·`data/`·`images/`)은 **저장소 루트**로 옮겼다. 이 폴더에는 `scripts/build_data.py`와 문서만 남는다. 아래 경로는 루트 기준으로 읽을 것. 빌드는 저장소 루트에서 `python pogo-cct-tool/scripts/build_data.py`.
 
-# 포켓몬 GO PvP 계산기 모음
+# GO배틀리그 가이드 (포켓몬 GO PvP 계산기 모음)
 
 페이지 다섯. 전부 같은 껍데기와 `common.js` 를 공유한다.
 
