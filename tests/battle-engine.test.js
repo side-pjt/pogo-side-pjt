@@ -81,6 +81,30 @@ assert.equal(matrix[2][2].left.shields >= 0, true);
   assert.equal(used, true);
 }
 
+/* Equal-attack CMP: both lethal Charged Moves resolve, so a mirror KO is a draw. */
+{
+  const poke = mon('altaria');
+  const build = C.buildFor(poke, { league: 'great', ivs: [0, 15, 15] });
+  const sky = move('SKY_ATTACK');
+  const dmg = C.damage({
+    types: poke.types, shadow: false, stats: build, boosts: { atk: 0, def: 0 },
+  }, {
+    types: poke.types, shadow: false, stats: build, boosts: { atk: 0, def: 0 },
+  }, sky);
+  const side = () => ({
+    mon: poke,
+    build: Object.assign({}, build, { hp: dmg }),
+    fast: move('DRAGON_BREATH'),
+    charged: [sky],
+    shields: 0,
+    energy: sky.energyCost,
+    bait: false,
+  });
+  const tied = E.simulate({ left: side(), right: side(), seed: 1 });
+  assert.equal(tied.log.filter(event => event.kind === 'charged').length, 2);
+  assert.equal(tied.winner, 'draw');
+}
+
 /* A Charged Move must not stall the opponent's fast move cadence (Snarl = 3 turns). */
 {
   const result = E.simulate({

@@ -90,7 +90,7 @@
     for (let guard = 0; guard < 500; guard++) {
       while (energy < move.energyCost) {
         hp -= fastDamage;
-        energy += Math.max(1, fighter.fast.energyGain);
+        energy = Math.min(Core.ENERGY_CAP, energy + Math.max(0, fighter.fast.energyGain));
         turns += fighter.fast.turns;
         if (hp <= 0) return turns;
       }
@@ -261,8 +261,11 @@
 
       charging.sort((a, b) => b[0].stats.atk - a[0].stats.atk ||
         (a[0].side === 'left' ? -1 : 1));
+      /* Unequal Attack: higher CMP can KO and cancel the other Charged Move.
+         Equal Attack: both Charged Moves still resolve (PvPoke usePriority is off). */
+      const cmpTie = charging.length === 2 && charging[0][0].stats.atk === charging[1][0].stats.atk;
       for (const [attacker, defender, move] of charging) {
-        if (attacker.hp <= 0 || defender.hp <= 0) continue;
+        if (!cmpTie && (attacker.hp <= 0 || defender.hp <= 0)) continue;
         useCharged(attacker, defender, move, turn, random, log);
       }
     }
