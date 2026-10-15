@@ -374,7 +374,8 @@ function threatAgainst(foe, foeMoves, mons) {
   const rows = mons.map(m => {
     const hits = foeMoves.filter(mv => typeMult(mv.type, m.types) >= 1.59);
     const fastHit = !!fast && hits.includes(fast);
-    const answer = recommendedMoves(m).some(mv => typeMult(mv.type, foe.types) >= 1.59);
+    const answerMoves = recommendedMoves(m).filter(mv => typeMult(mv.type, foe.types) >= 1.59);
+    const answer = answerMoves.length > 0;
     const walls = foeMoves.every(mv => typeMult(mv.type, m.types) < 0.9);
     const dbl = hits.some(mv => typeMult(mv.type, m.types) > 2.5);
     let score = 0;
@@ -382,7 +383,7 @@ function threatAgainst(foe, foeMoves, mons) {
     if (answer) score -= 1.5;
     if (walls) score -= 1;
     const cls = hits.length ? (answer ? 'warn' : 'bad') : answer ? 'good' : 'mid';
-    return { m, hits, fastHit, answer, cls, score };
+    return { m, hits, fastHit, answer, answerMoves, walls, cls, score };
   });
   return {
     foe, moves: foeMoves, rows,
@@ -417,13 +418,29 @@ function threatBlock(mons) {
   const moveTag = (mv, fast) => `<span class="tt-th-move${fast ? ' fast' : ''}"><i class="mv-dot ty ty-${mv.type}" title="${esc(TKO(mv.type))}"></i>${esc(mv.name)}</span>`;
   // 밀리는 포켓몬(찔리는 기술과 함께)과 내보낼 만한 포켓몬만 — '보통'은 뺀다
   const hit = (r, note) => `<span class="tt-hit ${r.cls}"><b>${esc(r.m.ko)}</b>${note ? `<small>${note}</small>` : ''}</span>`;
+  const names = list => list.map(mv => esc(mv.name)).join('·');
+  /* 팀에 대응도 버팀도 없을 때: 팀 밖 상위 100종 중 그 기술에 약점을 안 찔리고 약점을 찌르는 포켓몬 */
+  const counters = t => DATA
+    .filter(p => p.rank <= 100 && !teamBases.has(baseOf(p)) && baseOf(p) !== baseOf(t.foe))
+    .map(p => ({ p, mv: recommendedMoves(p).filter(mv => typeMult(mv.type, t.foe.types) >= 1.59) }))
+    .filter(c => c.mv.length && t.moves.every(mv => typeMult(mv.type, c.p.types) < 1.59))
+    .filter((c, i, all) => all.findIndex(o => baseOf(o.p) === baseOf(c.p)) === i)
+    .slice(0, 2);
+  const line = (cls, lb, body) => `<div class="tt-hl"><span class="tt-hl-lb ${cls}">${lb}</span>${body}</div>`;
   const lines = t => {
     const lost = t.rows.filter(r => r.cls === 'bad');
-    const ans = t.rows.filter(r => r.cls === 'good' || r.cls === 'warn');
-    return `<div class="tt-hl"><span class="tt-hl-lb bad">밀림</span>${lost.map(r => hit(r, r.hits.map(mv => esc(mv.name)).join('·'))).join('')}</div>
-      <div class="tt-hl"><span class="tt-hl-lb good">대응</span>${ans.length
-        ? ans.map(r => hit(r, r.cls === 'warn' ? '서로 약점' : '')).join('')
-        : '<span class="tt-hl-none">약점을 찌를 포켓몬이 없음</span>'}</div>`;
+    const ans = t.rows.filter(r => r.answer);
+    const wall = t.rows.filter(r => r.walls && !r.answer);
+    let out = line('bad', '밀림', lost.map(r => hit(r, names(r.hits))).join(''));
+    if (ans.length) out += line('good', '대응', ans.map(r => hit(r, names(r.answerMoves) + (r.cls === 'warn' ? ' · 서로 약점' : ''))).join(''));
+    if (wall.length) out += line('wall', '버팀', wall.map(r => hit({ ...r, cls: 'wall' }, '기술 전부 저항')).join(''));
+    if (!ans.length && !wall.length) {
+      const cs = counters(t);
+      out += line('pick', '추천', cs.length
+        ? cs.map(c => `<span class="tt-hit pick"><b>${esc(c.p.ko)}</b><small>${names(c.mv)} · ${c.p.rank}위</small></span>`).join('') + '<span class="tt-hl-none dim">팀에 대응할 포켓몬이 없어 영입 후보</span>'
+        : '<span class="tt-hl-none">대응할 포켓몬이 없음</span>');
+    }
+    return out;
   };
 
   // 처음엔 위의 3마리만, 나머지는 더 보기로
@@ -437,7 +454,7 @@ function threatBlock(mons) {
       </div>
     </li>`).join('')}</ol>
     ${list.length > 3 ? `<button type="button" class="tt-threat-more">${list.length - 3}마리 더 보기</button>` : ''}
-    <p class="note tt-method-note">밀림 = 그 포켓몬 기술이 약점을 찌르는데 우리 추천 기술로는 약점을 못 찌름 · 대응 = 우리 추천 기술로 그 포켓몬의 약점을 찌름 (서로 약점이면 표시) · 노말어택(굵게)으로 찔리면 매 턴 눌려 더 위험합니다. 실제 대전은 종족값·실드·기술 속도에 따라 달라집니다.</p>`;
+    <p class="note tt-method-note">밀림 = 그 포켓몬 기술이 약점을 찌르는데 우리 추천 기술로는 약점을 못 찌름 · 대응 = 우리 추천 기술(옆에 적은 기술)로 약점을 찌름 · 버팀 = 그 포켓몬 기술을 전부 저항 · 추천 = 팀에 대응·버팀이 없을 때 상위권에서 잡을 만한 포켓몬 · 노말어택(굵게)으로 찔리면 매 턴 눌려 더 위험합니다. 실제 대전은 종족값·실드·기술 속도에 따라 달라집니다.</p>`;
 }
 
 function strongGrid(strong) {
@@ -579,9 +596,9 @@ function setTournament(on) {
   syncDiagUrl();
 }
 
-/* 1~10위에서 서로 다른 종(그림자 포함 같은 종은 하나만) 세 마리를 무작위로 */
+/* 1~50위에서 서로 다른 종(그림자 포함 같은 종은 하나만) 세 마리를 무작위로 */
 function randomTopTeam() {
-  const pool = DATA.filter(p => p.rank <= 10);
+  const pool = DATA.filter(p => p.rank <= 50);
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -601,7 +618,7 @@ function setupDiag() {
     setupSearch(root, mon => { diag[i] = mon; paintSlot(root, i); paintDiag(); syncDiagUrl(); });
     root.querySelector('.clear').addEventListener('click', () => { diag[i] = null; paintSlot(root, i); paintDiag(); syncDiagUrl(); });
   });
-  // 주소에 저장된 팀이 없으면 지금 포맷 1~10위에서 무작위 세 마리. 순위가 아직 없으면 ABC 예시 팀.
+  // 주소에 저장된 팀이 없으면 지금 포맷 1~50위에서 무작위 세 마리. 순위가 아직 없으면 ABC 예시 팀.
   if (!restoreDiagUrl()) {
     const team = randomTopTeam();
     (team.length ? team : byCode('ABC').members.map(byId)).forEach((mon, i) => { diag[i] = mon || null; });
