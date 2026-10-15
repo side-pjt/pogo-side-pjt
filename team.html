@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="style.css?v=6e01d418">
+<link rel="stylesheet" href="style.css?v=b3caf6f3">
 <script src="theme.js?v=28d57714"></script>
 </head>
 <body>
@@ -45,8 +45,7 @@
     <span class="nav-sep" aria-hidden="true"></span>
     <a href="ivs.html"><span class="nav-ico" aria-hidden="true">IV</span>개체값 고르기</a>
     <a href="team.html"><span class="nav-ico" aria-hidden="true">팀</span>팀 조합 유형</a>
-    <a href="types.html"><span class="nav-ico" aria-hidden="true">상성</span>타입 상성</a>
-    <a href="moves.html"><span class="nav-ico" aria-hidden="true">기술</span>기술표</a>
+    <a href="types.html"><span class="nav-ico" aria-hidden="true">상성</span>상성·기술</a>
   </nav>
   <p class="side-note">CP 1500 · 슈퍼리그<br>데이터 PvPoke · PoGoMate</p>
 </aside>
@@ -62,16 +61,6 @@
 </header>
 
 <main class="wrap">
-
-  <section class="panel lead">
-    <h2>A / B / C / X 는 타입이 아닙니다</h2>
-    <p class="note">
-      포켓몬의 <b>역할</b>과 <b>약점 구조</b>를 구분하는 기호입니다.
-      같은 글자면 비슷한 역할이거나 비슷한 약점을 가진 포켓몬이라는 뜻입니다.
-      타입이 달라도 같은 글자가 될 수 있습니다.
-    </p>
-    <div class="roles" id="roles"></div>
-  </section>
 
   <div class="tt-tabs" role="tablist" aria-label="팀 조합 보기">
     <button type="button" role="tab" class="tt-tab" id="tab-btn-diag" data-tab="diag" aria-selected="true" aria-controls="tab-diag">내 팀 진단</button>
@@ -160,17 +149,25 @@
 
   </div>
 
+  <section class="panel lead">
+    <h2>A / B / C / X 는 타입이 아닙니다</h2>
+    <p class="note">
+      포켓몬의 <b>역할</b>과 <b>약점 구조</b>를 구분하는 기호입니다.
+      같은 글자면 비슷한 역할이거나 비슷한 약점을 가진 포켓몬이라는 뜻입니다.
+      타입이 달라도 같은 글자가 될 수 있습니다.
+    </p>
+    <div class="roles" id="roles"></div>
+  </section>
+
   <section class="panel">
     <h2>실전에서 더 강해지는 포인트</h2>
     <ul class="tips">
-      <li><strong>같은 글자라고 같은 타입은 아닙니다</strong>
-        역할과 약점 구조가 비슷하면 타입이 달라도 같은 글자가 됩니다</li>
       <li><strong>ABB는 유도 플레이가 핵심입니다</strong>
         상대의 카운터를 먼저 빼내는 운영이 승리의 열쇠입니다</li>
       <li><strong>조합만큼 중요한 건 기술 구성과 교체 타이밍입니다</strong>
         좋은 조합도 기술과 타이밍이 맞지 않으면 제 성능을 못 냅니다</li>
       <li><strong>약점이 겹치는지 먼저 확인하세요</strong>
-        <a href="types.html">타입 상성</a>에서 세 마리의 약점을 하나씩 확인해 보면 빠릅니다</li>
+        <a href="types.html">상성·기술</a>에서 세 마리의 약점을 하나씩 확인해 보면 빠릅니다</li>
     </ul>
   </section>
 
@@ -192,6 +189,6 @@
 <script src="format.js?v=b57f94bf"></script>
 <script src="data/moves.js?v=7c708418"></script>
 <script src="common.js?v=321f9617"></script>
-<script src="team.js?v=8923d3b9"></script>
+<script src="team.js?v=bda53a01"></script>
 </body>
 </html>

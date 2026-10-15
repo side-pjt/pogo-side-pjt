@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>타입 상성 · GO배틀리그 가이드</title>
-<meta name="description" content="포켓몬 GO배틀리그 가이드 — 슈퍼·하이퍼·마스터리그·시즌 컵 대전 도구 모음 — CCT·CMP·개체값·팀 조합·타입 상성">
+<title>상성·기술 · GO배틀리그 가이드</title>
+<meta name="description" content="포켓몬 GO배틀리그 가이드 — 슈퍼·하이퍼·마스터리그·시즌 컵 대전 도구 모음 — CCT·CMP·개체값·팀 조합·타입 상성·기술표">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="타입 상성 · GO배틀리그 가이드">
-<meta property="og:description" content="포켓몬 GO배틀리그 가이드 — 슈퍼·하이퍼·마스터리그·시즌 컵 대전 도구 모음 — CCT·CMP·개체값·팀 조합·타입 상성">
+<meta property="og:title" content="상성·기술 · GO배틀리그 가이드">
+<meta property="og:description" content="포켓몬 GO배틀리그 가이드 — 슈퍼·하이퍼·마스터리그·시즌 컵 대전 도구 모음 — CCT·CMP·개체값·팀 조합·타입 상성·기술표">
 <meta property="og:image" content="https://side-pjt.github.io/pogo-side-pjt/og-image.png?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="style.css?v=6e01d418">
+<link rel="stylesheet" href="style.css?v=b3caf6f3">
 <script src="theme.js?v=28d57714"></script>
 </head>
 <body>
@@ -34,7 +34,7 @@
     <img class="brand-img" src="sidebar-brand.png" alt="" width="408" height="152">
     <span class="brand-sub">포켓몬 GO</span>
     <span class="brand-name">GO배틀리그 가이드</span>
-    <span class="brand-page">타입 상성</span>
+    <span class="brand-page">상성·기술</span>
   </a>
   <nav class="nav">
     <a href="season.html"><span class="nav-ico" aria-hidden="true">시즌</span>시즌 일정</a>
@@ -45,8 +45,7 @@
     <span class="nav-sep" aria-hidden="true"></span>
     <a href="ivs.html"><span class="nav-ico" aria-hidden="true">IV</span>개체값 고르기</a>
     <a href="team.html"><span class="nav-ico" aria-hidden="true">팀</span>팀 조합 유형</a>
-    <a href="types.html"><span class="nav-ico" aria-hidden="true">상성</span>타입 상성</a>
-    <a href="moves.html"><span class="nav-ico" aria-hidden="true">기술</span>기술표</a>
+    <a href="types.html"><span class="nav-ico" aria-hidden="true">상성</span>상성·기술</a>
   </nav>
   <p class="side-note">CP 1500 · 슈퍼리그<br>데이터 PvPoke · PoGoMate</p>
 </aside>
@@ -55,16 +54,16 @@
 
 <header class="top">
   <div class="wrap">
-    <h1>타입 상성</h1>
-    <p class="sub">어떤 타입 기술이 잘 통하고 잘 안 통하는지</p>
-    <div class="meta"><span>포켓몬 GO 기준 (본편과 배수가 다름)</span><span>완전 무효 없음</span></div>
+    <h1>상성·기술</h1>
+    <p class="sub">포켓몬 하나로 타입 상성과 쓸 수 있는 기술을 함께</p>
+    <div class="meta"><span>포켓몬 GO 기준 (본편과 배수가 다름)</span><span><em class="fmt" data-format="name">슈퍼리그</em> 기준 추천</span></div>
   </div>
 </header>
 
 <main class="wrap">
 
   <section class="panel">
-    <h2>포켓몬 또는 타입 고르기</h2>
+    <h2>포켓몬 고르기</h2>
     <div id="src-mon" class="src-mon">
       <div class="combo">
         <input type="search" class="search" placeholder="포켓몬 이름으로 검색 (한글·영문)" autocomplete="off" aria-label="포켓몬 검색">
@@ -79,18 +78,23 @@
         <button type="button" class="clear" aria-label="선택 해제">✕</button>
       </div>
     </div>
-    <div class="selbar" id="def-sel"></div>
-    <div class="tpick" id="def-pick" data-multi="2"></div>
-    <p class="tpick-hint">포켓몬을 검색하거나 타입을 1~2개 직접 고르세요. 3번째를 누르면 가장 먼저 고른 것이 빠집니다. 결과는 아래에 받는 피해와 주는 피해가 나란히 나옵니다.</p>
+    <details class="more tpick-fold" id="def-fold">
+      <summary>타입으로 직접 고르기</summary>
+      <div class="tpick" id="def-pick" data-multi="2"></div>
+      <p class="tpick-hint">1~2개를 고르세요. 3번째를 누르면 먼저 고른 것이 빠집니다.</p>
+    </details>
   </section>
+  <nav class="jump" id="jump" aria-label="이 페이지 바로가기">
+    <a href="#dmg-in">받는 피해</a><a href="#dmg-out">주는 피해</a><a href="#mv-result">기술</a><a href="#chart">상성표</a><a href="#help">보는 법</a>
+  </nav>
   <section class="result" id="out-def" aria-live="polite"></section>
+  <section class="result" id="mv-result" aria-live="polite" hidden></section>
 
-  <section class="panel">
-    <h2>전체 상성표</h2>
+  <details class="panel fold-lead" id="chart" open>
+    <summary>전체 상성표 (18×18)</summary>
     <p class="note">
       세로 = 맞는 쪽(방어) 타입 · 가로 = 때리는 기술 타입 · 칸을 누르면 설명이 나오고 줄이 강조됩니다 · 맨 아래 숫자는 그 타입 기술이 약점을 찌르는 타입 수
     </p>
-    <p class="scroll-hint">표를 상하좌우로 밀어 보고, 칸을 누르면 상세 배율을 확인할 수 있습니다.</p>
     <div class="tlegend">
       <span>● 효과가 굉장하다 ×1.6</span>
       <span>▲ 효과가 별로다 ×0.625</span>
@@ -99,28 +103,33 @@
     </div>
     <div class="tchart-wrap" tabindex="0" aria-label="전체 타입 상성표, 상하좌우로 스크롤 가능"><table class="tchart" id="type-table"></table></div>
     <div class="cell-detail" id="cell-detail" role="status" aria-live="polite">칸을 눌러보세요.</div>
-  </section>
+  </details>
 
-  <section class="panel">
-    <h2>알아두면 쉬워지는 것</h2>
+  <details class="panel fold-lead" id="help" open>
+    <summary>보는 법</summary>
     <ul class="tips">
       <li><strong>포켓몬 GO에는 완전 무효가 없다</strong>
-        본편에서 ×0 인 조합도 여기서는 ×0.39로 조금은 들어간다.
-        고스트에게 노말 기술이 아예 안 통하는 게 아니다</li>
+        본편에서 ×0 인 조합도 여기서는 ×0.39로 조금은 들어간다</li>
       <li><strong>두 타입이면 곱해진다</strong>
         약점 둘이 겹치면 ×2.56, 약점과 저항이 겹치면 ×1로 상쇄된다</li>
       <li><strong>배수가 본편과 다르다</strong>
         본편은 2배·0.5배지만 포켓몬 GO는 1.6배·0.625배라 체감이 더 완만하다</li>
-      <li><strong>자속 보정은 별도</strong>
-        자기 타입과 같은 기술은 여기에 ×1.2가 더 붙는다</li>
+      <li><strong>자속</strong>
+        자기 타입과 같은 기술은 위력 ×1.2</li>
+      <li><strong>노말어택</strong>
+        위력 · 걸리는 턴 · 모이는 에너지(+). 누르면 그 기술 기준으로 스페셜어택 횟수가 바뀐다</li>
+      <li><strong>스페셜어택</strong>
+        위력 · 필요 에너지 · DPE(에너지당 위력). 노말어택 n회는 5번 쓸 때까지 몇 번씩 쳐야 하는지 (남는 에너지 이월)</li>
+      <li><strong>추천</strong>
+        지금 고른 리그·컵의 PvPoke 추천 기술</li>
     </ul>
-  </section>
+  </details>
 
 </main>
 
 <footer class="wrap foot">
   <p class="made-by">made by <strong>kingchickenmayo</strong></p>
-  <p>타입 상성 PvPoke · 한글 타입명 포켓몬 GO 한국어 로케일</p>
+  <p>타입 상성·기술 수치 PvPoke · 한글 타입·기술명 포켓몬 GO 한국어 로케일</p>
   <p>상표 및 게임 이미지의 권리는 각 권리자에게 있습니다.</p>
 </footer>
 
@@ -132,7 +141,8 @@
 <script src="data/seasons.js?v=4e445b58"></script>
 <script src="season.js?v=e5b1f9d5"></script>
 <script src="format.js?v=b57f94bf"></script>
+<script src="data/moves.js?v=7c708418"></script>
 <script src="common.js?v=321f9617"></script>
-<script src="types.js?v=ef49a1f8"></script>
+<script src="types.js?v=ad587243"></script>
 </body>
 </html>

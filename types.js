@@ -1,6 +1,8 @@
 'use strict';
 
 /* ------------------------------------------------------------------
+   상성·기술 — 고른 포켓몬(또는 타입)의 상성과, 포켓몬이면 기술표까지
+
    타입 상성
 
    data.js 의 TYPES.chart[공격타입][방어타입] = 배율.
@@ -9,6 +11,13 @@
 
    포켓몬 GO에는 '완전 무효'가 없다. 본편에서 ×0 인 조합도 여기서는
    ×0.390625 (이중 저항) 로 들어간다. 데미지가 줄 뿐 0은 아니다.
+
+   기술표
+   data/moves.js 의 MOVES[기술id] = [한글명, 타입, 위력, 턴(노말)/에너지(스페셜), 에너지획득(노말), 능력치변화?]
+     능력치변화 = [대상(s 자신 / o 상대), 공격 단계, 방어 단계, 발동 확률]
+   MOVESETS[포켓몬id] = [노말어택들, 스페셜어택들, 추천 노말, 추천 스페셜들, 대단한 기술 머신 필요, 이벤트 한정]
+   (scripts/build_moves.py 가 PvPoke 에서 만든다)
+   포켓몬 GO에는 물리/특수 구분이 없다. 기술은 타입·위력·에너지로만 정해진다.
 ------------------------------------------------------------------ */
 
 const T = window.TYPES || { order: [], ko: {}, chart: {}, mult: {} };
@@ -28,7 +37,11 @@ const fmt = m => String(Number(m.toFixed(Math.abs(m - 0.625) < 1e-6 ? 3 : 2)));
 
 const defHost = document.getElementById('def-pick');
 const picked = host => [...host.querySelectorAll('.on')].map(b => b.dataset.t);
+const MOVES = window.MOVES || {};
+const SETS = window.MOVESETS || {};
+const f1 = n => String(Number(n.toFixed(2)));
 let mon = null;
+let basis = null;   // 노말어택 횟수 계산에 쓰는 노말어택 id
 
 function buildPick(host) {
   host.innerHTML = T.order.map(t =>
@@ -60,18 +73,16 @@ function defCol(types) {
   const lv = f => rows.filter(r => f(r.m)).sort((x, y) => y.m - x.m);
   const g16 = lv(m => m > 2.5), g4 = lv(m => m > 1.1 && m < 2.5);
   const gr = lv(m => m < 0.9 && m >= 0.5), grr = lv(m => m < 0.5);
-  const line = (cls, x, list, tip) => `
+  const line = (cls, x, list) => `
     <div class="lvl ${cls}"><div class="lvl-x">${x}</div>
-      <div class="tchips">${list.length ? list.map(r => badge(r.a, cls[0] === 'x' ? 'x4' : '')).join('') : '<span class="none">없음</span>'}</div>
-      ${tip ? `<div class="lvl-tip">${tip}</div>` : ''}</div>`;
+      <div class="tchips">${list.length ? list.map(r => badge(r.a, cls[0] === 'x' ? 'x4' : '')).join('') : '<span class="none">없음</span>'}</div></div>`;
   return `
-    <div class="duo-col def">
-      <h3>🛡 받는 피해 <small>상대 기술 기준</small></h3>
-      <p class="duo-sum"><b class="weak">약점 ${g16.length + g4.length}</b> · <b class="res">저항 ${gr.length + grr.length}</b></p>
-      ${g16.length ? line('x16', '×2.56', g16, '약점이 겹침 — 가장 위험') : ''}
-      ${line('x4', '×1.6', g4, '')}
-      ${line('r', '×0.625', gr, '')}
-      ${line('rr', '×0.39', grr, '거의 안 아픔')}
+    <div class="duo-col def" id="dmg-in">
+      <h3>🛡 받는 피해 <span class="duo-sum"><b class="weak">약점 ${g16.length + g4.length}</b> · <b class="res">저항 ${gr.length + grr.length}</b></span></h3>
+      ${g16.length ? line('x16', '×2.56', g16) : ''}
+      ${line('x4', '×1.6', g4)}
+      ${line('r', '×0.625', gr)}
+      ${grr.length ? line('rr', '×0.39', grr) : ''}
     </div>`;
 }
 
@@ -92,39 +103,21 @@ function atkCol(types) {
       </div>`;
   };
   return `
-    <div class="duo-col atk">
+    <div class="duo-col atk" id="dmg-out">
       <h3>⚔ 주는 피해 <small>이 타입 기술로 때릴 때</small></h3>
       ${types.map(one).join('')}
     </div>`;
 }
 
-/* 고른 타입을 위에 크게 보여주고, 하나씩 또는 전체 해제 */
-function renderSel(ts) {
-  const bar = document.getElementById('def-sel');
-  bar.hidden = !ts.length;
-  bar.innerHTML = ts.length
-    ? `<span class="selbar-label">선택됨</span>` +
-      ts.map(t => `<button type="button" class="selchip ty ty-${t}" data-t="${t}" aria-label="${esc(TKO(t))} 해제">${esc(TKO(t))} <i>✕</i></button>`).join('') +
-      `<button type="button" class="selclear">모두 지우기</button>`
-    : '';
-}
-document.getElementById('def-sel').addEventListener('click', e => {
-  if (e.target.closest('.selclear')) { paintMon(null); syncUrl(); return; }
-  const c = e.target.closest('.selchip'); if (!c) return;
-  const rest = picked(defHost).filter(t => t !== c.dataset.t);
-  mon = null; document.querySelector('#src-mon .chosen').hidden = true;
-  setPick(defHost, rest); render(); syncUrl();
-});
-
 function render() {
   const ts = picked(defHost);
-  renderSel(ts);
   defHost.classList.toggle('has-sel', ts.length > 0);
+  renderMoves();
+  syncJump();
   const box = document.getElementById('out-def');
   if (!ts.length) { box.innerHTML = '<p class="placeholder">포켓몬을 검색하거나 타입을 1~2개 고르세요.</p>'; return; }
-  box.innerHTML = `
-    <div class="matchup"><div>${mon ? `<b>${esc(mon.ko)}</b> · ` : ''}${ts.map(t => badge(t)).join(' ')} — 왼쪽은 맞을 때, 오른쪽은 때릴 때입니다.</div></div>
-    <div class="duo">${defCol(ts)}${atkCol(ts)}</div>`;
+  box.innerHTML = `<div class="duo">${defCol(ts)}${atkCol(ts)}</div>`;
+  syncJump();
 }
 
 /* 포켓몬을 골랐으면 ?p=, 타입을 직접 골랐으면 ?t=, 둘 다 없으면 주소를 비운다 */
@@ -135,9 +128,11 @@ function syncUrl() {
 }
 
 function paintMon(m) {
-  mon = m;
+  mon = m; basis = null;
   const chosen = document.querySelector('#src-mon .chosen');
   chosen.hidden = !m;
+  // 포켓몬을 골랐으면 타입 버튼은 접어 둔다
+  document.getElementById('def-fold').open = !m;
   if (m) {
     chosen.querySelector('.chosen-img').src = 'images/' + encodeURIComponent(m.img);
     chosen.querySelector('.chosen-img').alt = `${m.ko} 이미지`;
@@ -147,6 +142,108 @@ function paintMon(m) {
   } else setPick(defHost, []);
   render();
 }
+
+/* ------------------------------------------------------------------
+   기술표 (노말어택 / 스페셜어택) — 포켓몬을 골랐을 때만 나온다
+------------------------------------------------------------------ */
+
+/* 스페셜어택을 5번 쓸 때마다 노말어택을 몇 번 치는지 (남는 에너지는 이월, 최대 100) */
+function tapCounts(gain, cost, times = 5) {
+  const out = [];
+  let energy = 0;
+  for (let i = 0; i < times; i++) {
+    let n = 0;
+    while (energy < cost) { energy = Math.min(100, energy + gain); n++; }
+    energy -= cost;
+    out.push(n);
+  }
+  return out;
+}
+
+function buffText(buff) {
+  if (!buff) return '';
+  const [who, atk, def, chance] = buff;
+  const parts = [];
+  if (atk) parts.push(`공격 ${atk > 0 ? '+' : ''}${atk}`);
+  if (def) parts.push(`방어 ${def > 0 ? '+' : ''}${def}`);
+  const good = (who === 's') === (atk + def > 0);   // 자신 강화 또는 상대 약화
+  const pct = chance < 1 ? ` (${Math.round(chance * 100)}%)` : '';
+  return `<span class="mv-buff ${good ? 'up' : 'down'}">${who === 's' ? '자신' : '상대'} ${parts.join(' ')}${pct}</span>`;
+}
+
+/* 자속 / 추천 / 대단한 기술 머신 / 이벤트 한정 태그 */
+function tags(id, type, rec) {
+  const [, , , , elite, legacy] = SETS[mon.id];
+  return (mon.types.includes(type) ? '<em class="mv-tag stab">자속</em>' : '') +
+    (rec ? '<em class="mv-tag rec">추천</em>' : '') +
+    (elite.includes(id) ? '<em class="mv-tag elite" title="대단한 기술머신이 있어야 배울 수 있는 기술">대단한 기술머신</em>' : '') +
+    (legacy.includes(id) ? '<em class="mv-tag legacy" title="이벤트로만 얻을 수 있었던 기술">이벤트</em>' : '');
+}
+
+function normalList(ids, recId) {
+  return ids.map(id => {
+    const [name, type, power, turns, gain] = MOVES[id];
+    return `<li class="mv-item ${id === basis ? 'on' : ''}" data-id="${id}" tabindex="0" role="button" aria-pressed="${id === basis}">
+      <i class="mv-dot ty ty-${type}" title="${esc(TKO(type))}"></i>
+      <span class="mv-name">${esc(name)}${tags(id, type, id === recId)}</span>
+      <span class="mv-stats"><b>${power}</b><small>위력</small><b>${turns}</b><small>턴</small><b class="gain">+${gain}</b><small>에너지</small></span>
+    </li>`;
+  }).join('');
+}
+
+function specialList(ids, recIds) {
+  const g = basis ? MOVES[basis][4] : 0;
+  return ids.map(id => {
+    const [name, type, power, energy, , buff] = MOVES[id];
+    const taps = g ? tapCounts(g, energy).join('-') : '';
+    return `<li class="mv-item">
+      <i class="mv-dot ty ty-${type}" title="${esc(TKO(type))}"></i>
+      <span class="mv-name">${esc(name)}${tags(id, type, recIds.includes(id))}</span>
+      <span class="mv-stats"><b>${power}</b><small>위력</small><b class="cost">${energy}</b><small>에너지</small><b>${f1(power / energy)}</b><small>DPE</small></span>
+      ${taps || buff ? `<span class="mv-sub">${taps ? `노말어택 ${taps}회` : ''}${buffText(buff)}</span>` : ''}
+    </li>`;
+  }).join('');
+}
+
+/* 타입만 직접 골랐으면 기술표는 숨긴다 */
+function renderMoves() {
+  const box = document.getElementById('mv-result');
+  box.hidden = !mon;
+  if (!mon) { box.innerHTML = ''; return; }
+  const set = SETS[mon.id];
+  if (!set) { box.innerHTML = '<p class="placeholder">이 포켓몬의 기술 정보가 없습니다.</p>'; return; }
+  const [fast, charged, recFast, recCharged, elite] = set;
+  const eff = id => MOVES[id][2] / MOVES[id][3];
+  if (!basis || !fast.includes(basis)) basis = recFast || fast[0];
+
+  // 추천을 맨 위로, 나머지는 효율(위력÷턴 또는 위력÷에너지) 높은 순
+  const fs = fast.slice().sort((a, b) => (b === recFast) - (a === recFast) || eff(b) - eff(a));
+  const cs = charged.slice().sort((a, b) => recCharged.includes(b) - recCharged.includes(a) || eff(b) - eff(a));
+  const eliteNote = elite.length
+    ? `<p class="mv-foot"><em class="mv-tag elite">대단한 기술머신</em> ${elite.map(id => esc(MOVES[id][0])).join(', ')} — 대단한 기술머신이 있어야 배울 수 있습니다</p>` : '';
+
+  box.innerHTML = `
+    <div class="mv-col">
+      <h3>노말어택 <small>${fast.length}</small></h3>
+      <ul class="mv-list" id="mv-normal">${normalList(fs, recFast)}</ul>
+      <p class="mv-hint">누르면 그 노말어택 기준으로 오른쪽 횟수가 바뀝니다</p>
+    </div>
+    <div class="mv-col">
+      <h3>스페셜어택 <small>${charged.length}</small></h3>
+      <ul class="mv-list">${specialList(cs, recCharged)}</ul>
+    </div>
+    ${eliteNote}`;
+}
+
+const mvBox = document.getElementById('mv-result');
+function pickBasis(e) {
+  const li = e.target.closest('#mv-normal .mv-item'); if (!li) return false;
+  basis = li.dataset.id; renderMoves(); return true;
+}
+mvBox.addEventListener('click', pickBasis);
+mvBox.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && pickBasis(e)) e.preventDefault();
+});
 
 /* ------------------------------------------------------------------
    18 x 18 상성표
@@ -208,6 +305,69 @@ function buildChart() {
   });
 }
 
+/* ------------------------------------------------------------------
+   페이지 안 바로가기 — 위에 붙어 있고, 지금 보고 있는 칸에 불이 들어온다
+------------------------------------------------------------------ */
+
+const jump = document.getElementById('jump');
+const jumpLinks = [...jump.querySelectorAll('a')];
+const jumpTarget = a => document.getElementById(a.hash.slice(1));
+let jumpClicked = null;   // 나란히 놓인 칸(받는·주는 피해)은 위치가 같아서 누른 쪽을 고른다
+
+/* 아직 없는 칸(포켓몬을 안 골랐을 때의 기술표 등)은 링크도 숨긴다 */
+function syncJump() {
+  jumpLinks.forEach(a => { const t = jumpTarget(a); a.hidden = !t || t.closest('[hidden]') !== null; });
+  spyJump();
+}
+
+/* 바로가기 바 밑까지 올라온 칸 중 가장 아래 것. 맨 아래까지 내렸으면 마지막 칸 */
+function spyJump() {
+  const shown = jumpLinks.filter(a => !a.hidden);
+  const line = jump.getBoundingClientRect().bottom + 24;
+  const tops = shown.map(a => jumpTarget(a).getBoundingClientRect().top);
+  let cur = null;
+  if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = shown[shown.length - 1];
+  else {
+    const passed = shown.filter((a, i) => tops[i] <= line);
+    if (passed.length) {
+      const top = Math.max(...passed.map(a => tops[shown.indexOf(a)]));
+      const same = passed.filter(a => Math.abs(tops[shown.indexOf(a)] - top) < 2);
+      cur = same.includes(jumpClicked) ? jumpClicked : same[0];
+    }
+  }
+  jumpLinks.forEach(a => { if (a === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+}
+
+/* 폰에서는 상단 바가 붙어 있으니 그 밑에 붙인다 */
+function placeJump() {
+  const bar = document.querySelector('.sidebar');
+  const top = getComputedStyle(bar).position === 'sticky' && innerWidth <= 860 ? bar.getBoundingClientRect().height : 0;
+  document.documentElement.style.setProperty('--jump-top', top + 'px');
+  document.documentElement.style.setProperty('--jump-h', jump.offsetHeight + 'px');
+}
+
+jump.addEventListener('click', e => {
+  const a = e.target.closest('a'); if (!a) return;
+  const t = jumpTarget(a); if (!t) return;
+  e.preventDefault();
+  jumpClicked = a;
+  if (t.tagName === 'DETAILS') t.open = true;
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  t.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'start' });
+  spyJump();   // 이미 그 자리면 스크롤이 안 일어난다
+});
+
+let spyQueued = false;
+addEventListener('scroll', () => {
+  if (spyQueued) return;
+  spyQueued = true;
+  requestAnimationFrame(() => { spyQueued = false; spyJump(); });
+}, { passive: true });
+placeJump();
+addEventListener('resize', placeJump);
+// 리그·컵 선택기가 나중에 상단 바로 옮겨 오면 바 높이가 바뀐다
+if ('ResizeObserver' in window) new ResizeObserver(placeJump).observe(document.querySelector('.sidebar'));
+
 /* ------------------------------------------------------------------ */
 
 buildPick(defHost);
@@ -216,5 +376,5 @@ setupSearch(document.getElementById('src-mon'), m => { paintMon(m); syncUrl(); }
 document.querySelector('#src-mon .clear').addEventListener('click', () => { paintMon(null); syncUrl(); });
 
 const urlTypes = (urlGet('t') || '').split(',').filter(t => T.order.includes(t)).slice(0, 2);
-if (!monFromUrl('p') && urlTypes.length) { setPick(defHost, urlTypes); render(); }
+if (!monFromUrl('p') && urlTypes.length) { document.getElementById('def-fold').open = true; setPick(defHost, urlTypes); render(); }
 else paintMon(monFromUrl('p') || byRank(1));

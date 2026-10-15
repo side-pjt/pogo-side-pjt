@@ -11,7 +11,7 @@
 | `cmp.html` | **CMP** — 같은 턴에 차징기를 쓰면 누가 먼저 나가는지 |
 | `ivs.html` | **개체값** — 슈퍼리그에서 공격이 낮은 개체가 좋은 이유 (초보자용) |
 | `team.html` | **팀 조합** — ABB · ABA · ABC · XAB 구조 (초보자용) |
-| `types.html` | **타입 상성** — 18×18 상성표와 포켓몬별 약점 (초보자용) |
+| `types.html` | **상성·기술** — 포켓몬별 약점과 기술표, 18×18 상성표 (초보자용) |
 
 ## 여는 법
 
@@ -82,7 +82,7 @@ index.html        CCT 페이지        app.js
 cmp.html          CMP 페이지        cmp.js
 ivs.html          개체값 가이드      ivs.js
 team.html         팀 조합 유형       team.js
-types.html        타입 상성         types.js
+types.html        상성·기술         types.js
                   (모두 좌측 사이드바 + 본문 구조를 공유한다)
 style.css         전 페이지 공용
 common.js         데이터·검색·포켓몬 선택 콤보박스 (공용)

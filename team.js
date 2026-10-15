@@ -360,6 +360,86 @@ function recommendationBlock(mons, completeAt = 3) {
   </section>`;
 }
 
+/* ------------------------------------------------------------------
+   이 팀이 약한 포켓몬 — 지금 포맷 상위 100종의 추천 노말어택·스페셜어택 타입으로 따진다.
+   눌림 = 그 포켓몬의 기술 중 하나라도 약점(×1.6 이상)을 찌름. 노말어택이면 매 턴 눌려서 더 무겁다.
+   맞받아침 = 우리 포켓몬의 추천 기술 중 하나라도 그 포켓몬의 약점을 찌름.
+------------------------------------------------------------------ */
+function typeMult(atk, types) {
+  return types.reduce((m, d) => m * (((T.chart[atk] || {})[d]) ?? 1), 1);
+}
+
+function threatAgainst(foe, foeMoves, mons) {
+  const [fast, ...charged] = foeMoves;
+  const rows = mons.map(m => {
+    const hits = foeMoves.filter(mv => typeMult(mv.type, m.types) >= 1.59);
+    const fastHit = !!fast && hits.includes(fast);
+    const answer = recommendedMoves(m).some(mv => typeMult(mv.type, foe.types) >= 1.59);
+    const walls = foeMoves.every(mv => typeMult(mv.type, m.types) < 0.9);
+    const dbl = hits.some(mv => typeMult(mv.type, m.types) > 2.5);
+    let score = 0;
+    if (hits.length) score += (fastHit ? 2 : 1.5) + (dbl ? 0.5 : 0);
+    if (answer) score -= 1.5;
+    if (walls) score -= 1;
+    const cls = hits.length ? (answer ? 'warn' : 'bad') : answer ? 'good' : 'mid';
+    return { m, hits, fastHit, answer, cls, score };
+  });
+  return {
+    foe, moves: foeMoves, rows,
+    pressed: rows.filter(r => r.hits.length).length,
+    lost: rows.filter(r => r.cls === 'bad').length,
+    score: rows.reduce((t, r) => t + r.score, 0) + Math.max(0, 101 - foe.rank) * 0.01,
+    charged,
+  };
+}
+
+function threatBlock(mons) {
+  // 그림자와 일반은 같은 포켓몬 — 팀에 있는 종은 빼고, 둘 다 위협이면 순위 높은 쪽 하나에 묶는다
+  const baseOf = p => p.id.replace(/_shadow$/, '');
+  const teamBases = new Set(mons.map(baseOf));
+  const need = Math.max(1, Math.ceil(mons.length / 2));
+  const found = DATA
+    .filter(p => p.rank <= 100 && !teamBases.has(baseOf(p)))
+    .map(p => { const mv = recommendedMoves(p); return mv.length ? threatAgainst(p, mv, mons) : null; })
+    .filter(t => t && t.pressed >= need && t.lost >= 1);
+  const byBase = new Map();
+  for (const t of found.slice().sort((a, b) => a.foe.rank - b.foe.rank)) {
+    const kept = byBase.get(baseOf(t.foe));
+    if (kept) kept.twins.push(t.foe); else byBase.set(baseOf(t.foe), Object.assign(t, { twins: [] }));
+  }
+  const list = [...byBase.values()]
+    .sort((a, b) => b.lost - a.lost || b.score - a.score || a.foe.rank - b.foe.rank)
+    .slice(0, 6);
+
+  const head = `<h3 class="tt-h3">이 팀이 약한 포켓몬 <small>${esc(FORMAT.ko)} 상위 100종 · 추천 노말어택·스페셜어택 타입 기준</small></h3>`;
+  if (!list.length) return head + '<p class="tt-warn good">상위권에서 팀 절반 이상을 약점으로 찌르면서 맞받아치기 어려운 포켓몬이 없습니다.</p>';
+
+  const moveTag = (mv, fast) => `<span class="tt-th-move${fast ? ' fast' : ''}"><i class="mv-dot ty ty-${mv.type}" title="${esc(TKO(mv.type))}"></i>${esc(mv.name)}</span>`;
+  // 밀리는 포켓몬(찔리는 기술과 함께)과 내보낼 만한 포켓몬만 — '보통'은 뺀다
+  const hit = (r, note) => `<span class="tt-hit ${r.cls}"><b>${esc(r.m.ko)}</b>${note ? `<small>${note}</small>` : ''}</span>`;
+  const lines = t => {
+    const lost = t.rows.filter(r => r.cls === 'bad');
+    const ans = t.rows.filter(r => r.cls === 'good' || r.cls === 'warn');
+    return `<div class="tt-hl"><span class="tt-hl-lb bad">밀림</span>${lost.map(r => hit(r, r.hits.map(mv => esc(mv.name)).join('·'))).join('')}</div>
+      <div class="tt-hl"><span class="tt-hl-lb good">대응</span>${ans.length
+        ? ans.map(r => hit(r, r.cls === 'warn' ? '서로 약점' : '')).join('')
+        : '<span class="tt-hl-none">약점을 찌를 포켓몬이 없음</span>'}</div>`;
+  };
+
+  // 처음엔 위의 3마리만, 나머지는 더 보기로
+  return head + `<ol class="tt-threats">${list.map((t, i) => `<li class="tt-threat"${i >= 3 ? ' hidden' : ''}>
+      <img src="images/${encodeURIComponent(t.foe.img)}" alt="" loading="lazy">
+      <div class="tt-threat-main">
+        <div class="tt-threat-top"><a href="types.html?p=${encodeURIComponent(t.foe.id)}"><b>${esc(t.foe.ko)}</b></a>
+          <small>${t.foe.rank}위 · ${t.lost}마리가 밀림${t.twins.map(f => ` · ${esc(f.ko)}(${f.rank}위)도 같음`).join('')}</small></div>
+        <div class="tt-threat-moves">${moveTag(t.moves[0], true)}${t.charged.map(mv => moveTag(mv, false)).join('')}</div>
+        <div class="tt-threat-hits">${lines(t)}</div>
+      </div>
+    </li>`).join('')}</ol>
+    ${list.length > 3 ? `<button type="button" class="tt-threat-more">${list.length - 3}마리 더 보기</button>` : ''}
+    <p class="note tt-method-note">밀림 = 그 포켓몬 기술이 약점을 찌르는데 우리 추천 기술로는 약점을 못 찌름 · 대응 = 우리 추천 기술로 그 포켓몬의 약점을 찌름 (서로 약점이면 표시) · 노말어택(굵게)으로 찔리면 매 턴 눌려 더 위험합니다. 실제 대전은 종족값·실드·기술 속도에 따라 달라집니다.</p>`;
+}
+
 function strongGrid(strong) {
   return T.order.map(t => {
     const n = strong.filter(s => s.has(t)).length;
@@ -438,6 +518,7 @@ function paintDiag() {
     box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">팀 약점 <small>숫자 = 해당 타입에 약한 포켓몬 수</small></h3>
       ${summary}
       <div class="tt-grid">${grid}</div>
+      ${threatBlock(mons)}
       ${recommendationBlock(mons, 6)}
       ${strongBlock(mons)}
       ${trios}`;
@@ -466,6 +547,7 @@ function paintDiag() {
   box.innerHTML = `<h3 class="tt-h3" style="margin-top:0">팀 약점 <small>숫자 = 해당 타입에 약한 포켓몬 수</small></h3>
     ${summary}
     <div class="tt-grid">${grid}</div>
+    ${threatBlock(mons)}
     ${suggestions}
     ${strongBlock(mons)}
     ${guess}`;
@@ -477,7 +559,7 @@ function relabelSlots() {
     const i = Number(root.dataset.slot);
     root.hidden = i >= 3 && !tournament;
     const label = root.querySelector('.tt-slot-label');
-    const badge = i < 3 ? `<i class="role r-${['A', 'B', 'C'][i]}">${i + 1}</i> ` : '';
+    const badge = i < 3 ? `<i class="role r-${['A', 'B', 'C'][i]}">${i + 1}</i> ` : `<i class="role r-n">${i + 1}</i> `;
     label.innerHTML = badge + (tournament ? `등록 ${i + 1}` : LABELS3[i]);
   });
 }
@@ -497,14 +579,33 @@ function setTournament(on) {
   syncDiagUrl();
 }
 
+/* 1~10위에서 서로 다른 종(그림자 포함 같은 종은 하나만) 세 마리를 무작위로 */
+function randomTopTeam() {
+  const pool = DATA.filter(p => p.rank <= 10);
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const bases = new Set();
+  return pool.filter(p => {
+    const base = p.id.replace(/_shadow$/, '');
+    if (bases.has(base) || bases.size >= 3) return false;
+    bases.add(base);
+    return true;
+  });
+}
+
 function setupDiag() {
   document.querySelectorAll('.tt-dslot').forEach(root => {
     const i = Number(root.dataset.slot);
     setupSearch(root, mon => { diag[i] = mon; paintSlot(root, i); paintDiag(); syncDiagUrl(); });
     root.querySelector('.clear').addEventListener('click', () => { diag[i] = null; paintSlot(root, i); paintDiag(); syncDiagUrl(); });
   });
-  // 주소에 저장된 팀이 없을 때만 ABC 예시 팀을 보여준다.
-  if (!restoreDiagUrl()) byCode('ABC').members.forEach((id, i) => { diag[i] = byId(id) || null; });
+  // 주소에 저장된 팀이 없으면 지금 포맷 1~10위에서 무작위 세 마리. 순위가 아직 없으면 ABC 예시 팀.
+  if (!restoreDiagUrl()) {
+    const team = randomTopTeam();
+    (team.length ? team : byCode('ABC').members.map(byId)).forEach((mon, i) => { diag[i] = mon || null; });
+  }
   document.getElementById('diag-6').checked = tournament;
   relabelSlots();
   document.querySelectorAll('.tt-dslot').forEach(root => paintSlot(root, Number(root.dataset.slot)));
@@ -595,6 +696,12 @@ document.addEventListener('click', e => {
     paintSlot(root, slot);
     paintDiag();
     syncDiagUrl();
+    return;
+  }
+  const more = e.target.closest('.tt-threat-more');
+  if (more) {
+    more.previousElementSibling.querySelectorAll('.tt-threat[hidden]').forEach(li => { li.hidden = false; });
+    more.remove();
     return;
   }
   const go = e.target.closest('.tt-go');

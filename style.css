@@ -521,10 +521,10 @@ table.cmp-table td.tie { color: var(--t4); }
   display: inline-flex; align-items: center; gap: 6px;
   background: color-mix(in srgb, var(--c) 22%, var(--panel-2));
   border: 1px solid color-mix(in srgb, var(--c) 70%, transparent);
-  border-radius: calc(999px * var(--rk)); padding: 5px 11px; font-size: 13px; color: var(--ink);
+  border-radius: calc(999px * var(--rk)); padding: 3px 9px; font-size: 12px; color: var(--ink);
 }
-.tbadge::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
-.tbadge.x4 { border-width: 2px; font-weight: 700; box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 25%, transparent); }
+.tbadge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.tbadge.x4 { font-weight: 700; box-shadow: 0 0 0 2px color-mix(in srgb, var(--c) 30%, transparent); }
 
 .tpick { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 6px; margin-top: 12px; }
 .src-mon { margin-top: 8px; }
@@ -536,12 +536,8 @@ table.cmp-table td.tie { color: var(--t4); }
 .tpick.has-sel button:not(.on) { opacity: .55; }
 .tpick button.on { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--c); position: relative; }
 .tpick button.on::before { content: "✓ "; font-weight: 700; }
-.selbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; padding: 10px 12px; background: var(--panel-2); border: var(--bw) solid var(--line); border-radius: calc(10px * var(--rk)); }
-.selbar-label { font-size: 12px; color: var(--ink-dim); }
-.selchip { display: inline-flex; align-items: center; gap: 6px; background: var(--c); color: #0d1220; border: 0; border-radius: calc(999px * var(--rk)); padding: 6px 8px 6px 13px; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
-.selchip i { font-style: normal; display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: color-mix(in srgb, var(--bg) 25%, transparent); font-size: 10px; }
-.selclear { margin-left: auto; background: none; border: var(--bw) solid var(--line); color: var(--ink-dim); border-radius: calc(8px * var(--rk)); padding: 6px 10px; font: inherit; font-size: 12px; cursor: pointer; }
-.selclear:hover { color: var(--ink); border-color: var(--ink-dim); }
+.tpick-fold { margin-top: 12px; }
+.tpick-fold > summary { list-style-position: inside; }
 .tpick-hint { font-size: 12px; color: var(--ink-dim); margin: 8px 0 0; }
 
 .sumrow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
@@ -550,29 +546,48 @@ table.cmp-table td.tie { color: var(--t4); }
 .sum small { font-size: 11px; color: var(--ink-dim); }
 .sum.weak b { color: var(--bad); } .sum.res b { color: var(--t1); } .sum.dbl b { color: var(--ink-dim); }
 
-.lvl { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 0; border-top: 1px solid var(--line); }
+.lvl { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 10px; align-items: start; padding: 8px 0; border-top: 1px solid var(--line); }
 .lvl:first-child { border-top: 0; }
-.lvl-x { font-family: var(--font-num, inherit); font-size: 17px; font-weight: 700; padding-top: 4px; }
+.lvl-x { font-family: var(--font-num, inherit); font-size: 14px; font-weight: 700; padding-top: 3px; white-space: nowrap; }
 .lvl.x16 .lvl-x { color: var(--bad); }
 .lvl.x4 .lvl-x { color: var(--bad); }
 .lvl.r .lvl-x { color: var(--t1); }
 .lvl.rr .lvl-x { color: var(--ink-dim); }
-.lvl-tip { grid-column: 2; font-size: 12px; color: var(--ink-dim); margin-top: -2px; }
 
 .tchips { display: flex; flex-wrap: wrap; gap: 6px; }
 .tchips .none { color: var(--ink-dim); font-size: 13px; padding-top: 5px; }
+/* 상성·기술 페이지 안 바로가기 */
+.jump {
+  position: sticky; top: var(--jump-top, 0px); z-index: 30;
+  display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none;
+  margin-block: -8px; padding: 8px 0;
+  background: var(--bg);
+}
+.jump::-webkit-scrollbar { display: none; }
+.jump a {
+  flex: none; padding: 6px 12px; border: var(--bw) solid var(--line); border-radius: calc(999px * var(--rk));
+  background: var(--panel-2); color: var(--ink-dim); font-size: 13px; text-decoration: none; white-space: nowrap;
+}
+.jump a:hover { color: var(--ink); border-color: var(--ink-dim); }
+.jump a[aria-current] { color: var(--ink); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--panel-2)); }
+#dmg-in, #dmg-out, #mv-result, #chart, #help { scroll-margin-top: calc(var(--jump-top, 0px) + var(--jump-h, 48px) + 8px); }
 .duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .duo-col { background: var(--panel-2); border: var(--bw) solid var(--line); border-radius: calc(12px * var(--rk)); padding: 14px; min-width: 0; }
 .duo-col.def { border-top: 3px solid var(--bad); }
 .duo-col.atk { border-top: 3px solid var(--good); }
-.duo-col h3 { margin: 0 0 6px; font-size: 15px; }
-.duo-col h3 small { font-size: 11px; font-weight: 400; color: var(--ink-dim); margin-left: 6px; }
-.duo-sum { margin: 0 0 6px; font-size: 13px; color: var(--ink-dim); }
+.duo-col h3 { margin: 0 0 4px; font-size: 15px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.duo-col h3 small { font-size: 11px; font-weight: 400; color: var(--ink-dim); }
+.duo-sum { margin-left: auto; font-size: 12px; font-weight: 400; color: var(--ink-dim); }
 .duo .weak { color: var(--bad); } .duo .res { color: var(--t1); }
-.duo-col .lvl { grid-template-columns: 54px minmax(0, 1fr); }
-.atk-type + .atk-type { margin-top: 14px; padding-top: 12px; border-top: 2px solid var(--line); }
+.duo-col .lvl { grid-template-columns: 52px minmax(0, 1fr); gap: 8px; }
+.atk-type + .atk-type { margin-top: 8px; padding-top: 8px; border-top: 2px solid var(--line); }
 .atk-type-head { font-size: 13px; margin-bottom: 4px; }
-@media (max-width: 760px) { .duo { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .duo { grid-template-columns: 1fr; }
+  /* 한 줄로 쌓이면 카드 안의 카드가 되니 틀을 걷고 색 줄만 남긴다 */
+  .duo-col { background: none; border: 0; border-radius: 0; padding: 10px 0 0; }
+  .duo-col.atk { margin-top: 4px; }
+}
 .tg-super { color: var(--bad); }
 .tg-resist { color: var(--t1); }
 .tg-double { color: var(--ink-dim); }
@@ -607,16 +622,11 @@ table.tchart .sel { outline: 2px solid var(--accent); outline-offset: -2px; posi
   .tpick button.on { box-shadow: 0 0 0 1px var(--bg), 0 0 0 3px var(--c); }
   .tpick button.on::before { content: "✓"; margin-right: 1px; }
   .tpick-hint { font-size: 11px; margin-top: 6px; }
-  .selbar { margin-top: 8px; padding: 7px 9px; gap: 6px; }
-  .selchip { padding: 4px 6px 4px 10px; font-size: 12px; }
-  .selchip i { width: 16px; height: 16px; }
-  .selclear { padding: 4px 8px; font-size: 11px; }
-  .duo { gap: 10px; }
-  .duo-col { padding: 11px; }
+  .duo { gap: 6px; }
   .duo-col h3 { font-size: 14px; }
-  .duo-col .lvl { grid-template-columns: 46px minmax(0, 1fr); gap: 6px; padding: 7px 0; }
-  .lvl-x { font-size: 14px; padding-top: 3px; }
-  .tbadge { padding: 3px 8px; font-size: 12px; gap: 4px; }
+  .duo-col .lvl { grid-template-columns: 46px minmax(0, 1fr); gap: 6px; padding: 6px 0; }
+  .lvl-x { font-size: 12px; padding-top: 3px; }
+  .tbadge { padding: 2px 7px; font-size: 12px; gap: 4px; }
   .tbadge::before { width: 7px; height: 7px; }
   .tchips { gap: 4px; }
   .tchart-wrap { max-height: 60vh; }
@@ -662,10 +672,6 @@ table.tchart .sel { outline: 2px solid var(--accent); outline-offset: -2px; posi
 .mv-sub { grid-column: 2 / -1; font-size: 12px; color: var(--ink-dim); display: flex; flex-wrap: wrap; gap: 2px 12px; font-variant-numeric: tabular-nums; }
 .mv-buff.up { color: var(--good); } .mv-buff.down { color: var(--bad-soft); }
 .mv-hint { margin: 8px 8px 0; font-size: 11px; color: var(--ink-dim); }
-.mv-help { font-size: 13px; color: var(--ink-dim); }
-.mv-help h2 { margin: 0 0 10px; font-size: 15px; color: var(--ink); }
-.mv-help ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
-.mv-help b { color: var(--ink); }
 @media (max-width: 760px) {
   #mv-result { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .mv-item { padding: 9px 4px; column-gap: 8px; }
@@ -693,6 +699,7 @@ table.tchart .sel { outline: 2px solid var(--accent); outline-offset: -2px; posi
 .r-B { background: var(--t1); }
 .r-C { background: var(--good); }
 .r-X { background: var(--t4); }
+.r-n { background: var(--line); color: var(--ink); }
 
 .arch-list { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); }
 .arch {
@@ -1055,6 +1062,31 @@ main { gap: 18px; }
 .tt-warn.bad b { color: var(--t5); } .tt-warn.good { color: var(--good); }
 .tt-warn b { color: var(--accent); }
 
+/* 팀: 이 팀이 약한 포켓몬 */
+.tt-threat-more { margin-top: 6px; width: 100%; padding: 7px; background: none; border: var(--bw) dashed var(--line); border-radius: calc(10px * var(--rk)); color: var(--ink-dim); font: inherit; font-size: 12px; cursor: pointer; }
+.tt-threat-more:hover { color: var(--ink); border-color: var(--ink-dim); }
+.tt-threats { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.tt-threat { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 10px; align-items: start; padding: 8px 10px; background: var(--panel-2); border: var(--bw) solid var(--line); border-radius: calc(10px * var(--rk)); }
+.tt-threat img { width: 40px; height: 40px; object-fit: contain; }
+.tt-threat-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.tt-threat-top a { color: var(--ink); text-decoration: none; font-size: 14px; }
+.tt-threat-top a:hover { text-decoration: underline; }
+.tt-threat-top small { color: var(--ink-dim); font-size: 11px; }
+.tt-threat-moves { display: flex; flex-wrap: wrap; gap: 2px 10px; margin-top: 2px; font-size: 12px; color: var(--ink-dim); }
+.tt-th-move { display: inline-flex; align-items: center; gap: 4px; }
+.tt-th-move.fast { color: var(--ink); font-weight: 700; }
+.tt-th-move .mv-dot { width: 8px; height: 8px; }
+.tt-threat-hits { display: grid; gap: 4px; margin-top: 6px; }
+.tt-hl { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.tt-hl-lb { flex: none; width: 34px; font-size: 11px; font-weight: 700; }
+.tt-hl-lb.bad { color: var(--bad-ink); } .tt-hl-lb.good { color: var(--good); }
+.tt-hl-none { font-size: 11px; color: var(--bad-ink); }
+.tt-hit { display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 0 5px; padding: 2px 8px; border-radius: calc(6px * var(--rk)); font-size: 11px; border: 1px solid var(--line); color: var(--ink-dim); }
+.tt-hit b { color: var(--ink); font-weight: 600; font-size: 12px; }
+.tt-hit small { font-size: 10px; opacity: .85; }
+.tt-hit.bad { border-color: color-mix(in srgb, var(--bad) 60%, transparent); background: color-mix(in srgb, var(--bad) 14%, transparent); color: var(--bad-ink); }
+.tt-hit.warn { border-color: color-mix(in srgb, var(--accent) 45%, transparent); color: var(--accent); }
+.tt-hit.good { border-color: color-mix(in srgb, var(--good) 45%, transparent); color: var(--good); }
 .tt-suggest { margin-top: 18px; min-width: 0; }
 .tt-suggest-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
 .tt-suggest-head h3 { margin: 0; font-size: 14px; }
@@ -1218,7 +1250,6 @@ main { gap: 18px; }
   /* 반복 항목은 충분히 누를 수 있으면서도 화면을 과도하게 늘리지 않는다. */
   .tpick { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
   .tpick button { min-height: 44px; padding: 8px 2px; font-size: 13px; }
-  .selchip, .selclear { min-height: 40px; }
   table.tchart th, table.tchart td { width: 34px; min-width: 34px; height: 34px; }
   table.tchart th { font-size: 10px; padding: 3px 4px; }
   table.tchart thead th.corner, table.tchart tbody th { width: 58px; min-width: 58px; }
@@ -1588,3 +1619,11 @@ main { gap: 18px; }
 
 /* 본문 속 지금 리그·컵 이름 (format.js 가 채운다) */
 .fmt { font-style: normal; }
+
+/* 팀 진단 슬롯: 폰에서는 3마리·6마리 모두 한 줄에 한 마리씩, 이름표는 왼쪽 */
+@media (max-width: 680px) {
+  .tt-slots, .tt-slots.six { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .tt-slots .tt-dslot[data-slot="2"] { grid-column: auto; }
+  .tt-slots .tt-dslot { grid-template-columns: 64px minmax(0, 1fr); align-items: center; gap: 8px; padding: 6px 10px; }
+  .tt-slots .tt-dslot .chosen { padding: 0; }
+}

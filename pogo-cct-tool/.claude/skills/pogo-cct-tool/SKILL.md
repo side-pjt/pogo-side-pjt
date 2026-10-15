@@ -14,9 +14,8 @@ description: 포켓몬 GO PvP(모든 리그·컵) CCT·CMP·배틀 계산기 웹
 | `cmp.html` | `cmp.js` | CMP 차징 우선권 |
 | `ivs.html` | `ivs.js` | 개체값 가이드 (초보자용) |
 | `team.html` | `team.js` | 팀 조합 유형 (초보자용) |
-| `types.html` | `types.js` | 타입 상성 (초보자용) |
+| `types.html` | `types.js` | 상성·기술 — 포켓몬별 약점·기술표 + 18×18 상성표 (`moves.html` 은 여기로 넘어가는 옛 주소) |
 | `battle.html` | `battle.js` (+ `battle-core.js`·`battle-engine.js`) | 배틀 시뮬레이터 Single·Multi·Matrix |
-| `moves.html` | `moves.js` | 기술표 |
 | `season.html` | `season-page.js` | 시즌 일정 — 이번 주·다음 주 리그·컵, 주차별 표 |
 
 정적 HTML/CSS/JS. **빌드 도구도 프레임워크도 쓰지 않는다** — `index.html` 을 그냥 열면 돈다.

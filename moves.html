@@ -2,116 +2,14 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>기술표 · GO배틀리그 가이드</title>
-<meta name="description" content="포켓몬 GO배틀리그 가이드 — 슈퍼·하이퍼·마스터리그·시즌 컵 대전 도구 모음 — CCT·CMP·개체값·팀 조합·타입 상성·기술표">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="기술표 · GO배틀리그 가이드">
-<meta property="og:description" content="포켓몬 GO배틀리그 가이드 — 슈퍼·하이퍼·마스터리그·시즌 컵 대전 도구 모음 — CCT·CMP·개체값·팀 조합·타입 상성·기술표">
-<meta property="og:image" content="https://side-pjt.github.io/pogo-side-pjt/og-image.png?v=3">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0a0613">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-<link rel="alternate icon" href="favicon.ico">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="style.css?v=6e01d418">
-<script src="theme.js?v=28d57714"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>상성·기술 · GO배틀리그 가이드</title>
+<!-- 기술표는 상성·기술(types.html)로 합쳐졌다. 예전 주소의 ?p= ?f= 를 그대로 넘긴다 -->
+<link rel="canonical" href="types.html">
+<meta http-equiv="refresh" content="0; url=types.html">
+<script>location.replace('types.html' + location.search + location.hash);</script>
 </head>
 <body>
-
-<div class="shell">
-
-<aside class="sidebar">
-  <a class="brand" href="index.html">
-    <img class="brand-logo" src="favicon.svg" alt="" width="36" height="36">
-    <img class="brand-img" src="sidebar-brand.png" alt="" width="408" height="152">
-    <span class="brand-sub">포켓몬 GO</span>
-    <span class="brand-name">GO배틀리그 가이드</span>
-    <span class="brand-page">기술표</span>
-  </a>
-  <nav class="nav">
-    <a href="season.html"><span class="nav-ico" aria-hidden="true">시즌</span>시즌 일정</a>
-    <span class="nav-sep" aria-hidden="true"></span>
-    <a href="index.html"><span class="nav-ico" aria-hidden="true">CCT</span>차징 타이밍</a>
-    <a href="cmp.html"><span class="nav-ico" aria-hidden="true">CMP</span>차징 우선권</a>
-    <a href="battle.html"><span class="nav-ico" aria-hidden="true">SIM</span>배틀 시뮬</a>
-    <span class="nav-sep" aria-hidden="true"></span>
-    <a href="ivs.html"><span class="nav-ico" aria-hidden="true">IV</span>개체값 고르기</a>
-    <a href="team.html"><span class="nav-ico" aria-hidden="true">팀</span>팀 조합 유형</a>
-    <a href="types.html"><span class="nav-ico" aria-hidden="true">상성</span>타입 상성</a>
-    <a href="moves.html"><span class="nav-ico" aria-hidden="true">기술</span>기술표</a>
-  </nav>
-  <p class="side-note">CP 1500 · 슈퍼리그<br>데이터 PvPoke · PoGoMate</p>
-</aside>
-
-<div class="content">
-
-<header class="top">
-  <div class="wrap">
-    <h1>기술표</h1>
-    <p class="sub">포켓몬이 쓸 수 있는 노말어택·스페셜어택을 타입과 수치로 한눈에</p>
-    <div class="meta"><span><em class="fmt" data-format="name">슈퍼리그</em> 기준 추천</span><span>PvPoke 수치</span></div>
-  </div>
-</header>
-
-<main class="wrap">
-
-  <section class="picker cmp-picker">
-    <label class="picker-label">포켓몬 고르기</label>
-    <div class="combo">
-      <input type="search" class="search" placeholder="이름으로 검색 (한글·영문)" autocomplete="off" aria-label="포켓몬 검색">
-      <ul class="results" hidden></ul>
-    </div>
-    <div class="chosen" hidden>
-      <img class="chosen-img" alt="">
-      <div class="chosen-text">
-        <strong class="chosen-name"></strong>
-        <span class="chosen-rank"></span>
-      </div>
-      <button type="button" class="clear" aria-label="선택 해제">✕</button>
-    </div>
-  </section>
-
-  <section class="result" id="mv-result" aria-live="polite">
-    <p class="placeholder">포켓몬을 고르면 기술표가 나옵니다.</p>
-  </section>
-
-  <section class="panel mv-help">
-    <h2>보는 법</h2>
-    <ul>
-      <li><b>노말어택</b> 위력 · 걸리는 턴 · 모이는 에너지(+). 누르면 그 기술 기준으로 횟수가 계산됩니다</li>
-      <li><b>스페셜어택</b> 위력 · 필요 에너지 · <b>DPE</b>(에너지당 위력, 높을수록 효율이 좋음)</li>
-      <li><b>노말어택 n회</b> 스페셜어택을 5번 쓸 때까지 노말어택을 몇 번씩 쳐야 하는지 (남는 에너지 이월)</li>
-      <li><b>자속</b> 포켓몬 자기 타입과 같은 기술로 위력 ×1.2 · <b>추천</b> 지금 고른 리그·컵의 PvPoke 추천 기술</li>
-      <li>포켓몬 GO에는 물리·특수 구분이 없어서 기술은 타입·위력·에너지로만 정해집니다</li>
-    </ul>
-  </section>
-
-</main>
-
-<footer class="wrap foot">
-  <p class="made-by">made by <strong>kingchickenmayo</strong></p>
-  <p>기술 수치 PvPoke · 한글 기술명 포켓몬 GO 한국어 로케일</p>
-  <p>상표 및 게임 이미지의 권리는 각 권리자에게 있습니다.</p>
-</footer>
-
-</div><!-- /content -->
-</div><!-- /shell -->
-
-<script src="data/data.js?v=921e0568"></script>
-<script src="data/formats/index.js?v=8ca81d60"></script>
-<script src="data/seasons.js?v=4e445b58"></script>
-<script src="season.js?v=e5b1f9d5"></script>
-<script src="format.js?v=b57f94bf"></script>
-<script src="data/moves.js?v=7c708418"></script>
-<script src="common.js?v=321f9617"></script>
-<script src="moves.js?v=e0cca817"></script>
+<p><a href="types.html">상성·기술 페이지로 이동했습니다</a></p>
 </body>
 </html>
