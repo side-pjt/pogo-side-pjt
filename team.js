@@ -199,6 +199,12 @@ function restoreDiagUrl() {
   return true;
 }
 
+/* 같은 포켓몬으로 볼 열쇠. 그림자, '펌킨인 (대형)' 같은 괄호 폼은 이름과 타입이 같으면 하나로 본다.
+   리전폼(가라르 코산호)은 이름이, 로토무 폼은 타입이 달라 따로 남는다. */
+function speciesOf(p) {
+  return p.ko.replace(/^그림자\s*/, '').replace(/\s*\(.*\)$/, '') + '|' + p.types.join('/');
+}
+
 /* 약점 = 방어 타입 조합의 배율이 1.6배 이상인 공격 타입 */
 function weakSet(mon) {
   const out = new Set();
@@ -276,14 +282,14 @@ function defendMult(atk, mon) {
 function recommendationCards(mons, complete) {
   const kept = complete ? mons.slice(0, -1) : mons;
   const selectedIds = new Set(mons.map(m => m.id));
-  const selectedBases = new Set(mons.map(m => m.id.replace(/_shadow$/, '')));
+  const selectedBases = new Set(mons.map(speciesOf));
   const weakCounts = new Map(T.order.map(t => [t, kept.filter(m => weakSet(m).has(t)).length]));
   const teamMoveTypes = new Set(kept.flatMap(recommendedMoves).map(m => m.type));
   const uncovered = T.order.filter(def => ![...teamMoveTypes].some(atk => (T.chart[atk] || {})[def] > 1.1));
   const stack = n => n >= 3 ? 12 : n === 2 ? 4 : 0;   // 함께 약한 마리 수에 따른 감점
 
   const scored = DATA
-    .filter(p => p.rank <= 100 && !selectedIds.has(p.id) && !selectedBases.has(p.id.replace(/_shadow$/, '')))
+    .filter(p => p.rank <= 100 && !selectedIds.has(p.id) && !selectedBases.has(speciesOf(p)))
     .map(mon => {
       const moves = recommendedMoves(mon);
       if (!moves.length) return null;
@@ -310,7 +316,7 @@ function recommendationCards(mons, complete) {
   const pool = [];
   const bases = new Set();
   for (const item of scored) {
-    const base = item.mon.id.replace(/_shadow$/, '');
+    const base = speciesOf(item.mon);
     if (bases.has(base)) continue;
     bases.add(base);
     pool.push(item);
@@ -403,8 +409,8 @@ function threatAgainst(foe, foeMoves, mons) {
 }
 
 function threatBlock(mons) {
-  // 그림자와 일반은 같은 포켓몬 — 팀에 있는 종은 빼고, 둘 다 위협이면 순위 높은 쪽 하나에 묶는다
-  const baseOf = p => p.id.replace(/_shadow$/, '');
+  // 그림자·크기 다른 폼은 같은 포켓몬 — 팀에 있는 종은 빼고, 여럿이 위협이면 순위 높은 쪽 하나에 묶는다
+  const baseOf = speciesOf;
   const teamBases = new Set(mons.map(baseOf));
   const need = Math.max(1, Math.ceil(mons.length / 2));
   const found = DATA
@@ -427,13 +433,6 @@ function threatBlock(mons) {
   // 밀리는 포켓몬(찔리는 기술과 함께)과 내보낼 만한 포켓몬만 — '보통'은 뺀다
   const hit = (r, note) => `<span class="tt-hit ${r.cls}"><b>${esc(r.m.ko)}</b>${note ? `<small>${note}</small>` : ''}</span>`;
   const names = list => list.map(mv => esc(mv.name)).join('·');
-  /* 팀에 대응도 버팀도 없을 때: 팀 밖 상위 100종 중 그 기술에 약점을 안 찔리고 약점을 찌르는 포켓몬 */
-  const counters = t => DATA
-    .filter(p => p.rank <= 100 && !teamBases.has(baseOf(p)) && baseOf(p) !== baseOf(t.foe))
-    .map(p => ({ p, mv: recommendedMoves(p).filter(mv => typeMult(mv.type, t.foe.types) >= 1.59) }))
-    .filter(c => c.mv.length && t.moves.every(mv => typeMult(mv.type, c.p.types) < 1.59))
-    .filter((c, i, all) => all.findIndex(o => baseOf(o.p) === baseOf(c.p)) === i)
-    .slice(0, 2);
   const line = (cls, lb, body) => `<div class="tt-hl"><span class="tt-hl-lb ${cls}">${lb}</span>${body}</div>`;
   const lines = t => {
     const lost = t.rows.filter(r => r.cls === 'bad');
@@ -442,12 +441,7 @@ function threatBlock(mons) {
     let out = line('bad', '밀림', lost.map(r => hit(r, names(r.hits))).join(''));
     if (ans.length) out += line('good', '대응', ans.map(r => hit(r, names(r.answerMoves) + (r.cls === 'warn' ? ' · 서로 약점' : ''))).join(''));
     if (wall.length) out += line('wall', '버팀', wall.map(r => hit({ ...r, cls: 'wall' }, '기술 전부 저항')).join(''));
-    if (!ans.length && !wall.length) {
-      const cs = counters(t);
-      out += line('pick', '추천', cs.length
-        ? cs.map(c => `<span class="tt-hit pick"><b>${esc(c.p.ko)}</b><small>${names(c.mv)} · ${c.p.rank}위</small></span>`).join('') + '<span class="tt-hl-none dim">팀에 대응할 포켓몬이 없어 영입 후보</span>'
-        : '<span class="tt-hl-none">대응할 포켓몬이 없음</span>');
-    }
+    if (!ans.length && !wall.length) out += line('good', '대응', '<span class="tt-hl-none">대응할 포켓몬이 없음</span>');
     return out;
   };
 
@@ -462,7 +456,7 @@ function threatBlock(mons) {
       </div>
     </li>`).join('')}</ol>
     ${list.length > 3 ? `<button type="button" class="tt-threat-more">${list.length - 3}마리 더 보기</button>` : ''}
-    <p class="note tt-method-note">밀림 = 그 포켓몬 기술이 약점을 찌르는데 우리 추천 기술로는 약점을 못 찌름 · 대응 = 우리 추천 기술(옆에 적은 기술)로 약점을 찌름 · 버팀 = 그 포켓몬 기술을 전부 저항 · 추천 = 팀에 대응·버팀이 없을 때 상위권에서 잡을 만한 포켓몬 · 노말어택(굵게)으로 찔리면 매 턴 눌려 더 위험합니다. 실제 대전은 종족값·실드·기술 속도에 따라 달라집니다.</p>`;
+    <p class="note tt-method-note">밀림 = 그 포켓몬 기술이 약점을 찌르는데 우리 추천 기술로는 약점을 못 찌름 · 대응 = 우리 추천 기술(옆에 적은 기술)로 약점을 찌름 · 버팀 = 그 포켓몬 기술을 전부 저항 · 노말어택(굵게)으로 찔리면 매 턴 눌려 더 위험합니다. 실제 대전은 종족값·실드·기술 속도에 따라 달라집니다.</p>`;
 }
 
 function strongGrid(strong) {
@@ -604,7 +598,7 @@ function setTournament(on) {
   syncDiagUrl();
 }
 
-/* 1~50위에서 서로 다른 종(그림자 포함 같은 종은 하나만) 세 마리를 무작위로 */
+/* 1~50위에서 서로 다른 종(speciesOf 가 같으면 하나만) 세 마리를 무작위로 */
 function randomTopTeam() {
   const pool = DATA.filter(p => p.rank <= 50);
   for (let i = pool.length - 1; i > 0; i--) {
@@ -613,7 +607,7 @@ function randomTopTeam() {
   }
   const bases = new Set();
   return pool.filter(p => {
-    const base = p.id.replace(/_shadow$/, '');
+    const base = speciesOf(p);
     if (bases.has(base) || bases.size >= 3) return false;
     bases.add(base);
     return true;

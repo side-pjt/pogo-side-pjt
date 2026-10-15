@@ -1079,11 +1079,9 @@ main { gap: 18px; }
 .tt-threat-hits { display: grid; gap: 4px; margin-top: 6px; }
 .tt-hl { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
 .tt-hl-lb { flex: none; width: 34px; font-size: 11px; font-weight: 700; }
-.tt-hl-lb.bad { color: var(--bad-ink); } .tt-hl-lb.good { color: var(--good); } .tt-hl-lb.wall { color: var(--t1); } .tt-hl-lb.pick { color: var(--accent); }
+.tt-hl-lb.bad { color: var(--bad-ink); } .tt-hl-lb.good { color: var(--good); } .tt-hl-lb.wall { color: var(--t1); }
 .tt-hl-none { font-size: 11px; color: var(--bad-ink); }
-.tt-hl-none.dim { color: var(--ink-dim); }
 .tt-hit.wall { border-color: color-mix(in srgb, var(--t1) 45%, transparent); color: var(--t1); }
-.tt-hit.pick { border-style: dashed; border-color: color-mix(in srgb, var(--accent) 50%, transparent); color: var(--accent); }
 .tt-hit { display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 0 5px; padding: 2px 8px; border-radius: calc(6px * var(--rk)); font-size: 11px; border: 1px solid var(--line); color: var(--ink-dim); }
 .tt-hit b { color: var(--ink); font-weight: 600; font-size: 12px; }
 .tt-hit small { font-size: 10px; opacity: .85; }
