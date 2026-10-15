@@ -270,12 +270,17 @@ function defendMult(atk, mon) {
   return mon.types.reduce((m, d) => m * (((T.chart[atk] || {})[d]) ?? 1), 1);
 }
 
-function recommendationCards(mons) {
+/* 후보를 넣었을 때 남는 팀으로 점수를 매긴다. 팀이 꽉 찼으면 누를 때 마지막 슬롯을 바꾸니 그 자리는 빼고 본다.
+   여럿이 함께 약한 타입이 생기거나 늘면 크게 깎고(세 마리 모두 약하면 더 크게),
+   남는 포켓몬의 약점을 받아 주면 더하고, 아직 못 찌르는 타입을 찌르면 조금 더한다. */
+function recommendationCards(mons, complete) {
+  const kept = complete ? mons.slice(0, -1) : mons;
   const selectedIds = new Set(mons.map(m => m.id));
   const selectedBases = new Set(mons.map(m => m.id.replace(/_shadow$/, '')));
-  const weakCounts = new Map(T.order.map(t => [t, mons.filter(m => weakSet(m).has(t)).length]));
-  const teamMoveTypes = new Set(mons.flatMap(recommendedMoves).map(m => m.type));
+  const weakCounts = new Map(T.order.map(t => [t, kept.filter(m => weakSet(m).has(t)).length]));
+  const teamMoveTypes = new Set(kept.flatMap(recommendedMoves).map(m => m.type));
   const uncovered = T.order.filter(def => ![...teamMoveTypes].some(atk => (T.chart[atk] || {})[def] > 1.1));
+  const stack = n => n >= 3 ? 12 : n === 2 ? 4 : 0;   // 함께 약한 마리 수에 따른 감점
 
   const scored = DATA
     .filter(p => p.rank <= 100 && !selectedIds.has(p.id) && !selectedBases.has(p.id.replace(/_shadow$/, '')))
@@ -283,14 +288,17 @@ function recommendationCards(mons) {
       const moves = recommendedMoves(mon);
       if (!moves.length) return null;
       const moveTypes = new Set(moves.map(m => m.type));
+      const weak = weakSet(mon);
       let score = Math.max(0, 101 - mon.rank) * 0.04;
 
       for (const [threat, count] of weakCounts) {
+        const after = count + (weak.has(threat) ? 1 : 0);
+        score -= stack(after) - stack(count);
         if (!count) continue;
         const dm = defendMult(threat, mon);
-        if (dm < 0.9) score += count * (dm < 0.5 ? 5 : 3);
-        if (dm > 1.1) score -= count * 4;
-        if ([...moveTypes].some(atk => (T.chart[atk] || {})[threat] > 1.1)) score += count * 2;
+        if (dm < 0.9) score += count * (dm < 0.5 ? 4 : 3);
+        // 약점을 같이 지면서 그 타입을 때리는 기술만 있는 건 보완이 아니다
+        if (!weak.has(threat) && [...moveTypes].some(atk => (T.chart[atk] || {})[threat] > 1.1)) score += count;
       }
       const added = uncovered.filter(def => [...moveTypes].some(atk => (T.chart[atk] || {})[def] > 1.1));
       score += added.length * 1.2;
@@ -355,7 +363,7 @@ function recommendationBlock(mons, completeAt = 3) {
       <h3 id="tt-suggest-title">${complete ? '교체 후보 추천' : '다음 포켓몬 추천'}</h3>
       <span>현재 ${mons.length}마리 · PvPoke 권장 기술 기준</span>
     </div>
-    <div class="tt-suggest-track">${recommendationCards(mons)}</div>
+    <div class="tt-suggest-track">${recommendationCards(mons, complete)}</div>
     <p class="note">${complete ? '현재 팀의 빈 공격 범위와 공통 약점을 줄일 교체 후보입니다. 누르면 마지막 슬롯을 교체합니다.' : '아직 채우지 못한 공격 범위와 현재 포켓몬의 약점을 보완할 후보입니다. 누르면 빈 슬롯에 추가합니다.'}</p>
   </section>`;
 }
