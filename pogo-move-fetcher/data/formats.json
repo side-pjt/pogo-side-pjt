@@ -1,5 +1,5 @@
 {
- "count": 10,
+ "count": 11,
  "formats": [
   {
    "key": "great",
@@ -62,16 +62,6 @@
    "count": 470
   },
   {
-   "key": "colormega-1500",
-   "cup": "colormega",
-   "cp": 1500,
-   "title": "Mega Color Cup",
-   "ko": "메가 4색컵: 슈퍼리그 버전",
-   "nameSource": "override",
-   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/colormega/overall/rankings-1500.json",
-   "count": 493
-  },
-  {
    "key": "little-500",
    "cup": "little",
    "cp": 500,
@@ -80,6 +70,16 @@
    "nameSource": "official",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/little/overall/rankings-500.json",
    "count": 528
+  },
+  {
+   "key": "fantasy-1500",
+   "cup": "fantasy",
+   "cp": 1500,
+   "title": "Fantasy Cup",
+   "ko": "판타지컵: 슈퍼리그 버전",
+   "nameSource": "official",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/fantasy/overall/rankings-1500.json",
+   "count": 197
   },
   {
    "key": "laic2027-1500",
@@ -100,6 +100,16 @@
    "nameSource": "official",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/catch/overall/rankings-1500.json",
    "count": 995
+  },
+  {
+   "key": "colormega-1500",
+   "cup": "colormega",
+   "cp": 1500,
+   "title": "Mega Color Cup",
+   "ko": "메가 4색컵: 슈퍼리그 버전",
+   "nameSource": "override",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/colormega/overall/rankings-1500.json",
+   "count": 493
   }
  ],
  "skipped": [
@@ -113,7 +123,6 @@
   "Custom"
  ],
  "noRanking": [
-  "fantasy-1500",
   "halloweenmega-1500"
  ]
 }
