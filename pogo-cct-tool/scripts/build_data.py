@@ -288,7 +288,7 @@ def main():
             if not tgt.exists() or tgt.stat().st_size != src.stat().st_size:
                 shutil.copy2(src, tgt)
                 copied += 1
-        for p in dst.glob('*.webp'):          # 범위에서 빠진 옛 파일 정리
+        for p in [*dst.glob('*.webp'), *dst.glob('*.png')]:   # 범위에서 빠진 옛 파일 정리
             if p.name not in want:
                 p.unlink()
         print('이미지: %d장 (새로 복사 %d장)' % (len(want), copied))

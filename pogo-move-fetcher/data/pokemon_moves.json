@@ -127320,11 +127320,8 @@
    "score": null,
    "formats": {},
    "recommended": {
-    "fast": "ROLLOUT",
-    "charged": [
-     "ACROBATICS",
-     "POWER_GEM"
-    ]
+    "fast": null,
+    "charged": []
    },
    "fastMoves": [
     {
@@ -127349,11 +127346,8 @@
    "score": null,
    "formats": {},
    "recommended": {
-    "fast": "ROLLOUT",
-    "charged": [
-     "ACROBATICS",
-     "POWER_GEM"
-    ]
+    "fast": null,
+    "charged": []
    },
    "fastMoves": [
     {

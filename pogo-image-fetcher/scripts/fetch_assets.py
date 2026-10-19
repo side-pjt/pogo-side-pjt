@@ -40,10 +40,10 @@ POKEMINERS_SPRITES = ('https://raw.githubusercontent.com/PokeMiners/pogo_assets/
                       'Images/Pokemon%20-%20256x256/Addressable%20Assets/')
 # PoGoMate에 아직 없는 신규 종 — {PvPoke 종 id: (한글 전체 이름, PokeMiners 스프라이트 키)}.
 # 종 정보는 PvPoke 게임마스터에서 채운다. PoGoMate에 올라오면 그쪽이 우선하니 그때 지우면 된다.
-# 한글 종명은 인게임 로케일(pokemon_name_0774 = 메테노), 폼 표기는 본편 공식 표기.
+# 한글명은 인게임 로케일(pokemon_name_0774 = 메테노). 폼 표기는 붙이지 않는다.
 EXTRA_SPECIES = {
-    'minior_meteor': ('메테노 (유성의 모습)', 'pm774.fMETEOR.icon.png'),
-    'minior_core': ('메테노 (코어의 모습)', 'pm774.fRED.icon.png'),   # 코어 색은 7가지 — 빨강을 대표로
+    'minior_meteor': ('메테노', 'pm774.fMETEOR.icon.png'),
+    'minior_core': ('메테노', 'pm774.fRED.icon.png'),   # 코어 색은 7가지 — 빨강을 대표로
 }
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) pogomate-asset-fetch'
 

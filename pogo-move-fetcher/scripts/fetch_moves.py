@@ -55,12 +55,9 @@ SEASONS = pathlib.Path(__file__).resolve().parent.parent.parent / 'data' / 'seas
 # 순위가 겹치는 종의 기본 기술셋·일반기술 사용률을 어느 포맷에서 가져올지 (앞이 우선)
 PRIMARY_FORMATS = ['great', 'mega-1500', 'ultra', 'mega-2500', 'master', 'mega-10000']
 # 어느 포맷 순위에도 아직 없는 신규 종 (PvPoke 게임마스터에 released:false 로만 있다).
-# 게임마스터의 기술 목록으로 넣어 검색·배틀에서 고를 수 있게 한다. 순위에 오르면 순위 쪽이 우선하니 그때 지운다.
-# 값 = 임시 추천 기술셋 [노말, 스페셜…] — PvPoke 추천이 생기기 전까지 쓴다.
-UNRANKED_SPECIES = {
-    'minior_meteor': ['ROLLOUT', 'ACROBATICS', 'POWER_GEM'],
-    'minior_core': ['ROLLOUT', 'ACROBATICS', 'POWER_GEM'],
-}
+# 게임마스터의 기술 목록으로 넣어 검색·배틀에서 고를 수 있게 한다. 추천 기술은 비워 두고,
+# 순위에 오르면 PvPoke 추천이 들어오니 그때 지운다.
+UNRANKED_SPECIES = ['minior_meteor', 'minior_core']
 
 LEAGUE_KEY = {1500: 'great', 2500: 'ultra', 10000: 'master'}
 LEAGUE_EN = {500: 'Little', 1500: 'Great League', 2500: 'Ultra League', 10000: 'Master League'}
@@ -346,7 +343,7 @@ def main():
             } for f in fast_used],
         })
     gm_mon = {p['speciesId']: p for p in gm['pokemon']}
-    for sid, moveset in UNRANKED_SPECIES.items():
+    for sid in UNRANKED_SPECIES:
         g = gm_mon.get(sid)
         if sid in species or g is None:
             continue
@@ -357,7 +354,7 @@ def main():
             'mega': False,
             'score': None,
             'formats': {},
-            'recommended': {'fast': moveset[0], 'charged': moveset[1:]},
+            'recommended': {'fast': None, 'charged': []},
             # 사용률을 모른다 — 0 으로 둔다
             'fastMoves': [{
                 'moveId': m,

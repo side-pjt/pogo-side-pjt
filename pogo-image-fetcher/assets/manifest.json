@@ -32553,7 +32553,7 @@
    "name": "Minior (Meteor)",
    "nameKo": "메테노",
    "nameJa": null,
-   "displayKo": "메테노 (유성의 모습)",
+   "displayKo": "메테노",
    "dex": 774,
    "isShadow": false,
    "isMega": false,
@@ -32563,7 +32563,7 @@
     "flying"
    ],
    "level": null,
-   "file": "pokemon/minior_meteor_메테노유성의모습.png",
+   "file": "pokemon/minior_meteor_메테노.png",
    "spriteKey": "pm774.fMETEOR.icon.png",
    "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm774.fMETEOR.icon.png"
   },
@@ -32574,7 +32574,7 @@
    "name": "Minior (Core)",
    "nameKo": "메테노",
    "nameJa": null,
-   "displayKo": "메테노 (코어의 모습)",
+   "displayKo": "메테노",
    "dex": 774,
    "isShadow": false,
    "isMega": false,
@@ -32584,7 +32584,7 @@
     "flying"
    ],
    "level": null,
-   "file": "pokemon/minior_core_메테노코어의모습.png",
+   "file": "pokemon/minior_core_메테노.png",
    "spriteKey": "pm774.fRED.icon.png",
    "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm774.fRED.icon.png"
   }
