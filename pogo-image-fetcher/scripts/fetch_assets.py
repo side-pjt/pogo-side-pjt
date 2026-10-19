@@ -5,9 +5,11 @@ PoGoMate 포켓몬 스프라이트 에셋 수집기 — 모든 리그·컵에 �
   - 종/이름 데이터 : https://pogomate.com/battles/great-league (Next.js RSC 페이로드에 내장)
                     페이지 이름과 달리 슈퍼·하이퍼·마스터·메가·리틀컵 종이 모두 들어 있다.
   - 스프라이트 이미지 : cdn.pogomate.com (페이지 JS 번들의 해시 매핑에서 추출)
+  - PoGoMate에 없는 것 : 종 정보는 PvPoke 게임마스터, 스프라이트는 PokeMiners 인게임 원본 PNG
 
 출력
   assets/pokemon/<영문id>_<한글명>.webp   예: ninetales_alolan_shadow_나인테일.webp
+                                          (PokeMiners에서 받은 것은 .png)
   assets/manifest.json       전체 메타데이터 (영문/한글/일본어명, dex, 그림자, 타입, 랭크)
   assets/index.csv           표 작업용 간단 목록
 
@@ -32,6 +34,17 @@ PVPOKE_RANKS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data
 PVPOKE_MEGA_RANKS = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/'
                      'rankings/mega/overall/rankings-1500.json')
 MEGA_ID = re.compile(r'_(mega|primal)(_[xyz])?$')
+PVPOKE_POKEMON = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/'
+                  'gamemaster/pokemon.json')
+POKEMINERS_SPRITES = ('https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/'
+                      'Images/Pokemon%20-%20256x256/Addressable%20Assets/')
+# PoGoMate에 아직 없는 신규 종 — {PvPoke 종 id: (한글 전체 이름, PokeMiners 스프라이트 키)}.
+# 종 정보는 PvPoke 게임마스터에서 채운다. PoGoMate에 올라오면 그쪽이 우선하니 그때 지우면 된다.
+# 한글 종명은 인게임 로케일(pokemon_name_0774 = 메테노), 폼 표기는 본편 공식 표기.
+EXTRA_SPECIES = {
+    'minior_meteor': ('메테노 (유성의 모습)', 'pm774.fMETEOR.icon.png'),
+    'minior_core': ('메테노 (코어의 모습)', 'pm774.fRED.icon.png'),   # 코어 색은 7가지 — 빨강을 대표로
+}
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) pogomate-asset-fetch'
 
 
@@ -210,13 +223,6 @@ def korean_name(p, labels):
     return out.strip()
 
 
-def stem(p, labels):
-    """파일명 = <영문id>_<한글전체이름>.  양쪽 모두 폼과 그림자를 담는다
-    (예: ninetales_alolan_shadow_그림자알로라나인테일)."""
-    ko = FS_UNSAFE.sub('', korean_name(p, labels))
-    return '%s_%s' % (p['id'], ko) if ko else p['id']
-
-
 def backfill_names(data):
     """그림자 엔트리에는 nameJa가 비어 있다 — 같은 종의 일반 폼에서 채운다."""
     ja = {}
@@ -248,25 +254,80 @@ def resolve(ranked, sprite_map, labels):
         if key is None:
             missing.append(p['id'])
             continue
-        rows.append({
-            'rank': p['pvpokeRank'],                 # 정본 순위 = PvPoke
-            'pogomateRank': p.get('greatRank'),          # 참고용 (둘은 서로 다르다)
-            'id': p['id'],
-            'name': p['name'],
-            'nameKo': p.get('nameKo'),
-            'nameJa': p.get('nameJa'),
-            'displayKo': korean_name(p, labels),
-            'dex': dex,
-            'isShadow': bool(p.get('isShadow')),
-            'isMega': bool(p.get('isMega')),
-            'form': form,
-            'types': p.get('types', []),
-            'level': p.get('greatLevel'),
-            'file': 'pokemon/%s.webp' % stem(p, labels),
-            'spriteKey': key,
-            'url': sprite_map[key],
-        })
+        rows.append(sprite_row(p, labels, key, sprite_map[key], 'webp'))
     return rows, missing
+
+
+def pokeminers_url(key):
+    """PokeMiners에 그 스프라이트가 있으면 URL, 없으면 None."""
+    url = POKEMINERS_SPRITES + key
+    try:
+        req = urllib.request.Request(url, method='HEAD', headers={'User-Agent': UA})
+        with urllib.request.urlopen(req, timeout=30):
+            return url
+    except Exception:                             # noqa: BLE001
+        return None
+
+
+def pokeminers_fallback(ranked, missing, labels):
+    """PoGoMate 번들에 스프라이트가 없는 종을 PokeMiners 원본 PNG로 채운다 (예: brambleghast)."""
+    rows, still = [], []
+    by_id = {p['id']: p for p in ranked}
+    for sid in missing:
+        p = by_id[sid]
+        dex, form = p['dex'], p.get('imageForm')
+        cands = (['pm%d.f%s.icon.png' % (dex, form)] if form else []) + ['pm%d.icon.png' % dex]
+        key = next((k for k in cands if pokeminers_url(k)), None)
+        if key is None:
+            still.append(sid)
+            continue
+        rows.append(sprite_row(p, labels, key, POKEMINERS_SPRITES + key, 'png'))
+    return rows, still
+
+
+def extra_rows(data):
+    """EXTRA_SPECIES 중 PoGoMate에 아직 없는 종의 행. 순위는 없다 (PvPoke 순위에 오르기 전이다)."""
+    have = {p['id'] for p in data}
+    todo = {sid: v for sid, v in EXTRA_SPECIES.items() if sid not in have}
+    if not todo:
+        return []
+    gm = {p['speciesId']: p for p in fetch_json(PVPOKE_POKEMON)}
+    rows = []
+    for sid, (ko, key) in todo.items():
+        g = gm.get(sid)
+        if g is None:
+            print('    [경고] PvPoke 게임마스터에 없는 종: %s' % sid)
+            continue
+        form = re.match(r'pm\d+\.f([A-Z_]+)\.', key)
+        p = {'id': sid, 'name': g['speciesName'], 'nameKo': ko.split(' (')[0], 'dex': g['dex'],
+             'imageForm': form.group(1) if form else None, 'types': [t for t in g['types'] if t != 'none']}
+        rows.append(sprite_row(p, None, key, POKEMINERS_SPRITES + key, 'png', display_ko=ko))
+    return rows
+
+
+def sprite_row(p, labels, key, url, ext, display_ko=None):
+    """manifest 한 행. 파일명 = <영문id>_<한글전체이름>.  양쪽 모두 폼과 그림자를 담는다
+    (예: ninetales_alolan_shadow_그림자알로라나인테일)."""
+    ko = display_ko or korean_name(p, labels)
+    name = FS_UNSAFE.sub('', ko)
+    return {
+        'rank': p.get('pvpokeRank'),                 # 정본 순위 = PvPoke
+        'pogomateRank': p.get('greatRank'),          # 참고용 (둘은 서로 다르다)
+        'id': p['id'],
+        'name': p['name'],
+        'nameKo': p.get('nameKo'),
+        'nameJa': p.get('nameJa'),
+        'displayKo': ko,
+        'dex': p['dex'],
+        'isShadow': bool(p.get('isShadow')),
+        'isMega': bool(p.get('isMega')),
+        'form': p.get('imageForm'),
+        'types': p.get('types', []),
+        'level': p.get('greatLevel'),
+        'file': 'pokemon/%s.%s' % ('%s_%s' % (p['id'], name) if name else p['id'], ext),
+        'spriteKey': key,
+        'url': url,
+    }
 
 
 def download(rows, out_dir, force):
@@ -284,8 +345,10 @@ def download(rows, out_dir, force):
             if r['url'] not in cache:
                 cache[r['url']] = fetch(r['url'], binary=True)
             blob = cache[r['url']]
-            if blob[:4] != b'RIFF' or blob[8:12] != b'WEBP':
-                raise ValueError('webp 파일이 아님')
+            ok = (blob[:4] == b'RIFF' and blob[8:12] == b'WEBP') if r['file'].endswith('.webp') \
+                else blob[:8] == b'\x89PNG\r\n\x1a\n'
+            if not ok:
+                raise ValueError('%s 파일이 아님' % r['file'].rsplit('.', 1)[1])
             (out_dir / r['file']).write_bytes(blob)
         except Exception as e:                    # noqa: BLE001
             failed.append((r['id'], str(e)))
@@ -297,7 +360,7 @@ def download(rows, out_dir, force):
 
     # 랭킹 변동이나 파일명 규칙 변경으로 남은 옛 파일 정리
     keep = {(out_dir / r['file']).name for r in rows}
-    stale = [p for p in sprite_dir.glob('*.webp') if p.name not in keep]
+    stale = [p for p in sprite_dir.glob('*.*') if p.suffix in ('.webp', '.png') and p.name not in keep]
     for p in stale:
         p.unlink()
     if stale:
@@ -362,7 +425,17 @@ def main():
 
     rows, missing = resolve(ranked, sprite_map, labels)
     if missing:
+        found, missing = pokeminers_fallback(ranked, missing, labels)
+        rows += found
+        if found:
+            print('    PoGoMate에 스프라이트가 없어 PokeMiners에서: %s' % ', '.join(r['id'] for r in found))
+    if missing:
         print('    [경고] 스프라이트 미해결: %s' % ', '.join(missing))
+    if not args.top:
+        extra = extra_rows(data)
+        rows += extra
+        if extra:
+            print('    PoGoMate에 없는 신규 종 (EXTRA_SPECIES): %s' % ', '.join(r['id'] for r in extra))
 
     print('4/4 이미지 다운로드…')
     failed = download(rows, out_dir, args.force)

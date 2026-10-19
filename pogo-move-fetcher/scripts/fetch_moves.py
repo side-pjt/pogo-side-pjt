@@ -54,6 +54,13 @@ EXTRA_FORMATS = []
 SEASONS = pathlib.Path(__file__).resolve().parent.parent.parent / 'data' / 'seasons.js'
 # 순위가 겹치는 종의 기본 기술셋·일반기술 사용률을 어느 포맷에서 가져올지 (앞이 우선)
 PRIMARY_FORMATS = ['great', 'mega-1500', 'ultra', 'mega-2500', 'master', 'mega-10000']
+# 어느 포맷 순위에도 아직 없는 신규 종 (PvPoke 게임마스터에 released:false 로만 있다).
+# 게임마스터의 기술 목록으로 넣어 검색·배틀에서 고를 수 있게 한다. 순위에 오르면 순위 쪽이 우선하니 그때 지운다.
+# 값 = 임시 추천 기술셋 [노말, 스페셜…] — PvPoke 추천이 생기기 전까지 쓴다.
+UNRANKED_SPECIES = {
+    'minior_meteor': ['ROLLOUT', 'ACROBATICS', 'POWER_GEM'],
+    'minior_core': ['ROLLOUT', 'ACROBATICS', 'POWER_GEM'],
+}
 
 LEAGUE_KEY = {1500: 'great', 2500: 'ultra', 10000: 'master'}
 LEAGUE_EN = {500: 'Little', 1500: 'Great League', 2500: 'Ultra League', 10000: 'Master League'}
@@ -338,6 +345,31 @@ def main():
                 'share': round((f.get('uses') or 0) / total, 3),
             } for f in fast_used],
         })
+    gm_mon = {p['speciesId']: p for p in gm['pokemon']}
+    for sid, moveset in UNRANKED_SPECIES.items():
+        g = gm_mon.get(sid)
+        if sid in species or g is None:
+            continue
+        pm_rows.append({
+            'speciesId': sid,
+            'speciesName': g['speciesName'],
+            'rank': None,
+            'mega': False,
+            'score': None,
+            'formats': {},
+            'recommended': {'fast': moveset[0], 'charged': moveset[1:]},
+            # 사용률을 모른다 — 0 으로 둔다
+            'fastMoves': [{
+                'moveId': m,
+                'nameKo': names_ko.get(m),
+                'turns': move_rows.get(m, {}).get('turns'),
+                'share': 0,
+            } for m in g.get('fastMoves', [])],
+        })
+    ranked_now = [sid for sid in UNRANKED_SPECIES if sid in species]
+    if ranked_now:
+        print('    순위에 올라왔으니 UNRANKED_SPECIES 에서 지울 것: %s' % ', '.join(ranked_now))
+
     # 기존 순서 유지: 슈퍼리그 순위 → 메가 에디션 순위 → 그 밖의 포맷에만 나오는 종
     pm_rows.sort(key=lambda r: (r['rank'] is None, r['mega'], r['rank'] or 0))
 

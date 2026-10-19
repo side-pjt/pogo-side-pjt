@@ -2,8 +2,8 @@
  "source": "https://pogomate.com/battles/great-league",
  "rankSource": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/all/overall/rankings-1500.json",
  "league": "all",
- "top": 1583,
- "count": 1583,
+ "top": 1586,
+ "count": 1586,
  "pokemon": [
   {
    "rank": 1,
@@ -32524,6 +32524,69 @@
    "file": "pokemon/mewtwo_mega_y_메가뮤츠Y.webp",
    "spriteKey": "pm150.fMEGA_Y.icon.png",
    "url": "https://cdn.pogomate.com/pokemon/pm150.fMEGA_Y.icon.ed39f25b.webp"
+  },
+  {
+   "rank": 822,
+   "pogomateRank": 822,
+   "id": "brambleghast",
+   "name": "Brambleghast",
+   "nameKo": "공푸리",
+   "nameJa": "アノホラグサ",
+   "displayKo": "공푸리",
+   "dex": 947,
+   "isShadow": false,
+   "isMega": false,
+   "form": null,
+   "types": [
+    "grass",
+    "ghost"
+   ],
+   "level": 23,
+   "file": "pokemon/brambleghast_공푸리.png",
+   "spriteKey": "pm947.icon.png",
+   "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm947.icon.png"
+  },
+  {
+   "rank": null,
+   "pogomateRank": null,
+   "id": "minior_meteor",
+   "name": "Minior (Meteor)",
+   "nameKo": "메테노",
+   "nameJa": null,
+   "displayKo": "메테노 (유성의 모습)",
+   "dex": 774,
+   "isShadow": false,
+   "isMega": false,
+   "form": "METEOR",
+   "types": [
+    "rock",
+    "flying"
+   ],
+   "level": null,
+   "file": "pokemon/minior_meteor_메테노유성의모습.png",
+   "spriteKey": "pm774.fMETEOR.icon.png",
+   "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm774.fMETEOR.icon.png"
+  },
+  {
+   "rank": null,
+   "pogomateRank": null,
+   "id": "minior_core",
+   "name": "Minior (Core)",
+   "nameKo": "메테노",
+   "nameJa": null,
+   "displayKo": "메테노 (코어의 모습)",
+   "dex": 774,
+   "isShadow": false,
+   "isMega": false,
+   "form": "RED",
+   "types": [
+    "rock",
+    "flying"
+   ],
+   "level": null,
+   "file": "pokemon/minior_core_메테노코어의모습.png",
+   "spriteKey": "pm774.fRED.icon.png",
+   "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm774.fRED.icon.png"
   }
  ]
 }

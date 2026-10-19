@@ -12,7 +12,7 @@
   "catch-1500",
   "colormega-1500"
  ],
- "count": 1584,
+ "count": 1586,
  "pokemon": [
   {
    "speciesId": "melmetal",
@@ -127309,6 +127309,64 @@
      "nameKo": "튀어오르기",
      "turns": 4,
      "share": 1.0
+    }
+   ]
+  },
+  {
+   "speciesId": "minior_meteor",
+   "speciesName": "Minior (Meteor)",
+   "rank": null,
+   "mega": false,
+   "score": null,
+   "formats": {},
+   "recommended": {
+    "fast": "ROLLOUT",
+    "charged": [
+     "ACROBATICS",
+     "POWER_GEM"
+    ]
+   },
+   "fastMoves": [
+    {
+     "moveId": "ROLLOUT",
+     "nameKo": "구르기",
+     "turns": 3,
+     "share": 0
+    },
+    {
+     "moveId": "TAKE_DOWN",
+     "nameKo": "돌진",
+     "turns": 3,
+     "share": 0
+    }
+   ]
+  },
+  {
+   "speciesId": "minior_core",
+   "speciesName": "Minior (Core)",
+   "rank": null,
+   "mega": false,
+   "score": null,
+   "formats": {},
+   "recommended": {
+    "fast": "ROLLOUT",
+    "charged": [
+     "ACROBATICS",
+     "POWER_GEM"
+    ]
+   },
+   "fastMoves": [
+    {
+     "moveId": "ROLLOUT",
+     "nameKo": "구르기",
+     "turns": 3,
+     "share": 0
+    },
+    {
+     "moveId": "TAKE_DOWN",
+     "nameKo": "돌진",
+     "turns": 3,
+     "share": 0
     }
    ]
   },
