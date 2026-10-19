@@ -38,12 +38,16 @@ PVPOKE_POKEMON = ('https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/da
                   'gamemaster/pokemon.json')
 POKEMINERS_SPRITES = ('https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/'
                       'Images/Pokemon%20-%20256x256/Addressable%20Assets/')
-# PoGoMate에 아직 없는 신규 종 — {PvPoke 종 id: (한글 전체 이름, PokeMiners 스프라이트 키)}.
-# 종 정보는 PvPoke 게임마스터에서 채운다. PoGoMate에 올라오면 그쪽이 우선하니 그때 지우면 된다.
-# 한글명은 인게임 로케일(pokemon_name_0774 = 메테노). 폼 표기는 붙이지 않는다.
+POKEMINERS_KO = ('https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/'
+                 'Texts/Latest%20APK/JSON/i18n_korean.json')
+# 기술 수집기 결과 — PvPoke 모든 포맷 순위에 나오는 종. update_all.py 가 이 수집기보다 먼저 돌린다.
+MOVE_POKEMON = pathlib.Path(__file__).resolve().parent.parent.parent / 'pogo-move-fetcher' / 'data' / 'pokemon_moves.json'
+# PvPoke 순위에 나오는데 PoGoMate에 없는 종은 자동으로 채운다 (extra_rows).
+# 여기에는 순위에도 아직 없지만 미리 넣을 종만 적는다 — {PvPoke 종 id: PokeMiners 스프라이트 키}.
+# PoGoMate에 올라오면 그쪽이 우선하니 그때 지우면 된다.
 EXTRA_SPECIES = {
-    'minior_meteor': ('메테노', 'pm774.fMETEOR.icon.png'),
-    'minior_core': ('메테노', 'pm774.fRED.icon.png'),   # 코어 색은 7가지 — 빨강을 대표로
+    'minior_meteor': 'pm774.fMETEOR.icon.png',
+    'minior_core': 'pm774.fRED.icon.png',   # 코어 색은 7가지 — 빨강을 대표로
 }
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) pogomate-asset-fetch'
 
@@ -285,23 +289,56 @@ def pokeminers_fallback(ranked, missing, labels):
     return rows, still
 
 
-def extra_rows(data):
-    """EXTRA_SPECIES 중 PoGoMate에 아직 없는 종의 행. 순위는 없다 (PvPoke 순위에 오르기 전이다)."""
+def extra_rows(data, shadow_prefix):
+    """PoGoMate에 없는 종의 행 — PvPoke 순위에 나오는 종(pokemon_moves.json) + EXTRA_SPECIES.
+
+    종 정보는 PvPoke 게임마스터, 스프라이트는 PokeMiners. 한글명은 PoGoMate의 같은 도감번호 이름,
+    없으면 인게임 로케일(pokemon_name_0774 = 메테노). 폼 표기는 붙이지 않는다 — 번들의 폼 라벨표에 없는 폼이다.
+    """
     have = {p['id'] for p in data}
-    todo = {sid: v for sid, v in EXTRA_SPECIES.items() if sid not in have}
+    ranked = []
+    if MOVE_POKEMON.exists():
+        ranked = [r['speciesId'] for r in json.load(open(MOVE_POKEMON, encoding='utf-8'))['pokemon']]
+    else:
+        print('    [경고] %s 없음 — 기술 수집기를 먼저 돌리면 PoGoMate에 없는 순위 종도 채운다' % MOVE_POKEMON.name)
+    todo = list(dict.fromkeys(sid for sid in ranked + list(EXTRA_SPECIES) if sid not in have))
     if not todo:
         return []
+
     gm = {p['speciesId']: p for p in fetch_json(PVPOKE_POKEMON)}
+    ko_by_dex = {p['dex']: p['nameKo'] for p in data if p.get('nameKo')}
+    locale = None
     rows = []
-    for sid, (ko, key) in todo.items():
-        g = gm.get(sid)
+    for sid in todo:
+        base = sid[:-len('_shadow')] if sid.endswith('_shadow') else sid
+        g = gm.get(sid) or gm.get(base)
         if g is None:
             print('    [경고] PvPoke 게임마스터에 없는 종: %s' % sid)
             continue
-        form = re.match(r'pm\d+\.f([A-Z_]+)\.', key)
-        p = {'id': sid, 'name': g['speciesName'], 'nameKo': ko.split(' (')[0], 'dex': g['dex'],
-             'imageForm': form.group(1) if form else None, 'types': [t for t in g['types'] if t != 'none']}
-        rows.append(sprite_row(p, None, key, POKEMINERS_SPRITES + key, 'png', display_ko=ko))
+        dex = g['dex']
+        name = ko_by_dex.get(dex)
+        if name is None:
+            if locale is None:
+                d = fetch_json(POKEMINERS_KO)['data']
+                locale = {d[k]: d[k + 1] for k in range(0, len(d) - 1, 2)}
+            name = locale.get('pokemon_name_%04d' % dex)
+        if name is None:
+            print('    [경고] 한글명을 찾지 못한 종: %s' % sid)
+            continue
+        # 폼 스프라이트 키는 PvPoke id 의 폼 부분을 대문자로 (minior_meteor → pm774.fMETEOR)
+        form = base.split('_', 1)[1].upper() if '_' in base else None
+        cands = [EXTRA_SPECIES.get(base) or EXTRA_SPECIES.get(sid)] \
+            + (['pm%d.f%s.icon.png' % (dex, form)] if form else []) + ['pm%d.icon.png' % dex]
+        key = next((k for k in cands if k and pokeminers_url(k)), None)
+        if key is None:
+            print('    [경고] 스프라이트를 찾지 못한 종: %s' % sid)
+            continue
+        shadow = sid != base
+        p = {'id': sid, 'name': g['speciesName'], 'nameKo': name, 'dex': dex, 'isShadow': shadow,
+             'imageForm': re.match(r'pm\d+(?:\.f([A-Z_]+))?\.', key).group(1),
+             'types': [t for t in g['types'] if t != 'none']}
+        rows.append(sprite_row(p, None, key, POKEMINERS_SPRITES + key, 'png',
+                               display_ko=(shadow_prefix if shadow else '') + name))
     return rows
 
 
@@ -432,10 +469,10 @@ def main():
     if missing:
         print('    [경고] 스프라이트 미해결: %s' % ', '.join(missing))
     if not args.top:
-        extra = extra_rows(data)
+        extra = extra_rows(data, labels[2])
         rows += extra
         if extra:
-            print('    PoGoMate에 없는 신규 종 (EXTRA_SPECIES): %s' % ', '.join(r['id'] for r in extra))
+            print('    PoGoMate에 없어 PvPoke·PokeMiners로 채운 종: %s' % ', '.join(r['id'] for r in extra))
 
     print('4/4 이미지 다운로드…')
     failed = download(rows, out_dir, args.force)

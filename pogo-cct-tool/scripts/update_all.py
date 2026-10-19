@@ -1,8 +1,9 @@
 """
 데이터 일괄 갱신 — 수집기 둘과 도구 데이터 빌드를 순서대로 돌리고 요약을 낸다.
 
-  1. pogo-image-fetcher  모든 리그·컵의 종, 스프라이트, 한글 포켓몬명
-  2. pogo-move-fetcher   포맷 목록(PvPoke 자동), 포맷별 순위·추천 기술셋, 한글 기술·컵 이름
+  1. pogo-move-fetcher   포맷 목록(PvPoke 자동), 포맷별 순위·추천 기술셋, 한글 기술·컵 이름
+  2. pogo-image-fetcher  모든 리그·컵의 종, 스프라이트, 한글 포켓몬명
+                         (1의 순위에 있는데 PoGoMate에 없는 종도 채우므로 1 다음에 돈다)
   3. pogo-cct-tool       data/*.js, data/formats/*.js, images/
 
 한 단계가 경고로 끝나도(예: 한글명이 아직 없는 신규 기술) 다음 단계는 계속 돌린다.
@@ -37,11 +38,10 @@ def main():
                     help='PvPoke formats 에 없는 컵 추가 (예: fantasy:1500)')
     args = ap.parse_args()
 
-    steps = []
+    steps = [('1/4 포맷·순위·기술', ['pogo-move-fetcher/scripts/fetch_moves.py']
+              + (['--extra'] + args.extra if args.extra else []))]
     if not args.no_images:
-        steps.append(('1/4 이미지·한글 포켓몬명', ['pogo-image-fetcher/scripts/fetch_assets.py']))
-    steps.append(('2/4 포맷·순위·기술', ['pogo-move-fetcher/scripts/fetch_moves.py']
-                  + (['--extra'] + args.extra if args.extra else [])))
+        steps.append(('2/4 이미지·한글 포켓몬명', ['pogo-image-fetcher/scripts/fetch_assets.py']))
     steps.append(('3/4 도구 데이터 빌드', ['pogo-cct-tool/scripts/build_data.py']
                   + (['--no-images'] if args.no_images else [])))
     steps.append(('4/4 기술표 빌드', ['pogo-cct-tool/scripts/build_moves.py']))
