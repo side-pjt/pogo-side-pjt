@@ -1,7 +1,7 @@
 'use strict';
 
 /* 포맷(리그·컵) — 지금 보고 있는 포맷을 정하고 그 포맷 데이터를 읽는다.
-   정하는 순서: 주소 ?f= → 예전 주소 ?league= → localStorage → 슈퍼리그.
+   정하는 순서: 주소 ?f= → 예전 주소 ?league= → localStorage(이번 주에 고른 것) → 이번 주 컵 → 슈퍼리그.
    data/formats/index.js 다음, common.js 앞에 둔다. 포맷 파일을 document.write 로 넣어야
    common.js 보다 먼저 실행되고 file:// 로 열어도 동작한다 (fetch 를 쓸 수 없다).
    포맷을 바꾸면 페이지를 다시 연다 — 순위·개체값 계산이 전부 포맷에 묶여 있어서다. */
@@ -14,26 +14,35 @@
   function param(name) {
     try { return new URLSearchParams(location.search).get(name); } catch (e) { return null; }
   }
-  function stored() {
-    try { return localStorage.getItem(KEY); } catch (e) { return null; }
-  }
-  function save(key) {
-    try { localStorage.setItem(KEY, key); } catch (e) { /* 사생활 보호 모드 등 */ }
-  }
-
-  /* 시즌 일정(season.js) — 있으면 처음 오는 사람에게 이번 주 열린 포맷을 먼저 보여 준다 */
+  /* 시즌 일정(season.js) — 있으면 이번 주 열린 포맷을 먼저 보여 준다 */
   const season = root.Season ? root.Season.at() : null;
   const liveReady = season ? season.live.filter(e => e.ready).map(e => e.key) : [];
+  /* 고른 포맷은 고른 주와 함께 남긴다. 주가 바뀌어 닫힌 포맷이면 버리고 이번 주 포맷으로 연다 —
+     지난주 슈퍼리그를 골라 둔 사람이 판타지컵 주에도 슈퍼리그로 열지 않게 */
+  const week = season && season.current.length ? season.current[0].start : '';
+
+  function stored() {
+    let v;
+    try { v = JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; }  // 예전 값은 키 문자열이라 여기서 버린다
+    if (!v || typeof v.key !== 'string') return null;
+    return !week || v.week === week || liveReady.includes(v.key) ? v.key : null;
+  }
+  function save(key) {
+    try { localStorage.setItem(KEY, JSON.stringify({ key, week })); } catch (e) { /* 사생활 보호 모드 등 */ }
+  }
+
+  const isLeague = f => f.cup === 'all';
+  const isMega = f => f.cup === 'mega';
+  /* 이번 주 기본은 그 주의 컵 (판타지컵 주면 판타지컵) — 컵이 없으면 일정에 적힌 첫 포맷 */
+  const liveDefault = liveReady.find(k => !isLeague(byKey(k)) && !isMega(byKey(k))) || liveReady[0];
 
   const asked = param('f') || param('league');
-  const current = byKey(asked) || byKey(stored()) || byKey(liveReady[0]) || byKey(DEFAULT) || LIST[0] ||
+  const current = byKey(asked) || byKey(stored()) || byKey(liveDefault) || byKey(DEFAULT) || LIST[0] ||
     { key: DEFAULT, cup: 'all', cp: 1500, title: 'Great League', ko: '슈퍼리그' };
   /* 주소로 연 포맷은 다음 방문에도 이어지게 남긴다. 없어진 포맷이면 알림을 띄운다 */
   if (asked && byKey(asked)) save(current.key);
   const missing = asked && !byKey(asked) ? asked : null;
 
-  const isLeague = f => f.cup === 'all';
-  const isMega = f => f.cup === 'mega';
   const capText = f => f.cp >= 10000 ? '무제한' : `CP ${f.cp}`;
   /* 선택기 칸이 좁아서 컵은 이름만 (이름에 리그가 들어 있다) */
   const label = f => isLeague(f) ? `${f.ko} · ${capText(f)}` : f.ko;
