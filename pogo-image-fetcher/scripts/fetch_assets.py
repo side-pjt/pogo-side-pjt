@@ -528,7 +528,7 @@ def write_outputs(rows, out_dir, top):
         }, f, ensure_ascii=False, indent=1)
 
     with open(out_dir / 'index.csv', 'w', encoding='utf-8-sig', newline='') as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator='\n')   # Actions(Linux)·PC 어디서 써도 같은 파일이 되게
         w.writerow(['rank', 'pogomateRank', 'id', 'name', 'nameKo', 'displayKo',
                     'nameJa', 'dex', 'isShadow', 'form', 'types', 'file'])
         for r in rows:

@@ -392,7 +392,7 @@ def main():
     fast = sorted([m for m in move_rows.values() if m['kind'] == 'fast'],
                   key=lambda m: (m['turns'] or 9, m['nameKo'] or m['name']))
     with open(out_dir / 'fast_moves.csv', 'w', encoding='utf-8-sig', newline='') as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator='\n')   # Actions(Linux)·PC 어디서 써도 같은 파일이 되게
         w.writerow(['turns', 'seconds', 'moveId', 'nameKo', 'name', 'type',
                     'power', 'energyGain'])
         for m in fast:
