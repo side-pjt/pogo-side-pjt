@@ -9,7 +9,7 @@
    "ko": "슈퍼리그",
    "nameSource": "official",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/all/overall/rankings-1500.json",
-   "count": 1153
+   "count": 1154
   },
   {
    "key": "ultra",
@@ -19,7 +19,7 @@
    "ko": "하이퍼리그",
    "nameSource": "official",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/all/overall/rankings-2500.json",
-   "count": 850
+   "count": 851
   },
   {
    "key": "master",
@@ -39,7 +39,7 @@
    "ko": "슈퍼리그: 메가 버전",
    "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/mega/overall/rankings-1500.json",
-   "count": 1210
+   "count": 1211
   },
   {
    "key": "mega-2500",
@@ -49,7 +49,7 @@
    "ko": "하이퍼리그: 메가 버전",
    "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/mega/overall/rankings-2500.json",
-   "count": 912
+   "count": 913
   },
   {
    "key": "mega-10000",
