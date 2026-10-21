@@ -24,6 +24,7 @@ import json
 import pathlib
 import re
 import sys
+import urllib.error
 import urllib.request
 
 PAGE_URL = 'https://pogomate.com/battles/great-league'
@@ -418,7 +419,14 @@ def main():
     out_dir = pathlib.Path(args.out)
 
     print('1/4 랭킹 페이지 로드…')
-    html = fetch(PAGE_URL)
+    try:
+        html = fetch(PAGE_URL)
+    except urllib.error.HTTPError as e:
+        # PoGoMate(Cloudflare)는 GitHub Actions 같은 데이터센터 IP에 확인 페이지(403)를 돌려준다.
+        # 그때는 받아 둔 manifest 를 그대로 두고 PvPoke 순위에 새로 나온 종만 채운다
+        if e.code != 403 or args.top or not (out_dir / 'manifest.json').exists():
+            raise
+        return offline(out_dir, args.force)
 
     print('2/4 랭킹 데이터 파싱…')
     data = backfill_names(load_ranking(html))
@@ -477,13 +485,44 @@ def main():
     print('4/4 이미지 다운로드…')
     failed = download(rows, out_dir, args.force)
 
+    write_outputs(rows, out_dir, args.top)
+
+    if failed:
+        print('  [실패] %s' % failed)
+        return 1
+    return 0
+
+
+def offline(out_dir, force):
+    """PoGoMate 없이 갱신 — 받아 둔 행은 그대로 두고, PvPoke 순위에 새로 나온 종만 extra_rows 로 채운다.
+    PoGoMate 스프라이트·한글명 자체의 변경은 PoGoMate 가 열리는 곳(로컬 PC)에서 돌려야 들어온다.
+    manifest 의 rank 는 참고용이라(포맷별 순위는 pokemon_moves.json) 다시 매기지 않는다."""
+    print('    [경고] PoGoMate 가 막혀 있다(HTTP 403) — 받아 둔 manifest 로 갱신하고, 새 종만 PvPoke·PokeMiners 로 채운다')
+    rows = json.load(open(out_dir / 'manifest.json', encoding='utf-8'))['pokemon']
+
+    # extra_rows 는 id(이미 있는 종)와 dex·nameKo(같은 도감번호 한글명)만 본다
+    extra = extra_rows(rows, '그림자 ')
+    rows += extra
+    if extra:
+        print('    PvPoke·PokeMiners로 채운 새 종: %s' % ', '.join(r['id'] for r in extra))
+    else:
+        print('    새로 채울 종 없음 (%d종 그대로)' % len(rows))
+
+    failed = download(rows, out_dir, force)
+    write_outputs(rows, out_dir, 0)
+    if failed:
+        print('  [실패] %s' % failed)
+    return 1      # 경고로 끝낸다 — update_all.py 요약에 남아 PC 에서 한 번 돌릴 때가 됐는지 보게
+
+
+def write_outputs(rows, out_dir, top):
     out_dir.mkdir(parents=True, exist_ok=True)
     with open(out_dir / 'manifest.json', 'w', encoding='utf-8') as f:
         json.dump({
             'source': PAGE_URL,
             'rankSource': PVPOKE_RANKS,
             'league': 'all',
-            'top': args.top or len(rows),
+            'top': top or len(rows),
             'count': len(rows),
             'pokemon': rows,
         }, f, ensure_ascii=False, indent=1)
@@ -503,10 +542,6 @@ def main():
           % (len(rows), sum(1 for r in rows if r['isShadow']), len({r['url'] for r in rows})))
     print('  %s' % (out_dir / 'manifest.json'))
     print('  %s' % (out_dir / 'index.csv'))
-    if failed:
-        print('  [실패] %s' % failed)
-        return 1
-    return 0
 
 
 if __name__ == '__main__':
