@@ -1,5 +1,5 @@
 {
- "count": 11,
+ "count": 12,
  "formats": [
   {
    "key": "great",
@@ -62,16 +62,6 @@
    "count": 470
   },
   {
-   "key": "little-500",
-   "cup": "little",
-   "cp": 500,
-   "title": "Little Cup",
-   "ko": "리틀컵",
-   "nameSource": "official",
-   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/little/overall/rankings-500.json",
-   "count": 528
-  },
-  {
    "key": "fantasy-1500",
    "cup": "fantasy",
    "cp": 1500,
@@ -82,6 +72,16 @@
    "count": 197
   },
   {
+   "key": "halloweenmega-1500",
+   "cup": "halloweenmega",
+   "cp": 1500,
+   "title": "Mega Halloween Cup",
+   "ko": "메가 핼러윈컵",
+   "nameSource": "rule",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/halloweenmega/overall/rankings-1500.json",
+   "count": 377
+  },
+  {
    "key": "laic2027-1500",
    "cup": "laic2027",
    "cp": 1500,
@@ -90,6 +90,16 @@
    "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/laic2027/overall/rankings-1500.json",
    "count": 828
+  },
+  {
+   "key": "little-500",
+   "cup": "little",
+   "cp": 500,
+   "title": "Little Cup",
+   "ko": "리틀컵",
+   "nameSource": "official",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/little/overall/rankings-500.json",
+   "count": 528
   },
   {
    "key": "catch-1500",
@@ -118,11 +128,10 @@
   "Battle Frontier (Cauldron)",
   "Battle Frontier (Master)",
   "Devon Trail Cup",
+  "Devon Fable Cup",
   "Gymbreakers Invitational Season 7",
   "Master Premier Cup",
   "Custom"
  ],
- "noRanking": [
-  "halloweenmega-1500"
- ]
+ "noRanking": []
 }

@@ -6,9 +6,10 @@
   "mega-1500",
   "mega-2500",
   "mega-10000",
-  "little-500",
   "fantasy-1500",
+  "halloweenmega-1500",
   "laic2027-1500",
+  "little-500",
   "catch-1500",
   "colormega-1500"
  ],
@@ -419,6 +420,15 @@
       "SHADOW_SNEAK",
       "PLAY_ROUGH"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 1,
+     "score": 97.2,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_SNEAK",
+      "PLAY_ROUGH"
+     ]
     }
    },
    "recommended": {
@@ -489,6 +499,15 @@
     "fantasy-1500": {
      "rank": 22,
      "score": 80.6,
+     "moveset": [
+      "FAIRY_WIND",
+      "GIGATON_HAMMER",
+      "BULLDOZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 2,
+     "score": 93.6,
      "moveset": [
       "FAIRY_WIND",
       "GIGATON_HAMMER",
@@ -621,6 +640,15 @@
     "mega-1500": {
      "rank": 11,
      "score": 91.2,
+     "moveset": [
+      "ASTONISH",
+      "NIGHT_SHADE",
+      "POWER_GEM"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 68,
+     "score": 80.2,
      "moveset": [
       "ASTONISH",
       "NIGHT_SHADE",
@@ -831,6 +859,15 @@
     "fantasy-1500": {
      "rank": 64,
      "score": 69.6,
+     "moveset": [
+      "FAIRY_WIND",
+      "CHILLING_WATER",
+      "MOONBLAST"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 35,
+     "score": 82.9,
      "moveset": [
       "FAIRY_WIND",
       "CHILLING_WATER",
@@ -1316,6 +1353,15 @@
       "BRUTAL_SWING",
       "FLY"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 47,
+     "score": 82.3,
+     "moveset": [
+      "DRAGON_BREATH",
+      "BRUTAL_SWING",
+      "FLY"
+     ]
     }
    },
    "recommended": {
@@ -1381,6 +1427,15 @@
       "POISON_STING",
       "STONE_EDGE",
       "EARTHQUAKE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 3,
+     "score": 93.1,
+     "moveset": [
+      "POISON_STING",
+      "EARTHQUAKE",
+      "STONE_EDGE"
      ]
     },
     "catch-1500": {
@@ -1452,6 +1507,15 @@
     "mega-2500": {
      "rank": 594,
      "score": 70.4,
+     "moveset": [
+      "INFESTATION",
+      "WATER_PULSE",
+      "MIRROR_COAT"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 16,
+     "score": 85.3,
      "moveset": [
       "INFESTATION",
       "WATER_PULSE",
@@ -1542,6 +1606,15 @@
       "ICY_WIND"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 59,
+     "score": 81.2,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "NIGHT_SLASH",
+      "ICY_WIND"
+     ]
+    },
     "catch-1500": {
      "rank": 38,
      "score": 86.7,
@@ -1599,6 +1672,15 @@
     "mega-1500": {
      "rank": 20,
      "score": 90.3,
+     "moveset": [
+      "SHADOW_CLAW",
+      "FOUL_PLAY",
+      "DRAIN_PUNCH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 58,
+     "score": 81.2,
      "moveset": [
       "SHADOW_CLAW",
       "FOUL_PLAY",
@@ -1665,6 +1747,15 @@
     "mega-2500": {
      "rank": 18,
      "score": 90.9,
+     "moveset": [
+      "HEX",
+      "SURF",
+      "SHADOW_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 100,
+     "score": 77.3,
      "moveset": [
       "HEX",
       "SURF",
@@ -2034,6 +2125,15 @@
       "DARK_PULSE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 52,
+     "score": 81.6,
+     "moveset": [
+      "SNARL",
+      "DARK_PULSE",
+      "LAST_RESORT"
+     ]
+    },
     "catch-1500": {
      "rank": 122,
      "score": 82.7,
@@ -2123,6 +2223,15 @@
      "score": 63.5,
      "moveset": [
       "COUNTER",
+      "RAGE_FIST",
+      "ICE_PUNCH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 87,
+     "score": 78.2,
+     "moveset": [
+      "LOW_KICK",
       "RAGE_FIST",
       "ICE_PUNCH"
      ]
@@ -2493,6 +2602,15 @@
     "fantasy-1500": {
      "rank": 41,
      "score": 74.4,
+     "moveset": [
+      "BUBBLE",
+      "ICE_BEAM",
+      "PLAY_ROUGH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 26,
+     "score": 83.6,
      "moveset": [
       "BUBBLE",
       "ICE_BEAM",
@@ -3051,6 +3169,15 @@
       "ICE_PUNCH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 105,
+     "score": 76.9,
+     "moveset": [
+      "LOW_KICK",
+      "RAGE_FIST",
+      "ICE_PUNCH"
+     ]
+    },
     "catch-1500": {
      "rank": 17,
      "score": 88.1,
@@ -3120,6 +3247,15 @@
     "mega-2500": {
      "rank": 599,
      "score": 70.1,
+     "moveset": [
+      "INFESTATION",
+      "WATER_PULSE",
+      "MIRROR_COAT"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 17,
+     "score": 85.2,
      "moveset": [
       "INFESTATION",
       "WATER_PULSE",
@@ -3204,6 +3340,15 @@
     "fantasy-1500": {
      "rank": 91,
      "score": 66.9,
+     "moveset": [
+      "ROCK_THROW",
+      "ROCK_SLIDE",
+      "MOONBLAST"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 4,
+     "score": 92.3,
      "moveset": [
       "ROCK_THROW",
       "ROCK_SLIDE",
@@ -3609,6 +3754,15 @@
       "POWER_GEM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 53,
+     "score": 81.5,
+     "moveset": [
+      "SHADOW_CLAW",
+      "FOUL_PLAY",
+      "POWER_GEM"
+     ]
+    },
     "catch-1500": {
      "rank": 15,
      "score": 88.6,
@@ -3705,6 +3859,15 @@
     "fantasy-1500": {
      "rank": 115,
      "score": 64.3,
+     "moveset": [
+      "DRAGON_TAIL",
+      "BRUTAL_SWING",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 78,
+     "score": 79,
      "moveset": [
       "DRAGON_TAIL",
       "BRUTAL_SWING",
@@ -3861,6 +4024,15 @@
       "FOUL_PLAY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 120,
+     "score": 75.8,
+     "moveset": [
+      "PSYWAVE",
+      "SUPER_POWER",
+      "FOUL_PLAY"
+     ]
+    },
     "catch-1500": {
      "rank": 8,
      "score": 90.1,
@@ -3942,6 +4114,15 @@
       "SUPER_POWER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 150,
+     "score": 73.4,
+     "moveset": [
+      "PSYWAVE",
+      "FOUL_PLAY",
+      "SUPER_POWER"
+     ]
+    },
     "catch-1500": {
      "rank": 2,
      "score": 91.7,
@@ -3999,6 +4180,15 @@
     "mega-1500": {
      "rank": 40,
      "score": 89.6,
+     "moveset": [
+      "VOLT_SWITCH",
+      "X_SCISSOR",
+      "DISCHARGE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 45,
+     "score": 82.3,
      "moveset": [
       "VOLT_SWITCH",
       "X_SCISSOR",
@@ -4293,6 +4483,15 @@
       "DISCHARGE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 67,
+     "score": 80.2,
+     "moveset": [
+      "VOLT_SWITCH",
+      "X_SCISSOR",
+      "DISCHARGE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 48,
      "score": 90,
@@ -4578,6 +4777,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 44,
+     "score": 82.4,
+     "moveset": [
+      "AIR_SLASH",
+      "DARK_PULSE",
+      "AERIAL_ACE"
+     ]
+    },
     "catch-1500": {
      "rank": 1,
      "score": 94.8,
@@ -4647,6 +4855,15 @@
     "mega-2500": {
      "rank": 329,
      "score": 78.7,
+     "moveset": [
+      "THUNDER_SHOCK",
+      "AURA_WHEEL_ELECTRIC",
+      "PSYCHIC_FANGS"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 8,
+     "score": 87.2,
      "moveset": [
       "THUNDER_SHOCK",
       "AURA_WHEEL_ELECTRIC",
@@ -4920,6 +5137,15 @@
     "fantasy-1500": {
      "rank": 11,
      "score": 87,
+     "moveset": [
+      "VOLT_SWITCH",
+      "SAND_TOMB",
+      "ROCK_TOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 40,
+     "score": 82.5,
      "moveset": [
       "VOLT_SWITCH",
       "SAND_TOMB",
@@ -5949,6 +6175,15 @@
       "SHADOW_PUNCH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 99,
+     "score": 77.3,
+     "moveset": [
+      "HEX",
+      "ICE_PUNCH",
+      "SHADOW_PUNCH"
+     ]
+    },
     "catch-1500": {
      "rank": 50,
      "score": 85.5,
@@ -6027,6 +6262,15 @@
     "fantasy-1500": {
      "rank": 4,
      "score": 94.2,
+     "moveset": [
+      "VOLT_SWITCH",
+      "SAND_TOMB",
+      "ROCK_TOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 6,
+     "score": 88.4,
      "moveset": [
       "VOLT_SWITCH",
       "SAND_TOMB",
@@ -6117,6 +6361,15 @@
     "fantasy-1500": {
      "rank": 92,
      "score": 66.7,
+     "moveset": [
+      "POWDER_SNOW",
+      "WEATHER_BALL_ICE",
+      "CHILLING_WATER"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 31,
+     "score": 83.4,
      "moveset": [
       "POWDER_SNOW",
       "WEATHER_BALL_ICE",
@@ -6295,6 +6548,15 @@
       "SUCKER_PUNCH",
       "ANCIENT_POWER",
       "PAYBACK"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 55,
+     "score": 81.4,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "FLY",
+      "BRAVE_BIRD"
      ]
     },
     "catch-1500": {
@@ -6564,6 +6826,15 @@
       "FLY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 71,
+     "score": 79.8,
+     "moveset": [
+      "DRAGON_BREATH",
+      "BRUTAL_SWING",
+      "FLY"
+     ]
+    },
     "catch-1500": {
      "rank": 134,
      "score": 82.1,
@@ -6642,6 +6913,15 @@
     "fantasy-1500": {
      "rank": 82,
      "score": 68.2,
+     "moveset": [
+      "POWDER_SNOW",
+      "WEATHER_BALL_ICE",
+      "CHILLING_WATER"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 50,
+     "score": 81.7,
      "moveset": [
       "POWDER_SNOW",
       "WEATHER_BALL_ICE",
@@ -6737,6 +7017,15 @@
       "SHADOW_BALL",
       "GYRO_BALL"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 122,
+     "score": 75.7,
+     "moveset": [
+      "AEGISLASH_CHARGE_PSYCHO_CUT",
+      "SHADOW_BALL",
+      "GYRO_BALL"
+     ]
     }
    },
    "recommended": {
@@ -6780,6 +7069,15 @@
     "mega-1500": {
      "rank": 79,
      "score": 87.9,
+     "moveset": [
+      "HEX",
+      "ICE_PUNCH",
+      "SHADOW_PUNCH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 61,
+     "score": 80.9,
      "moveset": [
       "HEX",
       "ICE_PUNCH",
@@ -7091,6 +7389,15 @@
       "SACRED_SWORD",
       "IRON_HEAD"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 70,
+     "score": 79.9,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SACRED_SWORD",
+      "IRON_HEAD"
+     ]
     }
    },
    "recommended": {
@@ -7344,6 +7651,15 @@
       "SHADOW_PUNCH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 92,
+     "score": 78,
+     "moveset": [
+      "ASTONISH",
+      "DYNAMIC_PUNCH",
+      "SHADOW_PUNCH"
+     ]
+    },
     "laic2027-1500": {
      "rank": 9,
      "score": 94.1,
@@ -7590,6 +7906,15 @@
     "mega-1500": {
      "rank": 75,
      "score": 88,
+     "moveset": [
+      "SHADOW_CLAW",
+      "LUNGE",
+      "ROCK_TOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 9,
+     "score": 86.8,
      "moveset": [
       "SHADOW_CLAW",
       "LUNGE",
@@ -7968,6 +8293,15 @@
       "FOUL_PLAY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 160,
+     "score": 72.7,
+     "moveset": [
+      "INCINERATE",
+      "SHADOW_BALL",
+      "SEED_BOMB"
+     ]
+    },
     "laic2027-1500": {
      "rank": 145,
      "score": 85.6,
@@ -8277,6 +8611,15 @@
       "FOUL_PLAY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 158,
+     "score": 72.8,
+     "moveset": [
+      "INCINERATE",
+      "SHADOW_BALL",
+      "SEED_BOMB"
+     ]
+    },
     "laic2027-1500": {
      "rank": 123,
      "score": 86.4,
@@ -8493,6 +8836,15 @@
       "METEOR_MASH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 24,
+     "score": 84,
+     "moveset": [
+      "FAIRY_WIND",
+      "MOONBLAST",
+      "METEOR_MASH"
+     ]
+    },
     "catch-1500": {
      "rank": 27,
      "score": 87.4,
@@ -8580,6 +8932,15 @@
     "mega-2500": {
      "rank": 270,
      "score": 80.1,
+     "moveset": [
+      "INCINERATE",
+      "SHADOW_BALL",
+      "SEED_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 167,
+     "score": 72.3,
      "moveset": [
       "INCINERATE",
       "SHADOW_BALL",
@@ -8868,6 +9229,15 @@
       "CRUNCH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 27,
+     "score": 83.6,
+     "moveset": [
+      "POISON_STING",
+      "CRUNCH",
+      "AQUA_TAIL"
+     ]
+    },
     "catch-1500": {
      "rank": 9,
      "score": 89.7,
@@ -8955,18 +9325,18 @@
       "ROCK_SLIDE"
      ]
     },
-    "little-500": {
-     "rank": 105,
-     "score": 79.7,
+    "laic2027-1500": {
+     "rank": 18,
+     "score": 92.5,
      "moveset": [
       "BITE",
       "DRILL_RUN",
       "ROCK_SLIDE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 18,
-     "score": 92.5,
+    "little-500": {
+     "rank": 105,
+     "score": 79.7,
      "moveset": [
       "BITE",
       "DRILL_RUN",
@@ -9048,6 +9418,15 @@
     "mega-2500": {
      "rank": 271,
      "score": 80.1,
+     "moveset": [
+      "INCINERATE",
+      "SHADOW_BALL",
+      "SEED_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 172,
+     "score": 71.9,
      "moveset": [
       "INCINERATE",
       "SHADOW_BALL",
@@ -9471,6 +9850,15 @@
       "SWIFT"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 30,
+     "score": 83.5,
+     "moveset": [
+      "CHARM",
+      "ICY_WIND",
+      "SWIFT"
+     ]
+    },
     "catch-1500": {
      "rank": 117,
      "score": 82.9,
@@ -9570,6 +9958,15 @@
       "ICE_PUNCH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 14,
+     "score": 85.6,
+     "moveset": [
+      "POISON_JAB",
+      "BRUTAL_SWING",
+      "ICE_PUNCH"
+     ]
+    },
     "catch-1500": {
      "rank": 348,
      "score": 75.3,
@@ -9645,6 +10042,15 @@
     "mega-2500": {
      "rank": 24,
      "score": 90.3,
+     "moveset": [
+      "ASTONISH",
+      "DYNAMIC_PUNCH",
+      "SHADOW_PUNCH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 107,
+     "score": 76.8,
      "moveset": [
       "ASTONISH",
       "DYNAMIC_PUNCH",
@@ -10071,6 +10477,15 @@
     "fantasy-1500": {
      "rank": 114,
      "score": 64.6,
+     "moveset": [
+      "FAIRY_WIND",
+      "MOONBLAST",
+      "PSYSHOCK"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 11,
+     "score": 86.4,
      "moveset": [
       "FAIRY_WIND",
       "MOONBLAST",
@@ -10784,6 +11199,15 @@
       "FOUL_PLAY",
       "PLAY_ROUGH"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 85,
+     "score": 78.5,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "FOUL_PLAY",
+      "PLAY_ROUGH"
+     ]
     }
    },
    "recommended": {
@@ -10869,6 +11293,15 @@
       "ICE_PUNCH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 18,
+     "score": 85.1,
+     "moveset": [
+      "POISON_JAB",
+      "BRUTAL_SWING",
+      "ICE_PUNCH"
+     ]
+    },
     "catch-1500": {
      "rank": 364,
      "score": 74.9,
@@ -10926,6 +11359,15 @@
     "mega-1500": {
      "rank": 109,
      "score": 85.7,
+     "moveset": [
+      "PECK",
+      "DRILL_PECK",
+      "FOUL_PLAY"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 38,
+     "score": 82.9,
      "moveset": [
       "PECK",
       "DRILL_PECK",
@@ -11016,15 +11458,6 @@
       "AERIAL_ACE"
      ]
     },
-    "little-500": {
-     "rank": 44,
-     "score": 84,
-     "moveset": [
-      "FURY_CUTTER",
-      "NIGHT_SLASH",
-      "AERIAL_ACE"
-     ]
-    },
     "laic2027-1500": {
      "rank": 139,
      "score": 85.9,
@@ -11032,6 +11465,15 @@
       "WING_ATTACK",
       "NIGHT_SLASH",
       "DIG"
+     ]
+    },
+    "little-500": {
+     "rank": 44,
+     "score": 84,
+     "moveset": [
+      "FURY_CUTTER",
+      "NIGHT_SLASH",
+      "AERIAL_ACE"
      ]
     },
     "catch-1500": {
@@ -11103,6 +11545,15 @@
     "mega-2500": {
      "rank": 92,
      "score": 86.2,
+     "moveset": [
+      "POISON_STING",
+      "CRUNCH",
+      "AQUA_TAIL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 19,
+     "score": 84.6,
      "moveset": [
       "POISON_STING",
       "CRUNCH",
@@ -11192,6 +11643,15 @@
      "score": 57.7,
      "moveset": [
       "POISON_JAB",
+      "BRINE",
+      "SLUDGE_WAVE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 23,
+     "score": 84.1,
+     "moveset": [
+      "BITE",
       "BRINE",
       "SLUDGE_WAVE"
      ]
@@ -11454,6 +11914,15 @@
       "ROCK_TOMB"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 94,
+     "score": 78,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "ROCK_TOMB",
+      "SHADOW_BALL"
+     ]
+    },
     "catch-1500": {
      "rank": 59,
      "score": 85.1,
@@ -11541,6 +12010,15 @@
     "mega-10000": {
      "rank": 109,
      "score": 65.6,
+     "moveset": [
+      "FURY_CUTTER",
+      "AQUA_JET",
+      "X_SCISSOR"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 65,
+     "score": 80.4,
      "moveset": [
       "FURY_CUTTER",
       "AQUA_JET",
@@ -12380,6 +12858,15 @@
       "DRAGON_CLAW",
       "SHADOW_SNEAK"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 166,
+     "score": 72.3,
+     "moveset": [
+      "DRAGON_BREATH",
+      "DRAGON_CLAW",
+      "SHADOW_SNEAK"
+     ]
     }
    },
    "recommended": {
@@ -12441,6 +12928,15 @@
     "mega-2500": {
      "rank": 142,
      "score": 84.3,
+     "moveset": [
+      "WATER_SHURIKEN",
+      "HYDRO_CANNON",
+      "BRUTAL_SWING"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 13,
+     "score": 85.7,
      "moveset": [
       "WATER_SHURIKEN",
       "HYDRO_CANNON",
@@ -12849,6 +13345,15 @@
       "DARK_PULSE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 98,
+     "score": 77.4,
+     "moveset": [
+      "DRAGON_BREATH",
+      "BODY_SLAM",
+      "DARK_PULSE"
+     ]
+    },
     "catch-1500": {
      "rank": 67,
      "score": 84.8,
@@ -12924,15 +13429,6 @@
       "AERIAL_ACE"
      ]
     },
-    "little-500": {
-     "rank": 108,
-     "score": 79.5,
-     "moveset": [
-      "WING_ATTACK",
-      "NIGHT_SLASH",
-      "AERIAL_ACE"
-     ]
-    },
     "laic2027-1500": {
      "rank": 115,
      "score": 86.7,
@@ -12940,6 +13436,15 @@
       "WING_ATTACK",
       "NIGHT_SLASH",
       "DIG"
+     ]
+    },
+    "little-500": {
+     "rank": 108,
+     "score": 79.5,
+     "moveset": [
+      "WING_ATTACK",
+      "NIGHT_SLASH",
+      "AERIAL_ACE"
      ]
     },
     "catch-1500": {
@@ -13011,6 +13516,15 @@
     "mega-2500": {
      "rank": 199,
      "score": 82.2,
+     "moveset": [
+      "INCINERATE",
+      "FOUL_PLAY",
+      "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 29,
+     "score": 83.5,
      "moveset": [
       "INCINERATE",
       "FOUL_PLAY",
@@ -13191,6 +13705,15 @@
       "ROCK_WRECKER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 76,
+     "score": 79.1,
+     "moveset": [
+      "FURY_CUTTER",
+      "X_SCISSOR",
+      "ROCK_WRECKER"
+     ]
+    },
     "laic2027-1500": {
      "rank": 6,
      "score": 94.6,
@@ -13278,6 +13801,15 @@
     "fantasy-1500": {
      "rank": 81,
      "score": 68.2,
+     "moveset": [
+      "ACID",
+      "AQUA_TAIL",
+      "OUTRAGE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 46,
+     "score": 82.3,
      "moveset": [
       "ACID",
       "AQUA_TAIL",
@@ -13490,6 +14022,15 @@
       "BODY_SLAM",
       "DARK_PULSE"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 89,
+     "score": 78.2,
+     "moveset": [
+      "DRAGON_BREATH",
+      "BODY_SLAM",
+      "DARK_PULSE"
+     ]
     }
    },
    "recommended": {
@@ -13560,6 +14101,15 @@
     "fantasy-1500": {
      "rank": 30,
      "score": 77.5,
+     "moveset": [
+      "ASTONISH",
+      "FOUL_PLAY",
+      "DRAINING_KISS"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 5,
+     "score": 88.7,
      "moveset": [
       "ASTONISH",
       "FOUL_PLAY",
@@ -14361,6 +14911,15 @@
       "ENERGY_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 126,
+     "score": 75.4,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_BALL",
+      "ENERGY_BALL"
+     ]
+    },
     "laic2027-1500": {
      "rank": 43,
      "score": 90.2,
@@ -14445,6 +15004,15 @@
     "mega-2500": {
      "rank": 115,
      "score": 85.3,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_BALL",
+      "ENERGY_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 133,
+     "score": 74.6,
      "moveset": [
       "SHADOW_CLAW",
       "SHADOW_BALL",
@@ -14865,6 +15433,15 @@
       "ICE_BEAM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 56,
+     "score": 81.4,
+     "moveset": [
+      "INFESTATION",
+      "SLUDGE",
+      "ICE_BEAM"
+     ]
+    },
     "laic2027-1500": {
      "rank": 2,
      "score": 96.2,
@@ -14976,6 +15553,15 @@
     "fantasy-1500": {
      "rank": 37,
      "score": 75.2,
+     "moveset": [
+      "PECK",
+      "PSYSHOCK",
+      "AURA_SPHERE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 63,
+     "score": 80.7,
      "moveset": [
       "PECK",
       "PSYSHOCK",
@@ -15357,6 +15943,15 @@
       "ACROBATICS"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 32,
+     "score": 83.3,
+     "moveset": [
+      "ROLLOUT",
+      "DYNAMIC_PUNCH",
+      "ACROBATICS"
+     ]
+    },
     "laic2027-1500": {
      "rank": 65,
      "score": 89,
@@ -15447,6 +16042,15 @@
     "mega-2500": {
      "rank": 444,
      "score": 74.5,
+     "moveset": [
+      "POISON_STING",
+      "AQUA_TAIL",
+      "SHADOW_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 66,
+     "score": 80.4,
      "moveset": [
       "POISON_STING",
       "AQUA_TAIL",
@@ -15813,6 +16417,15 @@
       "DRAINING_KISS"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 22,
+     "score": 84.2,
+     "moveset": [
+      "FAIRY_WIND",
+      "HEAT_WAVE",
+      "DRAINING_KISS"
+     ]
+    },
     "catch-1500": {
      "rank": 39,
      "score": 86.7,
@@ -16014,6 +16627,15 @@
       "X_SCISSOR"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 75,
+     "score": 79.2,
+     "moveset": [
+      "FURY_CUTTER",
+      "X_SCISSOR",
+      "AQUA_JET"
+     ]
+    },
     "laic2027-1500": {
      "rank": 90,
      "score": 87.7,
@@ -16104,6 +16726,15 @@
     "fantasy-1500": {
      "rank": 74,
      "score": 69,
+     "moveset": [
+      "FAIRY_WIND",
+      "VICE_GRIP",
+      "IRON_HEAD"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 15,
+     "score": 85.5,
      "moveset": [
       "FAIRY_WIND",
       "VICE_GRIP",
@@ -16287,6 +16918,15 @@
       "BRUTAL_SWING"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 21,
+     "score": 84.3,
+     "moveset": [
+      "FAIRY_WIND",
+      "SLUDGE",
+      "BRUTAL_SWING"
+     ]
+    },
     "catch-1500": {
      "rank": 26,
      "score": 87.6,
@@ -16360,6 +17000,15 @@
       "HEX",
       "SHADOW_BONE",
       "BONE_CLUB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 119,
+     "score": 75.9,
+     "moveset": [
+      "FIRE_SPIN",
+      "BONE_CLUB",
+      "SHADOW_BONE"
      ]
     },
     "catch-1500": {
@@ -16547,6 +17196,15 @@
      "score": 78.6,
      "moveset": [
       "POISON_JAB",
+      "AQUA_TAIL",
+      "DARK_PULSE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 33,
+     "score": 83.2,
+     "moveset": [
+      "POISON_STING",
       "AQUA_TAIL",
       "DARK_PULSE"
      ]
@@ -16844,6 +17502,15 @@
      "score": 66.4,
      "moveset": [
       "HEX",
+      "SHADOW_BONE",
+      "BONE_CLUB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 111,
+     "score": 76.7,
+     "moveset": [
+      "FIRE_SPIN",
       "SHADOW_BONE",
       "BONE_CLUB"
      ]
@@ -17859,6 +18526,15 @@
       "BRUTAL_SWING"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 28,
+     "score": 83.6,
+     "moveset": [
+      "WATER_SHURIKEN",
+      "HYDRO_CANNON",
+      "BRUTAL_SWING"
+     ]
+    },
     "catch-1500": {
      "rank": 47,
      "score": 86,
@@ -18048,6 +18724,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 109,
+     "score": 76.8,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_BALL",
+      "ROCK_TOMB"
+     ]
+    },
     "laic2027-1500": {
      "rank": 85,
      "score": 88.1,
@@ -18139,6 +18824,15 @@
       "FAIRY_WIND",
       "SLUDGE",
       "OVERHEAT"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 42,
+     "score": 82.5,
+     "moveset": [
+      "FAIRY_WIND",
+      "SLUDGE",
+      "BRUTAL_SWING"
      ]
     },
     "catch-1500": {
@@ -18333,6 +19027,15 @@
       "DRAINING_KISS"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 39,
+     "score": 82.9,
+     "moveset": [
+      "FAIRY_WIND",
+      "PSYSHOCK",
+      "DRAINING_KISS"
+     ]
+    },
     "catch-1500": {
      "rank": 326,
      "score": 76,
@@ -18432,6 +19135,15 @@
       "PAYBACK"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 41,
+     "score": 82.5,
+     "moveset": [
+      "ACID",
+      "SCALD",
+      "PAYBACK"
+     ]
+    },
     "laic2027-1500": {
      "rank": 110,
      "score": 87,
@@ -18516,6 +19228,15 @@
     "fantasy-1500": {
      "rank": 27,
      "score": 78.4,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "BUG_BUZZ",
+      "IRON_HEAD"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 25,
+     "score": 83.7,
      "moveset": [
       "SUCKER_PUNCH",
       "BUG_BUZZ",
@@ -19230,6 +19951,15 @@
       "EARTH_POWER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 10,
+     "score": 86.7,
+     "moveset": [
+      "MUD_SLAP",
+      "EARTH_POWER",
+      "POISON_FANG"
+     ]
+    },
     "laic2027-1500": {
      "rank": 253,
      "score": 82.6,
@@ -19416,6 +20146,15 @@
     "mega-2500": {
      "rank": 256,
      "score": 80.5,
+     "moveset": [
+      "ASTONISH",
+      "FOUL_PLAY",
+      "GRASS_KNOT"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 48,
+     "score": 82.2,
      "moveset": [
       "ASTONISH",
       "FOUL_PLAY",
@@ -20217,6 +20956,15 @@
       "SWIFT"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 112,
+     "score": 76.6,
+     "moveset": [
+      "ACID",
+      "WILD_CHARGE",
+      "SWIFT"
+     ]
+    },
     "laic2027-1500": {
      "rank": 79,
      "score": 88.4,
@@ -20589,6 +21337,15 @@
       "DARK_PULSE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 49,
+     "score": 81.9,
+     "moveset": [
+      "POISON_STING",
+      "AQUA_TAIL",
+      "DARK_PULSE"
+     ]
+    },
     "catch-1500": {
      "rank": 138,
      "score": 81.8,
@@ -20685,6 +21442,15 @@
     "fantasy-1500": {
      "rank": 33,
      "score": 77.1,
+     "moveset": [
+      "WATERFALL",
+      "MOONBLAST",
+      "HYDRO_CANNON"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 69,
+     "score": 80.2,
      "moveset": [
       "WATERFALL",
       "MOONBLAST",
@@ -20937,6 +21703,15 @@
     "fantasy-1500": {
      "rank": 98,
      "score": 65.9,
+     "moveset": [
+      "FAIRY_WIND",
+      "VICE_GRIP",
+      "IRON_HEAD"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 37,
+     "score": 82.9,
      "moveset": [
       "FAIRY_WIND",
       "VICE_GRIP",
@@ -21852,6 +22627,15 @@
       "ACID_SPRAY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 135,
+     "score": 74.5,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "LEAF_BLADE",
+      "ACID_SPRAY"
+     ]
+    },
     "laic2027-1500": {
      "rank": 86,
      "score": 88.1,
@@ -22347,6 +23131,15 @@
       "ROCK_WRECKER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 104,
+     "score": 77,
+     "moveset": [
+      "FURY_CUTTER",
+      "X_SCISSOR",
+      "ROCK_WRECKER"
+     ]
+    },
     "laic2027-1500": {
      "rank": 49,
      "score": 90,
@@ -22689,6 +23482,15 @@
       "FOUL_PLAY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 43,
+     "score": 82.4,
+     "moveset": [
+      "SCRATCH",
+      "POISON_FANG",
+      "FOUL_PLAY"
+     ]
+    },
     "laic2027-1500": {
      "rank": 153,
      "score": 85.1,
@@ -22977,6 +23779,15 @@
       "ENERGY_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 84,
+     "score": 78.6,
+     "moveset": [
+      "FAIRY_WIND",
+      "DRAINING_KISS",
+      "ENERGY_BALL"
+     ]
+    },
     "catch-1500": {
      "rank": 409,
      "score": 73.7,
@@ -23052,6 +23863,15 @@
     "mega-2500": {
      "rank": 66,
      "score": 87.5,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "FLY",
+      "DRILL_RUN"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 110,
+     "score": 76.7,
      "moveset": [
       "SUCKER_PUNCH",
       "FLY",
@@ -23205,18 +24025,18 @@
       "POWER_WHIP"
      ]
     },
-    "little-500": {
-     "rank": 99,
-     "score": 80,
+    "laic2027-1500": {
+     "rank": 89,
+     "score": 87.8,
      "moveset": [
       "LICK",
       "BODY_SLAM",
       "POWER_WHIP"
      ]
     },
-    "laic2027-1500": {
-     "rank": 89,
-     "score": 87.8,
+    "little-500": {
+     "rank": 99,
+     "score": 80,
      "moveset": [
       "LICK",
       "BODY_SLAM",
@@ -23418,6 +24238,15 @@
     "mega-10000": {
      "rank": 204,
      "score": 55.6,
+     "moveset": [
+      "KARATE_CHOP",
+      "CLOSE_COMBAT",
+      "NIGHT_SLASH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 199,
+     "score": 69.6,
      "moveset": [
       "KARATE_CHOP",
       "CLOSE_COMBAT",
@@ -23688,6 +24517,15 @@
       "PLAY_ROUGH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 90,
+     "score": 78.1,
+     "moveset": [
+      "THUNDER_SHOCK",
+      "DISCHARGE",
+      "PLAY_ROUGH"
+     ]
+    },
     "catch-1500": {
      "rank": 151,
      "score": 81.2,
@@ -23940,6 +24778,15 @@
     "mega-10000": {
      "rank": 190,
      "score": 56.7,
+     "moveset": [
+      "KARATE_CHOP",
+      "CLOSE_COMBAT",
+      "NIGHT_SLASH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 153,
+     "score": 73.3,
      "moveset": [
       "KARATE_CHOP",
       "CLOSE_COMBAT",
@@ -24366,6 +25213,15 @@
     "mega-1500": {
      "rank": 242,
      "score": 81,
+     "moveset": [
+      "PECK",
+      "DRILL_PECK",
+      "FOUL_PLAY"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 77,
+     "score": 79.1,
      "moveset": [
       "PECK",
       "DRILL_PECK",
@@ -25350,18 +26206,18 @@
       "FLY"
      ]
     },
-    "little-500": {
-     "rank": 210,
-     "score": 74.7,
+    "laic2027-1500": {
+     "rank": 136,
+     "score": 86,
      "moveset": [
       "PECK",
       "BRAVE_BIRD",
       "FLY"
      ]
     },
-    "laic2027-1500": {
-     "rank": 136,
-     "score": 86,
+    "little-500": {
+     "rank": 210,
+     "score": 74.7,
      "moveset": [
       "PECK",
       "BRAVE_BIRD",
@@ -25773,6 +26629,15 @@
       "POISON_FANG"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 130,
+     "score": 74.9,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "CRUNCH",
+      "POISON_FANG"
+     ]
+    },
     "catch-1500": {
      "rank": 76,
      "score": 84.2,
@@ -25959,6 +26824,15 @@
     "mega-2500": {
      "rank": 712,
      "score": 64.8,
+     "moveset": [
+      "INFESTATION",
+      "LUNGE",
+      "THUNDERBOLT"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 125,
+     "score": 75.5,
      "moveset": [
       "INFESTATION",
       "LUNGE",
@@ -26559,6 +27433,15 @@
       "ACROBATICS"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 95,
+     "score": 77.9,
+     "moveset": [
+      "ROLLOUT",
+      "DYNAMIC_PUNCH",
+      "ACROBATICS"
+     ]
+    },
     "laic2027-1500": {
      "rank": 127,
      "score": 86.3,
@@ -26631,6 +27514,15 @@
     "mega-1500": {
      "rank": 307,
      "score": 79.4,
+     "moveset": [
+      "POISON_STING",
+      "POISON_FANG",
+      "THUNDERBOLT"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 96,
+     "score": 77.8,
      "moveset": [
       "POISON_STING",
       "POISON_FANG",
@@ -26837,6 +27729,15 @@
      "score": 68,
      "moveset": [
       "FURY_CUTTER",
+      "NIGHT_SLASH",
+      "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 97,
+     "score": 77.5,
+     "moveset": [
+      "BULLET_PUNCH",
       "NIGHT_SLASH",
       "TRAILBLAZE"
      ]
@@ -27115,6 +28016,15 @@
       "HEX",
       "SHADOW_BALL",
       "ICY_WIND"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 170,
+     "score": 72.1,
+     "moveset": [
+      "ASTONISH",
+      "ICY_WIND",
+      "SHADOW_BALL"
      ]
     },
     "laic2027-1500": {
@@ -27399,6 +28309,15 @@
       "EARTH_POWER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 34,
+     "score": 83.1,
+     "moveset": [
+      "MUD_SLAP",
+      "EARTH_POWER",
+      "POISON_FANG"
+     ]
+    },
     "laic2027-1500": {
      "rank": 291,
      "score": 81.4,
@@ -27477,15 +28396,6 @@
       "THUNDERBOLT"
      ]
     },
-    "little-500": {
-     "rank": 45,
-     "score": 83.9,
-     "moveset": [
-      "POWDER_SNOW",
-      "WEATHER_BALL_ICE",
-      "ANCIENT_POWER"
-     ]
-    },
     "laic2027-1500": {
      "rank": 52,
      "score": 89.9,
@@ -27493,6 +28403,15 @@
       "POWDER_SNOW",
       "WEATHER_BALL_ICE",
       "THUNDERBOLT"
+     ]
+    },
+    "little-500": {
+     "rank": 45,
+     "score": 83.9,
+     "moveset": [
+      "POWDER_SNOW",
+      "WEATHER_BALL_ICE",
+      "ANCIENT_POWER"
      ]
     },
     "catch-1500": {
@@ -27929,6 +28848,15 @@
       "FOUL_PLAY",
       "DRAINING_KISS"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 145,
+     "score": 73.8,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "FOUL_PLAY",
+      "DRAINING_KISS"
+     ]
     }
    },
    "recommended": {
@@ -27996,6 +28924,15 @@
     "mega-2500": {
      "rank": 669,
      "score": 66.9,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "CRUNCH",
+      "POISON_FANG"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 138,
+     "score": 74.1,
      "moveset": [
       "SUCKER_PUNCH",
       "CRUNCH",
@@ -28118,6 +29055,15 @@
      "score": 65,
      "moveset": [
       "FURY_CUTTER",
+      "NIGHT_SLASH",
+      "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 116,
+     "score": 76.4,
+     "moveset": [
+      "BULLET_PUNCH",
       "NIGHT_SLASH",
       "TRAILBLAZE"
      ]
@@ -28278,15 +29224,6 @@
       "CROSS_CHOP"
      ]
     },
-    "little-500": {
-     "rank": 30,
-     "score": 86,
-     "moveset": [
-      "SCRATCH",
-      "SWIFT",
-      "CRUNCH"
-     ]
-    },
     "laic2027-1500": {
      "rank": 150,
      "score": 85.4,
@@ -28294,6 +29231,15 @@
       "SCRATCH",
       "SWIFT",
       "CROSS_CHOP"
+     ]
+    },
+    "little-500": {
+     "rank": 30,
+     "score": 86,
+     "moveset": [
+      "SCRATCH",
+      "SWIFT",
+      "CRUNCH"
      ]
     },
     "catch-1500": {
@@ -28369,6 +29315,15 @@
       "SHADOW_CLAW",
       "SHADOW_BALL",
       "SEED_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 157,
+     "score": 72.9,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_BALL",
+      "FOUL_PLAY"
      ]
     },
     "laic2027-1500": {
@@ -28635,6 +29590,15 @@
     "mega-2500": {
      "rank": 308,
      "score": 79.1,
+     "moveset": [
+      "INCINERATE",
+      "FOUL_PLAY",
+      "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 74,
+     "score": 79.4,
      "moveset": [
       "INCINERATE",
       "FOUL_PLAY",
@@ -28920,18 +29884,18 @@
       "ROCK_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 54,
-     "score": 83.2,
+    "laic2027-1500": {
+     "rank": 223,
+     "score": 83.5,
      "moveset": [
       "LOW_KICK",
       "BRICK_BREAK",
       "ROCK_TOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 223,
-     "score": 83.5,
+    "little-500": {
+     "rank": 54,
+     "score": 83.2,
      "moveset": [
       "LOW_KICK",
       "BRICK_BREAK",
@@ -29121,6 +30085,15 @@
     "mega-2500": {
      "rank": 672,
      "score": 66.7,
+     "moveset": [
+      "ACID",
+      "BRUTAL_SWING",
+      "WRAP"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 106,
+     "score": 76.9,
      "moveset": [
       "ACID",
       "BRUTAL_SWING",
@@ -29322,18 +30295,18 @@
       "DISCHARGE"
      ]
     },
-    "little-500": {
-     "rank": 94,
-     "score": 80.2,
+    "fantasy-1500": {
+     "rank": 36,
+     "score": 75.6,
      "moveset": [
       "VOLT_SWITCH",
       "MAGNET_BOMB",
       "DISCHARGE"
      ]
     },
-    "fantasy-1500": {
-     "rank": 36,
-     "score": 75.6,
+    "little-500": {
+     "rank": 94,
+     "score": 80.2,
      "moveset": [
       "VOLT_SWITCH",
       "MAGNET_BOMB",
@@ -29436,6 +30409,15 @@
       "DRAGON_PULSE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 124,
+     "score": 75.5,
+     "moveset": [
+      "INCINERATE",
+      "POISON_FANG",
+      "DRAGON_PULSE"
+     ]
+    },
     "catch-1500": {
      "rank": 223,
      "score": 78.9,
@@ -29520,18 +30502,18 @@
       "BULLDOZE"
      ]
     },
-    "little-500": {
-     "rank": 282,
-     "score": 71.4,
+    "laic2027-1500": {
+     "rank": 187,
+     "score": 84.4,
      "moveset": [
       "TACKLE",
       "BODY_SLAM",
       "BULLDOZE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 187,
-     "score": 84.4,
+    "little-500": {
+     "rank": 282,
+     "score": 71.4,
      "moveset": [
       "TACKLE",
       "BODY_SLAM",
@@ -29688,6 +30670,15 @@
       "FLASH_CANNON"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 51,
+     "score": 81.6,
+     "moveset": [
+      "FAIRY_WIND",
+      "PLAY_ROUGH",
+      "FLASH_CANNON"
+     ]
+    },
     "catch-1500": {
      "rank": 56,
      "score": 85.2,
@@ -29757,6 +30748,15 @@
     "mega-2500": {
      "rank": 163,
      "score": 83.4,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "LEAF_BLADE",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 132,
+     "score": 74.8,
      "moveset": [
       "SUCKER_PUNCH",
       "LEAF_BLADE",
@@ -29850,18 +30850,18 @@
       "AERIAL_ACE"
      ]
     },
-    "little-500": {
-     "rank": 39,
-     "score": 84.7,
+    "laic2027-1500": {
+     "rank": 140,
+     "score": 85.8,
      "moveset": [
       "SCRATCH",
       "SWIFT",
       "AERIAL_ACE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 140,
-     "score": 85.8,
+    "little-500": {
+     "rank": 39,
+     "score": 84.7,
      "moveset": [
       "SCRATCH",
       "SWIFT",
@@ -30036,6 +31036,15 @@
       "X_SCISSOR"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 181,
+     "score": 71.1,
+     "moveset": [
+      "VOLT_SWITCH",
+      "X_SCISSOR",
+      "DISCHARGE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 283,
      "score": 81.8,
@@ -30130,6 +31139,15 @@
       "ASTONISH",
       "FOUL_PLAY",
       "GRASS_KNOT"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 64,
+     "score": 80.4,
+     "moveset": [
+      "ASTONISH",
+      "GRASS_KNOT",
+      "FOUL_PLAY"
      ]
     },
     "laic2027-1500": {
@@ -30417,18 +31435,18 @@
       "DIG"
      ]
     },
-    "little-500": {
-     "rank": 344,
-     "score": 68.3,
+    "laic2027-1500": {
+     "rank": 424,
+     "score": 76.3,
      "moveset": [
       "SAND_ATTACK",
       "ROCK_TOMB",
       "DIG"
      ]
     },
-    "laic2027-1500": {
-     "rank": 424,
-     "score": 76.3,
+    "little-500": {
+     "rank": 344,
+     "score": 68.3,
      "moveset": [
       "SAND_ATTACK",
       "ROCK_TOMB",
@@ -30744,6 +31762,15 @@
       "PAYBACK"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 73,
+     "score": 79.5,
+     "moveset": [
+      "ACID",
+      "SCALD",
+      "PAYBACK"
+     ]
+    },
     "laic2027-1500": {
      "rank": 271,
      "score": 82.2,
@@ -30927,18 +31954,18 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 223,
-     "score": 74.1,
+    "laic2027-1500": {
+     "rank": 292,
+     "score": 81.4,
      "moveset": [
       "ROLLOUT",
       "SCALD",
       "BODY_SLAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 292,
-     "score": 81.4,
+    "little-500": {
+     "rank": 223,
+     "score": 74.1,
      "moveset": [
       "ROLLOUT",
       "SCALD",
@@ -31332,18 +32359,18 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 127,
-     "score": 78.5,
+    "laic2027-1500": {
+     "rank": 34,
+     "score": 90.8,
      "moveset": [
       "POWDER_SNOW",
       "AVALANCHE",
       "BODY_SLAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 34,
-     "score": 90.8,
+    "little-500": {
+     "rank": 127,
+     "score": 78.5,
      "moveset": [
       "POWDER_SNOW",
       "AVALANCHE",
@@ -31587,15 +32614,6 @@
       "THUNDERBOLT"
      ]
     },
-    "little-500": {
-     "rank": 64,
-     "score": 82.2,
-     "moveset": [
-      "POWDER_SNOW",
-      "WEATHER_BALL_ICE",
-      "ANCIENT_POWER"
-     ]
-    },
     "laic2027-1500": {
      "rank": 83,
      "score": 88.1,
@@ -31603,6 +32621,15 @@
       "POWDER_SNOW",
       "WEATHER_BALL_ICE",
       "THUNDERBOLT"
+     ]
+    },
+    "little-500": {
+     "rank": 64,
+     "score": 82.2,
+     "moveset": [
+      "POWDER_SNOW",
+      "WEATHER_BALL_ICE",
+      "ANCIENT_POWER"
      ]
     },
     "catch-1500": {
@@ -31860,6 +32887,15 @@
       "HYPER_FANG"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 86,
+     "score": 78.4,
+     "moveset": [
+      "BITE",
+      "CRUNCH",
+      "RETURN"
+     ]
+    },
     "catch-1500": {
      "rank": 195,
      "score": 79.5,
@@ -31929,6 +32965,15 @@
     "mega-2500": {
      "rank": 428,
      "score": 75.1,
+     "moveset": [
+      "FURY_CUTTER",
+      "X_SCISSOR",
+      "POWER_GEM"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 118,
+     "score": 76.1,
      "moveset": [
       "FURY_CUTTER",
       "X_SCISSOR",
@@ -32118,15 +33163,6 @@
       "ANCIENT_POWER"
      ]
     },
-    "little-500": {
-     "rank": 162,
-     "score": 77.3,
-     "moveset": [
-      "ACID",
-      "ANCIENT_POWER",
-      "GRASS_KNOT"
-     ]
-    },
     "laic2027-1500": {
      "rank": 202,
      "score": 84,
@@ -32134,6 +33170,15 @@
       "ACID",
       "GRASS_KNOT",
       "ANCIENT_POWER"
+     ]
+    },
+    "little-500": {
+     "rank": 162,
+     "score": 77.3,
+     "moveset": [
+      "ACID",
+      "ANCIENT_POWER",
+      "GRASS_KNOT"
      ]
     },
     "catch-1500": {
@@ -32337,6 +33382,15 @@
       "LUNGE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 88,
+     "score": 78.2,
+     "moveset": [
+      "EMBER",
+      "LUNGE",
+      "HEAT_WAVE"
+     ]
+    },
     "catch-1500": {
      "rank": 581,
      "score": 68.3,
@@ -32496,6 +33550,15 @@
       "POISON_FANG"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 36,
+     "score": 82.9,
+     "moveset": [
+      "WING_ATTACK",
+      "POISON_FANG",
+      "SHADOW_BALL"
+     ]
+    },
     "laic2027-1500": {
      "rank": 296,
      "score": 81.3,
@@ -32574,6 +33637,15 @@
     "mega-2500": {
      "rank": 540,
      "score": 72.1,
+     "moveset": [
+      "POISON_STING",
+      "AQUA_TAIL",
+      "SHADOW_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 83,
+     "score": 78.6,
      "moveset": [
       "POISON_STING",
       "AQUA_TAIL",
@@ -32772,6 +33844,15 @@
       "SEED_BOMB"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 177,
+     "score": 71.7,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SEED_BOMB",
+      "SHADOW_BALL"
+     ]
+    },
     "laic2027-1500": {
      "rank": 175,
      "score": 84.7,
@@ -32958,6 +34039,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 183,
+     "score": 70.8,
+     "moveset": [
+      "POWDER_SNOW",
+      "AVALANCHE",
+      "SHADOW_BALL"
+     ]
+    },
     "laic2027-1500": {
      "rank": 29,
      "score": 91.3,
@@ -33036,6 +34126,15 @@
     "mega-2500": {
      "rank": 264,
      "score": 80.3,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "X_SCISSOR",
+      "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 156,
+     "score": 73.2,
      "moveset": [
       "SUCKER_PUNCH",
       "X_SCISSOR",
@@ -33411,6 +34510,15 @@
       "MOONBLAST"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 162,
+     "score": 72.6,
+     "moveset": [
+      "FAIRY_WIND",
+      "SEED_BOMB",
+      "MOONBLAST"
+     ]
+    },
     "catch-1500": {
      "rank": 97,
      "score": 83.4,
@@ -33483,18 +34591,18 @@
       "AERIAL_ACE"
      ]
     },
-    "little-500": {
-     "rank": 83,
-     "score": 81,
+    "laic2027-1500": {
+     "rank": 102,
+     "score": 87.3,
      "moveset": [
       "SCRATCH",
       "SWIFT",
       "AERIAL_ACE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 102,
-     "score": 87.3,
+    "little-500": {
+     "rank": 83,
+     "score": 81,
      "moveset": [
       "SCRATCH",
       "SWIFT",
@@ -34074,6 +35182,15 @@
       "WRAP"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 80,
+     "score": 78.8,
+     "moveset": [
+      "ACID",
+      "BRUTAL_SWING",
+      "WRAP"
+     ]
+    },
     "laic2027-1500": {
      "rank": 133,
      "score": 86.1,
@@ -34146,6 +35263,15 @@
     "mega-1500": {
      "rank": 327,
      "score": 78.9,
+     "moveset": [
+      "POISON_STING",
+      "LUNGE",
+      "FOUL_PLAY"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 117,
+     "score": 76.3,
      "moveset": [
       "POISON_STING",
       "LUNGE",
@@ -34473,6 +35599,15 @@
       "TRAILBLAZE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 101,
+     "score": 77.3,
+     "moveset": [
+      "POISON_JAB",
+      "CRUNCH",
+      "TRAILBLAZE"
+     ]
+    },
     "catch-1500": {
      "rank": 149,
      "score": 81.4,
@@ -34564,6 +35699,15 @@
       "SUCKER_PUNCH",
       "DYNAMIC_PUNCH",
       "PAYBACK"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 159,
+     "score": 72.8,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "BRICK_BREAK",
+      "DYNAMIC_PUNCH"
      ]
     },
     "catch-1500": {
@@ -34956,6 +36100,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 202,
+     "score": 69.3,
+     "moveset": [
+      "HEX",
+      "ICY_WIND",
+      "SHADOW_BALL"
+     ]
+    },
     "laic2027-1500": {
      "rank": 199,
      "score": 84.1,
@@ -35022,18 +36175,18 @@
       "ROCK_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 52,
-     "score": 83.4,
+    "laic2027-1500": {
+     "rank": 265,
+     "score": 82.3,
      "moveset": [
       "LOW_KICK",
       "BRICK_BREAK",
       "ROCK_TOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 265,
-     "score": 82.3,
+    "little-500": {
+     "rank": 52,
+     "score": 83.4,
      "moveset": [
       "LOW_KICK",
       "BRICK_BREAK",
@@ -35613,15 +36766,6 @@
       "CROSS_CHOP"
      ]
     },
-    "little-500": {
-     "rank": 57,
-     "score": 83,
-     "moveset": [
-      "SCRATCH",
-      "SWIFT",
-      "CRUNCH"
-     ]
-    },
     "laic2027-1500": {
      "rank": 190,
      "score": 84.3,
@@ -35629,6 +36773,15 @@
       "SCRATCH",
       "SWIFT",
       "CROSS_CHOP"
+     ]
+    },
+    "little-500": {
+     "rank": 57,
+     "score": 83,
+     "moveset": [
+      "SCRATCH",
+      "SWIFT",
+      "CRUNCH"
      ]
     },
     "catch-1500": {
@@ -35931,6 +37084,15 @@
       "DARK_PULSE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 140,
+     "score": 74.1,
+     "moveset": [
+      "FURY_CUTTER",
+      "SACRED_SWORD",
+      "DARK_PULSE"
+     ]
+    },
     "catch-1500": {
      "rank": 431,
      "score": 72.8,
@@ -36024,6 +37186,15 @@
     "fantasy-1500": {
      "rank": 58,
      "score": 71.5,
+     "moveset": [
+      "ASTONISH",
+      "MOONBLAST",
+      "SEED_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 151,
+     "score": 73.4,
      "moveset": [
       "ASTONISH",
       "MOONBLAST",
@@ -36124,6 +37295,15 @@
       "GUST",
       "AIR_CUTTER",
       "CROSS_POISON"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 60,
+     "score": 80.9,
+     "moveset": [
+      "GUST",
+      "AIR_CUTTER",
+      "POISON_FANG"
      ]
     },
     "laic2027-1500": {
@@ -36354,6 +37534,15 @@
       "IRON_HEAD"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 79,
+     "score": 78.9,
+     "moveset": [
+      "LOW_KICK",
+      "FOUL_PLAY",
+      "IRON_HEAD"
+     ]
+    },
     "catch-1500": {
      "rank": 374,
      "score": 74.6,
@@ -36558,6 +37747,15 @@
     "mega-2500": {
      "rank": 167,
      "score": 83.1,
+     "moveset": [
+      "POISON_STING",
+      "AVALANCHE",
+      "EARTH_POWER"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 93,
+     "score": 78,
      "moveset": [
       "POISON_STING",
       "AVALANCHE",
@@ -36867,6 +38065,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 200,
+     "score": 69.5,
+     "moveset": [
+      "INCINERATE",
+      "TORCH_SONG",
+      "SHADOW_BALL"
+     ]
+    },
     "catch-1500": {
      "rank": 128,
      "score": 82.5,
@@ -37104,18 +38311,18 @@
       "ROCK_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 213,
-     "score": 74.5,
+    "laic2027-1500": {
+     "rank": 331,
+     "score": 80,
      "moveset": [
       "SCRATCH",
       "DRILL_RUN",
       "ROCK_TOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 331,
-     "score": 80,
+    "little-500": {
+     "rank": 213,
+     "score": 74.5,
      "moveset": [
       "SCRATCH",
       "DRILL_RUN",
@@ -37195,6 +38402,15 @@
       "WING_ATTACK",
       "AIR_CUTTER",
       "POISON_FANG"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 91,
+     "score": 78.1,
+     "moveset": [
+      "WING_ATTACK",
+      "POISON_FANG",
+      "SHADOW_BALL"
      ]
     },
     "laic2027-1500": {
@@ -37355,6 +38571,15 @@
     },
     "mega-1500": {
      "rank": 412,
+     "score": 77.1,
+     "moveset": [
+      "POISON_STING",
+      "POISON_FANG",
+      "DIG"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 103,
      "score": 77.1,
      "moveset": [
       "POISON_STING",
@@ -37658,6 +38883,15 @@
       "X_SCISSOR",
       "MAGNET_BOMB"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 108,
+     "score": 76.8,
+     "moveset": [
+      "FURY_CUTTER",
+      "X_SCISSOR",
+      "MAGNET_BOMB"
+     ]
     }
    },
    "recommended": {
@@ -37721,6 +38955,15 @@
      "score": 76.6,
      "moveset": [
       "CONFUSION",
+      "PSYSHOCK",
+      "BUG_BUZZ"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 227,
+     "score": 67.2,
+     "moveset": [
+      "PSYCHO_CUT",
       "PSYSHOCK",
       "BUG_BUZZ"
      ]
@@ -38115,6 +39358,15 @@
       "DISCHARGE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 175,
+     "score": 71.8,
+     "moveset": [
+      "VOLT_SWITCH",
+      "DISCHARGE",
+      "LUNGE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 237,
      "score": 83.1,
@@ -38475,6 +39727,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 179,
+     "score": 71.2,
+     "moveset": [
+      "INCINERATE",
+      "MIND_BLOWN",
+      "SHADOW_BALL"
+     ]
+    },
     "colormega-1500": {
      "rank": 188,
      "score": 77.5,
@@ -38634,18 +39895,27 @@
       "IRON_HEAD"
      ]
     },
-    "little-500": {
-     "rank": 16,
-     "score": 88,
+    "fantasy-1500": {
+     "rank": 99,
+     "score": 65.9,
      "moveset": [
       "FURY_CUTTER",
       "NIGHT_SLASH",
       "IRON_HEAD"
      ]
     },
-    "fantasy-1500": {
-     "rank": 99,
-     "score": 65.9,
+    "halloweenmega-1500": {
+     "rank": 72,
+     "score": 79.8,
+     "moveset": [
+      "SCRATCH",
+      "NIGHT_SLASH",
+      "IRON_HEAD"
+     ]
+    },
+    "little-500": {
+     "rank": 16,
+     "score": 88,
      "moveset": [
       "FURY_CUTTER",
       "NIGHT_SLASH",
@@ -38946,6 +40216,15 @@
       "BRUTAL_SWING"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 62,
+     "score": 80.9,
+     "moveset": [
+      "FIRE_FANG",
+      "BRUTAL_SWING",
+      "BLAST_BURN"
+     ]
+    },
     "catch-1500": {
      "rank": 291,
      "score": 76.9,
@@ -39036,6 +40315,15 @@
       "EARTH_POWER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 82,
+     "score": 78.6,
+     "moveset": [
+      "POISON_STING",
+      "AVALANCHE",
+      "EARTH_POWER"
+     ]
+    },
     "laic2027-1500": {
      "rank": 204,
      "score": 84,
@@ -39120,18 +40408,18 @@
       "GYRO_BALL"
      ]
     },
-    "little-500": {
-     "rank": 29,
-     "score": 86,
+    "fantasy-1500": {
+     "rank": 102,
+     "score": 65.8,
      "moveset": [
       "POWDER_SNOW",
       "NIGHT_SLASH",
       "GYRO_BALL"
      ]
     },
-    "fantasy-1500": {
-     "rank": 102,
-     "score": 65.8,
+    "little-500": {
+     "rank": 29,
+     "score": 86,
      "moveset": [
       "POWDER_SNOW",
       "NIGHT_SLASH",
@@ -39234,6 +40522,15 @@
     "fantasy-1500": {
      "rank": 42,
      "score": 74.4,
+     "moveset": [
+      "WATER_GUN",
+      "SURF",
+      "NATURES_MADNESS"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 152,
+     "score": 73.4,
      "moveset": [
       "WATER_GUN",
       "SURF",
@@ -39879,6 +41176,15 @@
       "SLUDGE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 134,
+     "score": 74.6,
+     "moveset": [
+      "VINE_WHIP",
+      "FRENZY_PLANT",
+      "SLUDGE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 254,
      "score": 82.6,
@@ -40047,18 +41353,18 @@
       "BRICK_BREAK"
      ]
     },
-    "little-500": {
-     "rank": 160,
-     "score": 77.3,
+    "laic2027-1500": {
+     "rank": 260,
+     "score": 82.4,
      "moveset": [
       "FURY_CUTTER",
       "LEAF_BLADE",
       "BRICK_BREAK"
      ]
     },
-    "laic2027-1500": {
-     "rank": 260,
-     "score": 82.4,
+    "little-500": {
+     "rank": 160,
+     "score": 77.3,
      "moveset": [
       "FURY_CUTTER",
       "LEAF_BLADE",
@@ -40116,6 +41422,15 @@
     "mega-1500": {
      "rank": 446,
      "score": 76.3,
+     "moveset": [
+      "SCRATCH",
+      "FOUL_PLAY",
+      "PLAY_ROUGH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 146,
+     "score": 73.8,
      "moveset": [
       "SCRATCH",
       "FOUL_PLAY",
@@ -40200,6 +41515,15 @@
     "fantasy-1500": {
      "rank": 54,
      "score": 72,
+     "moveset": [
+      "ASTONISH",
+      "MOONBLAST",
+      "SEED_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 141,
+     "score": 74.1,
      "moveset": [
       "ASTONISH",
       "MOONBLAST",
@@ -40503,6 +41827,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 203,
+     "score": 69.3,
+     "moveset": [
+      "ACID",
+      "PSYSHOCK",
+      "SHADOW_BALL"
+     ]
+    },
     "laic2027-1500": {
      "rank": 78,
      "score": 88.4,
@@ -40605,6 +41938,15 @@
     "mega-10000": {
      "rank": 297,
      "score": 45.6,
+     "moveset": [
+      "VINE_WHIP",
+      "FRENZY_PLANT",
+      "SLUDGE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 185,
+     "score": 70.8,
      "moveset": [
       "VINE_WHIP",
       "FRENZY_PLANT",
@@ -40830,6 +42172,15 @@
       "CROSS_POISON"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 81,
+     "score": 78.7,
+     "moveset": [
+      "GUST",
+      "AIR_CUTTER",
+      "POISON_FANG"
+     ]
+    },
     "laic2027-1500": {
      "rank": 255,
      "score": 82.5,
@@ -40923,6 +42274,15 @@
     "fantasy-1500": {
      "rank": 152,
      "score": 55.6,
+     "moveset": [
+      "CHARM",
+      "PSYCHIC_FANGS",
+      "PLAY_ROUGH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 123,
+     "score": 75.5,
      "moveset": [
       "CHARM",
       "PSYCHIC_FANGS",
@@ -41121,6 +42481,15 @@
       "DARK_PULSE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 180,
+     "score": 71.2,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_PUNCH",
+      "DARK_PULSE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 220,
      "score": 83.5,
@@ -41199,18 +42568,18 @@
       "DIG"
      ]
     },
-    "little-500": {
-     "rank": 384,
-     "score": 66,
+    "laic2027-1500": {
+     "rank": 487,
+     "score": 73.6,
      "moveset": [
       "SAND_ATTACK",
       "ROCK_TOMB",
       "DIG"
      ]
     },
-    "laic2027-1500": {
-     "rank": 487,
-     "score": 73.6,
+    "little-500": {
+     "rank": 384,
+     "score": 66,
      "moveset": [
       "SAND_ATTACK",
       "ROCK_TOMB",
@@ -41379,9 +42748,9 @@
       "ICE_BEAM"
      ]
     },
-    "little-500": {
-     "rank": 73,
-     "score": 81.8,
+    "halloweenmega-1500": {
+     "rank": 232,
+     "score": 66.7,
      "moveset": [
       "HEX",
       "NIGHT_SHADE",
@@ -41391,6 +42760,15 @@
     "laic2027-1500": {
      "rank": 268,
      "score": 82.2,
+     "moveset": [
+      "HEX",
+      "NIGHT_SHADE",
+      "ICE_BEAM"
+     ]
+    },
+    "little-500": {
+     "rank": 73,
+     "score": 81.8,
      "moveset": [
       "HEX",
       "NIGHT_SHADE",
@@ -41499,6 +42877,15 @@
       "EARTH_POWER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 149,
+     "score": 73.4,
+     "moveset": [
+      "MUD_SLAP",
+      "SHADOW_PUNCH",
+      "DYNAMIC_PUNCH"
+     ]
+    },
     "laic2027-1500": {
      "rank": 332,
      "score": 80,
@@ -41586,6 +42973,15 @@
     "mega-10000": {
      "rank": 195,
      "score": 56.3,
+     "moveset": [
+      "FURY_CUTTER",
+      "UPPER_HAND",
+      "ROCK_TOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 206,
+     "score": 68.9,
      "moveset": [
       "FURY_CUTTER",
       "UPPER_HAND",
@@ -41982,6 +43378,15 @@
       "FOUL_PLAY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 165,
+     "score": 72.4,
+     "moveset": [
+      "FEINT_ATTACK",
+      "BRAVE_BIRD",
+      "FOUL_PLAY"
+     ]
+    },
     "little-500": {
      "rank": 137,
      "score": 78.2,
@@ -42084,6 +43489,15 @@
       "BRUTAL_SWING"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 225,
+     "score": 67.3,
+     "moveset": [
+      "SHADOW_CLAW",
+      "POWER_WHIP",
+      "BRUTAL_SWING"
+     ]
+    },
     "laic2027-1500": {
      "rank": 243,
      "score": 82.9,
@@ -42183,18 +43597,18 @@
       "MIRROR_COAT"
      ]
     },
-    "little-500": {
-     "rank": 321,
-     "score": 69.6,
+    "laic2027-1500": {
+     "rank": 138,
+     "score": 85.9,
      "moveset": [
       "CONFUSION",
       "PSYCHIC_FANGS",
       "TRAILBLAZE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 138,
-     "score": 85.9,
+    "little-500": {
+     "rank": 321,
+     "score": 69.6,
      "moveset": [
       "CONFUSION",
       "PSYCHIC_FANGS",
@@ -42489,6 +43903,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 221,
+     "score": 67.8,
+     "moveset": [
+      "POISON_STING",
+      "DYNAMIC_PUNCH",
+      "SHADOW_BALL"
+     ]
+    },
     "laic2027-1500": {
      "rank": 224,
      "score": 83.5,
@@ -42774,18 +44197,18 @@
       "ANCIENT_POWER"
      ]
     },
-    "little-500": {
-     "rank": 245,
-     "score": 72.6,
+    "laic2027-1500": {
+     "rank": 290,
+     "score": 81.4,
      "moveset": [
       "ACID",
       "GRASS_KNOT",
       "ANCIENT_POWER"
      ]
     },
-    "laic2027-1500": {
-     "rank": 290,
-     "score": 81.4,
+    "little-500": {
+     "rank": 245,
+     "score": 72.6,
      "moveset": [
       "ACID",
       "GRASS_KNOT",
@@ -42984,6 +44407,15 @@
       "THUNDER_PUNCH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 235,
+     "score": 66.6,
+     "moveset": [
+      "COUNTER",
+      "FOUL_PLAY",
+      "UPPER_HAND"
+     ]
+    },
     "catch-1500": {
      "rank": 172,
      "score": 80.3,
@@ -43176,6 +44608,15 @@
       "THUNDER_PUNCH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 127,
+     "score": 75.3,
+     "moveset": [
+      "POISON_JAB",
+      "THUNDER_PUNCH",
+      "DARK_PULSE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 282,
      "score": 81.8,
@@ -43347,9 +44788,9 @@
       "FOUL_PLAY"
      ]
     },
-    "little-500": {
-     "rank": 124,
-     "score": 78.7,
+    "halloweenmega-1500": {
+     "rank": 210,
+     "score": 68.5,
      "moveset": [
       "ASTONISH",
       "GRASS_KNOT",
@@ -43359,6 +44800,15 @@
     "laic2027-1500": {
      "rank": 258,
      "score": 82.5,
+     "moveset": [
+      "ASTONISH",
+      "GRASS_KNOT",
+      "FOUL_PLAY"
+     ]
+    },
+    "little-500": {
+     "rank": 124,
+     "score": 78.7,
      "moveset": [
       "ASTONISH",
       "GRASS_KNOT",
@@ -43443,6 +44893,15 @@
     "mega-2500": {
      "rank": 410,
      "score": 75.8,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SWIFT",
+      "SHADOW_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 113,
+     "score": 76.6,
      "moveset": [
       "SHADOW_CLAW",
       "SWIFT",
@@ -43632,18 +45091,18 @@
       "MIRROR_COAT"
      ]
     },
-    "little-500": {
-     "rank": 371,
-     "score": 66.5,
+    "laic2027-1500": {
+     "rank": 142,
+     "score": 85.7,
      "moveset": [
       "CONFUSION",
       "PSYCHIC_FANGS",
       "TRAILBLAZE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 142,
-     "score": 85.7,
+    "little-500": {
+     "rank": 371,
+     "score": 66.5,
      "moveset": [
       "CONFUSION",
       "PSYCHIC_FANGS",
@@ -43857,6 +45316,15 @@
       "X_SCISSOR"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 190,
+     "score": 70.2,
+     "moveset": [
+      "VOLT_SWITCH",
+      "X_SCISSOR",
+      "FLY"
+     ]
+    },
     "laic2027-1500": {
      "rank": 298,
      "score": 81.3,
@@ -43944,18 +45412,18 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 314,
-     "score": 69.9,
+    "laic2027-1500": {
+     "rank": 363,
+     "score": 79,
      "moveset": [
       "ROLLOUT",
       "SCALD",
       "BODY_SLAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 363,
-     "score": 79,
+    "little-500": {
+     "rank": 314,
+     "score": 69.9,
      "moveset": [
       "ROLLOUT",
       "SCALD",
@@ -44319,18 +45787,18 @@
       "GYRO_BALL"
      ]
     },
-    "little-500": {
-     "rank": 33,
-     "score": 85.5,
+    "fantasy-1500": {
+     "rank": 83,
+     "score": 68.2,
      "moveset": [
       "POWDER_SNOW",
       "NIGHT_SLASH",
       "GYRO_BALL"
      ]
     },
-    "fantasy-1500": {
-     "rank": 83,
-     "score": 68.2,
+    "little-500": {
+     "rank": 33,
+     "score": 85.5,
      "moveset": [
       "POWDER_SNOW",
       "NIGHT_SLASH",
@@ -44505,11 +45973,11 @@
       "MUD_BOMB"
      ]
     },
-    "little-500": {
-     "rank": 123,
-     "score": 78.7,
+    "halloweenmega-1500": {
+     "rank": 144,
+     "score": 73.8,
      "moveset": [
-      "ACID",
+      "POISON_JAB",
       "SLUDGE",
       "MUD_BOMB"
      ]
@@ -44519,6 +45987,15 @@
      "score": 82.3,
      "moveset": [
       "POISON_JAB",
+      "SLUDGE",
+      "MUD_BOMB"
+     ]
+    },
+    "little-500": {
+     "rank": 123,
+     "score": 78.7,
+     "moveset": [
+      "ACID",
       "SLUDGE",
       "MUD_BOMB"
      ]
@@ -44694,6 +46171,15 @@
     "mega-2500": {
      "rank": 508,
      "score": 72.8,
+     "moveset": [
+      "LEAFAGE",
+      "NIGHT_SLASH",
+      "FRENZY_PLANT"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 214,
+     "score": 68.1,
      "moveset": [
       "LEAFAGE",
       "NIGHT_SLASH",
@@ -44886,6 +46372,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 195,
+     "score": 69.8,
+     "moveset": [
+      "POWDER_SNOW",
+      "AVALANCHE",
+      "SHADOW_BALL"
+     ]
+    },
     "laic2027-1500": {
      "rank": 99,
      "score": 87.4,
@@ -44966,6 +46461,15 @@
      "score": 75,
      "moveset": [
       "HEX",
+      "SHADOW_BALL",
+      "MYSTICAL_FIRE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 237,
+     "score": 66.5,
+     "moveset": [
+      "PSYWAVE",
       "SHADOW_BALL",
       "MYSTICAL_FIRE"
      ]
@@ -45195,6 +46699,15 @@
       "LEAF_STORM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 193,
+     "score": 70,
+     "moveset": [
+      "POISON_STING",
+      "WEATHER_BALL_FIRE",
+      "LEAF_STORM"
+     ]
+    },
     "laic2027-1500": {
      "rank": 323,
      "score": 80.4,
@@ -45375,6 +46888,15 @@
     "mega-2500": {
      "rank": 322,
      "score": 78.8,
+     "moveset": [
+      "POISON_STING",
+      "DYNAMIC_PUNCH",
+      "SHADOW_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 196,
+     "score": 69.8,
      "moveset": [
       "POISON_STING",
       "DYNAMIC_PUNCH",
@@ -45864,18 +47386,18 @@
       "ROCK_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 224,
-     "score": 74,
+    "laic2027-1500": {
+     "rank": 415,
+     "score": 76.5,
      "moveset": [
       "SCRATCH",
       "DRILL_RUN",
       "ROCK_TOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 415,
-     "score": 76.5,
+    "little-500": {
+     "rank": 224,
+     "score": 74,
      "moveset": [
       "SCRATCH",
       "DRILL_RUN",
@@ -45957,6 +47479,15 @@
       "DISCHARGE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 222,
+     "score": 67.7,
+     "moveset": [
+      "VOLT_SWITCH",
+      "DISCHARGE",
+      "LUNGE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 360,
      "score": 79,
@@ -46032,18 +47563,18 @@
       "DISCHARGE"
      ]
     },
-    "little-500": {
-     "rank": 114,
-     "score": 79.2,
+    "fantasy-1500": {
+     "rank": 67,
+     "score": 69.3,
      "moveset": [
       "VOLT_SWITCH",
       "MAGNET_BOMB",
       "DISCHARGE"
      ]
     },
-    "fantasy-1500": {
-     "rank": 67,
-     "score": 69.3,
+    "little-500": {
+     "rank": 114,
+     "score": 79.2,
      "moveset": [
       "VOLT_SWITCH",
       "MAGNET_BOMB",
@@ -46140,6 +47671,15 @@
     "mega-2500": {
      "rank": 289,
      "score": 79.7,
+     "moveset": [
+      "POISON_JAB",
+      "CRUNCH",
+      "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 154,
+     "score": 73.3,
      "moveset": [
       "POISON_JAB",
       "CRUNCH",
@@ -46290,6 +47830,15 @@
     "mega-1500": {
      "rank": 517,
      "score": 74.4,
+     "moveset": [
+      "EMBER",
+      "HEAT_WAVE",
+      "ENERGY_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 211,
+     "score": 68.3,
      "moveset": [
       "EMBER",
       "HEAT_WAVE",
@@ -46473,6 +48022,15 @@
     "mega-2500": {
      "rank": 840,
      "score": 56.8,
+     "moveset": [
+      "INFESTATION",
+      "SILVER_WIND",
+      "SHADOW_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 161,
+     "score": 72.7,
      "moveset": [
       "INFESTATION",
       "SILVER_WIND",
@@ -46788,6 +48346,15 @@
       "EARTH_POWER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 176,
+     "score": 71.7,
+     "moveset": [
+      "MUD_SLAP",
+      "SHADOW_PUNCH",
+      "DYNAMIC_PUNCH"
+     ]
+    },
     "laic2027-1500": {
      "rank": 388,
      "score": 77.6,
@@ -46854,18 +48421,18 @@
       "BRICK_BREAK"
      ]
     },
-    "little-500": {
-     "rank": 56,
-     "score": 83.1,
+    "laic2027-1500": {
+     "rank": 354,
+     "score": 79.3,
      "moveset": [
       "KARATE_CHOP",
       "CROSS_CHOP",
       "BRICK_BREAK"
      ]
     },
-    "laic2027-1500": {
-     "rank": 354,
-     "score": 79.3,
+    "little-500": {
+     "rank": 56,
+     "score": 83.1,
      "moveset": [
       "KARATE_CHOP",
       "CROSS_CHOP",
@@ -47402,6 +48969,15 @@
      "score": 39.2,
      "moveset": [
       "INFESTATION",
+      "DARK_PULSE",
+      "THUNDER_PUNCH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 163,
+     "score": 72.5,
+     "moveset": [
+      "POISON_JAB",
       "DARK_PULSE",
       "THUNDER_PUNCH"
      ]
@@ -48003,6 +49579,15 @@
       "SAND_TOMB"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 188,
+     "score": 70.4,
+     "moveset": [
+      "ASTONISH",
+      "SHADOW_BALL",
+      "EARTH_POWER"
+     ]
+    },
     "laic2027-1500": {
      "rank": 382,
      "score": 77.9,
@@ -48468,18 +50053,18 @@
       "BRICK_BREAK"
      ]
     },
-    "little-500": {
-     "rank": 70,
-     "score": 82,
+    "laic2027-1500": {
+     "rank": 383,
+     "score": 77.8,
      "moveset": [
       "KARATE_CHOP",
       "CROSS_CHOP",
       "BRICK_BREAK"
      ]
     },
-    "laic2027-1500": {
-     "rank": 383,
-     "score": 77.8,
+    "little-500": {
+     "rank": 70,
+     "score": 82,
      "moveset": [
       "KARATE_CHOP",
       "CROSS_CHOP",
@@ -48549,9 +50134,9 @@
       "FOUL_PLAY"
      ]
     },
-    "little-500": {
-     "rank": 170,
-     "score": 77,
+    "halloweenmega-1500": {
+     "rank": 231,
+     "score": 66.8,
      "moveset": [
       "ASTONISH",
       "GRASS_KNOT",
@@ -48561,6 +50146,15 @@
     "laic2027-1500": {
      "rank": 333,
      "score": 80,
+     "moveset": [
+      "ASTONISH",
+      "GRASS_KNOT",
+      "FOUL_PLAY"
+     ]
+    },
+    "little-500": {
+     "rank": 170,
+     "score": 77,
      "moveset": [
       "ASTONISH",
       "GRASS_KNOT",
@@ -49236,6 +50830,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 274,
+     "score": 63.1,
+     "moveset": [
+      "DRAGON_TAIL",
+      "OMINOUS_WIND",
+      "SHADOW_BALL"
+     ]
+    },
     "catch-1500": {
      "rank": 178,
      "score": 80.2,
@@ -49287,6 +50890,15 @@
     "mega-1500": {
      "rank": 507,
      "score": 74.7,
+     "moveset": [
+      "POISON_JAB",
+      "CRUNCH",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 142,
+     "score": 73.9,
      "moveset": [
       "POISON_JAB",
       "CRUNCH",
@@ -49569,6 +51181,15 @@
       "SCALD"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 114,
+     "score": 76.4,
+     "moveset": [
+      "WATERFALL",
+      "NIGHT_SLASH",
+      "SCALD"
+     ]
+    },
     "catch-1500": {
      "rank": 404,
      "score": 73.7,
@@ -49635,9 +51256,9 @@
       "MUD_BOMB"
      ]
     },
-    "little-500": {
-     "rank": 312,
-     "score": 70,
+    "halloweenmega-1500": {
+     "rank": 186,
+     "score": 70.6,
      "moveset": [
       "POISON_JAB",
       "SLUDGE",
@@ -49647,6 +51268,15 @@
     "laic2027-1500": {
      "rank": 278,
      "score": 82,
+     "moveset": [
+      "POISON_JAB",
+      "SLUDGE",
+      "MUD_BOMB"
+     ]
+    },
+    "little-500": {
+     "rank": 312,
+     "score": 70,
      "moveset": [
       "POISON_JAB",
       "SLUDGE",
@@ -49794,6 +51424,15 @@
       "X_SCISSOR"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 169,
+     "score": 72.1,
+     "moveset": [
+      "POISON_STING",
+      "X_SCISSOR",
+      "DRILL_RUN"
+     ]
+    },
     "laic2027-1500": {
      "rank": 262,
      "score": 82.3,
@@ -49866,6 +51505,15 @@
     "mega-1500": {
      "rank": 552,
      "score": 73.6,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_PUNCH",
+      "ICE_PUNCH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 217,
+     "score": 67.9,
      "moveset": [
       "SHADOW_CLAW",
       "SHADOW_PUNCH",
@@ -50223,6 +51871,15 @@
       "BUG_BUZZ"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 147,
+     "score": 73.6,
+     "moveset": [
+      "EMBER",
+      "FLAME_WHEEL",
+      "BUG_BUZZ"
+     ]
+    },
     "little-500": {
      "rank": 241,
      "score": 72.7,
@@ -50400,6 +52057,15 @@
     "mega-2500": {
      "rank": 370,
      "score": 77.3,
+     "moveset": [
+      "CONFUSION",
+      "DRAIN_PUNCH",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 304,
+     "score": 60.8,
      "moveset": [
       "CONFUSION",
       "DRAIN_PUNCH",
@@ -50784,6 +52450,15 @@
       "DARK_PULSE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 155,
+     "score": 73.2,
+     "moveset": [
+      "PECK",
+      "BRAVE_BIRD",
+      "DARK_PULSE"
+     ]
+    },
     "catch-1500": {
      "rank": 528,
      "score": 69.9,
@@ -51029,6 +52704,15 @@
      "score": 75.3,
      "moveset": [
       "HEX",
+      "SHADOW_BALL",
+      "MYSTICAL_FIRE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 252,
+     "score": 65.3,
+     "moveset": [
+      "PSYWAVE",
       "SHADOW_BALL",
       "MYSTICAL_FIRE"
      ]
@@ -51354,6 +53038,15 @@
       "SPIRIT_SHACKLE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 264,
+     "score": 64,
+     "moveset": [
+      "LEAFAGE",
+      "FRENZY_PLANT",
+      "SPIRIT_SHACKLE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 359,
      "score": 79,
@@ -51441,18 +53134,18 @@
       "ROCK_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 186,
-     "score": 76,
+    "laic2027-1500": {
+     "rank": 350,
+     "score": 79.5,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
       "ROCK_TOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 350,
-     "score": 79.5,
+    "little-500": {
+     "rank": 186,
+     "score": 76,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
@@ -51645,6 +53338,15 @@
     "fantasy-1500": {
      "rank": 143,
      "score": 58.5,
+     "moveset": [
+      "FAIRY_WIND",
+      "BODY_SLAM",
+      "WILD_CHARGE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 260,
+     "score": 64.5,
      "moveset": [
       "FAIRY_WIND",
       "BODY_SLAM",
@@ -52524,6 +54226,15 @@
       "STONE_EDGE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 131,
+     "score": 74.9,
+     "moveset": [
+      "DRAGON_BREATH",
+      "BRUTAL_SWING",
+      "STONE_EDGE"
+     ]
+    },
     "catch-1500": {
      "rank": 772,
      "score": 63.1,
@@ -52665,15 +54376,6 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 148,
-     "score": 77.8,
-     "moveset": [
-      "LOW_KICK",
-      "BODY_SLAM",
-      "CRUNCH"
-     ]
-    },
     "laic2027-1500": {
      "rank": 418,
      "score": 76.5,
@@ -52681,6 +54383,15 @@
       "LOW_KICK",
       "CRUNCH",
       "BODY_SLAM"
+     ]
+    },
+    "little-500": {
+     "rank": 148,
+     "score": 77.8,
+     "moveset": [
+      "LOW_KICK",
+      "BODY_SLAM",
+      "CRUNCH"
      ]
     },
     "catch-1500": {
@@ -52890,6 +54601,15 @@
       "STONE_EDGE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 121,
+     "score": 75.8,
+     "moveset": [
+      "DRAGON_BREATH",
+      "BRUTAL_SWING",
+      "STONE_EDGE"
+     ]
+    },
     "catch-1500": {
      "rank": 648,
      "score": 66.8,
@@ -52977,6 +54697,15 @@
       "BUG_BUZZ"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 174,
+     "score": 71.9,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "BULLDOZE",
+      "BUG_BUZZ"
+     ]
+    },
     "laic2027-1500": {
      "rank": 325,
      "score": 80.2,
@@ -53043,6 +54772,15 @@
     "mega-1500": {
      "rank": 610,
      "score": 72.2,
+     "moveset": [
+      "EMBER",
+      "HEAT_WAVE",
+      "ENERGY_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 240,
+     "score": 66,
      "moveset": [
       "EMBER",
       "HEAT_WAVE",
@@ -53127,6 +54865,15 @@
     "mega-2500": {
      "rank": 328,
      "score": 78.7,
+     "moveset": [
+      "SHADOW_CLAW",
+      "LEAF_BLADE",
+      "X_SCISSOR"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 218,
+     "score": 67.9,
      "moveset": [
       "SHADOW_CLAW",
       "LEAF_BLADE",
@@ -53400,18 +55147,18 @@
       "ROCK_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 161,
-     "score": 77.3,
+    "laic2027-1500": {
+     "rank": 398,
+     "score": 77.1,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
       "ROCK_TOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 398,
-     "score": 77.1,
+    "little-500": {
+     "rank": 161,
+     "score": 77.3,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
@@ -53496,6 +55243,15 @@
     "mega-2500": {
      "rank": 350,
      "score": 77.9,
+     "moveset": [
+      "POISON_STING",
+      "AQUA_TAIL",
+      "MEGAHORN"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 198,
+     "score": 69.7,
      "moveset": [
       "POISON_STING",
       "AQUA_TAIL",
@@ -53781,6 +55537,15 @@
     "mega-2500": {
      "rank": 276,
      "score": 80,
+     "moveset": [
+      "PECK",
+      "BRAVE_BIRD",
+      "DARK_PULSE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 129,
+     "score": 74.9,
      "moveset": [
       "PECK",
       "BRAVE_BIRD",
@@ -54303,15 +56068,6 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 109,
-     "score": 79.5,
-     "moveset": [
-      "LOW_KICK",
-      "BODY_SLAM",
-      "CRUNCH"
-     ]
-    },
     "laic2027-1500": {
      "rank": 367,
      "score": 78.7,
@@ -54319,6 +56075,15 @@
       "LOW_KICK",
       "CRUNCH",
       "BODY_SLAM"
+     ]
+    },
+    "little-500": {
+     "rank": 109,
+     "score": 79.5,
+     "moveset": [
+      "LOW_KICK",
+      "BODY_SLAM",
+      "CRUNCH"
      ]
     }
    },
@@ -54567,6 +56332,15 @@
     "mega-2500": {
      "rank": 837,
      "score": 56.9,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "ENERGY_BALL",
+      "BUG_BUZZ"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 208,
+     "score": 68.8,
      "moveset": [
       "SUCKER_PUNCH",
       "ENERGY_BALL",
@@ -54837,6 +56611,15 @@
       "GRASS_KNOT"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 205,
+     "score": 69,
+     "moveset": [
+      "VINE_WHIP",
+      "DRAINING_KISS",
+      "GRASS_KNOT"
+     ]
+    },
     "catch-1500": {
      "rank": 668,
      "score": 66.2,
@@ -54984,18 +56767,18 @@
       "WATER_PULSE"
      ]
     },
-    "little-500": {
-     "rank": 327,
-     "score": 69.4,
+    "laic2027-1500": {
+     "rank": 381,
+     "score": 78,
      "moveset": [
       "CONFUSION",
       "PSYSHOCK",
       "WATER_PULSE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 381,
-     "score": 78,
+    "little-500": {
+     "rank": 327,
+     "score": 69.4,
      "moveset": [
       "CONFUSION",
       "PSYSHOCK",
@@ -55299,15 +57082,6 @@
       "DRAGON_CLAW"
      ]
     },
-    "little-500": {
-     "rank": 240,
-     "score": 72.7,
-     "moveset": [
-      "SCRATCH",
-      "AQUA_TAIL",
-      "DRAGON_CLAW"
-     ]
-    },
     "fantasy-1500": {
      "rank": 129,
      "score": 61.1,
@@ -55320,6 +57094,15 @@
     "laic2027-1500": {
      "rank": 445,
      "score": 75.5,
+     "moveset": [
+      "SCRATCH",
+      "AQUA_TAIL",
+      "DRAGON_CLAW"
+     ]
+    },
+    "little-500": {
+     "rank": 240,
+     "score": 72.7,
      "moveset": [
       "SCRATCH",
       "AQUA_TAIL",
@@ -55368,6 +57151,15 @@
     "mega-1500": {
      "rank": 562,
      "score": 73.2,
+     "moveset": [
+      "POISON_JAB",
+      "CRUNCH",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 173,
+     "score": 71.9,
      "moveset": [
       "POISON_JAB",
       "CRUNCH",
@@ -55809,6 +57601,15 @@
       "FOUL_PLAY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 257,
+     "score": 64.8,
+     "moveset": [
+      "SNARL",
+      "LEAF_BLADE",
+      "FOUL_PLAY"
+     ]
+    },
     "catch-1500": {
      "rank": 186,
      "score": 79.9,
@@ -56235,9 +58036,9 @@
       "FOUL_PLAY"
      ]
     },
-    "little-500": {
-     "rank": 176,
-     "score": 76.8,
+    "halloweenmega-1500": {
+     "rank": 244,
+     "score": 65.8,
      "moveset": [
       "ASTONISH",
       "GRASS_KNOT",
@@ -56247,6 +58048,15 @@
     "laic2027-1500": {
      "rank": 377,
      "score": 78.3,
+     "moveset": [
+      "ASTONISH",
+      "GRASS_KNOT",
+      "FOUL_PLAY"
+     ]
+    },
+    "little-500": {
+     "rank": 176,
+     "score": 76.8,
      "moveset": [
       "ASTONISH",
       "GRASS_KNOT",
@@ -56505,6 +58315,15 @@
       "X_SCISSOR"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 215,
+     "score": 68.1,
+     "moveset": [
+      "FURY_CUTTER",
+      "NIGHT_SLASH",
+      "X_SCISSOR"
+     ]
+    },
     "laic2027-1500": {
      "rank": 259,
      "score": 82.5,
@@ -56593,6 +58412,15 @@
       "ROLLOUT",
       "SLUDGE_BOMB",
       "SHADOW_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 136,
+     "score": 74.5,
+     "moveset": [
+      "ROLLOUT",
+      "SLUDGE_BOMB",
+      "DARK_PULSE"
      ]
     },
     "laic2027-1500": {
@@ -56689,6 +58517,15 @@
       "INFESTATION",
       "DRILL_RUN",
       "X_SCISSOR"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 143,
+     "score": 73.8,
+     "moveset": [
+      "INFESTATION",
+      "X_SCISSOR",
+      "DRILL_RUN"
      ]
     },
     "laic2027-1500": {
@@ -56893,6 +58730,15 @@
       "HEX",
       "SHADOW_BALL",
       "FIRE_PUNCH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 302,
+     "score": 61,
+     "moveset": [
+      "EMBER",
+      "SHADOW_BALL",
+      "WILD_CHARGE"
      ]
     },
     "catch-1500": {
@@ -57165,6 +59011,15 @@
     "fantasy-1500": {
      "rank": 119,
      "score": 63.4,
+     "moveset": [
+      "BUG_BITE",
+      "DRILL_RUN",
+      "RAZOR_SHELL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 182,
+     "score": 70.8,
      "moveset": [
       "BUG_BITE",
       "DRILL_RUN",
@@ -57621,6 +59476,15 @@
       "MEGAHORN"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 223,
+     "score": 67.7,
+     "moveset": [
+      "POISON_STING",
+      "AQUA_TAIL",
+      "X_SCISSOR"
+     ]
+    },
     "laic2027-1500": {
      "rank": 334,
      "score": 80,
@@ -57709,6 +59573,15 @@
       "SUCKER_PUNCH",
       "DARK_PULSE",
       "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 194,
+     "score": 69.9,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "TRAILBLAZE",
+      "DARK_PULSE"
      ]
     },
     "catch-1500": {
@@ -57855,11 +59728,11 @@
       "BRICK_BREAK"
      ]
     },
-    "little-500": {
-     "rank": 80,
-     "score": 81.3,
+    "halloweenmega-1500": {
+     "rank": 191,
+     "score": 70.1,
      "moveset": [
-      "MUD_SLAP",
+      "ASTONISH",
       "SHADOW_PUNCH",
       "BRICK_BREAK"
      ]
@@ -57869,6 +59742,15 @@
      "score": 75.1,
      "moveset": [
       "ASTONISH",
+      "SHADOW_PUNCH",
+      "BRICK_BREAK"
+     ]
+    },
+    "little-500": {
+     "rank": 80,
+     "score": 81.3,
+     "moveset": [
+      "MUD_SLAP",
       "SHADOW_PUNCH",
       "BRICK_BREAK"
      ]
@@ -58110,6 +59992,15 @@
     "mega-2500": {
      "rank": 473,
      "score": 73.7,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_PUNCH",
+      "DARK_PULSE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 236,
+     "score": 66.5,
      "moveset": [
       "SHADOW_CLAW",
       "SHADOW_PUNCH",
@@ -58455,6 +60346,15 @@
       "FLAMETHROWER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 171,
+     "score": 72,
+     "moveset": [
+      "EMBER",
+      "DARK_PULSE",
+      "FLAMETHROWER"
+     ]
+    },
     "little-500": {
      "rank": 187,
      "score": 75.9,
@@ -58530,18 +60430,18 @@
       "ROCK_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 274,
-     "score": 71.7,
+    "laic2027-1500": {
+     "rank": 499,
+     "score": 73.2,
      "moveset": [
       "SCRATCH",
       "SAND_TOMB",
       "ROCK_TOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 499,
-     "score": 73.2,
+    "little-500": {
+     "rank": 274,
+     "score": 71.7,
      "moveset": [
       "SCRATCH",
       "SAND_TOMB",
@@ -58611,15 +60511,6 @@
       "DRAGON_CLAW"
      ]
     },
-    "little-500": {
-     "rank": 183,
-     "score": 76.3,
-     "moveset": [
-      "DRAGON_BREATH",
-      "AVALANCHE",
-      "DRAGON_CLAW"
-     ]
-    },
     "fantasy-1500": {
      "rank": 178,
      "score": 46.6,
@@ -58632,6 +60523,15 @@
     "laic2027-1500": {
      "rank": 276,
      "score": 82,
+     "moveset": [
+      "DRAGON_BREATH",
+      "AVALANCHE",
+      "DRAGON_CLAW"
+     ]
+    },
+    "little-500": {
+     "rank": 183,
+     "score": 76.3,
      "moveset": [
       "DRAGON_BREATH",
       "AVALANCHE",
@@ -58908,6 +60808,15 @@
       "CROSS_POISON"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 207,
+     "score": 68.8,
+     "moveset": [
+      "FURY_CUTTER",
+      "ROCK_BLAST",
+      "LIQUIDATION"
+     ]
+    },
     "laic2027-1500": {
      "rank": 328,
      "score": 80,
@@ -58968,6 +60877,15 @@
     "mega-1500": {
      "rank": 678,
      "score": 70.8,
+     "moveset": [
+      "SHADOW_CLAW",
+      "ICE_PUNCH",
+      "SHADOW_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 197,
+     "score": 69.7,
      "moveset": [
       "SHADOW_CLAW",
       "ICE_PUNCH",
@@ -59169,6 +61087,15 @@
     "mega-2500": {
      "rank": 889,
      "score": 49.8,
+     "moveset": [
+      "BITE",
+      "CRUNCH",
+      "HYPER_FANG"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 139,
+     "score": 74.1,
      "moveset": [
       "BITE",
       "CRUNCH",
@@ -59442,6 +61369,15 @@
       "X_SCISSOR"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 308,
+     "score": 60.1,
+     "moveset": [
+      "FURY_CUTTER",
+      "CLOSE_COMBAT",
+      "X_SCISSOR"
+     ]
+    },
     "laic2027-1500": {
      "rank": 270,
      "score": 82.2,
@@ -59580,18 +61516,18 @@
       "HIGH_JUMP_KICK"
      ]
     },
-    "little-500": {
-     "rank": 258,
-     "score": 72.3,
+    "laic2027-1500": {
+     "rank": 475,
+     "score": 74.2,
      "moveset": [
       "LOW_KICK",
       "BRICK_BREAK",
       "HIGH_JUMP_KICK"
      ]
     },
-    "laic2027-1500": {
-     "rank": 475,
-     "score": 74.2,
+    "little-500": {
+     "rank": 258,
+     "score": 72.3,
      "moveset": [
       "LOW_KICK",
       "BRICK_BREAK",
@@ -60828,6 +62764,15 @@
       "STONE_EDGE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 250,
+     "score": 65.4,
+     "moveset": [
+      "FURY_CUTTER",
+      "X_SCISSOR",
+      "ROCK_SLIDE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 317,
      "score": 80.5,
@@ -60918,9 +62863,9 @@
       "SHADOW_SNEAK"
      ]
     },
-    "little-500": {
-     "rank": 281,
-     "score": 71.4,
+    "halloweenmega-1500": {
+     "rank": 258,
+     "score": 64.7,
      "moveset": [
       "ASTONISH",
       "DARK_PULSE",
@@ -60930,6 +62875,15 @@
     "laic2027-1500": {
      "rank": 468,
      "score": 74.6,
+     "moveset": [
+      "ASTONISH",
+      "DARK_PULSE",
+      "SHADOW_SNEAK"
+     ]
+    },
+    "little-500": {
+     "rank": 281,
+     "score": 71.4,
      "moveset": [
       "ASTONISH",
       "DARK_PULSE",
@@ -61113,6 +63067,15 @@
     "mega-2500": {
      "rank": 573,
      "score": 71.2,
+     "moveset": [
+      "INFESTATION",
+      "POISON_FANG",
+      "SILVER_WIND"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 184,
+     "score": 70.8,
      "moveset": [
       "INFESTATION",
       "POISON_FANG",
@@ -61446,9 +63409,9 @@
       "ICY_WIND"
      ]
     },
-    "little-500": {
-     "rank": 77,
-     "score": 81.5,
+    "halloweenmega-1500": {
+     "rank": 287,
+     "score": 62,
      "moveset": [
       "HEX",
       "SHADOW_BALL",
@@ -61458,6 +63421,15 @@
     "laic2027-1500": {
      "rank": 446,
      "score": 75.5,
+     "moveset": [
+      "HEX",
+      "SHADOW_BALL",
+      "ICY_WIND"
+     ]
+    },
+    "little-500": {
+     "rank": 77,
+     "score": 81.5,
      "moveset": [
       "HEX",
       "SHADOW_BALL",
@@ -61560,6 +63532,15 @@
     "fantasy-1500": {
      "rank": 139,
      "score": 59,
+     "moveset": [
+      "BUG_BITE",
+      "DRILL_RUN",
+      "RAZOR_SHELL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 187,
+     "score": 70.5,
      "moveset": [
       "BUG_BITE",
       "DRILL_RUN",
@@ -61743,6 +63724,15 @@
     "mega-2500": {
      "rank": 511,
      "score": 72.7,
+     "moveset": [
+      "BITE",
+      "SHADOW_BALL",
+      "PSYCHIC_FANGS"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 311,
+     "score": 59.8,
      "moveset": [
       "BITE",
       "SHADOW_BALL",
@@ -62040,6 +64030,15 @@
       "SLUDGE_BOMB"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 233,
+     "score": 66.7,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "FOUL_PLAY",
+      "SLUDGE_BOMB"
+     ]
+    },
     "catch-1500": {
      "rank": 553,
      "score": 69.3,
@@ -62103,15 +64102,6 @@
       "DRAGON_CLAW"
      ]
     },
-    "little-500": {
-     "rank": 247,
-     "score": 72.5,
-     "moveset": [
-      "SCRATCH",
-      "AQUA_TAIL",
-      "DRAGON_CLAW"
-     ]
-    },
     "fantasy-1500": {
      "rank": 136,
      "score": 59.6,
@@ -62124,6 +64114,15 @@
     "laic2027-1500": {
      "rank": 469,
      "score": 74.5,
+     "moveset": [
+      "SCRATCH",
+      "AQUA_TAIL",
+      "DRAGON_CLAW"
+     ]
+    },
+    "little-500": {
+     "rank": 247,
+     "score": 72.5,
      "moveset": [
       "SCRATCH",
       "AQUA_TAIL",
@@ -62203,6 +64202,15 @@
       "SUCKER_PUNCH",
       "DARK_PULSE",
       "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 224,
+     "score": 67.4,
+     "moveset": [
+      "SUCKER_PUNCH",
+      "TRAILBLAZE",
+      "DARK_PULSE"
      ]
     },
     "catch-1500": {
@@ -62490,6 +64498,15 @@
     "mega-2500": {
      "rank": 583,
      "score": 70.8,
+     "moveset": [
+      "INFESTATION",
+      "POISON_FANG",
+      "SILVER_WIND"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 219,
+     "score": 67.9,
      "moveset": [
       "INFESTATION",
       "POISON_FANG",
@@ -62802,6 +64819,15 @@
       "POWER_GEM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 278,
+     "score": 62.9,
+     "moveset": [
+      "HEX",
+      "SHADOW_BALL",
+      "POWER_GEM"
+     ]
+    },
     "catch-1500": {
      "rank": 747,
      "score": 63.7,
@@ -62877,11 +64903,11 @@
       "SHADOW_SNEAK"
      ]
     },
-    "little-500": {
-     "rank": 346,
-     "score": 68.2,
+    "halloweenmega-1500": {
+     "rank": 289,
+     "score": 62,
      "moveset": [
-      "ASTONISH",
+      "PSYWAVE",
       "DARK_PULSE",
       "SHADOW_SNEAK"
      ]
@@ -62891,6 +64917,15 @@
      "score": 82.6,
      "moveset": [
       "PSYWAVE",
+      "DARK_PULSE",
+      "SHADOW_SNEAK"
+     ]
+    },
+    "little-500": {
+     "rank": 346,
+     "score": 68.2,
+     "moveset": [
+      "ASTONISH",
       "DARK_PULSE",
       "SHADOW_SNEAK"
      ]
@@ -63096,6 +65131,15 @@
       "AERIAL_ACE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 238,
+     "score": 66.5,
+     "moveset": [
+      "SHADOW_CLAW",
+      "CLOSE_COMBAT",
+      "X_SCISSOR"
+     ]
+    },
     "laic2027-1500": {
      "rank": 442,
      "score": 75.7,
@@ -63168,18 +65212,18 @@
       "IRON_HEAD"
      ]
     },
-    "little-500": {
-     "rank": 168,
-     "score": 77,
+    "fantasy-1500": {
+     "rank": 117,
+     "score": 64.2,
      "moveset": [
       "METAL_SOUND",
       "ROCK_TOMB",
       "IRON_HEAD"
      ]
     },
-    "fantasy-1500": {
-     "rank": 117,
-     "score": 64.2,
+    "little-500": {
+     "rank": 168,
+     "score": 77,
      "moveset": [
       "METAL_SOUND",
       "ROCK_TOMB",
@@ -63432,6 +65476,15 @@
       "FOUL_PLAY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 266,
+     "score": 63.7,
+     "moveset": [
+      "SNARL",
+      "LEAF_BLADE",
+      "FOUL_PLAY"
+     ]
+    },
     "catch-1500": {
      "rank": 308,
      "score": 76.5,
@@ -63510,18 +65563,18 @@
       "WATER_PULSE"
      ]
     },
-    "little-500": {
-     "rank": 299,
-     "score": 70.6,
+    "laic2027-1500": {
+     "rank": 408,
+     "score": 76.7,
      "moveset": [
       "CONFUSION",
       "PSYSHOCK",
       "WATER_PULSE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 408,
-     "score": 76.7,
+    "little-500": {
+     "rank": 299,
+     "score": 70.6,
      "moveset": [
       "CONFUSION",
       "PSYSHOCK",
@@ -63624,6 +65677,15 @@
     "mega-10000": {
      "rank": 208,
      "score": 55,
+     "moveset": [
+      "SHADOW_CLAW",
+      "CLOSE_COMBAT",
+      "X_SCISSOR"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 226,
+     "score": 67.3,
      "moveset": [
       "SHADOW_CLAW",
       "CLOSE_COMBAT",
@@ -63738,6 +65800,15 @@
       "CROSS_CHOP"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 248,
+     "score": 65.5,
+     "moveset": [
+      "COUNTER",
+      "CROSS_CHOP",
+      "NIGHT_SLASH"
+     ]
+    },
     "catch-1500": {
      "rank": 273,
      "score": 77.4,
@@ -63795,9 +65866,9 @@
       "FOUL_PLAY"
      ]
     },
-    "little-500": {
-     "rank": 184,
-     "score": 76.1,
+    "halloweenmega-1500": {
+     "rank": 270,
+     "score": 63.3,
      "moveset": [
       "ASTONISH",
       "GRASS_KNOT",
@@ -63807,6 +65878,15 @@
     "laic2027-1500": {
      "rank": 448,
      "score": 75.5,
+     "moveset": [
+      "ASTONISH",
+      "GRASS_KNOT",
+      "FOUL_PLAY"
+     ]
+    },
+    "little-500": {
+     "rank": 184,
+     "score": 76.1,
      "moveset": [
       "ASTONISH",
       "GRASS_KNOT",
@@ -63897,6 +65977,15 @@
       "MEGAHORN"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 216,
+     "score": 67.9,
+     "moveset": [
+      "PSYCHO_CUT",
+      "BRUTAL_SWING",
+      "MEGAHORN"
+     ]
+    },
     "catch-1500": {
      "rank": 517,
      "score": 70.1,
@@ -63970,6 +66059,15 @@
       "WATERFALL",
       "NIGHT_SLASH",
       "CRABHAMMER"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 148,
+     "score": 73.5,
+     "moveset": [
+      "WATERFALL",
+      "NIGHT_SLASH",
+      "SCALD"
      ]
     },
     "catch-1500": {
@@ -64494,6 +66592,15 @@
       "EARTH_POWER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 201,
+     "score": 69.4,
+     "moveset": [
+      "ASTONISH",
+      "SHADOW_BALL",
+      "EARTH_POWER"
+     ]
+    },
     "laic2027-1500": {
      "rank": 543,
      "score": 71.3,
@@ -64686,6 +66793,15 @@
       "HEAT_WAVE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 275,
+     "score": 63,
+     "moveset": [
+      "INCINERATE",
+      "SHADOW_BALL",
+      "HEAT_WAVE"
+     ]
+    },
     "catch-1500": {
      "rank": 508,
      "score": 70.4,
@@ -64752,11 +66868,11 @@
       "BRICK_BREAK"
      ]
     },
-    "little-500": {
-     "rank": 90,
-     "score": 80.4,
+    "halloweenmega-1500": {
+     "rank": 229,
+     "score": 66.8,
      "moveset": [
-      "MUD_SLAP",
+      "ASTONISH",
       "SHADOW_PUNCH",
       "BRICK_BREAK"
      ]
@@ -64766,6 +66882,15 @@
      "score": 72.7,
      "moveset": [
       "ASTONISH",
+      "SHADOW_PUNCH",
+      "BRICK_BREAK"
+     ]
+    },
+    "little-500": {
+     "rank": 90,
+     "score": 80.4,
+     "moveset": [
+      "MUD_SLAP",
       "SHADOW_PUNCH",
       "BRICK_BREAK"
      ]
@@ -65016,18 +67141,18 @@
       "BRICK_BREAK"
      ]
     },
-    "little-500": {
-     "rank": 139,
-     "score": 78.1,
+    "laic2027-1500": {
+     "rank": 558,
+     "score": 70.6,
      "moveset": [
       "THUNDER_SHOCK",
       "THUNDER_PUNCH",
       "BRICK_BREAK"
      ]
     },
-    "laic2027-1500": {
-     "rank": 558,
-     "score": 70.6,
+    "little-500": {
+     "rank": 139,
+     "score": 78.1,
      "moveset": [
       "THUNDER_SHOCK",
       "THUNDER_PUNCH",
@@ -65343,6 +67468,15 @@
       "OBSTRUCT"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 245,
+     "score": 65.7,
+     "moveset": [
+      "COUNTER",
+      "NIGHT_SLASH",
+      "CROSS_CHOP"
+     ]
+    },
     "catch-1500": {
      "rank": 333,
      "score": 75.8,
@@ -65394,6 +67528,15 @@
     "mega-1500": {
      "rank": 682,
      "score": 70.8,
+     "moveset": [
+      "BUG_BITE",
+      "ENERGY_BALL",
+      "SILVER_WIND"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 249,
+     "score": 65.5,
      "moveset": [
       "BUG_BITE",
       "ENERGY_BALL",
@@ -65784,18 +67927,27 @@
       "THUNDERBOLT"
      ]
     },
-    "little-500": {
-     "rank": 311,
-     "score": 70.2,
+    "fantasy-1500": {
+     "rank": 168,
+     "score": 48.5,
      "moveset": [
       "CHARM",
       "DRAINING_KISS",
       "THUNDERBOLT"
      ]
     },
-    "fantasy-1500": {
-     "rank": 168,
-     "score": 48.5,
+    "halloweenmega-1500": {
+     "rank": 204,
+     "score": 69.1,
+     "moveset": [
+      "CHARM",
+      "DRAINING_KISS",
+      "THUNDERBOLT"
+     ]
+    },
+    "little-500": {
+     "rank": 311,
+     "score": 70.2,
      "moveset": [
       "CHARM",
       "DRAINING_KISS",
@@ -65934,6 +68086,15 @@
       "CROSS_POISON"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 280,
+     "score": 62.6,
+     "moveset": [
+      "FURY_CUTTER",
+      "X_SCISSOR",
+      "CROSS_POISON"
+     ]
+    },
     "laic2027-1500": {
      "rank": 370,
      "score": 78.6,
@@ -66015,18 +68176,18 @@
       "ANCIENT_POWER"
      ]
     },
-    "little-500": {
-     "rank": 195,
-     "score": 75.5,
+    "laic2027-1500": {
+     "rank": 485,
+     "score": 73.7,
      "moveset": [
       "BITE",
       "SURF",
       "ANCIENT_POWER"
      ]
     },
-    "laic2027-1500": {
-     "rank": 485,
-     "score": 73.7,
+    "little-500": {
+     "rank": 195,
+     "score": 75.5,
      "moveset": [
       "BITE",
       "SURF",
@@ -66099,15 +68260,6 @@
       "STOMP"
      ]
     },
-    "little-500": {
-     "rank": 292,
-     "score": 70.9,
-     "moveset": [
-      "DRAGON_TAIL",
-      "ROCK_TOMB",
-      "ANCIENT_POWER"
-     ]
-    },
     "fantasy-1500": {
      "rank": 182,
      "score": 44.8,
@@ -66124,6 +68276,15 @@
       "DRAGON_TAIL",
       "ROCK_TOMB",
       "STOMP"
+     ]
+    },
+    "little-500": {
+     "rank": 292,
+     "score": 70.9,
+     "moveset": [
+      "DRAGON_TAIL",
+      "ROCK_TOMB",
+      "ANCIENT_POWER"
      ]
     },
     "catch-1500": {
@@ -66447,18 +68608,18 @@
       "SURF"
      ]
     },
-    "little-500": {
+    "laic2027-1500": {
      "rank": 358,
-     "score": 67.4,
+     "score": 79.1,
      "moveset": [
       "CONFUSION",
       "PSYSHOCK",
       "SURF"
      ]
     },
-    "laic2027-1500": {
+    "little-500": {
      "rank": 358,
-     "score": 79.1,
+     "score": 67.4,
      "moveset": [
       "CONFUSION",
       "PSYSHOCK",
@@ -66795,9 +68956,9 @@
       "ICY_WIND"
      ]
     },
-    "little-500": {
-     "rank": 42,
-     "score": 84.3,
+    "halloweenmega-1500": {
+     "rank": 310,
+     "score": 59.9,
      "moveset": [
       "HEX",
       "SHADOW_BALL",
@@ -66807,6 +68968,15 @@
     "laic2027-1500": {
      "rank": 434,
      "score": 76,
+     "moveset": [
+      "HEX",
+      "SHADOW_BALL",
+      "ICY_WIND"
+     ]
+    },
+    "little-500": {
+     "rank": 42,
+     "score": 84.3,
      "moveset": [
       "HEX",
       "SHADOW_BALL",
@@ -66963,9 +69133,9 @@
       "X_SCISSOR"
      ]
     },
-    "little-500": {
-     "rank": 92,
-     "score": 80.4,
+    "halloweenmega-1500": {
+     "rank": 256,
+     "score": 64.8,
      "moveset": [
       "FURY_CUTTER",
       "DRILL_RUN",
@@ -66975,6 +69145,15 @@
     "laic2027-1500": {
      "rank": 417,
      "score": 76.5,
+     "moveset": [
+      "FURY_CUTTER",
+      "DRILL_RUN",
+      "X_SCISSOR"
+     ]
+    },
+    "little-500": {
+     "rank": 92,
+     "score": 80.4,
      "moveset": [
       "FURY_CUTTER",
       "DRILL_RUN",
@@ -67032,6 +69211,15 @@
     "mega-1500": {
      "rank": 705,
      "score": 70,
+     "moveset": [
+      "FURY_CUTTER",
+      "X_SCISSOR",
+      "AERIAL_ACE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 272,
+     "score": 63.2,
      "moveset": [
       "FURY_CUTTER",
       "X_SCISSOR",
@@ -67120,6 +69308,15 @@
       "ROLLOUT",
       "SLUDGE_BOMB",
       "SHADOW_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 212,
+     "score": 68.2,
+     "moveset": [
+      "ROLLOUT",
+      "SLUDGE_BOMB",
+      "DARK_PULSE"
      ]
     },
     "laic2027-1500": {
@@ -67380,18 +69577,18 @@
       "ROCK_SLIDE"
      ]
     },
-    "little-500": {
-     "rank": 202,
-     "score": 75.1,
+    "laic2027-1500": {
+     "rank": 548,
+     "score": 71.1,
      "moveset": [
       "VOLT_SWITCH",
       "ROCK_TOMB",
       "ROCK_SLIDE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 548,
-     "score": 71.1,
+    "little-500": {
+     "rank": 202,
+     "score": 75.1,
      "moveset": [
       "VOLT_SWITCH",
       "ROCK_TOMB",
@@ -67491,6 +69688,15 @@
       "POWER_WHIP"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 335,
+     "score": 56.5,
+     "moveset": [
+      "PSYCHO_CUT",
+      "PSYSHOCK",
+      "POWER_WHIP"
+     ]
+    },
     "catch-1500": {
      "rank": 539,
      "score": 69.7,
@@ -67570,6 +69776,15 @@
       "POISON_JAB",
       "POISON_FANG",
       "CRUNCH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 263,
+     "score": 64.1,
+     "moveset": [
+      "POISON_JAB",
+      "POISON_FANG",
+      "WRAP"
      ]
     },
     "laic2027-1500": {
@@ -68403,9 +70618,9 @@
       "ANCIENT_POWER"
      ]
     },
-    "little-500": {
-     "rank": 211,
-     "score": 74.6,
+    "halloweenmega-1500": {
+     "rank": 242,
+     "score": 65.9,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
@@ -68419,6 +70634,15 @@
       "SCRATCH",
       "AQUA_JET",
       "CROSS_POISON"
+     ]
+    },
+    "little-500": {
+     "rank": 211,
+     "score": 74.6,
+     "moveset": [
+      "SCRATCH",
+      "AQUA_JET",
+      "ANCIENT_POWER"
      ]
     },
     "catch-1500": {
@@ -68664,18 +70888,18 @@
       "ICE_PUNCH"
      ]
     },
-    "little-500": {
-     "rank": 335,
-     "score": 69,
+    "laic2027-1500": {
+     "rank": 324,
+     "score": 80.4,
      "moveset": [
       "POWDER_SNOW",
       "PSYSHOCK",
       "ICE_PUNCH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 324,
-     "score": 80.4,
+    "little-500": {
+     "rank": 335,
+     "score": 69,
      "moveset": [
       "POWDER_SNOW",
       "PSYSHOCK",
@@ -68745,18 +70969,18 @@
       "STOMP"
      ]
     },
-    "little-500": {
-     "rank": 338,
-     "score": 68.9,
+    "laic2027-1500": {
+     "rank": 479,
+     "score": 74.1,
      "moveset": [
       "TAKE_DOWN",
       "SUPER_POWER",
       "STOMP"
      ]
     },
-    "laic2027-1500": {
-     "rank": 479,
-     "score": 74.1,
+    "little-500": {
+     "rank": 338,
+     "score": 68.9,
      "moveset": [
       "TAKE_DOWN",
       "SUPER_POWER",
@@ -69009,6 +71233,15 @@
     "mega-1500": {
      "rank": 765,
      "score": 68.3,
+     "moveset": [
+      "ACID",
+      "POWER_WHIP",
+      "SEED_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 281,
+     "score": 62.5,
      "moveset": [
       "ACID",
       "POWER_WHIP",
@@ -69357,18 +71590,27 @@
       "X_SCISSOR"
      ]
     },
-    "little-500": {
-     "rank": 119,
-     "score": 79,
+    "halloweenmega-1500": {
+     "rank": 243,
+     "score": 65.9,
+     "moveset": [
+      "FURY_CUTTER",
+      "NIGHT_SLASH",
+      "X_SCISSOR"
+     ]
+    },
+    "laic2027-1500": {
+     "rank": 384,
+     "score": 77.8,
      "moveset": [
       "FURY_CUTTER",
       "X_SCISSOR",
       "NIGHT_SLASH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 384,
-     "score": 77.8,
+    "little-500": {
+     "rank": 119,
+     "score": 79,
      "moveset": [
       "FURY_CUTTER",
       "X_SCISSOR",
@@ -69972,6 +72214,15 @@
       "IRON_HEAD"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 213,
+     "score": 68.1,
+     "moveset": [
+      "BUG_BITE",
+      "X_SCISSOR",
+      "IRON_HEAD"
+     ]
+    },
     "catch-1500": {
      "rank": 544,
      "score": 69.6,
@@ -70059,6 +72310,15 @@
     "mega-10000": {
      "rank": 299,
      "score": 45.5,
+     "moveset": [
+      "FURY_CUTTER",
+      "CLOSE_COMBAT",
+      "X_SCISSOR"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 348,
+     "score": 55,
      "moveset": [
       "FURY_CUTTER",
       "CLOSE_COMBAT",
@@ -70413,18 +72673,18 @@
       "ROCK_SLIDE"
      ]
     },
-    "little-500": {
-     "rank": 150,
-     "score": 77.7,
+    "laic2027-1500": {
+     "rank": 587,
+     "score": 68.5,
      "moveset": [
       "VOLT_SWITCH",
       "ROCK_TOMB",
       "ROCK_SLIDE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 587,
-     "score": 68.5,
+    "little-500": {
+     "rank": 150,
+     "score": 77.7,
      "moveset": [
       "VOLT_SWITCH",
       "ROCK_TOMB",
@@ -70497,18 +72757,18 @@
       "ROCK_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 334,
-     "score": 69.1,
+    "laic2027-1500": {
+     "rank": 578,
+     "score": 68.9,
      "moveset": [
       "SCRATCH",
       "SAND_TOMB",
       "ROCK_TOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 578,
-     "score": 68.9,
+    "little-500": {
+     "rank": 334,
+     "score": 69.1,
      "moveset": [
       "SCRATCH",
       "SAND_TOMB",
@@ -70728,15 +72988,6 @@
       "STOMP"
      ]
     },
-    "little-500": {
-     "rank": 317,
-     "score": 69.8,
-     "moveset": [
-      "DRAGON_TAIL",
-      "ROCK_TOMB",
-      "ANCIENT_POWER"
-     ]
-    },
     "fantasy-1500": {
      "rank": 187,
      "score": 42.9,
@@ -70753,6 +73004,15 @@
       "DRAGON_TAIL",
       "ROCK_TOMB",
       "STOMP"
+     ]
+    },
+    "little-500": {
+     "rank": 317,
+     "score": 69.8,
+     "moveset": [
+      "DRAGON_TAIL",
+      "ROCK_TOMB",
+      "ANCIENT_POWER"
      ]
     },
     "catch-1500": {
@@ -70944,9 +73204,9 @@
       "X_SCISSOR"
      ]
     },
-    "little-500": {
-     "rank": 416,
-     "score": 63.9,
+    "halloweenmega-1500": {
+     "rank": 328,
+     "score": 57.3,
      "moveset": [
       "POISON_JAB",
       "CLOSE_COMBAT",
@@ -70956,6 +73216,15 @@
     "laic2027-1500": {
      "rank": 494,
      "score": 73.3,
+     "moveset": [
+      "POISON_JAB",
+      "CLOSE_COMBAT",
+      "X_SCISSOR"
+     ]
+    },
+    "little-500": {
+     "rank": 416,
+     "score": 63.9,
      "moveset": [
       "POISON_JAB",
       "CLOSE_COMBAT",
@@ -71055,6 +73324,15 @@
       "LIQUIDATION"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 268,
+     "score": 63.5,
+     "moveset": [
+      "FURY_CUTTER",
+      "ROCK_BLAST",
+      "LIQUIDATION"
+     ]
+    },
     "laic2027-1500": {
      "rank": 414,
      "score": 76.5,
@@ -71121,20 +73399,20 @@
       "ENERGY_BALL"
      ]
     },
-    "little-500": {
-     "rank": 268,
-     "score": 71.8,
-     "moveset": [
-      "SCRATCH",
-      "PSYSHOCK",
-      "ENERGY_BALL"
-     ]
-    },
     "laic2027-1500": {
      "rank": 375,
      "score": 78.3,
      "moveset": [
       "CONFUSION",
+      "PSYSHOCK",
+      "ENERGY_BALL"
+     ]
+    },
+    "little-500": {
+     "rank": 268,
+     "score": 71.8,
+     "moveset": [
+      "SCRATCH",
       "PSYSHOCK",
       "ENERGY_BALL"
      ]
@@ -71271,18 +73549,18 @@
       "AERIAL_ACE"
      ]
     },
-    "little-500": {
-     "rank": 262,
-     "score": 72.1,
+    "laic2027-1500": {
+     "rank": 583,
+     "score": 68.7,
      "moveset": [
       "BUBBLE",
       "WATER_PULSE",
       "AERIAL_ACE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 583,
-     "score": 68.7,
+    "little-500": {
+     "rank": 262,
+     "score": 72.1,
      "moveset": [
       "BUBBLE",
       "WATER_PULSE",
@@ -71367,6 +73645,15 @@
     "mega-2500": {
      "rank": 763,
      "score": 62.4,
+     "moveset": [
+      "ASTONISH",
+      "THUNDERBOLT",
+      "OMINOUS_WIND"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 279,
+     "score": 62.8,
      "moveset": [
       "ASTONISH",
       "THUNDERBOLT",
@@ -71718,9 +74005,9 @@
       "X_SCISSOR"
      ]
     },
-    "little-500": {
-     "rank": 400,
-     "score": 64.8,
+    "halloweenmega-1500": {
+     "rank": 296,
+     "score": 61.4,
      "moveset": [
       "POISON_JAB",
       "CLOSE_COMBAT",
@@ -71730,6 +74017,15 @@
     "laic2027-1500": {
      "rank": 559,
      "score": 70.6,
+     "moveset": [
+      "POISON_JAB",
+      "CLOSE_COMBAT",
+      "X_SCISSOR"
+     ]
+    },
+    "little-500": {
+     "rank": 400,
+     "score": 64.8,
      "moveset": [
       "POISON_JAB",
       "CLOSE_COMBAT",
@@ -72216,6 +74512,15 @@
       "PSYCHIC"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 276,
+     "score": 63,
+     "moveset": [
+      "VINE_WHIP",
+      "DAZZLING_GLEAM",
+      "PSYCHIC"
+     ]
+    },
     "catch-1500": {
      "rank": 477,
      "score": 71.4,
@@ -72366,9 +74671,9 @@
       "MOONBLAST"
      ]
     },
-    "little-500": {
-     "rank": 331,
-     "score": 69.2,
+    "halloweenmega-1500": {
+     "rank": 314,
+     "score": 59.5,
      "moveset": [
       "ACID",
       "SEED_BOMB",
@@ -72378,6 +74683,15 @@
     "laic2027-1500": {
      "rank": 493,
      "score": 73.3,
+     "moveset": [
+      "ACID",
+      "SEED_BOMB",
+      "MOONBLAST"
+     ]
+    },
+    "little-500": {
+     "rank": 331,
+     "score": 69.2,
      "moveset": [
       "ACID",
       "SEED_BOMB",
@@ -72534,6 +74848,15 @@
       "MEGAHORN"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 254,
+     "score": 65.1,
+     "moveset": [
+      "PSYCHO_CUT",
+      "BRUTAL_SWING",
+      "MEGAHORN"
+     ]
+    },
     "catch-1500": {
      "rank": 633,
      "score": 67,
@@ -72625,6 +74948,15 @@
       "INCINERATE",
       "SHADOW_BALL",
       "FLAME_CHARGE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 292,
+     "score": 61.8,
+     "moveset": [
+      "INCINERATE",
+      "SHADOW_BALL",
+      "ENERGY_BALL"
      ]
     },
     "catch-1500": {
@@ -73091,6 +75423,15 @@
       "SUPER_POWER",
       "LUNGE"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 339,
+     "score": 56.1,
+     "moveset": [
+      "COUNTER",
+      "SUPER_POWER",
+      "LUNGE"
+     ]
     }
    },
    "recommended": {
@@ -73161,6 +75502,15 @@
     "fantasy-1500": {
      "rank": 154,
      "score": 55.1,
+     "moveset": [
+      "PSYWAVE",
+      "SHADOW_BALL",
+      "PSYCHIC"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 332,
+     "score": 57,
      "moveset": [
       "PSYWAVE",
       "SHADOW_BALL",
@@ -73248,6 +75598,15 @@
     "mega-2500": {
      "rank": 701,
      "score": 65.4,
+     "moveset": [
+      "BITE",
+      "CRUNCH",
+      "POISON_FANG"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 261,
+     "score": 64.4,
      "moveset": [
       "BITE",
       "CRUNCH",
@@ -73422,18 +75781,18 @@
       "FIRE_PUNCH"
      ]
     },
-    "little-500": {
-     "rank": 219,
-     "score": 74.1,
+    "laic2027-1500": {
+     "rank": 536,
+     "score": 71.4,
      "moveset": [
       "QUICK_ATTACK",
       "SWIFT",
       "FIRE_PUNCH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 536,
-     "score": 71.4,
+    "little-500": {
+     "rank": 219,
+     "score": 74.1,
      "moveset": [
       "QUICK_ATTACK",
       "SWIFT",
@@ -73509,6 +75868,15 @@
     "mega-2500": {
      "rank": 512,
      "score": 72.7,
+     "moveset": [
+      "INFESTATION",
+      "AIR_CUTTER",
+      "LUNGE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 273,
+     "score": 63.2,
      "moveset": [
       "INFESTATION",
       "AIR_CUTTER",
@@ -73764,18 +76132,18 @@
       "BRICK_BREAK"
      ]
     },
-    "little-500": {
-     "rank": 104,
-     "score": 79.9,
+    "laic2027-1500": {
+     "rank": 567,
+     "score": 70,
      "moveset": [
       "KARATE_CHOP",
       "CROSS_CHOP",
       "BRICK_BREAK"
      ]
     },
-    "laic2027-1500": {
-     "rank": 567,
-     "score": 70,
+    "little-500": {
+     "rank": 104,
+     "score": 79.9,
      "moveset": [
       "KARATE_CHOP",
       "CROSS_CHOP",
@@ -73923,18 +76291,18 @@
       "STOMP"
      ]
     },
-    "little-500": {
-     "rank": 275,
-     "score": 71.7,
+    "laic2027-1500": {
+     "rank": 515,
+     "score": 72.5,
      "moveset": [
       "TAKE_DOWN",
       "SUPER_POWER",
       "STOMP"
      ]
     },
-    "laic2027-1500": {
-     "rank": 515,
-     "score": 72.5,
+    "little-500": {
+     "rank": 275,
+     "score": 71.7,
      "moveset": [
       "TAKE_DOWN",
       "SUPER_POWER",
@@ -74442,6 +76810,15 @@
       "SLUDGE_BOMB"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 288,
+     "score": 62,
+     "moveset": [
+      "VINE_WHIP",
+      "POWER_WHIP",
+      "SLUDGE_BOMB"
+     ]
+    },
     "laic2027-1500": {
      "rank": 569,
      "score": 69.8,
@@ -74577,6 +76954,15 @@
     "mega-1500": {
      "rank": 815,
      "score": 66.5,
+     "moveset": [
+      "SCRATCH",
+      "CRUNCH",
+      "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 253,
+     "score": 65.2,
      "moveset": [
       "SCRATCH",
       "CRUNCH",
@@ -74925,15 +77311,6 @@
       "HYPER_BEAM"
      ]
     },
-    "little-500": {
-     "rank": 390,
-     "score": 65.5,
-     "moveset": [
-      "QUICK_ATTACK",
-      "DISCHARGE",
-      "SIGNAL_BEAM"
-     ]
-    },
     "laic2027-1500": {
      "rank": 586,
      "score": 68.6,
@@ -74941,6 +77318,15 @@
       "QUICK_ATTACK",
       "DISCHARGE",
       "HYPER_BEAM"
+     ]
+    },
+    "little-500": {
+     "rank": 390,
+     "score": 65.5,
+     "moveset": [
+      "QUICK_ATTACK",
+      "DISCHARGE",
+      "SIGNAL_BEAM"
      ]
     },
     "catch-1500": {
@@ -75393,9 +77779,9 @@
       "X_SCISSOR"
      ]
     },
-    "little-500": {
-     "rank": 118,
-     "score": 79,
+    "halloweenmega-1500": {
+     "rank": 300,
+     "score": 61.2,
      "moveset": [
       "FURY_CUTTER",
       "DRILL_RUN",
@@ -75405,6 +77791,15 @@
     "laic2027-1500": {
      "rank": 508,
      "score": 72.7,
+     "moveset": [
+      "FURY_CUTTER",
+      "DRILL_RUN",
+      "X_SCISSOR"
+     ]
+    },
+    "little-500": {
+     "rank": 118,
+     "score": 79,
      "moveset": [
       "FURY_CUTTER",
       "DRILL_RUN",
@@ -75504,6 +77899,15 @@
       "FLAME_CHARGE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 313,
+     "score": 59.5,
+     "moveset": [
+      "INCINERATE",
+      "SHADOW_BALL",
+      "ENERGY_BALL"
+     ]
+    },
     "catch-1500": {
      "rank": 676,
      "score": 66,
@@ -75582,6 +77986,15 @@
       "FLAMETHROWER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 230,
+     "score": 66.8,
+     "moveset": [
+      "EMBER",
+      "DARK_PULSE",
+      "FLAMETHROWER"
+     ]
+    },
     "little-500": {
      "rank": 209,
      "score": 74.7,
@@ -75651,6 +78064,15 @@
     "mega-1500": {
      "rank": 864,
      "score": 64.9,
+     "moveset": [
+      "BITE",
+      "CRUNCH",
+      "PSYCHIC_FANGS"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 251,
+     "score": 65.3,
      "moveset": [
       "BITE",
       "CRUNCH",
@@ -76218,9 +78640,9 @@
       "MOONBLAST"
      ]
     },
-    "little-500": {
-     "rank": 351,
-     "score": 68,
+    "halloweenmega-1500": {
+     "rank": 297,
+     "score": 61.3,
      "moveset": [
       "ACID",
       "SEED_BOMB",
@@ -76230,6 +78652,15 @@
     "laic2027-1500": {
      "rank": 534,
      "score": 71.5,
+     "moveset": [
+      "ACID",
+      "SEED_BOMB",
+      "MOONBLAST"
+     ]
+    },
+    "little-500": {
+     "rank": 351,
+     "score": 68,
      "moveset": [
       "ACID",
       "SEED_BOMB",
@@ -76302,18 +78733,18 @@
       "ROCK_BLAST"
      ]
     },
-    "little-500": {
-     "rank": 336,
-     "score": 68.9,
+    "laic2027-1500": {
+     "rank": 602,
+     "score": 67.8,
      "moveset": [
       "MUD_SHOT",
       "ROCK_TOMB",
       "ROCK_BLAST"
      ]
     },
-    "laic2027-1500": {
-     "rank": 602,
-     "score": 67.8,
+    "little-500": {
+     "rank": 336,
+     "score": 68.9,
      "moveset": [
       "MUD_SHOT",
       "ROCK_TOMB",
@@ -76386,18 +78817,18 @@
       "CRUNCH"
      ]
     },
-    "little-500": {
-     "rank": 391,
-     "score": 65.3,
+    "laic2027-1500": {
+     "rank": 437,
+     "score": 75.9,
      "moveset": [
       "BITE",
       "ICY_WIND",
       "CRUNCH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 437,
-     "score": 75.9,
+    "little-500": {
+     "rank": 391,
+     "score": 65.3,
      "moveset": [
       "BITE",
       "ICY_WIND",
@@ -76572,6 +79003,15 @@
       "DARK_PULSE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 336,
+     "score": 56.3,
+     "moveset": [
+      "HEX",
+      "SHADOW_BALL",
+      "DARK_PULSE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 510,
      "score": 72.7,
@@ -76727,6 +79167,15 @@
       "NIGHT_SHADE",
       "POWER_WHIP"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 350,
+     "score": 54.7,
+     "moveset": [
+      "HEX",
+      "NIGHT_SHADE",
+      "POWER_WHIP"
+     ]
     }
    },
    "recommended": {
@@ -76854,6 +79303,15 @@
     "mega-1500": {
      "rank": 849,
      "score": 65.4,
+     "moveset": [
+      "ACID",
+      "MOONBLAST",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 283,
+     "score": 62.3,
      "moveset": [
       "ACID",
       "MOONBLAST",
@@ -77118,6 +79576,15 @@
       "FOUL_PLAY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 271,
+     "score": 63.3,
+     "moveset": [
+      "ICE_SHARD",
+      "AVALANCHE",
+      "FOUL_PLAY"
+     ]
+    },
     "little-500": {
      "rank": 411,
      "score": 64.2,
@@ -77184,18 +79651,18 @@
       "IRON_HEAD"
      ]
     },
-    "little-500": {
-     "rank": 246,
-     "score": 72.5,
+    "fantasy-1500": {
+     "rank": 135,
+     "score": 60,
      "moveset": [
       "METAL_SOUND",
       "ROCK_TOMB",
       "IRON_HEAD"
      ]
     },
-    "fantasy-1500": {
-     "rank": 135,
-     "score": 60,
+    "little-500": {
+     "rank": 246,
+     "score": 72.5,
      "moveset": [
       "METAL_SOUND",
       "ROCK_TOMB",
@@ -77265,18 +79732,18 @@
       "BRICK_BREAK"
      ]
     },
-    "little-500": {
-     "rank": 120,
-     "score": 78.9,
+    "laic2027-1500": {
+     "rank": 596,
+     "score": 68.1,
      "moveset": [
       "KARATE_CHOP",
       "CROSS_CHOP",
       "BRICK_BREAK"
      ]
     },
-    "laic2027-1500": {
-     "rank": 596,
-     "score": 68.1,
+    "little-500": {
+     "rank": 120,
+     "score": 78.9,
      "moveset": [
       "KARATE_CHOP",
       "CROSS_CHOP",
@@ -77358,18 +79825,18 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 304,
-     "score": 70.5,
+    "laic2027-1500": {
+     "rank": 651,
+     "score": 64.5,
      "moveset": [
       "MUD_SLAP",
       "BULLDOZE",
       "BODY_SLAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 651,
-     "score": 64.5,
+    "little-500": {
+     "rank": 304,
+     "score": 70.5,
      "moveset": [
       "MUD_SLAP",
       "BULLDOZE",
@@ -77538,6 +80005,15 @@
     "fantasy-1500": {
      "rank": 179,
      "score": 46.5,
+     "moveset": [
+      "ROCK_THROW",
+      "ROCK_SLIDE",
+      "MOONBLAST"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 234,
+     "score": 66.6,
      "moveset": [
       "ROCK_THROW",
       "ROCK_SLIDE",
@@ -77769,18 +80245,18 @@
       "AQUA_JET"
      ]
     },
-    "little-500": {
-     "rank": 298,
-     "score": 70.6,
+    "laic2027-1500": {
+     "rank": 616,
+     "score": 66.5,
      "moveset": [
       "WATER_GUN",
       "AQUA_TAIL",
       "AQUA_JET"
      ]
     },
-    "laic2027-1500": {
-     "rank": 616,
-     "score": 66.5,
+    "little-500": {
+     "rank": 298,
+     "score": 70.6,
      "moveset": [
       "WATER_GUN",
       "AQUA_TAIL",
@@ -77853,18 +80329,18 @@
       "ANCIENT_POWER"
      ]
     },
-    "little-500": {
-     "rank": 228,
-     "score": 73.9,
+    "laic2027-1500": {
+     "rank": 553,
+     "score": 71,
      "moveset": [
       "BITE",
       "SURF",
       "ANCIENT_POWER"
      ]
     },
-    "laic2027-1500": {
-     "rank": 553,
-     "score": 71,
+    "little-500": {
+     "rank": 228,
+     "score": 73.9,
      "moveset": [
       "BITE",
       "SURF",
@@ -78015,6 +80491,15 @@
     "mega-1500": {
      "rank": 892,
      "score": 64,
+     "moveset": [
+      "SCRATCH",
+      "CRUNCH",
+      "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 267,
+     "score": 63.6,
      "moveset": [
       "SCRATCH",
       "CRUNCH",
@@ -78390,11 +80875,11 @@
       "DARK_PULSE"
      ]
     },
-    "little-500": {
-     "rank": 140,
-     "score": 78.1,
+    "halloweenmega-1500": {
+     "rank": 247,
+     "score": 65.5,
      "moveset": [
-      "ACID",
+      "INFESTATION",
       "SLUDGE",
       "DARK_PULSE"
      ]
@@ -78404,6 +80889,15 @@
      "score": 72.5,
      "moveset": [
       "INFESTATION",
+      "SLUDGE",
+      "DARK_PULSE"
+     ]
+    },
+    "little-500": {
+     "rank": 140,
+     "score": 78.1,
+     "moveset": [
+      "ACID",
       "SLUDGE",
       "DARK_PULSE"
      ]
@@ -78465,6 +80959,15 @@
     "mega-1500": {
      "rank": 873,
      "score": 64.6,
+     "moveset": [
+      "PECK",
+      "SLUDGE_BOMB",
+      "FELL_STINGER"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 209,
+     "score": 68.5,
      "moveset": [
       "PECK",
       "SLUDGE_BOMB",
@@ -78540,6 +81043,15 @@
     "fantasy-1500": {
      "rank": 172,
      "score": 47.4,
+     "moveset": [
+      "DRAGON_TAIL",
+      "SHADOW_BALL",
+      "OUTRAGE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 360,
+     "score": 51.3,
      "moveset": [
       "DRAGON_TAIL",
       "SHADOW_BALL",
@@ -78627,6 +81139,15 @@
      "moveset": [
       "POWDER_SNOW",
       "ICE_BEAM",
+      "BUG_BUZZ"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 309,
+     "score": 60,
+     "moveset": [
+      "POWDER_SNOW",
+      "ICY_WIND",
       "BUG_BUZZ"
      ]
     },
@@ -79176,6 +81697,15 @@
       "POISON_FANG"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 291,
+     "score": 61.9,
+     "moveset": [
+      "BITE",
+      "CRUNCH",
+      "POISON_FANG"
+     ]
+    },
     "catch-1500": {
      "rank": 741,
      "score": 64,
@@ -79242,9 +81772,9 @@
       "TWISTER"
      ]
     },
-    "little-500": {
-     "rank": 48,
-     "score": 83.8,
+    "halloweenmega-1500": {
+     "rank": 277,
+     "score": 63,
      "moveset": [
       "ACID",
       "AQUA_TAIL",
@@ -79254,6 +81784,15 @@
     "laic2027-1500": {
      "rank": 603,
      "score": 67.8,
+     "moveset": [
+      "ACID",
+      "AQUA_TAIL",
+      "TWISTER"
+     ]
+    },
+    "little-500": {
+     "rank": 48,
+     "score": 83.8,
      "moveset": [
       "ACID",
       "AQUA_TAIL",
@@ -79365,6 +81904,15 @@
     "fantasy-1500": {
      "rank": 151,
      "score": 56.4,
+     "moveset": [
+      "SNARL",
+      "DARK_PULSE",
+      "IRON_HEAD"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 228,
+     "score": 66.8,
      "moveset": [
       "SNARL",
       "DARK_PULSE",
@@ -79653,6 +82201,15 @@
     "mega-2500": {
      "rank": 663,
      "score": 67.1,
+     "moveset": [
+      "INFESTATION",
+      "BODY_SLAM",
+      "SEED_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 298,
+     "score": 61.2,
      "moveset": [
       "INFESTATION",
       "BODY_SLAM",
@@ -80013,6 +82570,15 @@
       "DIG"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 241,
+     "score": 66,
+     "moveset": [
+      "SNARL",
+      "BODY_SLAM",
+      "DIG"
+     ]
+    },
     "catch-1500": {
      "rank": 457,
      "score": 71.8,
@@ -80070,9 +82636,9 @@
       "ANCIENT_POWER"
      ]
     },
-    "little-500": {
-     "rank": 266,
-     "score": 71.8,
+    "halloweenmega-1500": {
+     "rank": 303,
+     "score": 60.9,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
@@ -80082,6 +82648,15 @@
     "laic2027-1500": {
      "rank": 565,
      "score": 70.1,
+     "moveset": [
+      "SCRATCH",
+      "AQUA_JET",
+      "ANCIENT_POWER"
+     ]
+    },
+    "little-500": {
+     "rank": 266,
+     "score": 71.8,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
@@ -80265,6 +82840,15 @@
       "ICE_BEAM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 286,
+     "score": 62.1,
+     "moveset": [
+      "POISON_STING",
+      "SLUDGE_BOMB",
+      "ICE_BEAM"
+     ]
+    },
     "laic2027-1500": {
      "rank": 542,
      "score": 71.3,
@@ -80331,18 +82915,18 @@
       "ROCK_BLAST"
      ]
     },
-    "little-500": {
-     "rank": 291,
-     "score": 70.9,
+    "laic2027-1500": {
+     "rank": 550,
+     "score": 71.1,
      "moveset": [
       "MUD_SHOT",
       "ROCK_TOMB",
       "ROCK_BLAST"
      ]
     },
-    "laic2027-1500": {
-     "rank": 550,
-     "score": 71.1,
+    "little-500": {
+     "rank": 291,
+     "score": 70.9,
      "moveset": [
       "MUD_SHOT",
       "ROCK_TOMB",
@@ -80517,6 +83101,15 @@
       "FOUL_PLAY"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 284,
+     "score": 62.2,
+     "moveset": [
+      "FEINT_ATTACK",
+      "UPPER_HAND",
+      "FOUL_PLAY"
+     ]
+    },
     "little-500": {
      "rank": 445,
      "score": 61.8,
@@ -80577,6 +83170,15 @@
     "mega-1500": {
      "rank": 920,
      "score": 62.8,
+     "moveset": [
+      "SNARL",
+      "BODY_SLAM",
+      "DIG"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 259,
+     "score": 64.5,
      "moveset": [
       "SNARL",
       "BODY_SLAM",
@@ -80733,18 +83335,18 @@
       "CRUNCH"
      ]
     },
-    "little-500": {
-     "rank": 100,
-     "score": 80,
+    "laic2027-1500": {
+     "rank": 652,
+     "score": 64.5,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
       "CRUNCH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 652,
-     "score": 64.5,
+    "little-500": {
+     "rank": 100,
+     "score": 80,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
@@ -80811,6 +83413,15 @@
     "mega-1500": {
      "rank": 919,
      "score": 62.8,
+     "moveset": [
+      "CONFUSION",
+      "SILVER_WIND",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 285,
+     "score": 62.1,
      "moveset": [
       "CONFUSION",
       "SILVER_WIND",
@@ -80967,15 +83578,6 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 112,
-     "score": 79.3,
-     "moveset": [
-      "MUD_SLAP",
-      "BODY_SLAM",
-      "WATER_PULSE"
-     ]
-    },
     "laic2027-1500": {
      "rank": 679,
      "score": 62.7,
@@ -80983,6 +83585,15 @@
       "MUD_SLAP",
       "WATER_PULSE",
       "BODY_SLAM"
+     ]
+    },
+    "little-500": {
+     "rank": 112,
+     "score": 79.3,
+     "moveset": [
+      "MUD_SLAP",
+      "BODY_SLAM",
+      "WATER_PULSE"
      ]
     },
     "catch-1500": {
@@ -81175,6 +83786,15 @@
       "MUD_SLAP",
       "CRUNCH",
       "SAND_TOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 168,
+     "score": 72.2,
+     "moveset": [
+      "MUD_SLAP",
+      "SAND_TOMB",
+      "CRUNCH"
      ]
     },
     "catch-1500": {
@@ -81384,13 +84004,13 @@
       "EARTH_POWER"
      ]
     },
-    "little-500": {
-     "rank": 324,
-     "score": 69.5,
+    "halloweenmega-1500": {
+     "rank": 293,
+     "score": 61.6,
      "moveset": [
-      "ASTONISH",
-      "EARTH_POWER",
-      "SHADOW_BALL"
+      "MUD_SHOT",
+      "SHADOW_BALL",
+      "EARTH_POWER"
      ]
     },
     "laic2027-1500": {
@@ -81400,6 +84020,15 @@
       "MUD_SHOT",
       "SHADOW_BALL",
       "EARTH_POWER"
+     ]
+    },
+    "little-500": {
+     "rank": 324,
+     "score": 69.5,
+     "moveset": [
+      "ASTONISH",
+      "EARTH_POWER",
+      "SHADOW_BALL"
      ]
     },
     "catch-1500": {
@@ -81459,6 +84088,15 @@
     "mega-1500": {
      "rank": 905,
      "score": 63.4,
+     "moveset": [
+      "INFESTATION",
+      "AIR_CUTTER",
+      "SILVER_WIND"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 307,
+     "score": 60.3,
      "moveset": [
       "INFESTATION",
       "AIR_CUTTER",
@@ -81780,18 +84418,18 @@
       "CRUNCH"
      ]
     },
-    "little-500": {
-     "rank": 101,
-     "score": 80,
+    "laic2027-1500": {
+     "rank": 610,
+     "score": 67.2,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
       "CRUNCH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 610,
-     "score": 67.2,
+    "little-500": {
+     "rank": 101,
+     "score": 80,
      "moveset": [
       "SCRATCH",
       "AQUA_JET",
@@ -82098,6 +84736,15 @@
       "SEED_BOMB"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 295,
+     "score": 61.4,
+     "moveset": [
+      "INFESTATION",
+      "BODY_SLAM",
+      "GUNK_SHOT"
+     ]
+    },
     "laic2027-1500": {
      "rank": 519,
      "score": 72.4,
@@ -82254,18 +84901,18 @@
       "SAND_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 132,
-     "score": 78.3,
+    "laic2027-1500": {
+     "rank": 640,
+     "score": 65,
      "moveset": [
       "ROCK_THROW",
       "ROCK_SLIDE",
       "SAND_TOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 640,
-     "score": 65,
+    "little-500": {
+     "rank": 132,
+     "score": 78.3,
      "moveset": [
       "ROCK_THROW",
       "ROCK_SLIDE",
@@ -82422,13 +85069,13 @@
       "EARTH_POWER"
      ]
     },
-    "little-500": {
-     "rank": 280,
-     "score": 71.5,
+    "halloweenmega-1500": {
+     "rank": 262,
+     "score": 64.3,
      "moveset": [
       "ASTONISH",
-      "EARTH_POWER",
-      "SHADOW_BALL"
+      "SHADOW_BALL",
+      "EARTH_POWER"
      ]
     },
     "laic2027-1500": {
@@ -82438,6 +85085,15 @@
       "ASTONISH",
       "SHADOW_BALL",
       "EARTH_POWER"
+     ]
+    },
+    "little-500": {
+     "rank": 280,
+     "score": 71.5,
+     "moveset": [
+      "ASTONISH",
+      "EARTH_POWER",
+      "SHADOW_BALL"
      ]
     }
    },
@@ -82494,18 +85150,18 @@
       "ICE_BEAM"
      ]
     },
-    "little-500": {
-     "rank": 440,
-     "score": 62.2,
+    "laic2027-1500": {
+     "rank": 473,
+     "score": 74.2,
      "moveset": [
       "ICE_FANG",
       "ICE_PUNCH",
       "ICE_BEAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 473,
-     "score": 74.2,
+    "little-500": {
+     "rank": 440,
+     "score": 62.2,
      "moveset": [
       "ICE_FANG",
       "ICE_PUNCH",
@@ -82752,18 +85408,18 @@
       "ROCK_SLIDE"
      ]
     },
-    "little-500": {
-     "rank": 373,
-     "score": 66.4,
+    "laic2027-1500": {
+     "rank": 719,
+     "score": 59.4,
      "moveset": [
       "COUNTER",
       "ROCK_TOMB",
       "ROCK_SLIDE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 719,
-     "score": 59.4,
+    "little-500": {
+     "rank": 373,
+     "score": 66.4,
      "moveset": [
       "COUNTER",
       "ROCK_TOMB",
@@ -82902,18 +85558,27 @@
       "GYRO_BALL"
      ]
     },
-    "little-500": {
-     "rank": 449,
-     "score": 61,
+    "fantasy-1500": {
+     "rank": 145,
+     "score": 58.1,
      "moveset": [
       "PSYCHO_CUT",
       "IRON_HEAD",
       "GYRO_BALL"
      ]
     },
-    "fantasy-1500": {
-     "rank": 145,
-     "score": 58.1,
+    "halloweenmega-1500": {
+     "rank": 326,
+     "score": 57.5,
+     "moveset": [
+      "PSYCHO_CUT",
+      "IRON_HEAD",
+      "GYRO_BALL"
+     ]
+    },
+    "little-500": {
+     "rank": 449,
+     "score": 61,
      "moveset": [
       "PSYCHO_CUT",
       "IRON_HEAD",
@@ -82962,6 +85627,15 @@
     "mega-1500": {
      "rank": 909,
      "score": 63.4,
+     "moveset": [
+      "FURY_CUTTER",
+      "SHADOW_BALL",
+      "AERIAL_ACE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 305,
+     "score": 60.6,
      "moveset": [
       "FURY_CUTTER",
       "SHADOW_BALL",
@@ -83055,6 +85729,15 @@
     "fantasy-1500": {
      "rank": 184,
      "score": 44.5,
+     "moveset": [
+      "FAIRY_WIND",
+      "DRAINING_KISS",
+      "BUG_BUZZ"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 342,
+     "score": 55.8,
      "moveset": [
       "FAIRY_WIND",
       "DRAINING_KISS",
@@ -83252,6 +85935,15 @@
       "CRUNCH",
       "PSYCHIC_FANGS"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 290,
+     "score": 61.9,
+     "moveset": [
+      "BITE",
+      "CRUNCH",
+      "PSYCHIC_FANGS"
+     ]
     }
    },
    "recommended": {
@@ -83295,6 +85987,15 @@
     "mega-1500": {
      "rank": 952,
      "score": 61.7,
+     "moveset": [
+      "VINE_WHIP",
+      "POWER_WHIP",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 341,
+     "score": 56,
      "moveset": [
       "VINE_WHIP",
       "POWER_WHIP",
@@ -83493,18 +86194,18 @@
       "ICE_BEAM"
      ]
     },
-    "little-500": {
-     "rank": 349,
-     "score": 68.1,
+    "laic2027-1500": {
+     "rank": 533,
+     "score": 71.6,
      "moveset": [
       "POWDER_SNOW",
       "ENERGY_BALL",
       "ICE_BEAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 533,
-     "score": 71.6,
+    "little-500": {
+     "rank": 349,
+     "score": 68.1,
      "moveset": [
       "POWDER_SNOW",
       "ENERGY_BALL",
@@ -83583,9 +86284,9 @@
       "WATER_PULSE"
      ]
     },
-    "little-500": {
-     "rank": 65,
-     "score": 82.2,
+    "halloweenmega-1500": {
+     "rank": 282,
+     "score": 62.4,
      "moveset": [
       "POISON_STING",
       "WRAP",
@@ -83595,6 +86296,15 @@
     "laic2027-1500": {
      "rank": 636,
      "score": 65.3,
+     "moveset": [
+      "POISON_STING",
+      "WRAP",
+      "WATER_PULSE"
+     ]
+    },
+    "little-500": {
+     "rank": 65,
+     "score": 82.2,
      "moveset": [
       "POISON_STING",
       "WRAP",
@@ -83766,9 +86476,9 @@
       "DARK_PULSE"
      ]
     },
-    "little-500": {
-     "rank": 250,
-     "score": 72.5,
+    "halloweenmega-1500": {
+     "rank": 301,
+     "score": 61,
      "moveset": [
       "INFESTATION",
       "SLUDGE",
@@ -83778,6 +86488,15 @@
     "laic2027-1500": {
      "rank": 522,
      "score": 72.2,
+     "moveset": [
+      "INFESTATION",
+      "SLUDGE",
+      "DARK_PULSE"
+     ]
+    },
+    "little-500": {
+     "rank": 250,
+     "score": 72.5,
      "moveset": [
       "INFESTATION",
       "SLUDGE",
@@ -83907,6 +86626,15 @@
     "mega-1500": {
      "rank": 933,
      "score": 62.4,
+     "moveset": [
+      "ACID",
+      "MOONBLAST",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 325,
+     "score": 58.1,
      "moveset": [
       "ACID",
       "MOONBLAST",
@@ -84105,18 +86833,18 @@
       "STOMP"
      ]
     },
-    "little-500": {
-     "rank": 191,
-     "score": 75.7,
+    "laic2027-1500": {
+     "rank": 708,
+     "score": 60.1,
      "moveset": [
       "MUD_SLAP",
       "BULLDOZE",
       "STOMP"
      ]
     },
-    "laic2027-1500": {
-     "rank": 708,
-     "score": 60.1,
+    "little-500": {
+     "rank": 191,
+     "score": 75.7,
      "moveset": [
       "MUD_SLAP",
       "BULLDOZE",
@@ -84180,18 +86908,18 @@
       "ICE_BEAM"
      ]
     },
-    "little-500": {
-     "rank": 361,
-     "score": 67.1,
+    "laic2027-1500": {
+     "rank": 557,
+     "score": 70.7,
      "moveset": [
       "POWDER_SNOW",
       "ENERGY_BALL",
       "ICE_BEAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 557,
-     "score": 70.7,
+    "little-500": {
+     "rank": 361,
+     "score": 67.1,
      "moveset": [
       "POWDER_SNOW",
       "ENERGY_BALL",
@@ -84468,6 +87196,15 @@
     "mega-2500": {
      "rank": 827,
      "score": 57.4,
+     "moveset": [
+      "ICE_SHARD",
+      "AVALANCHE",
+      "FOUL_PLAY"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 312,
+     "score": 59.6,
      "moveset": [
       "ICE_SHARD",
       "AVALANCHE",
@@ -85014,18 +87751,18 @@
       "STOMP"
      ]
     },
-    "little-500": {
-     "rank": 264,
-     "score": 72,
+    "laic2027-1500": {
+     "rank": 702,
+     "score": 60.3,
      "moveset": [
       "MUD_SLAP",
       "BULLDOZE",
       "STOMP"
      ]
     },
-    "laic2027-1500": {
-     "rank": 702,
-     "score": 60.3,
+    "little-500": {
+     "rank": 264,
+     "score": 72,
      "moveset": [
       "MUD_SLAP",
       "BULLDOZE",
@@ -85107,6 +87844,15 @@
       "DAZZLING_GLEAM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 337,
+     "score": 56.2,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_BALL",
+      "DAZZLING_GLEAM"
+     ]
+    },
     "laic2027-1500": {
      "rank": 630,
      "score": 65.4,
@@ -85173,6 +87919,15 @@
       "BULLDOZE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 192,
+     "score": 70,
+     "moveset": [
+      "MUD_SLAP",
+      "CRUNCH",
+      "BULLDOZE"
+     ]
+    },
     "catch-1500": {
      "rank": 510,
      "score": 70.4,
@@ -85230,9 +87985,9 @@
       "WATER_PULSE"
      ]
     },
-    "little-500": {
-     "rank": 98,
-     "score": 80.1,
+    "halloweenmega-1500": {
+     "rank": 323,
+     "score": 58.2,
      "moveset": [
       "POISON_STING",
       "WRAP",
@@ -85242,6 +87997,15 @@
     "laic2027-1500": {
      "rank": 645,
      "score": 64.7,
+     "moveset": [
+      "POISON_STING",
+      "WRAP",
+      "WATER_PULSE"
+     ]
+    },
+    "little-500": {
+     "rank": 98,
+     "score": 80.1,
      "moveset": [
       "POISON_STING",
       "WRAP",
@@ -85557,6 +88321,15 @@
       "GYRO_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 255,
+     "score": 64.9,
+     "moveset": [
+      "METAL_SOUND",
+      "OVERHEAT",
+      "GYRO_BALL"
+     ]
+    },
     "catch-1500": {
      "rank": 607,
      "score": 67.7,
@@ -85656,18 +88429,18 @@
       "FLASH_CANNON"
      ]
     },
-    "little-500": {
-     "rank": 478,
-     "score": 56,
+    "fantasy-1500": {
+     "rank": 188,
+     "score": 42.1,
      "moveset": [
       "DRAGON_TAIL",
       "DRAGON_CLAW",
       "FLASH_CANNON"
      ]
     },
-    "fantasy-1500": {
-     "rank": 188,
-     "score": 42.1,
+    "little-500": {
+     "rank": 478,
+     "score": 56,
      "moveset": [
       "DRAGON_TAIL",
       "DRAGON_CLAW",
@@ -85971,18 +88744,18 @@
       "WRAP"
      ]
     },
-    "little-500": {
-     "rank": 192,
-     "score": 75.6,
+    "laic2027-1500": {
+     "rank": 732,
+     "score": 58.8,
      "moveset": [
       "MUD_SLAP",
       "EARTH_POWER",
       "WRAP"
      ]
     },
-    "laic2027-1500": {
-     "rank": 732,
-     "score": 58.8,
+    "little-500": {
+     "rank": 192,
+     "score": 75.6,
      "moveset": [
       "MUD_SLAP",
       "EARTH_POWER",
@@ -86367,6 +89140,15 @@
       "FOCUS_BLAST"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 319,
+     "score": 58.7,
+     "moveset": [
+      "SNARL",
+      "AVALANCHE",
+      "FOUL_PLAY"
+     ]
+    },
     "catch-1500": {
      "rank": 589,
      "score": 68.1,
@@ -86451,6 +89233,15 @@
     "fantasy-1500": {
      "rank": 185,
      "score": 44.4,
+     "moveset": [
+      "CHARM",
+      "CLOSE_COMBAT",
+      "CRUNCH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 294,
+     "score": 61.5,
      "moveset": [
       "CHARM",
       "CLOSE_COMBAT",
@@ -86595,6 +89386,15 @@
       "ICE_BEAM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 333,
+     "score": 56.8,
+     "moveset": [
+      "POISON_STING",
+      "SLUDGE_BOMB",
+      "ICE_BEAM"
+     ]
+    },
     "laic2027-1500": {
      "rank": 562,
      "score": 70.4,
@@ -86655,6 +89455,15 @@
     "mega-1500": {
      "rank": 981,
      "score": 60.3,
+     "moveset": [
+      "FEINT_ATTACK",
+      "LEAF_BLADE",
+      "FOUL_PLAY"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 345,
+     "score": 55.4,
      "moveset": [
       "FEINT_ATTACK",
       "LEAF_BLADE",
@@ -86739,6 +89548,15 @@
     "mega-2500": {
      "rank": 729,
      "score": 64,
+     "moveset": [
+      "INFESTATION",
+      "ENERGY_BALL",
+      "BUG_BUZZ"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 349,
+     "score": 54.8,
      "moveset": [
       "INFESTATION",
       "ENERGY_BALL",
@@ -86925,18 +89743,27 @@
       "CRUNCH"
      ]
     },
-    "little-500": {
-     "rank": 244,
-     "score": 72.7,
+    "fantasy-1500": {
+     "rank": 149,
+     "score": 57.2,
      "moveset": [
       "BITE",
       "BRICK_BREAK",
       "CRUNCH"
      ]
     },
-    "fantasy-1500": {
-     "rank": 149,
-     "score": 57.2,
+    "halloweenmega-1500": {
+     "rank": 346,
+     "score": 55.2,
+     "moveset": [
+      "BITE",
+      "BRICK_BREAK",
+      "CRUNCH"
+     ]
+    },
+    "little-500": {
+     "rank": 244,
+     "score": 72.7,
      "moveset": [
       "BITE",
       "BRICK_BREAK",
@@ -87030,6 +89857,15 @@
     "mega-10000": {
      "rank": 352,
      "score": 41.7,
+     "moveset": [
+      "ASTONISH",
+      "NIGHT_SHADE",
+      "POWER_GEM"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 324,
+     "score": 58.1,
      "moveset": [
       "ASTONISH",
       "NIGHT_SHADE",
@@ -87229,6 +90065,15 @@
       "SNARL",
       "AVALANCHE",
       "FOCUS_BLAST"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 320,
+     "score": 58.6,
+     "moveset": [
+      "SNARL",
+      "AVALANCHE",
+      "FOUL_PLAY"
      ]
     },
     "catch-1500": {
@@ -87552,18 +90397,18 @@
       "SAND_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 115,
-     "score": 79.2,
+    "laic2027-1500": {
+     "rank": 695,
+     "score": 60.8,
      "moveset": [
       "ROCK_THROW",
       "ROCK_SLIDE",
       "SAND_TOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 695,
-     "score": 60.8,
+    "little-500": {
+     "rank": 115,
+     "score": 79.2,
      "moveset": [
       "ROCK_THROW",
       "ROCK_SLIDE",
@@ -87693,9 +90538,9 @@
       "AQUA_TAIL"
      ]
     },
-    "little-500": {
-     "rank": 20,
-     "score": 87.3,
+    "halloweenmega-1500": {
+     "rank": 315,
+     "score": 59.5,
      "moveset": [
       "INFESTATION",
       "CROSS_POISON",
@@ -87709,6 +90554,15 @@
       "INFESTATION",
       "AQUA_TAIL",
       "CROSS_POISON"
+     ]
+    },
+    "little-500": {
+     "rank": 20,
+     "score": 87.3,
+     "moveset": [
+      "INFESTATION",
+      "CROSS_POISON",
+      "AQUA_TAIL"
      ]
     },
     "catch-1500": {
@@ -87768,18 +90622,27 @@
       "CRUNCH"
      ]
     },
-    "little-500": {
-     "rank": 270,
-     "score": 71.8,
+    "fantasy-1500": {
+     "rank": 158,
+     "score": 54.5,
      "moveset": [
       "BITE",
       "BRICK_BREAK",
       "CRUNCH"
      ]
     },
-    "fantasy-1500": {
-     "rank": 158,
-     "score": 54.5,
+    "halloweenmega-1500": {
+     "rank": 355,
+     "score": 53.1,
+     "moveset": [
+      "BITE",
+      "BRICK_BREAK",
+      "CRUNCH"
+     ]
+    },
+    "little-500": {
+     "rank": 270,
+     "score": 71.8,
      "moveset": [
       "BITE",
       "BRICK_BREAK",
@@ -87855,6 +90718,15 @@
     "mega-2500": {
      "rank": 689,
      "score": 66.1,
+     "moveset": [
+      "ACID",
+      "MOONBLAST",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 338,
+     "score": 56.2,
      "moveset": [
       "ACID",
       "MOONBLAST",
@@ -88053,18 +90925,18 @@
       "BULLDOZE"
      ]
     },
-    "little-500": {
-     "rank": 58,
-     "score": 82.9,
+    "laic2027-1500": {
+     "rank": 724,
+     "score": 59.2,
      "moveset": [
       "MUD_SLAP",
       "BONE_CLUB",
       "BULLDOZE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 724,
-     "score": 59.2,
+    "little-500": {
+     "rank": 58,
+     "score": 82.9,
      "moveset": [
       "MUD_SLAP",
       "BONE_CLUB",
@@ -88557,20 +91429,20 @@
       "ICY_WIND"
      ]
     },
-    "little-500": {
-     "rank": 26,
-     "score": 86.5,
-     "moveset": [
-      "LICK",
-      "AQUA_TAIL",
-      "ICY_WIND"
-     ]
-    },
     "laic2027-1500": {
      "rank": 714,
      "score": 59.8,
      "moveset": [
       "WATER_GUN",
+      "AQUA_TAIL",
+      "ICY_WIND"
+     ]
+    },
+    "little-500": {
+     "rank": 26,
+     "score": 86.5,
+     "moveset": [
+      "LICK",
       "AQUA_TAIL",
       "ICY_WIND"
      ]
@@ -88740,18 +91612,18 @@
       "HORN_ATTACK"
      ]
     },
-    "little-500": {
-     "rank": 141,
-     "score": 78,
+    "laic2027-1500": {
+     "rank": 681,
+     "score": 62.5,
      "moveset": [
       "PECK",
       "AQUA_TAIL",
       "HORN_ATTACK"
      ]
     },
-    "laic2027-1500": {
-     "rank": 681,
-     "score": 62.5,
+    "little-500": {
+     "rank": 141,
+     "score": 78,
      "moveset": [
       "PECK",
       "AQUA_TAIL",
@@ -88908,18 +91780,18 @@
       "ROCK_SLIDE"
      ]
     },
-    "little-500": {
-     "rank": 205,
-     "score": 75,
+    "laic2027-1500": {
+     "rank": 667,
+     "score": 63.5,
      "moveset": [
       "ROCK_THROW",
       "ROCK_TOMB",
       "ROCK_SLIDE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 667,
-     "score": 63.5,
+    "little-500": {
+     "rank": 205,
+     "score": 75,
      "moveset": [
       "ROCK_THROW",
       "ROCK_TOMB",
@@ -89013,6 +91885,15 @@
     "mega-10000": {
      "rank": 431,
      "score": 34,
+     "moveset": [
+      "ROCK_THROW",
+      "METEOR_BEAM",
+      "POWER_GEM"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 299,
+     "score": 61.2,
      "moveset": [
       "ROCK_THROW",
       "METEOR_BEAM",
@@ -89337,20 +92218,20 @@
       "WRAP"
      ]
     },
-    "little-500": {
-     "rank": 237,
-     "score": 73,
-     "moveset": [
-      "MUD_SHOT",
-      "EARTH_POWER",
-      "WRAP"
-     ]
-    },
     "laic2027-1500": {
      "rank": 741,
      "score": 58.4,
      "moveset": [
       "MUD_SLAP",
+      "EARTH_POWER",
+      "WRAP"
+     ]
+    },
+    "little-500": {
+     "rank": 237,
+     "score": 73,
+     "moveset": [
+      "MUD_SHOT",
       "EARTH_POWER",
       "WRAP"
      ]
@@ -89406,6 +92287,15 @@
     "mega-1500": {
      "rank": 1022,
      "score": 58.5,
+     "moveset": [
+      "ACID",
+      "POWER_WHIP",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 352,
+     "score": 53.9,
      "moveset": [
       "ACID",
       "POWER_WHIP",
@@ -89493,18 +92383,18 @@
       "CRUNCH"
      ]
     },
-    "little-500": {
-     "rank": 420,
-     "score": 63.7,
+    "laic2027-1500": {
+     "rank": 633,
+     "score": 65.3,
      "moveset": [
       "WING_ATTACK",
       "ANCIENT_POWER",
       "CRUNCH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 633,
-     "score": 65.3,
+    "little-500": {
+     "rank": 420,
+     "score": 63.7,
      "moveset": [
       "WING_ATTACK",
       "ANCIENT_POWER",
@@ -89934,15 +92824,6 @@
       "RETURN"
      ]
     },
-    "little-500": {
-     "rank": 227,
-     "score": 73.9,
-     "moveset": [
-      "CONFUSION",
-      "PSYSHOCK",
-      "PSYCHIC"
-     ]
-    },
     "laic2027-1500": {
      "rank": 599,
      "score": 67.8,
@@ -89950,6 +92831,15 @@
       "CONFUSION",
       "PSYSHOCK",
       "RETURN"
+     ]
+    },
+    "little-500": {
+     "rank": 227,
+     "score": 73.9,
+     "moveset": [
+      "CONFUSION",
+      "PSYSHOCK",
+      "PSYCHIC"
      ]
     },
     "catch-1500": {
@@ -90117,6 +93007,15 @@
       "SLUDGE_BOMB"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 344,
+     "score": 55.6,
+     "moveset": [
+      "ACID",
+      "SLUDGE_BOMB",
+      "PETAL_BLIZZARD"
+     ]
+    },
     "laic2027-1500": {
      "rank": 623,
      "score": 66,
@@ -90192,9 +93091,9 @@
       "AERIAL_ACE"
      ]
     },
-    "little-500": {
-     "rank": 385,
-     "score": 65.9,
+    "halloweenmega-1500": {
+     "rank": 327,
+     "score": 57.4,
      "moveset": [
       "WING_ATTACK",
       "SILVER_WIND",
@@ -90204,6 +93103,15 @@
     "laic2027-1500": {
      "rank": 609,
      "score": 67.3,
+     "moveset": [
+      "WING_ATTACK",
+      "SILVER_WIND",
+      "AERIAL_ACE"
+     ]
+    },
+    "little-500": {
+     "rank": 385,
+     "score": 65.9,
      "moveset": [
       "WING_ATTACK",
       "SILVER_WIND",
@@ -90267,18 +93175,18 @@
       "RETURN"
      ]
     },
-    "little-500": {
-     "rank": 46,
-     "score": 83.9,
+    "laic2027-1500": {
+     "rank": 720,
+     "score": 59.4,
      "moveset": [
       "MUD_SLAP",
       "BONE_CLUB",
       "BULLDOZE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 720,
-     "score": 59.4,
+    "little-500": {
+     "rank": 46,
+     "score": 83.9,
      "moveset": [
       "MUD_SLAP",
       "BONE_CLUB",
@@ -90528,6 +93436,15 @@
       "DAZZLING_GLEAM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 318,
+     "score": 58.7,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_BALL",
+      "DAZZLING_GLEAM"
+     ]
+    },
     "laic2027-1500": {
      "rank": 654,
      "score": 64.2,
@@ -90639,6 +93556,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 363,
+     "score": 47.8,
+     "moveset": [
+      "CONFUSION",
+      "TRIPLE_AXEL",
+      "SHADOW_BALL"
+     ]
+    },
     "catch-1500": {
      "rank": 501,
      "score": 70.6,
@@ -90708,9 +93634,9 @@
       "DAZZLING_GLEAM"
      ]
     },
-    "little-500": {
-     "rank": 253,
-     "score": 72.4,
+    "halloweenmega-1500": {
+     "rank": 317,
+     "score": 58.8,
      "moveset": [
       "ROCK_THROW",
       "POWER_GEM",
@@ -90720,6 +93646,15 @@
     "laic2027-1500": {
      "rank": 624,
      "score": 65.9,
+     "moveset": [
+      "ROCK_THROW",
+      "POWER_GEM",
+      "DAZZLING_GLEAM"
+     ]
+    },
+    "little-500": {
+     "rank": 253,
+     "score": 72.4,
      "moveset": [
       "ROCK_THROW",
       "POWER_GEM",
@@ -90768,6 +93703,15 @@
     "mega-1500": {
      "rank": 1043,
      "score": 57.8,
+     "moveset": [
+      "FEINT_ATTACK",
+      "LEAF_BLADE",
+      "FOUL_PLAY"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 343,
+     "score": 55.6,
      "moveset": [
       "FEINT_ATTACK",
       "LEAF_BLADE",
@@ -91008,20 +93952,20 @@
       "PLAY_ROUGH"
      ]
     },
-    "little-500": {
-     "rank": 429,
-     "score": 63.2,
-     "moveset": [
-      "LOW_KICK",
-      "SWIFT",
-      "PLAY_ROUGH"
-     ]
-    },
     "laic2027-1500": {
      "rank": 626,
      "score": 65.9,
      "moveset": [
       "PSYCHO_CUT",
+      "SWIFT",
+      "PLAY_ROUGH"
+     ]
+    },
+    "little-500": {
+     "rank": 429,
+     "score": 63.2,
+     "moveset": [
+      "LOW_KICK",
       "SWIFT",
       "PLAY_ROUGH"
      ]
@@ -91083,18 +94027,18 @@
       "CRUNCH"
      ]
     },
-    "little-500": {
-     "rank": 471,
-     "score": 57.2,
+    "laic2027-1500": {
+     "rank": 703,
+     "score": 60.3,
      "moveset": [
       "SAND_ATTACK",
       "SAND_TOMB",
       "CRUNCH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 703,
-     "score": 60.3,
+    "little-500": {
+     "rank": 471,
+     "score": 57.2,
      "moveset": [
       "SAND_ATTACK",
       "SAND_TOMB",
@@ -91641,13 +94585,13 @@
       "CROSS_POISON"
      ]
     },
-    "little-500": {
-     "rank": 37,
-     "score": 85.2,
+    "halloweenmega-1500": {
+     "rank": 321,
+     "score": 58.3,
      "moveset": [
       "INFESTATION",
-      "CROSS_POISON",
-      "AQUA_TAIL"
+      "AQUA_TAIL",
+      "CROSS_POISON"
      ]
     },
     "laic2027-1500": {
@@ -91657,6 +94601,15 @@
       "INFESTATION",
       "AQUA_TAIL",
       "CROSS_POISON"
+     ]
+    },
+    "little-500": {
+     "rank": 37,
+     "score": 85.2,
+     "moveset": [
+      "INFESTATION",
+      "CROSS_POISON",
+      "AQUA_TAIL"
      ]
     },
     "catch-1500": {
@@ -91716,18 +94669,18 @@
       "ANCIENT_POWER"
      ]
     },
-    "little-500": {
-     "rank": 458,
-     "score": 59.4,
+    "laic2027-1500": {
+     "rank": 672,
+     "score": 63.1,
      "moveset": [
       "CONFUSION",
       "SEED_BOMB",
       "ANCIENT_POWER"
      ]
     },
-    "laic2027-1500": {
-     "rank": 672,
-     "score": 63.1,
+    "little-500": {
+     "rank": 458,
+     "score": 59.4,
      "moveset": [
       "CONFUSION",
       "SEED_BOMB",
@@ -91800,20 +94753,20 @@
       "ICY_WIND"
      ]
     },
-    "little-500": {
-     "rank": 72,
-     "score": 82,
-     "moveset": [
-      "LICK",
-      "AQUA_TAIL",
-      "ICY_WIND"
-     ]
-    },
     "laic2027-1500": {
      "rank": 751,
      "score": 56.7,
      "moveset": [
       "WATER_GUN",
+      "AQUA_TAIL",
+      "ICY_WIND"
+     ]
+    },
+    "little-500": {
+     "rank": 72,
+     "score": 82,
+     "moveset": [
+      "LICK",
       "AQUA_TAIL",
       "ICY_WIND"
      ]
@@ -92058,18 +95011,18 @@
       "ANCIENT_POWER"
      ]
     },
-    "little-500": {
-     "rank": 452,
-     "score": 60.2,
+    "laic2027-1500": {
+     "rank": 655,
+     "score": 64.2,
      "moveset": [
       "CONFUSION",
       "SEED_BOMB",
       "ANCIENT_POWER"
      ]
     },
-    "laic2027-1500": {
-     "rank": 655,
-     "score": 64.2,
+    "little-500": {
+     "rank": 452,
+     "score": 60.2,
      "moveset": [
       "CONFUSION",
       "SEED_BOMB",
@@ -92328,18 +95281,18 @@
       "ROCK_SLIDE"
      ]
     },
-    "little-500": {
-     "rank": 469,
-     "score": 57.4,
+    "laic2027-1500": {
+     "rank": 707,
+     "score": 60.1,
      "moveset": [
       "TACKLE",
       "BULLDOZE",
       "ROCK_SLIDE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 707,
-     "score": 60.1,
+    "little-500": {
+     "rank": 469,
+     "score": 57.4,
      "moveset": [
       "TACKLE",
       "BULLDOZE",
@@ -92403,9 +95356,9 @@
       "SAND_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 126,
-     "score": 78.6,
+    "halloweenmega-1500": {
+     "rank": 330,
+     "score": 57.1,
      "moveset": [
       "BUG_BITE",
       "ROCK_TOMB",
@@ -92415,6 +95368,15 @@
     "laic2027-1500": {
      "rank": 615,
      "score": 66.8,
+     "moveset": [
+      "BUG_BITE",
+      "ROCK_TOMB",
+      "SAND_TOMB"
+     ]
+    },
+    "little-500": {
+     "rank": 126,
+     "score": 78.6,
      "moveset": [
       "BUG_BITE",
       "ROCK_TOMB",
@@ -92478,18 +95440,18 @@
       "CRUNCH"
      ]
     },
-    "little-500": {
-     "rank": 464,
-     "score": 58,
+    "laic2027-1500": {
+     "rank": 698,
+     "score": 60.6,
      "moveset": [
       "SAND_ATTACK",
       "SAND_TOMB",
       "CRUNCH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 698,
-     "score": 60.6,
+    "little-500": {
+     "rank": 464,
+     "score": 58,
      "moveset": [
       "SAND_ATTACK",
       "SAND_TOMB",
@@ -92721,6 +95683,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 362,
+     "score": 49.7,
+     "moveset": [
+      "CONFUSION",
+      "TRIPLE_AXEL",
+      "SHADOW_BALL"
+     ]
+    },
     "catch-1500": {
      "rank": 363,
      "score": 74.9,
@@ -92811,6 +95782,15 @@
     "fantasy-1500": {
      "rank": 189,
      "score": 42,
+     "moveset": [
+      "CHARM",
+      "CLOSE_COMBAT",
+      "CRUNCH"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 316,
+     "score": 59,
      "moveset": [
       "CHARM",
       "CLOSE_COMBAT",
@@ -93030,6 +96010,15 @@
       "PLAY_ROUGH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 353,
+     "score": 53.5,
+     "moveset": [
+      "SNARL",
+      "DARK_PULSE",
+      "PLAY_ROUGH"
+     ]
+    },
     "catch-1500": {
      "rank": 803,
      "score": 61.8,
@@ -93126,6 +96115,15 @@
     "fantasy-1500": {
      "rank": 190,
      "score": 41.8,
+     "moveset": [
+      "DRAGON_TAIL",
+      "SHADOW_BALL",
+      "OUTRAGE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 367,
+     "score": 46.4,
      "moveset": [
       "DRAGON_TAIL",
       "SHADOW_BALL",
@@ -93426,13 +96424,13 @@
       "X_SCISSOR"
      ]
     },
-    "little-500": {
-     "rank": 366,
-     "score": 66.9,
+    "halloweenmega-1500": {
+     "rank": 329,
+     "score": 57.1,
      "moveset": [
       "SMACK_DOWN",
-      "X_SCISSOR",
-      "ROCK_TOMB"
+      "ROCK_TOMB",
+      "X_SCISSOR"
      ]
     },
     "laic2027-1500": {
@@ -93442,6 +96440,15 @@
       "SMACK_DOWN",
       "ROCK_TOMB",
       "X_SCISSOR"
+     ]
+    },
+    "little-500": {
+     "rank": 366,
+     "score": 66.9,
+     "moveset": [
+      "SMACK_DOWN",
+      "X_SCISSOR",
+      "ROCK_TOMB"
      ]
     },
     "catch-1500": {
@@ -93789,18 +96796,18 @@
       "CRUNCH"
      ]
     },
-    "little-500": {
-     "rank": 444,
-     "score": 61.9,
+    "laic2027-1500": {
+     "rank": 664,
+     "score": 63.7,
      "moveset": [
       "WING_ATTACK",
       "ANCIENT_POWER",
       "CRUNCH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 664,
-     "score": 63.7,
+    "little-500": {
+     "rank": 444,
+     "score": 61.9,
      "moveset": [
       "WING_ATTACK",
       "ANCIENT_POWER",
@@ -93864,18 +96871,18 @@
       "PSYCHIC"
      ]
     },
-    "little-500": {
-     "rank": 267,
-     "score": 71.8,
+    "laic2027-1500": {
+     "rank": 631,
+     "score": 65.4,
      "moveset": [
       "CONFUSION",
       "PSYSHOCK",
       "PSYCHIC"
      ]
     },
-    "laic2027-1500": {
-     "rank": 631,
-     "score": 65.4,
+    "little-500": {
+     "rank": 267,
+     "score": 71.8,
      "moveset": [
       "CONFUSION",
       "PSYSHOCK",
@@ -94047,6 +97054,15 @@
       "GYRO_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 322,
+     "score": 58.3,
+     "moveset": [
+      "POISON_STING",
+      "SLUDGE_BOMB",
+      "GYRO_BALL"
+     ]
+    },
     "laic2027-1500": {
      "rank": 646,
      "score": 64.7,
@@ -94113,20 +97129,20 @@
       "THUNDERBOLT"
      ]
     },
-    "little-500": {
-     "rank": 412,
-     "score": 64.1,
-     "moveset": [
-      "SPARK",
-      "WATER_PULSE",
-      "THUNDERBOLT"
-     ]
-    },
     "laic2027-1500": {
      "rank": 777,
      "score": 53.9,
      "moveset": [
       "BUBBLE",
+      "WATER_PULSE",
+      "THUNDERBOLT"
+     ]
+    },
+    "little-500": {
+     "rank": 412,
+     "score": 64.1,
+     "moveset": [
+      "SPARK",
       "WATER_PULSE",
       "THUNDERBOLT"
      ]
@@ -94197,13 +97213,13 @@
       "X_SCISSOR"
      ]
     },
-    "little-500": {
-     "rank": 330,
-     "score": 69.2,
+    "halloweenmega-1500": {
+     "rank": 340,
+     "score": 56,
      "moveset": [
       "SMACK_DOWN",
-      "X_SCISSOR",
-      "ROCK_TOMB"
+      "ROCK_TOMB",
+      "X_SCISSOR"
      ]
     },
     "laic2027-1500": {
@@ -94213,6 +97229,15 @@
       "SMACK_DOWN",
       "ROCK_TOMB",
       "X_SCISSOR"
+     ]
+    },
+    "little-500": {
+     "rank": 330,
+     "score": 69.2,
+     "moveset": [
+      "SMACK_DOWN",
+      "X_SCISSOR",
+      "ROCK_TOMB"
      ]
     },
     "catch-1500": {
@@ -94272,18 +97297,18 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 438,
-     "score": 62.4,
+    "laic2027-1500": {
+     "rank": 768,
+     "score": 55.2,
      "moveset": [
       "WATER_GUN",
       "WATER_PULSE",
       "BODY_SLAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 768,
-     "score": 55.2,
+    "little-500": {
+     "rank": 438,
+     "score": 62.4,
      "moveset": [
       "WATER_GUN",
       "WATER_PULSE",
@@ -94554,18 +97579,18 @@
       "ENERGY_BALL"
      ]
     },
-    "little-500": {
-     "rank": 339,
-     "score": 68.8,
+    "laic2027-1500": {
+     "rank": 737,
+     "score": 58.5,
      "moveset": [
       "TAKE_DOWN",
       "WILD_CHARGE",
       "ENERGY_BALL"
      ]
     },
-    "laic2027-1500": {
-     "rank": 737,
-     "score": 58.5,
+    "little-500": {
+     "rank": 339,
+     "score": 68.8,
      "moveset": [
       "TAKE_DOWN",
       "WILD_CHARGE",
@@ -94722,6 +97747,15 @@
       "PLAY_ROUGH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 351,
+     "score": 54.1,
+     "moveset": [
+      "SNARL",
+      "DARK_PULSE",
+      "PLAY_ROUGH"
+     ]
+    },
     "catch-1500": {
      "rank": 868,
      "score": 59.2,
@@ -94779,18 +97813,18 @@
       "VICE_GRIP"
      ]
     },
-    "little-500": {
-     "rank": 447,
-     "score": 61.1,
+    "laic2027-1500": {
+     "rank": 739,
+     "score": 58.4,
      "moveset": [
       "BUBBLE",
       "AQUA_JET",
       "VICE_GRIP"
      ]
     },
-    "laic2027-1500": {
-     "rank": 739,
-     "score": 58.4,
+    "little-500": {
+     "rank": 447,
+     "score": 61.1,
      "moveset": [
       "BUBBLE",
       "AQUA_JET",
@@ -94947,18 +97981,27 @@
       "ENERGY_BALL"
      ]
     },
-    "little-500": {
-     "rank": 460,
-     "score": 59.1,
+    "fantasy-1500": {
+     "rank": 191,
+     "score": 40.5,
      "moveset": [
       "TACKLE",
       "DRAINING_KISS",
       "ENERGY_BALL"
      ]
     },
-    "fantasy-1500": {
-     "rank": 191,
-     "score": 40.5,
+    "halloweenmega-1500": {
+     "rank": 361,
+     "score": 49.9,
+     "moveset": [
+      "TACKLE",
+      "DRAINING_KISS",
+      "ENERGY_BALL"
+     ]
+    },
+    "little-500": {
+     "rank": 460,
+     "score": 59.1,
      "moveset": [
       "TACKLE",
       "DRAINING_KISS",
@@ -95403,18 +98446,18 @@
       "DIG"
      ]
     },
-    "little-500": {
-     "rank": 117,
-     "score": 79,
+    "laic2027-1500": {
+     "rank": 715,
+     "score": 59.7,
      "moveset": [
       "QUICK_ATTACK",
       "SWIFT",
       "DIG"
      ]
     },
-    "laic2027-1500": {
-     "rank": 715,
-     "score": 59.7,
+    "little-500": {
+     "rank": 117,
+     "score": 79,
      "moveset": [
       "QUICK_ATTACK",
       "SWIFT",
@@ -95478,9 +98521,9 @@
       "SAND_TOMB"
      ]
     },
-    "little-500": {
-     "rank": 198,
-     "score": 75.4,
+    "halloweenmega-1500": {
+     "rank": 356,
+     "score": 53,
      "moveset": [
       "BUG_BITE",
       "ROCK_TOMB",
@@ -95490,6 +98533,15 @@
     "laic2027-1500": {
      "rank": 684,
      "score": 62.2,
+     "moveset": [
+      "BUG_BITE",
+      "ROCK_TOMB",
+      "SAND_TOMB"
+     ]
+    },
+    "little-500": {
+     "rank": 198,
+     "score": 75.4,
      "moveset": [
       "BUG_BITE",
       "ROCK_TOMB",
@@ -95973,18 +99025,18 @@
       "ROCK_SLIDE"
      ]
     },
-    "little-500": {
-     "rank": 272,
-     "score": 71.7,
+    "laic2027-1500": {
+     "rank": 746,
+     "score": 57.7,
      "moveset": [
       "ROCK_THROW",
       "ROCK_TOMB",
       "ROCK_SLIDE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 746,
-     "score": 57.7,
+    "little-500": {
+     "rank": 272,
+     "score": 71.7,
      "moveset": [
       "ROCK_THROW",
       "ROCK_TOMB",
@@ -96258,6 +99310,15 @@
       "HURRICANE"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 331,
+     "score": 57.1,
+     "moveset": [
+      "GUST",
+      "ENERGY_BALL",
+      "HURRICANE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 716,
      "score": 59.7,
@@ -96444,6 +99505,15 @@
       "ANCIENT_POWER"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 347,
+     "score": 55.1,
+     "moveset": [
+      "WING_ATTACK",
+      "AERIAL_ACE",
+      "ANCIENT_POWER"
+     ]
+    },
     "laic2027-1500": {
      "rank": 683,
      "score": 62.4,
@@ -96603,18 +99673,18 @@
       "RAZOR_SHELL"
      ]
     },
-    "little-500": {
-     "rank": 490,
-     "score": 53.4,
+    "laic2027-1500": {
+     "rank": 747,
+     "score": 57.7,
      "moveset": [
       "BUBBLE",
       "VICE_GRIP",
       "RAZOR_SHELL"
      ]
     },
-    "laic2027-1500": {
-     "rank": 747,
-     "score": 57.7,
+    "little-500": {
+     "rank": 490,
+     "score": 53.4,
      "moveset": [
       "BUBBLE",
       "VICE_GRIP",
@@ -96930,18 +100000,18 @@
       "PSYCHIC"
      ]
     },
-    "little-500": {
-     "rank": 494,
-     "score": 51.1,
+    "laic2027-1500": {
+     "rank": 694,
+     "score": 60.8,
      "moveset": [
       "CONFUSION",
       "DARK_PULSE",
       "PSYCHIC"
      ]
     },
-    "laic2027-1500": {
-     "rank": 694,
-     "score": 60.8,
+    "little-500": {
+     "rank": 494,
+     "score": 51.1,
      "moveset": [
       "CONFUSION",
       "DARK_PULSE",
@@ -97005,18 +100075,18 @@
       "SEED_BOMB"
      ]
     },
-    "little-500": {
-     "rank": 333,
-     "score": 69.1,
+    "laic2027-1500": {
+     "rank": 745,
+     "score": 58,
      "moveset": [
       "LEAFAGE",
       "ENERGY_BALL",
       "SEED_BOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 745,
-     "score": 58,
+    "little-500": {
+     "rank": 333,
+     "score": 69.1,
      "moveset": [
       "LEAFAGE",
       "ENERGY_BALL",
@@ -97185,18 +100255,18 @@
       "CRABHAMMER"
      ]
     },
-    "little-500": {
-     "rank": 306,
-     "score": 70.4,
+    "laic2027-1500": {
+     "rank": 782,
+     "score": 53.1,
      "moveset": [
       "WATER_GUN",
       "AQUA_JET",
       "CRABHAMMER"
      ]
     },
-    "laic2027-1500": {
-     "rank": 782,
-     "score": 53.1,
+    "little-500": {
+     "rank": 306,
+     "score": 70.4,
      "moveset": [
       "WATER_GUN",
       "AQUA_JET",
@@ -97338,18 +100408,18 @@
       "AQUA_JET"
      ]
     },
-    "little-500": {
-     "rank": 279,
-     "score": 71.5,
+    "laic2027-1500": {
+     "rank": 760,
+     "score": 56.2,
      "moveset": [
       "WATER_GUN",
       "AQUA_TAIL",
       "AQUA_JET"
      ]
     },
-    "laic2027-1500": {
-     "rank": 760,
-     "score": 56.2,
+    "little-500": {
+     "rank": 279,
+     "score": 71.5,
      "moveset": [
       "WATER_GUN",
       "AQUA_TAIL",
@@ -97440,18 +100510,18 @@
       "SLUDGE_BOMB"
      ]
     },
-    "little-500": {
-     "rank": 509,
-     "score": 44.2,
+    "laic2027-1500": {
+     "rank": 726,
+     "score": 59.1,
      "moveset": [
       "INFESTATION",
       "GRASS_KNOT",
       "SLUDGE_BOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 726,
-     "score": 59.1,
+    "little-500": {
+     "rank": 509,
+     "score": 44.2,
      "moveset": [
       "INFESTATION",
       "GRASS_KNOT",
@@ -97683,18 +100753,18 @@
       "SIGNAL_BEAM"
      ]
     },
-    "little-500": {
-     "rank": 475,
-     "score": 56.9,
+    "laic2027-1500": {
+     "rank": 744,
+     "score": 58,
      "moveset": [
       "TACKLE",
       "DISCHARGE",
       "SIGNAL_BEAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 744,
-     "score": 58,
+    "little-500": {
+     "rank": 475,
+     "score": 56.9,
      "moveset": [
       "TACKLE",
       "DISCHARGE",
@@ -97860,18 +100930,18 @@
       "ROCK_BLAST"
      ]
     },
-    "little-500": {
-     "rank": 89,
-     "score": 80.5,
+    "laic2027-1500": {
+     "rank": 736,
+     "score": 58.6,
      "moveset": [
       "ROCK_THROW",
       "ROCK_SLIDE",
       "ROCK_BLAST"
      ]
     },
-    "laic2027-1500": {
-     "rank": 736,
-     "score": 58.6,
+    "little-500": {
+     "rank": 89,
+     "score": 80.5,
      "moveset": [
       "ROCK_THROW",
       "ROCK_SLIDE",
@@ -98133,18 +101203,18 @@
       "VICE_GRIP"
      ]
     },
-    "little-500": {
-     "rank": 425,
-     "score": 63.5,
+    "laic2027-1500": {
+     "rank": 759,
+     "score": 56.2,
      "moveset": [
       "BUBBLE",
       "AQUA_JET",
       "VICE_GRIP"
      ]
     },
-    "laic2027-1500": {
-     "rank": 759,
-     "score": 56.2,
+    "little-500": {
+     "rank": 425,
+     "score": 63.5,
      "moveset": [
       "BUBBLE",
       "AQUA_JET",
@@ -98229,6 +101299,15 @@
     "mega-2500": {
      "rank": 848,
      "score": 56.2,
+     "moveset": [
+      "AIR_SLASH",
+      "AIR_CUTTER",
+      "HURRICANE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 365,
+     "score": 47.1,
      "moveset": [
       "AIR_SLASH",
       "AIR_CUTTER",
@@ -98478,6 +101557,15 @@
       "BUG_BUZZ"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 354,
+     "score": 53.2,
+     "moveset": [
+      "BUG_BITE",
+      "AERIAL_ACE",
+      "BUG_BUZZ"
+     ]
+    },
     "laic2027-1500": {
      "rank": 699,
      "score": 60.4,
@@ -98544,9 +101632,9 @@
       "SEED_BOMB"
      ]
     },
-    "little-500": {
-     "rank": 433,
-     "score": 62.7,
+    "halloweenmega-1500": {
+     "rank": 368,
+     "score": 46.2,
      "moveset": [
       "VINE_WHIP",
       "POWER_WHIP",
@@ -98556,6 +101644,15 @@
     "laic2027-1500": {
      "rank": 748,
      "score": 57.4,
+     "moveset": [
+      "VINE_WHIP",
+      "POWER_WHIP",
+      "SEED_BOMB"
+     ]
+    },
+    "little-500": {
+     "rank": 433,
+     "score": 62.7,
      "moveset": [
       "VINE_WHIP",
       "POWER_WHIP",
@@ -98622,6 +101719,15 @@
     "mega-1500": {
      "rank": 1119,
      "score": 52.8,
+     "moveset": [
+      "POISON_STING",
+      "SLUDGE_BOMB",
+      "GYRO_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 359,
+     "score": 52.7,
      "moveset": [
       "POISON_STING",
       "SLUDGE_BOMB",
@@ -98769,18 +101875,18 @@
       "ROCK_BLAST"
      ]
     },
-    "little-500": {
-     "rank": 158,
-     "score": 77.6,
+    "laic2027-1500": {
+     "rank": 773,
+     "score": 54.5,
      "moveset": [
       "ROCK_THROW",
       "ROCK_SLIDE",
       "ROCK_BLAST"
      ]
     },
-    "laic2027-1500": {
-     "rank": 773,
-     "score": 54.5,
+    "little-500": {
+     "rank": 158,
+     "score": 77.6,
      "moveset": [
       "ROCK_THROW",
       "ROCK_SLIDE",
@@ -98844,18 +101950,18 @@
       "RAZOR_SHELL"
      ]
     },
-    "little-500": {
-     "rank": 483,
-     "score": 55,
+    "laic2027-1500": {
+     "rank": 779,
+     "score": 53.6,
      "moveset": [
       "BUBBLE",
       "VICE_GRIP",
       "RAZOR_SHELL"
      ]
     },
-    "laic2027-1500": {
-     "rank": 779,
-     "score": 53.6,
+    "little-500": {
+     "rank": 483,
+     "score": 55,
      "moveset": [
       "BUBBLE",
       "VICE_GRIP",
@@ -99012,18 +102118,18 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 380,
-     "score": 66.1,
+    "laic2027-1500": {
+     "rank": 763,
+     "score": 55.9,
      "moveset": [
       "VINE_WHIP",
       "SEED_BOMB",
       "BODY_SLAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 763,
-     "score": 55.9,
+    "little-500": {
+     "rank": 380,
+     "score": 66.1,
      "moveset": [
       "VINE_WHIP",
       "SEED_BOMB",
@@ -99507,18 +102613,18 @@
       "STOMP"
      ]
     },
-    "little-500": {
-     "rank": 496,
-     "score": 50.7,
+    "laic2027-1500": {
+     "rank": 765,
+     "score": 55.8,
      "moveset": [
       "TACKLE",
       "WILD_CHARGE",
       "STOMP"
      ]
     },
-    "laic2027-1500": {
-     "rank": 765,
-     "score": 55.8,
+    "little-500": {
+     "rank": 496,
+     "score": 50.7,
      "moveset": [
       "TACKLE",
       "WILD_CHARGE",
@@ -99708,18 +102814,18 @@
       "SLUDGE_BOMB"
      ]
     },
-    "little-500": {
-     "rank": 510,
-     "score": 44.1,
+    "laic2027-1500": {
+     "rank": 752,
+     "score": 56.5,
      "moveset": [
       "INFESTATION",
       "GRASS_KNOT",
       "SLUDGE_BOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 752,
-     "score": 56.5,
+    "little-500": {
+     "rank": 510,
+     "score": 44.1,
      "moveset": [
       "INFESTATION",
       "GRASS_KNOT",
@@ -99792,18 +102898,18 @@
       "ICY_WIND"
      ]
     },
-    "little-500": {
-     "rank": 235,
-     "score": 73.1,
+    "laic2027-1500": {
+     "rank": 792,
+     "score": 51.2,
      "moveset": [
       "BUBBLE",
       "DRILL_PECK",
       "ICY_WIND"
      ]
     },
-    "laic2027-1500": {
-     "rank": 792,
-     "score": 51.2,
+    "little-500": {
+     "rank": 235,
+     "score": 73.1,
      "moveset": [
       "BUBBLE",
       "DRILL_PECK",
@@ -99876,18 +102982,18 @@
       "ROCK_SLIDE"
      ]
     },
-    "little-500": {
-     "rank": 487,
-     "score": 54.5,
+    "laic2027-1500": {
+     "rank": 785,
+     "score": 52.9,
      "moveset": [
       "TACKLE",
       "BULLDOZE",
       "ROCK_SLIDE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 785,
-     "score": 52.9,
+    "little-500": {
+     "rank": 487,
+     "score": 54.5,
      "moveset": [
       "TACKLE",
       "BULLDOZE",
@@ -99951,18 +103057,18 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 424,
-     "score": 63.5,
+    "laic2027-1500": {
+     "rank": 775,
+     "score": 54.3,
      "moveset": [
       "VINE_WHIP",
       "SEED_BOMB",
       "BODY_SLAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 775,
-     "score": 54.3,
+    "little-500": {
+     "rank": 424,
+     "score": 63.5,
      "moveset": [
       "VINE_WHIP",
       "SEED_BOMB",
@@ -100323,15 +103429,6 @@
       "POWER_UP_PUNCH"
      ]
     },
-    "little-500": {
-     "rank": 480,
-     "score": 55.6,
-     "moveset": [
-      "BUBBLE",
-      "BRICK_BREAK",
-      "CRABHAMMER"
-     ]
-    },
     "laic2027-1500": {
      "rank": 802,
      "score": 48.9,
@@ -100339,6 +103436,15 @@
       "BUBBLE",
       "CRABHAMMER",
       "POWER_UP_PUNCH"
+     ]
+    },
+    "little-500": {
+     "rank": 480,
+     "score": 55.6,
+     "moveset": [
+      "BUBBLE",
+      "BRICK_BREAK",
+      "CRABHAMMER"
      ]
     },
     "catch-1500": {
@@ -100498,6 +103604,15 @@
       "INFESTATION",
       "ENERGY_BALL",
       "BUG_BUZZ"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 369,
+     "score": 44.3,
+     "moveset": [
+      "INFESTATION",
+      "BUG_BUZZ",
+      "ACID_SPRAY"
      ]
     },
     "laic2027-1500": {
@@ -100674,6 +103789,15 @@
       "DAZZLING_GLEAM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 366,
+     "score": 46.8,
+     "moveset": [
+      "POISON_JAB",
+      "SLUDGE_BOMB",
+      "DAZZLING_GLEAM"
+     ]
+    },
     "laic2027-1500": {
      "rank": 783,
      "score": 53.1,
@@ -100755,18 +103879,18 @@
       "ROCK_BLAST"
      ]
     },
-    "little-500": {
-     "rank": 319,
-     "score": 69.7,
+    "laic2027-1500": {
+     "rank": 787,
+     "score": 52.6,
      "moveset": [
       "SMACK_DOWN",
       "STONE_EDGE",
       "ROCK_BLAST"
      ]
     },
-    "laic2027-1500": {
-     "rank": 787,
-     "score": 52.6,
+    "little-500": {
+     "rank": 319,
+     "score": 69.7,
      "moveset": [
       "SMACK_DOWN",
       "STONE_EDGE",
@@ -100848,18 +103972,18 @@
       "STOMP"
      ]
     },
-    "little-500": {
-     "rank": 473,
-     "score": 57.1,
+    "laic2027-1500": {
+     "rank": 778,
+     "score": 53.7,
      "moveset": [
       "TACKLE",
       "WILD_CHARGE",
       "STOMP"
      ]
     },
-    "laic2027-1500": {
-     "rank": 778,
-     "score": 53.7,
+    "little-500": {
+     "rank": 473,
+     "score": 57.1,
      "moveset": [
       "TACKLE",
       "WILD_CHARGE",
@@ -101241,20 +104365,29 @@
       "GUNK_SHOT"
      ]
     },
-    "little-500": {
-     "rank": 397,
-     "score": 65,
-     "moveset": [
-      "POISON_JAB",
-      "GYRO_BALL",
-      "GUNK_SHOT"
-     ]
-    },
     "fantasy-1500": {
      "rank": 170,
      "score": 47.9,
      "moveset": [
       "METAL_SOUND",
+      "GYRO_BALL",
+      "GUNK_SHOT"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 357,
+     "score": 52.8,
+     "moveset": [
+      "METAL_SOUND",
+      "GYRO_BALL",
+      "GUNK_SHOT"
+     ]
+    },
+    "little-500": {
+     "rank": 397,
+     "score": 65,
+     "moveset": [
+      "POISON_JAB",
       "GYRO_BALL",
       "GUNK_SHOT"
      ]
@@ -101322,18 +104455,18 @@
       "ROCK_BLAST"
      ]
     },
-    "little-500": {
-     "rank": 368,
-     "score": 66.8,
+    "laic2027-1500": {
+     "rank": 784,
+     "score": 53,
      "moveset": [
       "SMACK_DOWN",
       "STONE_EDGE",
       "ROCK_BLAST"
      ]
     },
-    "laic2027-1500": {
-     "rank": 784,
-     "score": 53,
+    "little-500": {
+     "rank": 368,
+     "score": 66.8,
      "moveset": [
       "SMACK_DOWN",
       "STONE_EDGE",
@@ -101799,6 +104932,15 @@
     "fantasy-1500": {
      "rank": 193,
      "score": 39.1,
+     "moveset": [
+      "POISON_JAB",
+      "DRAGON_CLAW",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 364,
+     "score": 47.4,
      "moveset": [
       "POISON_JAB",
       "DRAGON_CLAW",
@@ -102321,18 +105463,18 @@
       "ICY_WIND"
      ]
     },
-    "little-500": {
-     "rank": 283,
-     "score": 71.4,
+    "laic2027-1500": {
+     "rank": 801,
+     "score": 49.1,
      "moveset": [
       "BUBBLE",
       "DRILL_PECK",
       "ICY_WIND"
      ]
     },
-    "laic2027-1500": {
-     "rank": 801,
-     "score": 49.1,
+    "little-500": {
+     "rank": 283,
+     "score": 71.4,
      "moveset": [
       "BUBBLE",
       "DRILL_PECK",
@@ -102750,15 +105892,6 @@
       "ANCIENT_POWER"
      ]
     },
-    "little-500": {
-     "rank": 455,
-     "score": 60,
-     "moveset": [
-      "TAKE_DOWN",
-      "ROCK_TOMB",
-      "ANCIENT_POWER"
-     ]
-    },
     "laic2027-1500": {
      "rank": 786,
      "score": 52.7,
@@ -102766,6 +105899,15 @@
       "TAKE_DOWN",
       "ROCK_TOMB",
       "BULLDOZE"
+     ]
+    },
+    "little-500": {
+     "rank": 455,
+     "score": 60,
+     "moveset": [
+      "TAKE_DOWN",
+      "ROCK_TOMB",
+      "ANCIENT_POWER"
      ]
     }
    },
@@ -102909,15 +106051,6 @@
       "RETURN"
      ]
     },
-    "little-500": {
-     "rank": 269,
-     "score": 71.8,
-     "moveset": [
-      "METAL_CLAW",
-      "IRON_HEAD",
-      "GYRO_BALL"
-     ]
-    },
     "fantasy-1500": {
      "rank": 186,
      "score": 43.2,
@@ -102925,6 +106058,15 @@
       "METAL_CLAW",
       "IRON_HEAD",
       "RETURN"
+     ]
+    },
+    "little-500": {
+     "rank": 269,
+     "score": 71.8,
+     "moveset": [
+      "METAL_CLAW",
+      "IRON_HEAD",
+      "GYRO_BALL"
      ]
     },
     "catch-1500": {
@@ -102993,15 +106135,6 @@
       "PSYCHIC"
      ]
     },
-    "little-500": {
-     "rank": 472,
-     "score": 57.1,
-     "moveset": [
-      "VINE_WHIP",
-      "DAZZLING_GLEAM",
-      "PETAL_BLIZZARD"
-     ]
-    },
     "fantasy-1500": {
      "rank": 196,
      "score": 30.2,
@@ -103009,6 +106142,24 @@
       "VINE_WHIP",
       "DAZZLING_GLEAM",
       "PSYCHIC"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 371,
+     "score": 40.9,
+     "moveset": [
+      "VINE_WHIP",
+      "DAZZLING_GLEAM",
+      "PSYCHIC"
+     ]
+    },
+    "little-500": {
+     "rank": 472,
+     "score": 57.1,
+     "moveset": [
+      "VINE_WHIP",
+      "DAZZLING_GLEAM",
+      "PETAL_BLIZZARD"
      ]
     },
     "catch-1500": {
@@ -103062,6 +106213,15 @@
     "mega-1500": {
      "rank": 1180,
      "score": 44.4,
+     "moveset": [
+      "CONFUSION",
+      "BUG_BUZZ",
+      "PSYCHIC"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 376,
+     "score": 33.4,
      "moveset": [
       "CONFUSION",
       "BUG_BUZZ",
@@ -103161,6 +106321,15 @@
       "PSYCHIC"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 375,
+     "score": 36.9,
+     "moveset": [
+      "CONFUSION",
+      "SHADOW_BALL",
+      "PSYCHIC"
+     ]
+    },
     "catch-1500": {
      "rank": 933,
      "score": 55,
@@ -103218,18 +106387,27 @@
       "SLUDGE_BOMB"
      ]
     },
-    "little-500": {
-     "rank": 410,
-     "score": 64.2,
+    "halloweenmega-1500": {
+     "rank": 372,
+     "score": 39.4,
+     "moveset": [
+      "VINE_WHIP",
+      "POWER_WHIP",
+      "SLUDGE_BOMB"
+     ]
+    },
+    "laic2027-1500": {
+     "rank": 749,
+     "score": 57.4,
      "moveset": [
       "VINE_WHIP",
       "POWER_WHIP",
       "SEED_BOMB"
      ]
     },
-    "laic2027-1500": {
-     "rank": 749,
-     "score": 57.4,
+    "little-500": {
+     "rank": 410,
+     "score": 64.2,
      "moveset": [
       "VINE_WHIP",
       "POWER_WHIP",
@@ -103386,18 +106564,18 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 502,
-     "score": 48.2,
+    "laic2027-1500": {
+     "rank": 810,
+     "score": 47.9,
      "moveset": [
       "TACKLE",
       "ENERGY_BALL",
       "BODY_SLAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 810,
-     "score": 47.9,
+    "little-500": {
+     "rank": 502,
+     "score": 48.2,
      "moveset": [
       "TACKLE",
       "ENERGY_BALL",
@@ -103668,18 +106846,18 @@
       "DAZZLING_GLEAM"
      ]
     },
-    "little-500": {
-     "rank": 500,
-     "score": 49.4,
+    "laic2027-1500": {
+     "rank": 800,
+     "score": 49.2,
      "moveset": [
       "CHARGE_BEAM",
       "PSYSHOCK",
       "DAZZLING_GLEAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 800,
-     "score": 49.2,
+    "little-500": {
+     "rank": 500,
+     "score": 49.4,
      "moveset": [
       "CHARGE_BEAM",
       "PSYSHOCK",
@@ -104007,18 +107185,18 @@
       "BODY_SLAM"
      ]
     },
-    "little-500": {
-     "rank": 506,
-     "score": 45.6,
+    "laic2027-1500": {
+     "rank": 814,
+     "score": 46,
      "moveset": [
       "TACKLE",
       "ENERGY_BALL",
       "BODY_SLAM"
      ]
     },
-    "laic2027-1500": {
-     "rank": 814,
-     "score": 46,
+    "little-500": {
+     "rank": 506,
+     "score": 45.6,
      "moveset": [
       "TACKLE",
       "ENERGY_BALL",
@@ -104547,6 +107725,15 @@
       "SIGNAL_BEAM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 373,
+     "score": 37.8,
+     "moveset": [
+      "CONFUSION",
+      "BUG_BUZZ",
+      "SIGNAL_BEAM"
+     ]
+    },
     "laic2027-1500": {
      "rank": 809,
      "score": 47.9,
@@ -104619,15 +107806,6 @@
       "ANCIENT_POWER"
      ]
     },
-    "little-500": {
-     "rank": 489,
-     "score": 53.6,
-     "moveset": [
-      "TAKE_DOWN",
-      "ROCK_TOMB",
-      "ANCIENT_POWER"
-     ]
-    },
     "laic2027-1500": {
      "rank": 817,
      "score": 45,
@@ -104635,6 +107813,15 @@
       "TAKE_DOWN",
       "ROCK_TOMB",
       "BULLDOZE"
+     ]
+    },
+    "little-500": {
+     "rank": 489,
+     "score": 53.6,
+     "moveset": [
+      "TAKE_DOWN",
+      "ROCK_TOMB",
+      "ANCIENT_POWER"
      ]
     }
    },
@@ -104679,6 +107866,15 @@
     "mega-1500": {
      "rank": 1193,
      "score": 39.7,
+     "moveset": [
+      "CONFUSION",
+      "BUG_BUZZ",
+      "SIGNAL_BEAM"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 374,
+     "score": 37.2,
      "moveset": [
       "CONFUSION",
       "BUG_BUZZ",
@@ -104757,18 +107953,18 @@
       "GYRO_BALL"
      ]
     },
-    "little-500": {
-     "rank": 278,
-     "score": 71.5,
+    "fantasy-1500": {
+     "rank": 192,
+     "score": 40.3,
      "moveset": [
       "METAL_CLAW",
       "IRON_HEAD",
       "GYRO_BALL"
      ]
     },
-    "fantasy-1500": {
-     "rank": 192,
-     "score": 40.3,
+    "little-500": {
+     "rank": 278,
+     "score": 71.5,
      "moveset": [
       "METAL_CLAW",
       "IRON_HEAD",
@@ -104901,15 +108097,6 @@
       "SEED_BOMB"
      ]
     },
-    "little-500": {
-     "rank": 512,
-     "score": 43,
-     "moveset": [
-      "ROCK_SMASH",
-      "BRICK_BREAK",
-      "SEED_BOMB"
-     ]
-    },
     "laic2027-1500": {
      "rank": 822,
      "score": 39.5,
@@ -104917,6 +108104,15 @@
       "ROCK_SMASH",
       "SEED_BOMB",
       "BRICK_BREAK"
+     ]
+    },
+    "little-500": {
+     "rank": 512,
+     "score": 43,
+     "moveset": [
+      "ROCK_SMASH",
+      "BRICK_BREAK",
+      "SEED_BOMB"
      ]
     },
     "catch-1500": {
@@ -105141,18 +108337,18 @@
       "NIGHT_SHADE"
      ]
     },
-    "little-500": {
-     "rank": 514,
-     "score": 41.5,
+    "laic2027-1500": {
+     "rank": 819,
+     "score": 44.3,
      "moveset": [
       "HIDDEN_POWER_PSYCHIC",
       "PSYSHOCK",
       "NIGHT_SHADE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 819,
-     "score": 44.3,
+    "little-500": {
+     "rank": 514,
+     "score": 41.5,
      "moveset": [
       "HIDDEN_POWER_PSYCHIC",
       "PSYSHOCK",
@@ -105462,18 +108658,18 @@
       "NIGHT_SHADE"
      ]
     },
-    "little-500": {
-     "rank": 516,
-     "score": 37.2,
+    "laic2027-1500": {
+     "rank": 821,
+     "score": 40.6,
      "moveset": [
       "HIDDEN_POWER_PSYCHIC",
       "PSYSHOCK",
       "NIGHT_SHADE"
      ]
     },
-    "laic2027-1500": {
-     "rank": 821,
-     "score": 40.6,
+    "little-500": {
+     "rank": 516,
+     "score": 37.2,
      "moveset": [
       "HIDDEN_POWER_PSYCHIC",
       "PSYSHOCK",
@@ -105627,18 +108823,18 @@
       "ICE_PUNCH"
      ]
     },
-    "little-500": {
-     "rank": 501,
-     "score": 48.7,
+    "laic2027-1500": {
+     "rank": 825,
+     "score": 35.6,
      "moveset": [
       "ROCK_SMASH",
       "SUPER_POWER",
       "ICE_PUNCH"
      ]
     },
-    "laic2027-1500": {
-     "rank": 825,
-     "score": 35.6,
+    "little-500": {
+     "rank": 501,
+     "score": 48.7,
      "moveset": [
       "ROCK_SMASH",
       "SUPER_POWER",
@@ -106044,18 +109240,18 @@
       "SHADOW_BALL"
      ]
     },
-    "little-500": {
-     "rank": 519,
-     "score": 34.3,
+    "laic2027-1500": {
+     "rank": 823,
+     "score": 36.3,
      "moveset": [
       "ZEN_HEADBUTT",
       "MIRROR_COAT",
       "SHADOW_BALL"
      ]
     },
-    "laic2027-1500": {
-     "rank": 823,
-     "score": 36.3,
+    "little-500": {
+     "rank": 519,
+     "score": 34.3,
      "moveset": [
       "ZEN_HEADBUTT",
       "MIRROR_COAT",
@@ -106119,18 +109315,18 @@
       "SHADOW_BALL"
      ]
     },
-    "little-500": {
-     "rank": 521,
-     "score": 31.1,
+    "laic2027-1500": {
+     "rank": 824,
+     "score": 36.1,
      "moveset": [
       "ZEN_HEADBUTT",
       "MIRROR_COAT",
       "SHADOW_BALL"
      ]
     },
-    "laic2027-1500": {
-     "rank": 824,
-     "score": 36.1,
+    "little-500": {
+     "rank": 521,
+     "score": 31.1,
      "moveset": [
       "ZEN_HEADBUTT",
       "MIRROR_COAT",
@@ -106197,6 +109393,15 @@
     "fantasy-1500": {
      "rank": 197,
      "score": 19.2,
+     "moveset": [
+      "ZEN_HEADBUTT",
+      "MOONBLAST",
+      "DISARMING_VOICE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 377,
+     "score": 23,
      "moveset": [
       "ZEN_HEADBUTT",
       "MOONBLAST",
@@ -106609,6 +109814,15 @@
       "FOUL_PLAY",
       "POWER_GEM"
      ]
+    },
+    "halloweenmega-1500": {
+     "rank": 7,
+     "score": 87.7,
+     "moveset": [
+      "SHADOW_CLAW",
+      "FOUL_PLAY",
+      "DAZZLING_GLEAM"
+     ]
     }
    },
    "recommended": {
@@ -106663,6 +109877,16 @@
     "mega-10000": {
      "rank": 122,
      "score": 64,
+     "moveset": [
+      "PSYWAVE",
+      "FOUL_PLAY",
+      "SUPER_POWER",
+      "PSYBEAM_PLUS"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 102,
+     "score": 77.1,
      "moveset": [
       "PSYWAVE",
       "FOUL_PLAY",
@@ -106914,6 +110138,15 @@
       "IRON_HEAD"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 20,
+     "score": 84.6,
+     "moveset": [
+      "FAIRY_WIND",
+      "VICE_GRIP",
+      "IRON_HEAD"
+     ]
+    },
     "laic2027-1500": {
      "rank": 1,
      "score": 98.3,
@@ -106994,6 +110227,16 @@
     "mega-10000": {
      "rank": 70,
      "score": 70.1,
+     "moveset": [
+      "INCINERATE",
+      "FLAMETHROWER",
+      "TRAILBLAZE",
+      "DARK_PULSE_PLUS"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 54,
+     "score": 81.4,
      "moveset": [
       "INCINERATE",
       "FLAMETHROWER",
@@ -107085,6 +110328,15 @@
       "BODY_SLAM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 57,
+     "score": 81.3,
+     "moveset": [
+      "CHARGE_BEAM",
+      "BODY_SLAM",
+      "DISARMING_VOICE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 181,
      "score": 84.4,
@@ -107157,6 +110409,15 @@
       "SKY_ATTACK"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 137,
+     "score": 74.2,
+     "moveset": [
+      "DRAGON_BREATH",
+      "MOONBLAST",
+      "FLAMETHROWER"
+     ]
+    },
     "laic2027-1500": {
      "rank": 192,
      "score": 84.2,
@@ -107219,6 +110480,16 @@
     "mega-10000": {
      "rank": 61,
      "score": 71.2,
+     "moveset": [
+      "WATER_SHURIKEN",
+      "HYDRO_CANNON",
+      "BRUTAL_SWING",
+      "SURF_PLUS"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 12,
+     "score": 86,
      "moveset": [
       "WATER_SHURIKEN",
       "HYDRO_CANNON",
@@ -107664,6 +110935,15 @@
       "CRUNCH"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 115,
+     "score": 76.4,
+     "moveset": [
+      "DRAGON_BREATH",
+      "AQUA_TAIL",
+      "CRUNCH"
+     ]
+    },
     "laic2027-1500": {
      "rank": 261,
      "score": 82.4,
@@ -107819,6 +111099,15 @@
      "score": 79.2,
      "moveset": [
       "FURY_CUTTER",
+      "NIGHT_SLASH",
+      "TRAILBLAZE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 128,
+     "score": 75.3,
+     "moveset": [
+      "BULLET_PUNCH",
       "NIGHT_SLASH",
       "TRAILBLAZE"
      ]
@@ -108710,6 +111999,16 @@
       "ACID_SPRAY_PLUS"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 246,
+     "score": 65.6,
+     "moveset": [
+      "ACID",
+      "LEAF_BLADE",
+      "SLUDGE_BOMB",
+      "ACID_SPRAY_PLUS"
+     ]
+    },
     "laic2027-1500": {
      "rank": 236,
      "score": 83.2,
@@ -108881,6 +112180,15 @@
     "mega-10000": {
      "rank": 129,
      "score": 63.3,
+     "moveset": [
+      "VINE_WHIP",
+      "FRENZY_PLANT",
+      "SLUDGE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 178,
+     "score": 71.7,
      "moveset": [
       "VINE_WHIP",
       "FRENZY_PLANT",
@@ -109369,6 +112677,16 @@
       "FELL_STINGER_PLUS"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 189,
+     "score": 70.3,
+     "moveset": [
+      "INFESTATION",
+      "DRILL_RUN",
+      "SLUDGE_BOMB",
+      "FELL_STINGER_PLUS"
+     ]
+    },
     "laic2027-1500": {
      "rank": 300,
      "score": 81.2,
@@ -109443,6 +112761,15 @@
     "mega-10000": {
      "rank": 15,
      "score": 83.9,
+     "moveset": [
+      "FURY_CUTTER",
+      "ROCK_TOMB",
+      "UPPER_HAND"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 265,
+     "score": 64,
      "moveset": [
       "FURY_CUTTER",
       "ROCK_TOMB",
@@ -109886,6 +113213,15 @@
       "SHADOW_BALL"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 239,
+     "score": 66.1,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_PUNCH",
+      "DARK_PULSE"
+     ]
+    },
     "laic2027-1500": {
      "rank": 374,
      "score": 78.4,
@@ -109958,6 +113294,15 @@
     "mega-10000": {
      "rank": 9,
      "score": 91.1,
+     "moveset": [
+      "DRAGON_BREATH",
+      "BRUTAL_SWING",
+      "STONE_EDGE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 164,
+     "score": 72.5,
      "moveset": [
       "DRAGON_BREATH",
       "BRUTAL_SWING",
@@ -110489,6 +113834,15 @@
       "X_SCISSOR"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 334,
+     "score": 56.7,
+     "moveset": [
+      "FURY_CUTTER",
+      "CLOSE_COMBAT",
+      "X_SCISSOR"
+     ]
+    },
     "laic2027-1500": {
      "rank": 444,
      "score": 75.6,
@@ -110561,6 +113915,15 @@
       "MEGAHORN"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 269,
+     "score": 63.4,
+     "moveset": [
+      "PSYCHO_CUT",
+      "BRUTAL_SWING",
+      "MEGAHORN"
+     ]
+    },
     "laic2027-1500": {
      "rank": 551,
      "score": 71,
@@ -110621,6 +113984,15 @@
     "mega-10000": {
      "rank": 247,
      "score": 50.4,
+     "moveset": [
+      "WATERFALL",
+      "CRUNCH",
+      "POISON_FANG"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 220,
+     "score": 67.8,
      "moveset": [
       "WATERFALL",
       "CRUNCH",
@@ -110696,6 +114068,15 @@
     "mega-10000": {
      "rank": 220,
      "score": 53.3,
+     "moveset": [
+      "ROCK_THROW",
+      "MOONBLAST",
+      "ROCK_SLIDE"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 306,
+     "score": 60.4,
      "moveset": [
       "ROCK_THROW",
       "MOONBLAST",
@@ -110921,6 +114302,15 @@
       "DAZZLING_GLEAM"
      ]
     },
+    "halloweenmega-1500": {
+     "rank": 358,
+     "score": 52.7,
+     "moveset": [
+      "SHADOW_CLAW",
+      "SHADOW_BALL",
+      "DAZZLING_GLEAM"
+     ]
+    },
     "laic2027-1500": {
      "rank": 734,
      "score": 58.7,
@@ -110985,6 +114375,15 @@
       "CHARM",
       "TRIPLE_AXEL",
       "SHADOW_BALL"
+     ]
+    },
+    "halloweenmega-1500": {
+     "rank": 370,
+     "score": 41.9,
+     "moveset": [
+      "CONFUSION",
+      "TRIPLE_AXEL",
+      "DAZZLING_GLEAM"
      ]
     },
     "laic2027-1500": {
