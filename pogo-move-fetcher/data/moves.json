@@ -1,5 +1,5 @@
 {
- "count": 352,
+ "count": 354,
  "moves": [
   {
    "moveId": "ACID",
@@ -2225,6 +2225,19 @@
    "energy": null
   },
   {
+   "moveId": "KOWTOW_CLEAVE",
+   "name": "Kowtow Cleave",
+   "nameKo": null,
+   "nameDisplay": "Kowtow Cleave",
+   "type": "dark",
+   "kind": "charged",
+   "turns": null,
+   "seconds": null,
+   "power": 75,
+   "energyGain": null,
+   "energy": 40
+  },
+  {
    "moveId": "LAST_RESORT",
    "name": "Last Resort",
    "nameKo": "비장의무기",
@@ -2756,6 +2769,19 @@
    "power": 45,
    "energyGain": null,
    "energy": 45
+  },
+  {
+   "moveId": "OMINOUS_WIND_PLUS",
+   "name": "Ominous Wind+",
+   "nameKo": "괴상한바람",
+   "nameDisplay": "괴상한바람",
+   "type": "ghost",
+   "kind": "charged",
+   "turns": null,
+   "seconds": null,
+   "power": 50,
+   "energyGain": null,
+   "energy": 40
   },
   {
    "moveId": "ORIGIN_PULSE",
