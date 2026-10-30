@@ -80,3 +80,20 @@ for (const f of FORMATS) {
 assert.equal(C.league('nope').cap, 1500);
 
 console.log(`formats tests passed (${FORMATS.length} formats)`);
+
+/* 베스트 파트너: 켜면 최대 레벨이 51, 끄면 50. 같은 CP 상한에서도 레벨이 오르면 능력치가 커진다 */
+{
+  const mon = species.get('medicham') || context.POKEMON[0];
+  const off = C.bestBuild(mon.base, [15, 15, 15], 10000);
+  assert.equal(off.level, 50);
+  assert.equal(C.maxLevel(), 50);
+  context.Format = { buddy: true };
+  assert.equal(C.maxLevel(), 51);
+  const on = C.bestBuild(mon.base, [15, 15, 15], 10000);
+  assert.equal(on.level, 51);
+  assert.ok(on.atk > off.atk && on.hp >= off.hp);
+  const capped = C.bestBuild(mon.base, [0, 15, 15], 1500);
+  assert.ok(capped.cp <= 1500 && capped.level <= 51);
+  context.Format = undefined;
+  assert.equal(C.bestBuild(mon.base, [15, 15, 15], 10000).level, 50);
+}

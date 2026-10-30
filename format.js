@@ -31,6 +31,24 @@
     try { localStorage.setItem(KEY, JSON.stringify({ key, week })); } catch (e) { /* 사생활 보호 모드 등 */ }
   }
 
+  /* 베스트 파트너 — 켜면 최대 레벨이 51. 주소 ?bb=1/0 이 먼저, 없으면 브라우저에 남은 값 */
+  const BUDDY_KEY = 'pogo-buddy';
+  const buddy = (function () {
+    const asked = param('bb');
+    if (asked === '1' || asked === '0') {
+      try { localStorage.setItem(BUDDY_KEY, asked); } catch (e) { /* 사생활 보호 모드 등 */ }
+      return asked === '1';
+    }
+    try { return localStorage.getItem(BUDDY_KEY) === '1'; } catch (e) { return false; }
+  })();
+  function setBuddy(on) {
+    try { localStorage.setItem(BUDDY_KEY, on ? '1' : '0'); } catch (e) { /* 위와 같다 */ }
+    const q = new URLSearchParams(location.search);
+    q.delete('bb');
+    const s = q.toString();
+    location.href = location.pathname + (s ? '?' + s : '') + location.hash;
+  }
+
   const isLeague = f => f.cup === 'all';
   const isMega = f => f.cup === 'mega';
   /* 이번 주 기본은 그 주의 컵 (판타지컵 주면 판타지컵) — 컵이 없으면 일정에 적힌 첫 포맷 */
@@ -137,6 +155,12 @@
     box.className = 'format-pick';
     box.innerHTML = `<span>리그·컵</span><select aria-label="리그·컵 고르기">${options()}</select>`;
     bar.appendChild(box);
+    const bb = document.createElement('label');
+    bb.className = 'format-buddy';
+    bb.title = '베스트 파트너는 포켓몬 레벨이 1 높아져 최대 Lv51까지 올릴 수 있습니다';
+    bb.innerHTML = `<input type="checkbox"${buddy ? ' checked' : ''}><span>베스트 파트너 <small>Lv51</small></span>`;
+    bb.querySelector('input').addEventListener('change', e => setBuddy(e.target.checked));
+    bar.appendChild(bb);
     box.querySelector('select').addEventListener('change', e => go(e.target.value));
 
     const note = sidebar.querySelector('.side-note');
@@ -172,6 +196,7 @@
     cap: current.cp,
     name: current.ko,
     capText: capText(current),
+    buddy,
     isMaster: current.cp >= 10000,
     isLeague: isLeague(current),
     byKey,
