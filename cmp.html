@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="style.css?v=32e1bf20">
+<link rel="stylesheet" href="style.css?v=2e42b64b">
 <script src="theme.js?v=28d57714"></script>
 </head>
 <body>
@@ -78,6 +78,7 @@
 
   <div class="bench">
 
+  <div class="buddy-inline" data-buddy="toggle"></div>
   <section class="pickers">
     <div class="picker cmp-picker" data-side="me">
       <label class="picker-label">내 포켓몬</label>
@@ -162,7 +163,7 @@
     </ul>
     <p class="note">
       공격 실수치 = (종족값 공격 + 공격 개체값) × CPM(레벨) ·
-      CP = ⌊공격 × √방어 × √HP ÷ 10⌋ · 레벨 상한 50 (베스트프렌드 미적용)
+      CP = ⌊공격 × √방어 × √HP ÷ 10⌋ · 레벨 상한 <span data-buddy="level"></span>
     </p>
   </section>
 
@@ -181,9 +182,9 @@
 <script src="data/formats/index.js?v=33ea9ba3"></script>
 <script src="data/seasons.js?v=4e445b58"></script>
 <script src="season.js?v=e5b1f9d5"></script>
-<script src="format.js?v=a3a081f9"></script>
+<script src="format.js?v=708142b9"></script>
 <script src="common.js?v=321f9617"></script>
-<script src="battle-core.js?v=e19828c6"></script>
+<script src="battle-core.js?v=7661c456"></script>
 <script src="cmp.js?v=9fa23a3a"></script>
 </body>
 </html>

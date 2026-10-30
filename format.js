@@ -161,6 +161,15 @@
     bb.innerHTML = `<input type="checkbox"${buddy ? ' checked' : ''}><span>베스트 파트너 <small>Lv51</small></span>`;
     bb.querySelector('input').addEventListener('change', e => setBuddy(e.target.checked));
     bar.appendChild(bb);
+    /* 페이지 본문에도 같은 스위치와 현재 레벨 상한을 보여 준다 (폰에서는 맨 위 바가 작아 놓치기 쉽다) */
+    document.querySelectorAll('[data-buddy="toggle"]').forEach(el => {
+      el.innerHTML = `<label><input type="checkbox"${buddy ? ' checked' : ''}><span>베스트 파트너 <small>레벨 상한 ${buddy ? 51 : 50}</small></span></label>`;
+      el.querySelector('input').addEventListener('change', e => setBuddy(e.target.checked));
+    });
+    document.querySelectorAll('[data-buddy="level"]').forEach(el => { el.textContent = buddy ? '51 (베스트 파트너)' : '50'; });
+    document.querySelectorAll('[data-buddy="levelnote"]').forEach(el => {
+      el.textContent = buddy ? '베스트 파트너를 켠 계산입니다' : '베스트 파트너(레벨 51)는 위 스위치를 켜면 반영됩니다';
+    });
     box.querySelector('select').addEventListener('change', e => go(e.target.value));
 
     const note = sidebar.querySelector('.side-note');

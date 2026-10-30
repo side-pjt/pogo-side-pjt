@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="style.css?v=32e1bf20">
+<link rel="stylesheet" href="style.css?v=2e42b64b">
 <script src="theme.js?v=28d57714"></script>
 </head>
 <body>
@@ -63,6 +63,7 @@
 <main class="wrap">
 
   <div class="bench">
+  <div class="buddy-inline" data-buddy="toggle"></div>
   <section class="picker cmp-picker">
     <label class="picker-label">포켓몬으로 확인하기</label>
     <div class="combo">
@@ -119,8 +120,8 @@
     <ul class="tips">
       <li><strong>무조건 0/15/15가 정답은 아닙니다</strong>
         포켓몬마다 최적 조합이 다릅니다. 위에서 직접 확인하세요</li>
-      <li><strong>레벨 상한 50 기준입니다</strong>
-        베스트프렌드(레벨 51)는 계산에 넣지 않았습니다</li>
+      <li><strong>레벨 상한 <span data-buddy="level"></span> 기준입니다</strong>
+        <span data-buddy="levelnote"></span></li>
       <li><strong>버티는 힘과 차징 우선권은 반대로 갑니다</strong>
         1등 개체는 오래 버티지만 공격이 낮아 CMP에서 집니다.
         <a href="cmp.html">CMP 계산기</a>에서 확인해 보세요</li>
@@ -144,9 +145,9 @@
 <script src="data/formats/index.js?v=33ea9ba3"></script>
 <script src="data/seasons.js?v=4e445b58"></script>
 <script src="season.js?v=e5b1f9d5"></script>
-<script src="format.js?v=a3a081f9"></script>
+<script src="format.js?v=708142b9"></script>
 <script src="common.js?v=321f9617"></script>
-<script src="battle-core.js?v=e19828c6"></script>
+<script src="battle-core.js?v=7661c456"></script>
 <script src="ivs.js?v=f2c9a7c4"></script>
 </body>
 </html>
