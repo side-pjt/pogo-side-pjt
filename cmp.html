@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="style.css?v=77577b63">
+<link rel="stylesheet" href="style.css?v=b2162deb">
 <script src="theme.js?v=28d57714"></script>
 </head>
 <body>
@@ -70,15 +70,17 @@
       <b>상대 개체값을 아시나요?</b>
       <span>몰라요: 가능한 모든 개체와 비교 · 알아요: 직접 입력해서 1:1 비교</span>
     </div>
+    <div class="side-stack">
     <div class="modes" role="group" aria-label="상대 개체값을 아는지">
       <button type="button" class="mode-btn" data-mode="spread" aria-pressed="true">몰라요</button>
       <button type="button" class="mode-btn" data-mode="head" aria-pressed="false">알아요</button>
+    </div>
+      <div class="buddy-inline" data-buddy="toggle"></div>
     </div>
   </div>
 
   <div class="bench">
 
-  <div class="buddy-inline" data-buddy="toggle"></div>
   <section class="pickers">
     <div class="picker cmp-picker" data-side="me">
       <label class="picker-label">내 포켓몬</label>
