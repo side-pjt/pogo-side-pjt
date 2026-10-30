@@ -12,6 +12,10 @@
   /* CP 10000 = 상한 없음. 개체값은 높을수록 좋아서 15/15/15 가 기본이다 */
   const isUncapped = lg => lg.cap >= 10000;
   const MAX_LEVEL = 50;
+  /* 베스트 파트너(Best Buddy) 는 레벨이 1 더 올라가 51까지 쓴다. 켜짐 여부는 format.js 가 정한다 */
+  const BUDDY_BONUS = 1;
+  const buddyOn = () => !!(root.Format && root.Format.buddy);
+  const maxLevel = () => MAX_LEVEL + (buddyOn() ? BUDDY_BONUS : 0);
   const STAB = 1.2;
   const PVP_BONUS = 1.2999999523162841796875; // PvPoke DamageMultiplier.BONUS
   const SHADOW_ATTACK = 1.2;
@@ -45,9 +49,9 @@
     };
   }
 
-  function bestBuild(base, ivs, cap = 1500, maxLevel = MAX_LEVEL) {
+  function bestBuild(base, ivs, cap = 1500, levelLimit = maxLevel()) {
     let out = null;
-    for (let level = 1; level <= maxLevel; level += 0.5) {
+    for (let level = 1; level <= levelLimit; level += 0.5) {
       const stats = statsAt(base, ivs, level);
       if (stats.cp > cap) break;
       out = Object.assign({ level, ivs: ivs.slice() }, stats);
@@ -59,7 +63,7 @@
 
   function allBuilds(mon, leagueKey) {
     const lg = league(leagueKey);
-    const cacheKey = `${mon.id}:${lg.cap}`;   // CP 상한이 같은 컵끼리는 결과가 같다
+    const cacheKey = `${mon.id}:${lg.cap}:${maxLevel()}`;   // CP 상한이 같은 컵끼리는 결과가 같다
     if (buildCache.has(cacheKey)) return buildCache.get(cacheKey);
     const out = [];
     for (let atk = 0; atk < 16; atk++)
@@ -144,6 +148,7 @@
     league,
     isUncapped,
     MAX_LEVEL,
+    maxLevel,
     ENERGY_CAP,
     BOOST_MIN,
     BOOST_MAX,
