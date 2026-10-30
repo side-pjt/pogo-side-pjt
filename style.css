@@ -1531,9 +1531,6 @@ main { gap: 18px; }
 .buddy-inline label { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--line, #3a3358); border-radius: 10px; font-size: 13px; cursor: pointer; }
 .buddy-inline input { margin: 0; accent-color: var(--accent, currentColor); }
 .buddy-inline small { color: var(--ink-dim); }
-.format-buddy { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-.format-buddy input { margin: 0; accent-color: var(--accent, currentColor); }
-.format-buddy small { color: var(--ink-dim); }
 .format-pick { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px; }
 .format-pick select {
   width: 100%; min-width: 0; background: var(--panel-2); color: var(--ink);
