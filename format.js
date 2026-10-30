@@ -155,13 +155,7 @@
     box.className = 'format-pick';
     box.innerHTML = `<span>리그·컵</span><select aria-label="리그·컵 고르기">${options()}</select>`;
     bar.appendChild(box);
-    const bb = document.createElement('label');
-    bb.className = 'format-buddy';
-    bb.title = '베스트 파트너는 포켓몬 레벨이 1 높아져 최대 Lv51까지 올릴 수 있습니다';
-    bb.innerHTML = `<input type="checkbox"${buddy ? ' checked' : ''}><span>베스트 파트너 <small>Lv51</small></span>`;
-    bb.querySelector('input').addEventListener('change', e => setBuddy(e.target.checked));
-    bar.appendChild(bb);
-    /* 페이지 본문에도 같은 스위치와 현재 레벨 상한을 보여 준다 (폰에서는 맨 위 바가 작아 놓치기 쉽다) */
+    /* 개체값과 관련된 페이지(개체값·CMP·배틀)는 본문에 스위치와 현재 레벨 상한을 둔다 */
     document.querySelectorAll('[data-buddy="toggle"]').forEach(el => {
       el.innerHTML = `<label><input type="checkbox"${buddy ? ' checked' : ''}><span>베스트 파트너 <small>레벨 상한 ${buddy ? 51 : 50}</small></span></label>`;
       el.querySelector('input').addEventListener('change', e => setBuddy(e.target.checked));
