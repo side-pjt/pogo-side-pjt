@@ -13,7 +13,7 @@
 <meta name="theme-color" content="#0a0613">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="style.css?v=77577b63">
+<link rel="stylesheet" href="style.css?v=b2162deb">
 <script src="theme.js?v=28d57714"></script>
 </head>
 <body>
@@ -56,6 +56,7 @@
       <button type="button" class="battle-tab" data-mode="multi" role="tab" aria-selected="false"><b>메타 비교</b><small>한 마리 일괄 분석</small></button>
       <button type="button" class="battle-tab" data-mode="matrix" role="tab" aria-selected="false"><b>그룹 비교</b><small>팀 대 팀 분석</small></button>
     </div>
+    <div class="side-stack">
     <label class="league-label">리그
       <select id="battle-league">
         <option value="great">슈퍼리그 · CP 1500</option>
@@ -63,10 +64,11 @@
         <option value="master">마스터리그 · 무제한</option> -->
       </select>
     </label>
+      <div class="buddy-inline" data-buddy="toggle"></div>
+    </div>
     <p id="battle-mode-help" class="battle-mode-help">두 포켓몬의 기술·실드·개체값을 직접 정해 1대1 결과를 봅니다.</p>
   </div>
 
-  <div class="buddy-inline" data-buddy="toggle"></div>
   <section id="mode-single" class="battle-pane" role="tabpanel">
     <div class="battle-pickers">
       <article class="battle-picker picker" data-side="left">
