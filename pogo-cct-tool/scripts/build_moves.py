@@ -29,10 +29,10 @@ KO_FALLBACK = {
 
 
 # PvPoke 게임마스터에 아직 없는 새 기술 — 올라오면(같은 id가 생기면) 이 항목은 쓰지 않는다.
-# 출처: Dittobase(나이트헤드+ 트레이너 배틀 위력 55·에너지 35). 공식 공지는 위력 55만 밝혔다 — 에너지는 확인되면 고친다.
+# 출처: 위력 55는 공식 공지, 에너지 45는 사용자 확인(Dittobase는 35라 했으나 틀렸다). 공식 수치가 확인되면 고친다.
 PROVISIONAL_MOVES = {
     'NIGHT_SHADE_PLUS': {'moveId': 'NIGHT_SHADE_PLUS', 'name': 'Night Shade+', 'type': 'ghost', 'power': 55,
-                         'energy': 35, 'energyGain': 0, 'cooldown': 500, 'turns': 1, 'nameKo': '나이트헤드+'},
+                         'energy': 45, 'energyGain': 0, 'cooldown': 500, 'turns': 1, 'nameKo': '나이트헤드+'},
 }
 # 임시 기술을 쓸 수 있는 종 {종 id: [기술 id]}
 PROVISIONAL_LEARNERS = {'sableye_mega': ['NIGHT_SHADE_PLUS']}
