@@ -121,9 +121,45 @@ function setupSearch(root, onPick) {
   // 고른 뒤 포커스를 풀어야 같은 입력창을 다시 눌렀을 때 focus가 다시 발생하고(모바일은 키보드도 내려감) 목록이 열린다
   function pick(p) { input.value = ''; close(); input.blur(); onPick(p); }
 
+  /* 목록을 한 번에 300개 만들면 입력할 때마다 버벅인다 — 처음엔 PAGE개만 그리고 스크롤하면 이어 붙인다.
+     한 번 만든 항목(사진 포함)은 다시 쓴다. 지웠다 새로 만들면 사진이 다시 떠서 깜빡인다 */
+  const PAGE = 40;
+  const rows = new Map();
+  let rendered = 0;
+
+  function row(p) {
+    let li = rows.get(p);
+    if (!li) {
+      li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      li.innerHTML = `<img src="images/${encodeURIComponent(p.img)}" alt="" width="34" height="34" decoding="async">` +
+        `<span class="r-name">${nameHtml(p)}</span><span class="r-sub">${rankText(p)}</span>`;
+      rows.set(p, li);
+    }
+    return li;
+  }
+
+  function appendMore() {
+    const end = Math.min(shown.length, rendered + PAGE);
+    const frag = document.createDocumentFragment();
+    for (let i = rendered; i < end; i++) {
+      const li = row(shown[i]);
+      li.id = `${listId}-option-${i}`;
+      li.dataset.i = i;
+      li.setAttribute('aria-selected', String(i === cursor));
+      frag.append(li);
+    }
+    list.append(frag);
+    rendered = end;
+  }
+
   function renderList(items) {
     shown = items;
-    list.innerHTML = '';
+    rendered = 0;
+    cursor = -1;
+    input.removeAttribute('aria-activedescendant');
+    list.replaceChildren();
+    list.scrollTop = 0;
     if (!items.length) {
       const li = document.createElement('li');
       li.className = 'empty';
@@ -131,34 +167,37 @@ function setupSearch(root, onPick) {
       li.setAttribute('aria-disabled', 'true');
       li.textContent = '검색 결과 없음';
       list.append(li);
-      list.hidden = false;
-      input.setAttribute('aria-expanded', 'true');
-      return;
-    }
-    items.forEach((p, i) => {
-      const li = document.createElement('li');
-      li.id = `${listId}-option-${i}`;
-      li.setAttribute('role', 'option');
-      li.setAttribute('aria-selected', String(i === cursor));
-      li.innerHTML = `<img src="images/${encodeURIComponent(p.img)}" alt="" loading="lazy">` +
-        `<span class="r-name"></span><span class="r-sub">${rankText(p)}</span>`;
-      li.querySelector('.r-name').innerHTML = nameHtml(p);
-      li.addEventListener('mousedown', e => { e.preventDefault(); pick(p); });
-      list.append(li);
-    });
+    } else appendMore();
     list.hidden = false;
     input.setAttribute('aria-expanded', 'true');
   }
 
+  // 항목마다 따로 다는 대신 목록 하나에서 받는다
+  list.addEventListener('mousedown', e => {
+    const li = e.target.closest('li[data-i]');
+    if (!li) return;
+    e.preventDefault();
+    pick(shown[Number(li.dataset.i)]);
+  });
+  list.addEventListener('scroll', () => {
+    if (rendered < shown.length && list.scrollTop + list.clientHeight >= list.scrollHeight - 120) appendMore();
+  }, { passive: true });
+
   function moveCursor(d) {
     if (list.hidden || !shown.length) return;
     cursor = (cursor + d + shown.length) % shown.length;
+    while (rendered <= cursor) appendMore();   // 아직 안 그린 곳까지 가면(맨 끝으로 돌아가기 등) 거기까지 그린다
     [...list.children].forEach((li, i) => li.setAttribute('aria-selected', String(i === cursor)));
     input.setAttribute('aria-activedescendant', list.children[cursor].id);
     list.children[cursor].scrollIntoView({ block: 'nearest' });
   }
 
-  input.addEventListener('input', () => renderList(search(input.value, LIST_LIMIT)));
+  // 빠르게 치면 프레임마다 한 번만 다시 그린다
+  let frame = 0;
+  input.addEventListener('input', () => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => renderList(search(input.value, LIST_LIMIT)));
+  });
   input.addEventListener('focus', () => {
     renderList(search(input.value, LIST_LIMIT));
     // 폰: 키보드가 올라온 뒤 입력창을 위로 올려서 아래 목록이 키보드에 가리지 않게 한다
