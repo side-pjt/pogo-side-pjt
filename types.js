@@ -196,11 +196,15 @@ function specialList(ids, recIds) {
   return ids.map(id => {
     const [name, type, power, energy, , buff] = MOVES[id];
     const taps = g ? tapCounts(g, energy).join('-') : '';
+    // '+' 기술(메가 전용)은 이름 뒤에 +를 붙이고, 메가 레벨별 위력을 보여 준다
+    const plus = window.BattleCore && BattleCore.isPlusMove(id);
+    const label = plus && !/\+$/.test(name) ? name + '+' : name;
+    const mega = plus ? `메가 레벨별 위력 ${BattleCore.MEGA_LEVELS.map(m => Number((power * m.mult).toFixed(1))).join(' · ')}` : '';
     return `<li class="mv-item">
       <i class="mv-dot ty ty-${type}" title="${esc(TKO(type))}"></i>
-      <span class="mv-name">${esc(name)}${tags(id, type, recIds.includes(id))}</span>
+      <span class="mv-name">${esc(label)}${tags(id, type, recIds.includes(id))}</span>
       <span class="mv-stats"><b>${power}</b><small>위력</small><b class="cost">${energy}</b><small>에너지</small><b>${f1(power / energy)}</b><small>DPE</small></span>
-      ${taps || buff ? `<span class="mv-sub">${taps ? `노말어택 ${taps}회` : ''}${buffText(buff)}</span>` : ''}
+      ${taps || buff || mega ? `<span class="mv-sub">${taps ? `노말어택 ${taps}회` : ''}${buffText(buff)}${mega ? `${taps || buff ? '<br>' : ''}${mega}` : ''}</span>` : ''}
     </li>`;
   }).join('');
 }
