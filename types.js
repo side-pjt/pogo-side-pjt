@@ -200,11 +200,12 @@ function specialList(ids, recIds) {
     const plus = window.BattleCore && BattleCore.isPlusMove(id);
     const label = plus && !/\+$/.test(name) ? name + '+' : name;
     const mega = plus ? `메가 레벨별 위력 ${BattleCore.MEGA_LEVELS.map(m => Number((power * m.mult).toFixed(1))).join(' · ')}` : '';
-    return `<li class="mv-item">
+    return `<li class="mv-item sp">
       <i class="mv-dot ty ty-${type}" title="${esc(TKO(type))}"></i>
       <span class="mv-name">${esc(label)}${tags(id, type, recIds.includes(id))}</span>
+      ${taps ? `<span class="mv-taps" title="이 기술을 쓰려면 노말어택을 몇 번씩 써야 하는지">노말어택 ${taps}회</span>` : ''}
       <span class="mv-stats"><b>${power}</b><small>위력</small><b class="cost">${energy}</b><small>에너지</small><b>${f1(power / energy)}</b><small>DPE</small></span>
-      ${taps || buff || mega ? `<span class="mv-sub">${taps ? `노말어택 ${taps}회` : ''}${buffText(buff)}${mega ? `${taps || buff ? '<br>' : ''}${mega}` : ''}</span>` : ''}
+      ${buff || mega ? `<span class="mv-sub">${buffText(buff)}${mega ? `${buff ? '<br>' : ''}${mega}` : ''}</span>` : ''}
     </li>`;
   }).join('');
 }
