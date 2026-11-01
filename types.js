@@ -199,7 +199,13 @@ function specialList(ids, recIds) {
     // '+' 기술(메가 전용)은 이름 뒤에 +를 붙이고, 메가 레벨별 위력을 보여 준다
     const plus = window.BattleCore && BattleCore.isPlusMove(id);
     const label = plus && !/\+$/.test(name) ? name + '+' : name;
-    const mega = plus ? `메가 레벨별 위력 ${BattleCore.MEGA_LEVELS.map(m => Number((power * m.mult).toFixed(1))).join(' · ')}` : '';
+    // 위력이 레벨마다 커지니 DPE(위력÷에너지)도 같이 커진다
+    const lv = BattleCore.MEGA_LEVELS;
+    const mega = plus ? `<table class="mv-mega" aria-label="메가 레벨별 위력과 DPE">
+      <tr><th>메가 레벨</th>${lv.map(m => `<td>${m.name}</td>`).join('')}</tr>
+      <tr><th>위력</th>${lv.map(m => `<td><b>${Number((power * m.mult).toFixed(1))}</b></td>`).join('')}</tr>
+      <tr><th>DPE</th>${lv.map(m => `<td><b>${f1(power * m.mult / energy)}</b></td>`).join('')}</tr>
+    </table>` : '';
     return `<li class="mv-item sp">
       <i class="mv-dot ty ty-${type}" title="${esc(TKO(type))}"></i>
       <span class="mv-name">${esc(label)}${tags(id, type, recIds.includes(id))}</span>
