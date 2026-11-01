@@ -228,6 +228,33 @@ def korean_name(p, labels):
     return out.strip()
 
 
+def mega_label(sid, name):
+    """메가·원시 id(chandelure_mega, charizard_mega_x, kyogre_primal)에 한글 표기를 붙인다.
+    PoGoMate 라벨표에 없는 새 메가를 PvPoke 로 채울 때도 '메가 샹델라'로 나오게 한다.
+    메가가 아니면 이름 그대로."""
+    m = MEGA_ID.search(sid)
+    if not m:
+        return name
+    out = ('원시 ' if m.group(1) == 'primal' else '메가 ') + name
+    return out + (' ' + m.group(2)[-1].upper() if m.group(2) else '')
+
+
+def fix_mega_names(rows):
+    """이미 받아 둔 행 중 이름에 메가·원시 표기가 빠진 것을 바로잡는다 (파일명도 이름을 따른다)."""
+    fixed = []
+    for r in rows:
+        if not MEGA_ID.search(r['id']) or r.get('isShadow'):
+            continue
+        want = mega_label(r['id'], r.get('nameKo') or r['displayKo'])
+        if r['displayKo'] == want:
+            continue
+        ext = r['file'].rsplit('.', 1)[1]
+        r['displayKo'] = want
+        r['file'] = 'pokemon/%s_%s.%s' % (r['id'], FS_UNSAFE.sub('', want), ext)
+        fixed.append(r['id'])
+    return fixed
+
+
 def backfill_names(data):
     """그림자 엔트리에는 nameJa가 비어 있다 — 같은 종의 일반 폼에서 채운다."""
     ja = {}
@@ -339,7 +366,7 @@ def extra_rows(data, shadow_prefix):
              'imageForm': re.match(r'pm\d+(?:\.f([A-Z_]+))?\.', key).group(1),
              'types': [t for t in g['types'] if t != 'none']}
         rows.append(sprite_row(p, None, key, POKEMINERS_SPRITES + key, 'png',
-                               display_ko=(shadow_prefix if shadow else '') + name))
+                               display_ko=(shadow_prefix if shadow else '') + mega_label(base, name)))
     return rows
 
 
@@ -503,6 +530,9 @@ def offline(out_dir, force):
     # extra_rows 는 id(이미 있는 종)와 dex·nameKo(같은 도감번호 한글명)만 본다
     extra = extra_rows(rows, '그림자 ')
     rows += extra
+    fixed = fix_mega_names(rows)
+    if fixed:
+        print('    메가·원시 표기를 바로잡은 종: %s' % ', '.join(fixed))
     if extra:
         print('    PvPoke·PokeMiners로 채운 새 종: %s' % ', '.join(r['id'] for r in extra))
     else:

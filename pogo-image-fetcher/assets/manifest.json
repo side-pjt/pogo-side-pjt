@@ -32595,7 +32595,7 @@
    "name": "Chandelure (Mega)",
    "nameKo": "샹델라",
    "nameJa": null,
-   "displayKo": "샹델라",
+   "displayKo": "메가 샹델라",
    "dex": 609,
    "isShadow": false,
    "isMega": false,
@@ -32605,7 +32605,7 @@
     "fire"
    ],
    "level": null,
-   "file": "pokemon/chandelure_mega_샹델라.png",
+   "file": "pokemon/chandelure_mega_메가샹델라.png",
    "spriteKey": "pm609.fMEGA.icon.png",
    "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm609.fMEGA.icon.png"
   }
