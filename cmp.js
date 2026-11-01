@@ -86,6 +86,19 @@ function setupSide(root, side) {
     });
   });
 
+  // 개체 순위 — 몇 등 개체인지 적으면 그 개체값으로 바꾼다
+  const rankInp = root.querySelector('.iv-rank-input');
+  rankInp.addEventListener('input', () => {
+    const n = ivRankInput(rankInp);
+    if (n == null || !S[side].mon) return;
+    S[side].ivs = ivsOfRank(S[side].mon, n);
+    S[side].preset = 'custom';
+    root.querySelectorAll('.iv-input').forEach((inp, i) => { inp.value = S[side].ivs[i]; });
+    paintSide(root, side);
+    render();
+  });
+  rankInp.addEventListener('change', () => { rankInp.value = S[side].mon ? ivRankOf(S[side].mon, S[side].ivs) || '' : ''; });
+
   // 직접 입력 슬라이더
   root.querySelectorAll('.iv-input').forEach((inp, i) => {
     inp.addEventListener('input', () => {
@@ -129,6 +142,8 @@ function paintSide(root, side) {
     root.querySelectorAll('.iv-input').forEach((inp, i) => { inp.value = b.ivs[i]; });
     st.ivs = b.ivs.slice();
   }
+  const rankInp = root.querySelector('.iv-rank-input');
+  if (document.activeElement !== rankInp) rankInp.value = ivRankOf(st.mon, b.ivs) || '';   // 적는 중에는 건드리지 않는다
   root.querySelector('.iv-summary').textContent =
     `${b.ivs.join(' / ')} · Lv${b.level} · CP ${b.cp} · 공격 ${b.atk.toFixed(1)}`;
 }

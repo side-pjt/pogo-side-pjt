@@ -135,6 +135,7 @@
         <div class="iv-row battle-ivs">
           ${['공격', '방어', 'HP'].map((label, i) => `<label>${label}<input type="number" class="battle-iv" data-index="${i}" min="0" max="15" value="${data.ivs[i]}"></label>`).join('')}
         </div>
+        <label class="iv-rank">개체 순위 <input type="number" class="iv-rank-input battle-rank" min="1" max="4096" step="1" inputmode="numeric" placeholder="1~4096" aria-label="개체 순위" value="${ivRankOf(mon, build.ivs) || ''}"><small>등 · 1등이 가장 좋은 개체</small></label>
         <p class="battle-build">Lv${build.level} · 공격 ${build.atk.toFixed(1)} · 방어 ${build.def.toFixed(1)} · HP ${build.hp}</p>
         <div class="battle-inline">
           <label>전략<select data-field="strategy">${option('optimal', '효율 우선', data.strategy)}${option('nuke', '강한 기술', data.strategy)}${option('farm', '에너지 모으기', data.strategy)}</select></label>
@@ -163,18 +164,29 @@
         syncUrl();
         runBattle();
       });
-      root.addEventListener('input', event => updateControl(side, event.target));
-      root.addEventListener('change', event => updateControl(side, event.target));
+      root.addEventListener('input', event => updateControl(side, event.target, event.type));
+      root.addEventListener('change', event => updateControl(side, event.target, event.type));
     });
   }
 
-  function updateControl(side, target) {
+  function updateControl(side, target, type) {
     const data = state[side];
     const field = target.dataset.field;
     if (target.classList.contains('battle-iv')) {
       data.ivs[Number(target.dataset.index)] = Math.max(0, Math.min(15, Number(target.value) || 0));
       data.preset = 'custom';
       paintSide(side);
+    } else if (target.classList.contains('battle-rank')) {
+      // 몇 등 개체인지 적으면 그 개체값으로. 다시 그리면 입력칸이 새로 만들어지니 적던 칸으로 포커스를 돌려 준다
+      if (!data.mon) return;
+      if (type === 'change') { target.value = ivRankOf(data.mon, data.ivs) || ''; return; }   // 다 적고 나가면 실제 순위로 정리
+      const n = ivRankInput(target);
+      if (n == null) return;
+      data.ivs = ivsOfRank(data.mon, n);
+      data.preset = 'custom';
+      paintSide(side);
+      const again = document.querySelector(`.battle-picker[data-side="${side}"] .battle-rank`);
+      if (again) { again.value = Math.min(n, 4096); again.focus(); }
     } else if (field === 'fast') data.fast = target.value;
     else if (field === 'charged0') data.charged[0] = target.value;
     else if (field === 'charged1') data.charged[1] = target.value;

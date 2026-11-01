@@ -62,6 +62,8 @@ function paint() {
   const mine = findBuild(mon, myIvs);
 
   document.querySelectorAll('.iv-input').forEach((inp, i) => { inp.value = myIvs[i]; });
+  const rankInp = document.querySelector('.iv-rank-input');
+  if (document.activeElement !== rankInp) rankInp.value = mine ? mine.rank : '';   // 적는 중에는 건드리지 않는다
 
   const pct = b => ((b.product / best.product) * 100).toFixed(1);
 
@@ -217,6 +219,15 @@ document.querySelectorAll('.iv-input').forEach((inp, i) => {
     paint();
   });
 });
+
+const rankInput = document.querySelector('.iv-rank-input');
+rankInput.addEventListener('input', () => {
+  const n = ivRankInput(rankInput);
+  if (n == null || !mon) return;
+  myIvs = ivsOfRank(mon, n);
+  paint();
+});
+rankInput.addEventListener('change', () => { rankInput.value = mon ? ivRankOf(mon, myIvs) || '' : ''; });
 
 document.querySelectorAll('.iv-quick').forEach(btn => {
   btn.addEventListener('click', () => {

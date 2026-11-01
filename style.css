@@ -403,12 +403,15 @@ table.cct td.on { outline: 2px solid var(--accent); outline-offset: -2px; }
   flex: 1 1 86px; display: grid; gap: 4px;
   font-size: 12px; color: var(--ink-dim);
 }
-.iv-input {
+.iv-input, .iv-rank-input {
   width: 100%; padding: 7px 9px;
   background: var(--panel-2); color: var(--ink);
   border: var(--bw) solid var(--line); border-radius: calc(8px * var(--rk)); font: inherit; font-size: 16px;
 }
-.iv-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.iv-rank { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 13px; color: var(--ink-dim); flex-wrap: wrap; }
+.iv-rank-input { width: 104px; }
+.iv-rank small { font-size: 12px; }
+.iv-input:focus, .iv-rank-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .iv-summary { margin-top: 9px; font-size: 12px; color: var(--ink-dim); }
 
 .cmp-head {
