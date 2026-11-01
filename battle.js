@@ -22,7 +22,7 @@
 
   function makeSide() {
     return {
-      mon: null, preset: 'rank1', ivs: [0, 15, 15], fast: null, charged: [],
+      mon: null, megaLevel: 1, preset: 'rank1', ivs: [0, 15, 15], fast: null, charged: [],
       shields: 1, strategy: 'optimal', bait: true, boosts: { atk: 0, def: 0 }, actions: [],
     };
   }
@@ -30,7 +30,8 @@
   const option = (value, label, selected) =>
     `<option value="${esc(value)}"${value === selected ? ' selected' : ''}>${esc(label)}</option>`;
   const move = id => C.moveFromRow(id, MOVE[id]);
-  const moveName = id => MOVE[id] ? MOVE[id][0] : id;
+  // '+' 기술은 이름이 기본 기술과 같아서(폭발펀치 / 폭발펀치+) 뒤에 +를 붙여 구분한다
+  const moveName = id => MOVE[id] ? MOVE[id][0] + (C.isPlusMove(id) && !/\+$/.test(MOVE[id][0]) ? '+' : '') : id;
   const typeName = id => T.ko[id] || id;
 
   function availablePokemon() {
@@ -84,7 +85,7 @@
       mon: data.mon,
       build: getBuild(side),
       fast: move(data.fast),
-      charged: data.charged.map(move),
+      charged: data.charged.map(id => C.megaMove(move(id), data.megaLevel)),
       shields: data.shields,
       strategy: data.strategy,
       bait: data.bait,
@@ -95,6 +96,44 @@
 
   function buildConfig() {
     return { left: sideInput('left'), right: sideInput('right'), seed: 1 };
+  }
+
+  /* 메가 레벨 — '+' 기술을 쓸 수 있는 메가 포켓몬만. 기술 위력과 상대에게 주는 피해를 레벨별로 보여 준다 */
+  function megaBox(data, set) {
+    if (!data.mon.mega || !set[1].some(C.isPlusMove)) return '';
+    return `<div class="battle-mega">
+        <label>메가 레벨<select data-field="megaLevel">${C.MEGA_LEVELS.map(m =>
+          option(String(m.level), `${m.level} · ${m.name}`, String(data.megaLevel))).join('')}</select></label>
+        <div class="mega-dmg" aria-live="polite"></div>
+        <p class="mega-note">배율 ×1.0~1.3은 비공식(커뮤니티 관찰값)</p>
+      </div>`;
+  }
+
+  function fighterOf(side) {
+    const data = state[side];
+    return { stats: getBuild(side), types: data.mon.types, boosts: data.boosts, shadow: !!data.mon.shadow };
+  }
+
+  function renderMegaDamage() {
+    for (const side of ['left', 'right']) {
+      const box = document.querySelector(`.battle-picker[data-side="${side}"] .mega-dmg`);
+      if (!box) continue;
+      const data = state[side], foe = state[side === 'left' ? 'right' : 'left'];
+      const plus = data.charged.filter(C.isPlusMove);
+      if (!plus.length) { box.innerHTML = '<small>스페셜에서 \'+\' 기술을 고르면 메가 레벨별 위력이 나옵니다.</small>'; continue; }
+      const me = fighterOf(side);
+      const rows = plus.map(id => {
+        const cells = C.MEGA_LEVELS.map(m => {
+          const mv = C.megaMove(move(id), m.level);
+          const dmg = foe.mon ? C.damage(me, fighterOf(side === 'left' ? 'right' : 'left'), mv) : null;
+          const on = m.level === data.megaLevel ? ' class="on"' : '';
+          return `<td${on}>${Number(mv.power.toFixed(1))}${dmg == null ? '' : `<b>${dmg}</b>`}</td>`;
+        }).join('');
+        return `<tr><th>${esc(moveName(id))}<small>위력 / 피해</small></th>${cells}</tr>`;
+      }).join('');
+      const head = `<tr><th></th>${C.MEGA_LEVELS.map(m => `<td class="lv${m.level === data.megaLevel ? ' on' : ''}">${m.name}</td>`).join('')}</tr>`;
+      box.innerHTML = `<table class="mega-table"><thead>${head}</thead><tbody>${rows}</tbody></table>`;
+    }
   }
 
   function paintSide(side) {
@@ -126,6 +165,7 @@
         <label>스페셜<select data-field="charged1">${chargedOptions.replace(`value="${data.charged[1]}"`, `value="${data.charged[1]}" selected`)}</select></label>
         <label>실드<select data-field="shields">${[0, 1, 2].map(n => option(String(n), `${n}개`, String(data.shields))).join('')}</select></label>
       </div>
+      ${megaBox(data, set)}
       <details class="battle-more"${moreOpen ? ' open' : ''}>
         <summary>개체값 · 전략</summary>
         <div class="preset-row">
@@ -191,6 +231,7 @@
     else if (field === 'charged0') data.charged[0] = target.value;
     else if (field === 'charged1') data.charged[1] = target.value;
     else if (field === 'shields') data.shields = Number(target.value);
+    else if (field === 'megaLevel') data.megaLevel = Number(target.value);
     else if (field === 'strategy') data.strategy = target.value;
     else if (field === 'bait') data.bait = target.checked;
     else if (field === 'atkBoost') data.boosts.atk = Number(target.value);
@@ -210,6 +251,7 @@
       urlSet(side, data.mon && data.mon.id);
       urlSet(`${side}m`, data.mon ? [data.fast].concat(data.charged).join('.') : null);
       urlSet(`${side}s`, data.mon ? data.shields : null);
+      urlSet(`${side}ml`, data.mon && data.megaLevel > 1 ? data.megaLevel : null);
       urlSet(`${side}iv`, data.mon && data.preset === 'custom' ? data.ivs.join('.') : null);
     }
   }
@@ -218,6 +260,8 @@
     const id = urlGet(side);
     const mon = ALL.find(item => item.id === id) || fallback;
     state[side].mon = mon;
+    const ml = Number(urlGet(`${side}ml`));
+    state[side].megaLevel = ml >= 1 && ml <= C.MEGA_LEVELS.length ? ml : 1;
     const defaults = defaultsFor(mon);
     const ids = (urlGet(`${side}m`) || '').split('.');
     state[side].fast = SETS[mon.id][0].includes(ids[0]) ? ids[0] : defaults.fast;
@@ -231,6 +275,7 @@
   }
 
   function runBattle(config = buildConfig()) {
+    renderMegaDamage();
     if (!config.left.mon || !config.right.mon) {
       document.getElementById('battle-result').innerHTML = '<p class="placeholder">양쪽 포켓몬을 고르면 결과가 나옵니다.</p>';
       document.getElementById('battle-timeline-panel').hidden = true;

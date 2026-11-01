@@ -1314,6 +1314,19 @@ main { gap: 18px; }
 /* 탭 안의 카드들이 서로 붙지 않게 — 다른 페이지 main 과 같은 간격 */
 .battle-pane { display: grid; gap: 18px; min-width: 0; }
 .battle-pane > * { min-width: 0; }
+.battle-mega { display: grid; gap: 6px; margin-top: 8px; padding: 7px 10px; border: 1px dashed var(--line); border-radius: calc(10px * var(--rk)); font-size: 11px; color: var(--ink-dim); }
+.battle-mega label { display: flex; align-items: center; gap: 6px; }
+.battle-mega select { padding: 3px 6px; font-size: 12px; min-height: 0; }
+.mega-note { margin: 0; font-size: 10px; opacity: .8; }
+.mega-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.mega-table th { text-align: left; font-weight: 700; font-size: 11px; color: var(--ink); width: 30%; padding: 2px 4px 2px 0; vertical-align: middle; line-height: 1.2; }
+.mega-table th small { display: block; font-weight: 400; font-size: 10px; color: var(--ink-dim); }
+.mega-table td { padding: 2px 3px; text-align: center; border: 1px solid var(--line); line-height: 1.25; }
+.mega-table td b { display: block; color: var(--ink); }
+.mega-table td.lv { border: 0; font-size: 10px; color: var(--ink-dim); padding-bottom: 0; }
+.mega-table td.on { border-color: var(--accent); color: var(--accent); }
+.mega-table td.lv.on { border: 0; }
+.mega-table td.on b { color: var(--accent); }
 .battle-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px 16px; padding: 16px 18px; }
 .battle-tabs { display: flex; gap: 8px; }
 .battle-tab, .timeline-controls button {

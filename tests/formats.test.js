@@ -103,3 +103,17 @@ for (const p of context.POKEMON) {
   if (!/_(mega|primal)(_[xyz])?$/.test(p.id) || /_shadow/.test(p.id)) continue;
   assert.match(p.ko, /^(메가|원시) /, `메가·원시 표기 없음: ${p.id} → ${p.ko}`);
 }
+
+/* 메가 레벨: '+' 기술만 위력이 레벨 배율로 커진다 */
+{
+  const plus = { id: 'NIGHT_SHADE_PLUS', power: 55 };
+  assert.deepEqual(Array.from(C.MEGA_LEVELS, m => m.mult), [1, 1.1, 1.2, 1.3]);
+  assert.equal(C.megaMove(plus, 1).power, 55);
+  assert.ok(Math.abs(C.megaMove(plus, 4).power - 71.5) < 1e-9);
+  const plain = { id: 'NIGHT_SHADE', power: 70 };
+  assert.equal(C.megaMove(plain, 4), plain);   // '+' 기술이 아니면 그대로
+  assert.equal(plus.power, 55);                // 원본은 바꾸지 않는다
+  // 나이트헤드+ 는 메가 깜까미가 쓸 수 있는 기술로 들어 있다 (PvPoke에 올라오기 전에는 임시 값)
+  assert.ok(context.MOVES.NIGHT_SHADE_PLUS, 'NIGHT_SHADE_PLUS 기술 없음');
+  assert.ok(context.MOVESETS.sableye_mega[1].includes('NIGHT_SHADE_PLUS'));
+}

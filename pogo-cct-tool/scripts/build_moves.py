@@ -28,6 +28,16 @@ KO_FALLBACK = {
 }
 
 
+# PvPoke 게임마스터에 아직 없는 새 기술 — 올라오면(같은 id가 생기면) 이 항목은 쓰지 않는다.
+# 출처: Dittobase(나이트헤드+ 트레이너 배틀 위력 55·에너지 35). 공식 공지는 위력 55만 밝혔다 — 에너지는 확인되면 고친다.
+PROVISIONAL_MOVES = {
+    'NIGHT_SHADE_PLUS': {'moveId': 'NIGHT_SHADE_PLUS', 'name': 'Night Shade+', 'type': 'ghost', 'power': 55,
+                         'energy': 35, 'energyGain': 0, 'cooldown': 500, 'turns': 1, 'nameKo': '나이트헤드+'},
+}
+# 임시 기술을 쓸 수 있는 종 {종 id: [기술 id]}
+PROVISIONAL_LEARNERS = {'sableye_mega': ['NIGHT_SHADE_PLUS']}
+
+
 def format_movesets():
     """data/formats/*.js(build_data.py 가 먼저 만든다)의 추천 기술 → {종: (노말들, 스페셜들)}.
 
@@ -48,8 +58,14 @@ def format_movesets():
 
 def main():
     gm = json.load(urllib.request.urlopen(GM, timeout=60))
+    for k, m in PROVISIONAL_MOVES.items():
+        if not any(x['moveId'] == k for x in gm['moves']):
+            gm['moves'].append(m)
+            print('    [임시] 게임마스터에 없는 기술 사용: %s' % k)
     ko = {m['moveId']: m.get('nameKo') or KO_FALLBACK.get(m['moveId']) or m['name']
           for m in json.load(open(KO, encoding='utf-8'))['moves']}
+    for k, m in PROVISIONAL_MOVES.items():
+        ko.setdefault(k, m['nameKo'])
     rec = {p['speciesId']: p['recommended'] for p in json.load(open(REC, encoding='utf-8'))['pokemon']}
     ids = set(re.findall(r'"id":"([a-z0-9_]+)","ko"', DATA.read_text(encoding='utf-8')))
     mon = {p['speciesId']: p for p in gm['pokemon']}
@@ -63,6 +79,7 @@ def main():
             continue
         fast = [m for m in p.get('fastMoves', []) if m in mv]
         chg = [m for m in p.get('chargedMoves', []) if m in mv]
+        chg += [m for m in PROVISIONAL_LEARNERS.get(i, []) if m in mv and m not in chg]
         r = rec.get(i) or {}
         extra_fast, extra_chg = fmt.get(i, (set(), set()))
         extra_fast = extra_fast | ({r['fast']} if r.get('fast') else set())

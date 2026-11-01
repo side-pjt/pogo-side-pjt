@@ -23,6 +23,20 @@
   const ENERGY_CAP = 100;
   const BOOST_MIN = -4;
   const BOOST_MAX = 4;
+  /* 메가 레벨 — 메가 진화 상태에서만 쓰는 '+' 기술(나이트헤드+ 등)의 위력은 메가 레벨이 오를수록 커진다.
+     배율은 공식 발표가 없어 커뮤니티(Dittobase) 관찰값이다 — 공식 수치가 나오면 여기만 고친다 */
+  const MEGA_LEVELS = [
+    { level: 1, name: '기본', mult: 1 },
+    { level: 2, name: '하이', mult: 1.1 },
+    { level: 3, name: '맥스', mult: 1.2 },
+    { level: 4, name: '슈퍼맥스', mult: 1.3 },
+  ];
+  const isPlusMove = id => /_PLUS$/.test(id || '');
+  function megaMove(mv, level) {
+    if (!mv || !isPlusMove(mv.id)) return mv;
+    const row = MEGA_LEVELS.find(x => x.level === level) || MEGA_LEVELS[0];
+    return Object.assign({}, mv, { power: mv.power * row.mult });
+  }
   const CPM_TABLE = () => root.CPM || [];
   const TYPE_DATA = () => root.TYPES || { chart: {} };
   const buildCache = new Map();
@@ -149,6 +163,9 @@
     isUncapped,
     MAX_LEVEL,
     maxLevel,
+    MEGA_LEVELS,
+    isPlusMove,
+    megaMove,
     ENERGY_CAP,
     BOOST_MIN,
     BOOST_MAX,
