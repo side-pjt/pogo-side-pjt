@@ -1,5 +1,5 @@
 {
- "count": 354,
+ "count": 355,
  "moves": [
   {
    "moveId": "ACID",
@@ -2702,6 +2702,19 @@
    "turns": null,
    "seconds": null,
    "power": 70,
+   "energyGain": null,
+   "energy": 45
+  },
+  {
+   "moveId": "NIGHT_SHADE_PLUS",
+   "name": "Night Shade+",
+   "nameKo": "나이트헤드",
+   "nameDisplay": "나이트헤드",
+   "type": "ghost",
+   "kind": "charged",
+   "turns": null,
+   "seconds": null,
+   "power": 55,
    "energyGain": null,
    "energy": 45
   },
