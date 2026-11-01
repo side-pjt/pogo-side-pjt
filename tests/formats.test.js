@@ -97,3 +97,9 @@ console.log(`formats tests passed (${FORMATS.length} formats)`);
   context.Format = undefined;
   assert.equal(C.bestBuild(mon.base, [15, 15, 15], 10000).level, 50);
 }
+
+/* 메가·원시 폼은 한글 이름에 '메가'·'원시'가 붙는다 (PoGoMate에 아직 없는 새 메가를 채울 때 빠진 적이 있다: 샹델라) */
+for (const p of context.POKEMON) {
+  if (!/_(mega|primal)(_[xyz])?$/.test(p.id) || /_shadow/.test(p.id)) continue;
+  assert.match(p.ko, /^(메가|원시) /, `메가·원시 표기 없음: ${p.id} → ${p.ko}`);
+}
