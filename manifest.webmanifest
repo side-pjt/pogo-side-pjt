@@ -1,0 +1,21 @@
+{
+  "name": "GO배틀리그 가이드",
+  "short_name": "GO배틀리그",
+  "description": "포켓몬 GO 슈퍼·하이퍼·마스터리그와 시즌 컵을 위한 CCT·CMP 계산기, 배틀 시뮬레이터, 시즌 일정",
+  "lang": "ko",
+  "start_url": "./index.html?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a0613",
+  "theme_color": "#0a0613",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "배틀 시뮬", "url": "./battle.html" },
+    { "name": "개체값 고르기", "url": "./ivs.html" },
+    { "name": "시즌 일정", "url": "./season.html" }
+  ]
+}

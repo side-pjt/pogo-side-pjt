@@ -120,3 +120,8 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildPicker);
   else buildPicker();
 })();
+
+/* 앱 설치 — 서비스 워커를 등록한다(sw.js). 설치할 수 없는 환경(file:// 등)에서는 조용히 넘어간다 */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
