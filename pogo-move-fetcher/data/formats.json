@@ -1,5 +1,5 @@
 {
- "count": 12,
+ "count": 13,
  "formats": [
   {
    "key": "great",
@@ -62,24 +62,14 @@
    "count": 472
   },
   {
-   "key": "fantasy-1500",
-   "cup": "fantasy",
+   "key": "laic2027gbl-1500",
+   "cup": "laic2027gbl",
    "cp": 1500,
-   "title": "Fantasy Cup",
-   "ko": "판타지컵: 슈퍼리그 버전",
-   "nameSource": "official",
-   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/fantasy/overall/rankings-1500.json",
-   "count": 197
-  },
-  {
-   "key": "halloweenmega-1500",
-   "cup": "halloweenmega",
-   "cp": 1500,
-   "title": "Mega Halloween Cup",
-   "ko": "메가 핼러윈컵",
-   "nameSource": "rule",
-   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/halloweenmega/overall/rankings-1500.json",
-   "count": 378
+   "title": "LAIC 2027 Cup (GBL)",
+   "ko": "LAIC 2027 Cup (GBL)",
+   "nameSource": "fallback",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/laic2027gbl/overall/rankings-1500.json",
+   "count": 776
   },
   {
    "key": "laic2027-1500",
@@ -120,6 +110,26 @@
    "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/colormega/overall/rankings-1500.json",
    "count": 493
+  },
+  {
+   "key": "fantasy-1500",
+   "cup": "fantasy",
+   "cp": 1500,
+   "title": "Fantasy Cup",
+   "ko": "판타지컵: 슈퍼리그 버전",
+   "nameSource": "official",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/fantasy/overall/rankings-1500.json",
+   "count": 197
+  },
+  {
+   "key": "halloweenmega-1500",
+   "cup": "halloweenmega",
+   "cp": 1500,
+   "title": "Mega Halloween Cup",
+   "ko": "메가 핼러윈컵",
+   "nameSource": "rule",
+   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/halloweenmega/overall/rankings-1500.json",
+   "count": 378
   }
  ],
  "skipped": [
