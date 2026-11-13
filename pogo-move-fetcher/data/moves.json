@@ -1,5 +1,5 @@
 {
- "count": 355,
+ "count": 357,
  "moves": [
   {
    "moveId": "ACID",
@@ -2589,6 +2589,19 @@
    "energy": 50
   },
   {
+   "moveId": "MOONBLAST_PLUS",
+   "name": "Moonblast+",
+   "nameKo": "문포스",
+   "nameDisplay": "문포스",
+   "type": "fairy",
+   "kind": "charged",
+   "turns": null,
+   "seconds": null,
+   "power": 80,
+   "energyGain": null,
+   "energy": 50
+  },
+  {
    "moveId": "MOONGEIST_BEAM",
    "name": "Moongeist Beam",
    "nameKo": "섀도레이",
@@ -3744,6 +3757,19 @@
    "power": 65,
    "energyGain": null,
    "energy": 35
+  },
+  {
+   "moveId": "SOAK",
+   "name": "Soak",
+   "nameKo": null,
+   "nameDisplay": "Soak",
+   "type": "water",
+   "kind": "fast",
+   "turns": 2,
+   "seconds": 1.0,
+   "power": 6,
+   "energyGain": 8,
+   "energy": null
   },
   {
    "moveId": "SOLAR_BEAM",

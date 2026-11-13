@@ -39,7 +39,7 @@
    "ko": "슈퍼리그: 메가 버전",
    "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/mega/overall/rankings-1500.json",
-   "count": 1212
+   "count": 1217
   },
   {
    "key": "mega-2500",
@@ -79,7 +79,7 @@
    "ko": "2026 GO 챔피언십LA 컵",
    "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/laic2027/overall/rankings-1500.json",
-   "count": 828
+   "count": 835
   },
   {
    "key": "little-500",

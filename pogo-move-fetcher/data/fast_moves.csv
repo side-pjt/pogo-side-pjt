@@ -11,6 +11,7 @@
 1,0.5,CUT,풀베기,Cut,normal,3,2
 1,0.5,SCRATCH,할퀴기,Scratch,normal,3,4
 1,0.5,LICK,핥기,Lick,ghost,3,3
+2,1.0,SOAK,,Soak,water,6,8
 2,1.0,STEEL_WING,강철날개,Steel Wing,steel,7,5
 2,1.0,METAL_SOUND,금속음,Metal Sound,steel,5,8
 2,1.0,SUCKER_PUNCH,기습,Sucker Punch,dark,8,7
