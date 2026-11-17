@@ -20,7 +20,11 @@ season, checks = S.build(ko, en, URL, S.KeyResolver(offline=True))
 
 # 손으로 적은 시즌과 주차·포맷 key 가 같다
 old = S.existing_seasons()['go-battle-league-twilight-trails']
-assert S.diff_weeks(old, season) == [], S.diff_weeks(old, season)
+# 단, 공지 표의 오타 한 줄은 일부러 고쳐 두었다 — 공지는 11/18–25 (11/17–18 이 비고 11/24–25 가 겹침),
+# seasons.js 는 7일 간격 11/17–24. 이 차이만 있어야 하고, 공지가 고쳐지면 이 예외도 지운다.
+TYPO = ['공지에만 있음: 2026-11-18T13:00:00-08:00 – 2026-11-25T13:00:00-08:00 ultra, mega-10000, laic2027gbl-1500',
+        'seasons.js 에만 있음: 2026-11-17T13:00:00-08:00 – 2026-11-24T13:00:00-08:00 ultra, mega-10000, laic2027gbl-1500']
+assert S.diff_weeks(old, season) == TYPO, S.diff_weeks(old, season)
 assert season['id'] == 'twilight-trails'
 assert season['ko'] == 'GO배틀리그: 황혼의 여정'
 assert season['en'] == 'GO Battle League: Twilight Trails'
@@ -42,7 +46,7 @@ assert any('겹칩니다' in n for n in season['notes'])
 # 출전 조건 요약
 assert season['rules']['colormega-1500'] == 'CP 1,500 이하 · 메가진화 가능 · 풀·불꽃·물·전기 타입만'
 assert season['rules']['willpower-1500'].endswith('가디안·조로아·조로아크 사용 불가')
-assert '14종 금지' in season['rules']['laic2027-1500']
+assert '14종 금지' in season['rules']['laic2027gbl-1500']
 assert 'great' not in season['rules'] and 'mega-1500' not in season['rules']
 
 # seasons.js 에 붙일 블록은 build_data.py 가 읽는 '한 주 한 줄' 형식이다

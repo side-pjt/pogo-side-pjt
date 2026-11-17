@@ -66,8 +66,8 @@
    "cup": "laic2027gbl",
    "cp": 1500,
    "title": "LAIC 2027 Cup (GBL)",
-   "ko": "LAIC 2027 Cup (GBL)",
-   "nameSource": "fallback",
+   "ko": "2026 GO 챔피언십LA 컵",
+   "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/laic2027gbl/overall/rankings-1500.json",
    "count": 776
   },
@@ -76,7 +76,7 @@
    "cup": "laic2027",
    "cp": 1500,
    "title": "LAIC 2027 Championship Series Cup",
-   "ko": "2026 GO 챔피언십LA 컵",
+   "ko": "2026 GO 챔피언십LA 컵: 현장 대회 규칙(메가 가능)",
    "nameSource": "override",
    "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/laic2027/overall/rankings-1500.json",
    "count": 835
