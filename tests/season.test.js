@@ -54,8 +54,8 @@ assert.equal(S.kstDate('2026-11-10T13:00:00-08:00', true), '11/11(수) 06:00');
 }
 
 /* 공지 오타(11/18–25) 를 바로잡아 주는 7일 간격으로 이어진다 — 11/17 13:00(태평양)에 하이퍼리그 주가 열린다 */
-assert.deepEqual(keys(at('2026-11-17T20:59:59Z')), ['great', 'mega-2500', 'laic2027-1500']);
-assert.deepEqual(keys(at('2026-11-17T21:00:00Z')), ['ultra', 'mega-10000', 'laic2027-1500']);
+assert.deepEqual(keys(at('2026-11-17T20:59:59Z')), ['great', 'mega-2500', 'laic2027gbl-1500']);
+assert.deepEqual(keys(at('2026-11-17T21:00:00Z')), ['ultra', 'mega-10000', 'laic2027gbl-1500']);
 assert.deepEqual(keys(at('2026-11-25T00:00:00Z')), ['master', 'catch-1500']);
 
 /* 한 시즌 안의 주는 비거나 겹치지 않고 이어져야 한다 (공지 날짜 오타를 잡는다) */
