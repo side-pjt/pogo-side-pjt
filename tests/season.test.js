@@ -53,14 +53,16 @@ assert.equal(S.kstDate('2026-11-10T13:00:00-08:00', true), '11/11(수) 06:00');
   assert.equal(state.season.id, 'twilight-trails');
 }
 
-/* 공지 일정이 겹치는 11/24–25 는 두 주의 포맷을 합친다 (laic 는 한 번만) */
-assert.deepEqual(keys(at('2026-11-25T00:00:00Z')), ['ultra', 'mega-10000', 'laic2027-1500', 'master', 'catch-1500']);
-/* 비어 있는 11/17–18 은 열린 포맷이 없고 다음 주를 알려 준다 */
-{
-  const gap = at('2026-11-18T00:00:00Z');
-  assert.deepEqual(keys(gap), []);
-  assert.equal(gap.next.start, '2026-11-18T13:00:00-08:00');
-}
+/* 공지 오타(11/18–25) 를 바로잡아 주는 7일 간격으로 이어진다 — 11/17 13:00(태평양)에 하이퍼리그 주가 열린다 */
+assert.deepEqual(keys(at('2026-11-17T20:59:59Z')), ['great', 'mega-2500', 'laic2027-1500']);
+assert.deepEqual(keys(at('2026-11-17T21:00:00Z')), ['ultra', 'mega-10000', 'laic2027-1500']);
+assert.deepEqual(keys(at('2026-11-25T00:00:00Z')), ['master', 'catch-1500']);
+
+/* 한 시즌 안의 주는 비거나 겹치지 않고 이어져야 한다 (공지 날짜 오타를 잡는다) */
+for (const season of S.list)
+  season.weeks.forEach((w, i) => {
+    if (i) assert.equal(w.start, season.weeks[i - 1].end, `주가 이어지지 않음: ${w.start}`);
+  });
 
 /* 등록된 시즌이 다 끝나면 stale — 화면이 '다음 시즌 일정 미등록' 을 띄운다 */
 /* 날짜는 마지막 시즌 끝 다음 날 — 새 시즌이 자동으로 더해져도 깨지지 않게 */
