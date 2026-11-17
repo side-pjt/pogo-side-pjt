@@ -2,8 +2,8 @@
  "source": "https://pogomate.com/battles/great-league",
  "rankSource": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/all/overall/rankings-1500.json",
  "league": "all",
- "top": 1587,
- "count": 1587,
+ "top": 1589,
+ "count": 1589,
  "pokemon": [
   {
    "rank": 1,
@@ -32608,6 +32608,48 @@
    "file": "pokemon/chandelure_mega_메가샹델라.png",
    "spriteKey": "pm609.fMEGA.icon.png",
    "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm609.fMEGA.icon.png"
+  },
+  {
+   "rank": null,
+   "pogomateRank": null,
+   "id": "goodra_hisuian",
+   "name": "Goodra (Hisuian)",
+   "nameKo": "미끄래곤",
+   "nameJa": null,
+   "displayKo": "미끄래곤",
+   "dex": 706,
+   "isShadow": false,
+   "isMega": false,
+   "form": "HISUIAN",
+   "types": [
+    "dragon",
+    "steel"
+   ],
+   "level": null,
+   "file": "pokemon/goodra_hisuian_미끄래곤.png",
+   "spriteKey": "pm706.fHISUIAN.icon.png",
+   "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm706.fHISUIAN.icon.png"
+  },
+  {
+   "rank": null,
+   "pogomateRank": null,
+   "id": "sliggoo_hisuian",
+   "name": "Sliggoo (Hisuian)",
+   "nameKo": "미끄네일",
+   "nameJa": null,
+   "displayKo": "미끄네일",
+   "dex": 705,
+   "isShadow": false,
+   "isMega": false,
+   "form": "HISUIAN",
+   "types": [
+    "dragon",
+    "steel"
+   ],
+   "level": null,
+   "file": "pokemon/sliggoo_hisuian_미끄네일.png",
+   "spriteKey": "pm705.fHISUIAN.icon.png",
+   "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm705.fHISUIAN.icon.png"
   }
  ]
 }
