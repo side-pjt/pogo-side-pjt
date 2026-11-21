@@ -24,7 +24,8 @@ KO_FALLBACK = {
     'BEAK_BLAST': '부리캐논', 'CHILLING_WATER': '찬물끼얹기', 'DIVE': '다이빙',
     'DRUM_BEATING': '드럼어택', 'GIGATON_HAMMER': '거대해머', 'GLAIVE_RUSH': '대검돌격',
     'MIND_BLOWN': '깜짝헤드', 'PLASMA_FISTS': '플라스마피스트', 'PYRO_BALL': '화염볼',
-    'SNIPE_SHOT': '노려맞히기',
+    'SNIPE_SHOT': '노려맞히기', 'KOWTOW_CLEAVE': '도각참', 'SECRET_SWORD': '신비의칼',
+    'SOAK': '물붓기', 'SPRINGTIDE_STORM': '봄의폭풍',
 }
 
 
