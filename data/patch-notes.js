@@ -3,9 +3,9 @@
 // 위력은 트레이너 배틀(= GO배틀리그) 기준 수치. 에너지 증감은 공지에 수치가 없어 방향만 적는다.
 window.PATCHES = [
   {
-    id: 'latest',
+    id: 'daydream-destinations',
     title: '배틀 밸런스 패치',
-    note: '공식 패치 노트 화면을 한글로 옮긴 것입니다. 적용 날짜는 화면에 없어 적지 않았습니다.',
+    note: '꿈꾸던 길 시즌 시작(한국시간 2026-12-02 06:00)에 적용됩니다. 공식 공지 기준입니다.',
     // 기술 변경 — fast: 노말어택, 나머지는 스페셜어택
     moveChanges: [
       { ko: '돌떨구기', en: 'Rock Throw', type: 'rock', kind: 'fast', changes: ['에너지 획득량 감소'] },
@@ -33,6 +33,13 @@ window.PATCHES = [
       ['armaldo', '아말도', '스톤샤워', 'charged', 'rock'],
       ['carracosta', '늑골라', '스톤샤워', 'charged', 'rock'],
       ['eelektrik', '저리릴', '아쿠아테일', 'charged', 'water'],
+      ['eelektrik', '저리릴', '덤벼들기', 'charged', 'bug'],
+      ['eelektross', '저리더프', '덤벼들기', 'charged', 'bug'],
+      ['flaaffy', '보송송', '전기쇼크', 'fast', 'electric'],
+      ['eelektrik', '저리릴', '볼트체인지', 'fast', 'electric'],
+      ['boltund', '펄스멍', '볼트체인지', 'fast', 'electric'],
+      ['electabuzz', '에레브', '와일드볼트', 'charged', 'electric'],
+      ['golem_alolan', '알로라 딱구리', '깨트리기', 'charged', 'fighting'],
       ['hariyama', '하리뭉', '찬물끼얹기', 'charged', 'water'],
       ['abomasnow', '눈설왕', '찬물끼얹기', 'charged', 'water'],
       ['drampa', '할비롱', '열풍', 'charged', 'fire'],
@@ -43,8 +50,7 @@ window.PATCHES = [
       ['starmie', '아쿠스타', '트리플악셀', 'charged', 'ice'],
       ['flamigo', '꼬이밍고', '트리플악셀', 'charged', 'ice'],
       ['litleo', '레오꼬', '스피드스타', 'charged', 'normal'],
-      ['pyroar', '화염레오 (모습 1)', '스피드스타', 'charged', 'normal'],
-      ['pyroar', '화염레오 (모습 2)', '스피드스타', 'charged', 'normal'],
+      ['pyroar', '화염레오', '스피드스타', 'charged', 'normal'],
       ['eelektross', '저리더프', '사이코팽', 'charged', 'psychic'],
       ['tyrunt', '티고라스', '사이코팽', 'charged', 'psychic'],
       ['boltund', '펄스멍', '사이코팽', 'charged', 'psychic'],
