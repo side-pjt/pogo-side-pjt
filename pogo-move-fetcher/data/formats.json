@@ -96,10 +96,10 @@
    "cup": "catch",
    "cp": 1500,
    "title": "Catch Cup",
-   "ko": "캐치컵",
-   "nameSource": "official",
-   "source": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/catch/overall/rankings-1500.json",
-   "count": 995
+   "ko": "메가 캐치컵: 슈퍼리그 버전",
+   "nameSource": "override",
+   "source": "mega-1500 순위에서 mythical 태그 제외 (PvPoke 에 메가 캐치컵 순위가 없어 직접 만듦)",
+   "count": 1203
   },
   {
    "key": "colormega-1500",
@@ -143,5 +143,12 @@
   "Master Premier Cup",
   "Custom"
  ],
- "noRanking": []
+ "noRanking": [
+  "mountain-1500",
+  "holiday-1500",
+  "fighting-1500",
+  "jungle-1500",
+  "love-1500",
+  "2027goeuic-1500"
+ ]
 }
