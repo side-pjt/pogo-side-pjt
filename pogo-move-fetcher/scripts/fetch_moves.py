@@ -26,6 +26,7 @@
 import argparse
 import csv
 import datetime
+import http.client
 import json
 import pathlib
 import re
@@ -68,10 +69,15 @@ FORMAT_NAME_KO = {
     'mega-1500': '슈퍼리그: 메가 버전',
     'mega-2500': '하이퍼리그: 메가 버전',
     'colormega-1500': '메가 4색컵: 슈퍼리그 버전',
+    'catch-1500': '메가 캐치컵: 슈퍼리그 버전',
     # 같은 컵의 PvPoke 순위가 둘이다. GO배틀리그는 메가진화 불가(gbl), 메가 허용은 현장 대회 규칙(laic2027)
     'laic2027gbl-1500': '2026 GO 챔피언십LA 컵',
     'laic2027-1500': '2026 GO 챔피언십LA 컵: 현장 대회 규칙(메가 가능)',
 }
+# 메가 캐치컵(공지: CP 1,500 이하 · 메가진화 가능 · 환상 포켓몬 불가 · 이번 시즌에 잡은 포켓몬만).
+# PvPoke 의 'catch' 컵은 메가를 뺀 일반 캐치컵이라 이 컵에 맞지 않는다. 메가 캐치컵 순위가 올라오기 전까지는
+# 메가 슈퍼리그(mega-1500) 순위에서 환상(mythical) 태그만 빼서 쓴다. '이번 시즌에 잡은' 조건은 데이터로 알 수 없다.
+DERIVED_FORMATS = {'catch-1500': {'from': 'mega-1500', 'exclude_tag': 'mythical'}}
 MEGA_ID = re.compile(r'_(mega|primal)(_[xyz])?$')
 
 
@@ -101,8 +107,13 @@ def season_formats():
 
 def fetch_json(url):
     req = urllib.request.Request(url, headers={'User-Agent': UA})
-    with urllib.request.urlopen(req, timeout=120) as r:
-        return json.load(r)
+    for attempt in range(5):
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                return json.loads(r.read())
+        except http.client.IncompleteRead:       # 큰 파일이 중간에 끊기는 일이 있다 — 다시 받는다
+            if attempt == 4:
+                raise
 
 
 def load_locale(lang):
@@ -244,6 +255,18 @@ def load_format_rankings(formats):
     return out, missing
 
 
+def derive_formats(formats, gm):
+    """DERIVED_FORMATS 에 적힌 컵의 순위를 다른 포맷 순위에서 거른 것으로 바꾼다."""
+    tags = {p['speciesId']: set(p.get('tags', [])) for p in gm['pokemon']}
+    by_key = {f['key']: f for f in formats}
+    for key, rule in DERIVED_FORMATS.items():
+        f, base = by_key.get(key), by_key.get(rule['from'])
+        if not f or not base:
+            continue
+        f['ranking'] = [e for e in base['ranking'] if rule['exclude_tag'] not in tags.get(e['speciesId'], ())]
+        f['source'] = '%s 순위에서 %s 태그 제외 (PvPoke 에 메가 캐치컵 순위가 없어 직접 만듦)' % (rule['from'], rule['exclude_tag'])
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=str(pathlib.Path(__file__).resolve().parent.parent / 'data'),
@@ -270,6 +293,7 @@ def main():
     print('3/4 PvPoke 포맷별 랭킹(추천 기술셋)…')
     formats, skipped = load_formats(gm, extra)
     formats, no_ranking = load_format_rankings(formats)
+    derive_formats(formats, gm)
     name_ko = format_namer(en, ko)
     for f in formats:
         f['ko'], f['nameSource'] = name_ko(f)
