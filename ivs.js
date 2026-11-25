@@ -85,7 +85,8 @@ function paint() {
   const hundo = findBuild(mon, [15, 15, 15]);
   const mine = findBuild(mon, myIvs);
 
-  document.querySelectorAll('.iv-input').forEach((inp, i) => { inp.value = myIvs[i]; });
+  // 치는 중인 칸은 덮어쓰지 않는다 (하한 10 이상인 종에서 '1' 을 치고 '2' 를 이어 칠 수 없게 된다)
+  document.querySelectorAll('.iv-input').forEach((inp, i) => { if (inp !== document.activeElement) inp.value = myIvs[i]; });
   const rankInp = document.querySelector('.iv-rank-input');
   if (document.activeElement !== rankInp) rankInp.value = mine ? mine.rank : '';   // 적는 중에는 건드리지 않는다
 
@@ -238,8 +239,17 @@ setupSearch(document.querySelector('.cmp-picker'), m => { setMon(m); paint(); ur
 document.querySelector('.cmp-picker .clear').addEventListener('click', () => { setMon(null); paint(); urlSet('p', null); });
 
 document.querySelectorAll('.iv-input').forEach((inp, i) => {
+  // 치는 중에는 하한 미만·빈칸이면 기다린다. 하한으로 올리는 건 칸을 벗어날 때(change)
   inp.addEventListener('input', () => {
-    myIvs[i] = Math.max(floorSel, Math.min(15, parseInt(inp.value, 10) || 0));
+    const n = parseInt(inp.value, 10);
+    if (Number.isNaN(n) || n < floorSel) return;
+    myIvs[i] = Math.min(15, n);
+    paint();
+  });
+  inp.addEventListener('change', () => {
+    const n = parseInt(inp.value, 10);
+    myIvs[i] = Math.max(floorSel, Math.min(15, Number.isNaN(n) ? floorSel : n));
+    inp.value = myIvs[i];
     paint();
   });
 });
