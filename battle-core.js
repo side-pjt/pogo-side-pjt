@@ -75,14 +75,17 @@
     return out;
   }
 
-  function allBuilds(mon, leagueKey) {
+  /* floor: 개체값 하한 (레이드·리서치 10 등). 안 주면 종의 기본값(mon.ivFloor)을 쓴다.
+     순위는 하한 안의 조합끼리 매긴다 — 레이드로만 얻는 종은 0/15/15 같은 개체가 나올 수 없다. */
+  function allBuilds(mon, leagueKey, floor) {
     const lg = league(leagueKey);
-    const cacheKey = `${mon.id}:${lg.cap}:${maxLevel()}`;   // CP 상한이 같은 컵끼리는 결과가 같다
+    const lo = Math.max(0, Math.min(15, floor == null ? (mon.ivFloor || 0) : floor));
+    const cacheKey = `${mon.id}:${lg.cap}:${maxLevel()}:${lo}`;   // CP 상한이 같은 컵끼리는 결과가 같다
     if (buildCache.has(cacheKey)) return buildCache.get(cacheKey);
     const out = [];
-    for (let atk = 0; atk < 16; atk++)
-      for (let def = 0; def < 16; def++)
-        for (let hp = 0; hp < 16; hp++)
+    for (let atk = lo; atk < 16; atk++)
+      for (let def = lo; def < 16; def++)
+        for (let hp = lo; hp < 16; hp++)
           out.push(bestBuild(mon.base, [atk, def, hp], lg.cap));
     out.sort((a, b) => b.product - a.product || b.atk - a.atk);
     out.forEach((build, index) => { build.rank = index + 1; });
