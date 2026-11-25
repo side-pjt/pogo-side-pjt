@@ -29,6 +29,20 @@ MOVE_TABLE = ROOT / 'pogo-move-fetcher' / 'data' / 'moves.json'
 FORMAT_LIST = ROOT / 'pogo-move-fetcher' / 'data' / 'formats.json'
 MEGA_ID = re.compile(r'_(mega|primal)(_[xyz])?$')
 
+# 레이드·리서치로만 얻는 종은 개체값이 전부 10 이상이다. 전설·환상·울트라비스트 태그로 판별한다.
+# 야생에서도 나오는 전설(wildlegendary)과 그림자(로켓단)는 하한이 달라 뺀다.
+# 환상이어도 신비한 상자로 얻는 멜탄·멜메탈은 하한이 없다.
+RAID_FLOOR = 10
+RAID_TAGS = {'legendary', 'mythical', 'ultrabeast'}
+NO_FLOOR_IDS = {'meltan', 'melmetal'}
+
+
+def iv_floor(species_id, tags):
+    t = set(tags)
+    if not (t & RAID_TAGS) or t & {'wildlegendary', 'shadow'} or species_id in NO_FLOOR_IDS:
+        return 0
+    return RAID_FLOOR
+
 # CMP 계산용 — 종족값과 CPM 표는 PvPoke 소스에서 직접 받는다.
 # 공격 실수치 = (종족값공격 + 공격개체값) x CPM(레벨)  — 1,152종 전부 재현 검증 완료.
 PVPOKE_GM = 'https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/gamemaster.json'
@@ -66,6 +80,7 @@ def load_cmp_source():
     """
     gm = json.loads(fetch(PVPOKE_GM))
     base = {p['speciesId']: p['baseStats'] for p in gm['pokemon'] if 'baseStats' in p}
+    floors = {p['speciesId']: iv_floor(p['speciesId'], p.get('tags', [])) for p in gm['pokemon']}
     # PvPoke 기본 개체값: defaultIVs['cp1500'] = [레벨, 공격, 방어, HP]. CP별로 [공격, 방어, HP]만 남긴다.
     # 메가 폼에 '메가 에디션 기본값' 프리셋으로 쓴다.
     pv_iv = {}
@@ -81,7 +96,7 @@ def load_cmp_source():
     cpms = [float(x) for x in m.group(1).split(',')]
     if len(cpms) < 100:
         raise SystemExit('CPM 표가 너무 짧습니다 (%d개)' % len(cpms))
-    return base, cpms, pv_iv
+    return base, cpms, pv_iv, floors
 
 
 def load_type_chart():
@@ -192,7 +207,7 @@ def main():
     moves = {m['moveId']: m for m in load(MOVE_TABLE)['moves']}
 
     print('CMP용 종족값·CPM 표 받는 중…')
-    base_stats, cpms, pv_iv = load_cmp_source()
+    base_stats, cpms, pv_iv, floors = load_cmp_source()
     print('  종족값 %d종 / CPM %d개 (레벨 1~%g)'
           % (len(base_stats), len(cpms), 1 + (len(cpms) - 1) / 2))
 
@@ -237,6 +252,7 @@ def main():
             'img': pathlib.PurePosixPath(a['file']).name,
             'fast': fast,
             'base': [bs['atk'], bs['def'], bs['hp']],   # CMP 계산용 종족값
+            **({'ivFloor': floors[a['id']]} if floors.get(a['id']) else {}),   # 개체값 하한 (레이드 전용 종)
         })
     # 순서는 의미 없다 (화면이 포맷 순위로 정렬한다). diff 가 안정되게 수집기 순서를 그대로 둔다.
 

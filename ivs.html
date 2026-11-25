@@ -62,7 +62,7 @@
   <div class="wrap">
     <h1>개체값 고르기</h1>
     <p class="sub">CP 상한이 있는 리그에서 공격이 낮은 개체가 좋은 이유</p>
-    <div class="meta"><span><em class="fmt" data-format="cap">CP 1500</em> 제한</span><span>4,096조합 전수 계산</span></div>
+    <div class="meta"><span><em class="fmt" data-format="cap">CP 1500</em> 제한</span><span>개체값 전수 계산</span></div>
   </div>
 </header>
 
@@ -99,6 +99,8 @@
         <label>방어 <input type="number" class="iv-input" min="0" max="15" step="1"></label>
         <label>HP <input type="number" class="iv-input" min="0" max="15" step="1"></label>
       </div>
+      <label class="iv-rank">얻은 방법 <select id="iv-floor" aria-label="얻은 방법(개체값 하한)"></select></label>
+      <p class="iv-grade-note" id="iv-floor-note"></p>
       <label class="iv-rank">개체 순위 <input type="number" class="iv-rank-input" min="1" max="4096" step="1" inputmode="numeric" placeholder="1~4096" aria-label="개체 순위"><small>등 (1등이 가장 좋은 개체)</small></label>
     </div>
   </section>
@@ -150,13 +152,13 @@
 </div><!-- /content -->
 </div><!-- /shell -->
 
-<script src="data/data.js?v=f8ccdac3"></script>
-<script src="data/formats/index.js?v=48f68b8c"></script>
+<script src="data/data.js?v=5b63f864"></script>
+<script src="data/formats/index.js?v=16c77b2c"></script>
 <script src="data/seasons.js?v=092717da"></script>
 <script src="season.js?v=e5b1f9d5"></script>
 <script src="format.js?v=6209904f"></script>
-<script src="common.js?v=2c73c40c"></script>
-<script src="battle-core.js?v=5f1146f6"></script>
-<script src="ivs.js?v=c3139286"></script>
+<script src="common.js?v=e6d5e591"></script>
+<script src="battle-core.js?v=8b8ea836"></script>
+<script src="ivs.js?v=95052408"></script>
 </body>
 </html>
