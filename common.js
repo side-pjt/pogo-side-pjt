@@ -69,14 +69,14 @@ function monFromUrl(key) {
 }
 
 /* 개체 순위 ↔ 개체값. '몇 등 개체'로 적거나 읽는다.
-   순위는 지금 리그(·베스트 파트너) 기준 4,096조합 중 스탯곱 등수 — PvPoke·개체값 고르기 페이지와 같다 */
-function ivRankOf(mon, ivs) {
+   순위는 지금 리그(·베스트 파트너) 기준 개체값 하한 안의 조합(보통 4,096개) 중 스탯곱 등수 — PvPoke·개체값 고르기 페이지와 같다 */
+function ivRankOf(mon, ivs, floor) {
   const key = ivs.join(',');
-  const hit = BattleCore.allBuilds(mon).find(b => b.ivs.join(',') === key);
+  const hit = BattleCore.allBuilds(mon, undefined, floor).find(b => b.ivs.join(',') === key);
   return hit ? hit.rank : null;
 }
-function ivsOfRank(mon, rank) {
-  const all = BattleCore.allBuilds(mon);
+function ivsOfRank(mon, rank, floor) {
+  const all = BattleCore.allBuilds(mon, undefined, floor);
   const n = Math.max(1, Math.min(all.length, Math.round(rank) || 1));
   return all[n - 1].ivs.slice();
 }

@@ -10,10 +10,24 @@
    스탯곱(공격 x 방어 x HP)이 클수록 오래 버틴다. 1등 개체는 이 값이 최대인 조합이다.
 ------------------------------------------------------------------ */
 
-/* 4096조합 전수 탐색 → 스탯곱 내림차순 */
+/* 개체값 하한 안의 조합 전수 탐색 → 스탯곱 내림차순. 하한 없으면 4,096조합 */
 function ranked(mon) {
-  return BattleCore.allBuilds(mon);
+  return BattleCore.allBuilds(mon, undefined, floorSel);
 }
+
+/* 얻은 방법에 따른 개체값 하한. 고르기 전에는 종의 기본값(레이드 전용 종은 10) */
+let floorSel = 0;
+const FLOOR_OPTIONS = [
+  [0, '제한 없음 (야생·교환 등)'],
+  [4, '날씨 부스트 야생'],
+  [10, '레이드·리서치·알'],
+  [12, '럭키 교환'],
+];
+function setMon(m) {
+  mon = m;
+  floorSel = m ? (m.ivFloor || 0) : 0;
+}
+const countText = n => n.toLocaleString('ko-KR');
 
 function findBuild(mon, ivs) {
   const key = ivs.join(',');
@@ -48,16 +62,26 @@ function paint() {
 
   // 메가 폼만: PvPoke 기본 개체값 빠른 선택
   const pvBtn = document.getElementById('iv-pv');
-  if (mon.pvIv) {
+  if (mon.pvIv && mon.pvIv.every(v => v >= floorSel)) {
     pvBtn.hidden = false;
     pvBtn.dataset.ivs = mon.pvIv.join('/');
     pvBtn.textContent = 'PvPoke 기본 ' + mon.pvIv.join(' · ');
   } else {
     pvBtn.hidden = true;
   }
+  const showPv = !pvBtn.hidden;
 
+  myIvs = myIvs.map(v => Math.max(floorSel, v));   // 하한 아래 값은 나올 수 없다
   const all = ranked(mon);
   const best = all[0];
+  const floorSelect = document.getElementById('iv-floor');
+  floorSelect.value = String(floorSel);
+  document.getElementById('iv-floor-note').textContent = floorSel
+    ? `개체값이 전부 ${floorSel} 이상인 ${countText(all.length)}조합 안에서 순위를 매깁니다.`
+    : '';
+  document.querySelectorAll('.iv-input').forEach(inp => { inp.min = floorSel; });
+  rankInputEl().max = all.length;
+  rankInputEl().placeholder = `1~${countText(all.length)}`;
   const hundo = findBuild(mon, [15, 15, 15]);
   const mine = findBuild(mon, myIvs);
 
@@ -73,7 +97,7 @@ function paint() {
 
     <details class="more">
       <summary>숫자로 자세히 보기</summary>
-      <p class="answer-sub" style="margin-top:8px"><b>${esc(mon.ko)}</b> 의 개체값 4,096조합을 전부 계산했습니다.
+      <p class="answer-sub" style="margin-top:8px"><b>${esc(mon.ko)}</b> 의 개체값 ${countText(all.length)}조합을 전부 계산했습니다.
       각 조합은 ${Format.capText}을 넘지 않는 가장 높은 레벨 기준입니다.</p>
     <p class="scroll-hint">표를 좌우로 밀어 전체 수치를 확인하세요.</p>
     <div class="table-scroll" tabindex="0" aria-label="개체값 상세 수치, 가로로 스크롤 가능">
@@ -84,21 +108,21 @@ function paint() {
           ${row('내 개체값', mine, pct(mine))}
           ${row('1등 개체', best, pct(best))}
           ${row('15 · 15 · 15', hundo, pct(hundo))}
-          ${mon.pvIv ? row('PvPoke 기본', findBuild(mon, mon.pvIv), pct(findBuild(mon, mon.pvIv))) : ''}
+          ${showPv ? row('PvPoke 기본', findBuild(mon, mon.pvIv), pct(findBuild(mon, mon.pvIv))) : ''}
         </tbody>
       </table>
     </div>
 
     <p class="answer-sub">
       ‘버티는 정도’는 스탯곱(공격 × 방어 × HP)을 1등 개체 대비 비율로 본 값입니다.
-      내 개체값은 4,096조합 중 <b>${mine.rank}위</b>입니다.
+      내 개체값은 ${countText(all.length)}조합 중 <b>${mine.rank}위</b>입니다.
     </p>
 
     ${verdictBlock(mine, best, hundo)}
     </details>`;
 }
 
-/* 4,096조합 중 순위를 등급으로 바꾼다. 기준은 임의로 정한 것이라 화면에도 적어 둔다. */
+/* 전체 조합 중 순위를 등급으로 바꾼다. 기준은 임의로 정한 것이라 화면에도 적어 둔다. */
 function gradeOf(rank, total) {
   const top = rank / total * 100;
   if (top <= 1) return { g: 'S', cls: 's', text: '버티는 힘 최상급입니다' };
@@ -114,7 +138,7 @@ function gradeBlock(mine, best, all) {
   const hold = mine.product / best.product * 100;
   const holdLabel = hold >= 99 ? ['매우 좋음', 'good'] : hold >= 97 ? ['좋음', 'good'] : hold >= 94 ? ['보통', 'acc'] : ['약함', 'bad'];
 
-  // 공격 실수치가 4,096조합 중 얼마나 높은지 = 차징 우선권(CMP) 쪽 강도
+  // 공격 실수치가 전체 조합 중 얼마나 높은지 = 차징 우선권(CMP) 쪽 강도
   const beaten = all.filter(b => b.atk < mine.atk).length / total * 100;
   const cmpLabel = beaten >= 70 ? ['강함', 'good'] : beaten >= 30 ? ['보통', 'acc'] : ['약함', 'bad'];
 
@@ -123,7 +147,7 @@ function gradeBlock(mine, best, all) {
       <span class="iv-g ${g.cls}">${g.g}</span>
       <div>
         <div class="iv-g-title">상위 ${topPct.toFixed(1)}% · ${g.text}</div>
-        <div class="iv-g-sub">${esc(mon.ko)} ${mine.ivs.join('/')} · 4,096조합 중 ${mine.rank}위</div>
+        <div class="iv-g-sub">${esc(mon.ko)} ${mine.ivs.join('/')} · ${countText(total)}조합 중 ${mine.rank}위</div>
         <div class="iv-pct"><i style="width:${(100 - topPct).toFixed(1)}%"></i></div>
       </div>
     </div>
@@ -210,24 +234,25 @@ function verdictBlock(mine, best, hundo) {
 
 /* ------------------------------------------------------------------ */
 
-setupSearch(document.querySelector('.cmp-picker'), m => { mon = m; paint(); urlSet('p', m && m.id); });
-document.querySelector('.cmp-picker .clear').addEventListener('click', () => { mon = null; paint(); urlSet('p', null); });
+setupSearch(document.querySelector('.cmp-picker'), m => { setMon(m); paint(); urlSet('p', m && m.id); });
+document.querySelector('.cmp-picker .clear').addEventListener('click', () => { setMon(null); paint(); urlSet('p', null); });
 
 document.querySelectorAll('.iv-input').forEach((inp, i) => {
   inp.addEventListener('input', () => {
-    myIvs[i] = Math.max(0, Math.min(15, parseInt(inp.value, 10) || 0));
+    myIvs[i] = Math.max(floorSel, Math.min(15, parseInt(inp.value, 10) || 0));
     paint();
   });
 });
 
 const rankInput = document.querySelector('.iv-rank-input');
+function rankInputEl() { return rankInput; }
 rankInput.addEventListener('input', () => {
   const n = ivRankInput(rankInput);
   if (n == null || !mon) return;
-  myIvs = ivsOfRank(mon, n);
+  myIvs = ivsOfRank(mon, n, floorSel);
   paint();
 });
-rankInput.addEventListener('change', () => { rankInput.value = mon ? ivRankOf(mon, myIvs) || '' : ''; });
+rankInput.addEventListener('change', () => { rankInput.value = mon ? ivRankOf(mon, myIvs, floorSel) || '' : ''; });
 
 document.querySelectorAll('.iv-quick').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -247,5 +272,9 @@ if (Format.isMaster) {
   document.querySelector('.top .meta span').textContent = 'CP 제한 없음';
 }
 
-mon = monFromUrl('p') || byRank(1);
+const floorEl = document.getElementById('iv-floor');
+floorEl.innerHTML = FLOOR_OPTIONS.map(([v, t]) => `<option value="${v}">${t} · ${v}~15</option>`).join('');
+floorEl.addEventListener('change', () => { floorSel = parseInt(floorEl.value, 10) || 0; paint(); });
+
+setMon(monFromUrl('p') || byRank(1));
 paint();
