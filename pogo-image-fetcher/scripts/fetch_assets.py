@@ -49,6 +49,8 @@ MOVE_POKEMON = pathlib.Path(__file__).resolve().parent.parent.parent / 'pogo-mov
 EXTRA_SPECIES = {
     'minior_meteor': 'pm774.fMETEOR.icon.png',
     'minior_core': 'pm774.fRED.icon.png',   # 코어 색은 7가지 — 빨강을 대표로
+    # 메가 픽시 — PokeMiners 에 메가 전용 스프라이트(pm36.fMEGA)가 아직 없어 픽시 그림으로 대신한다. 올라오면 이 줄을 지운다
+    'clefable_mega': 'pm36.icon.png',
 }
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) pogomate-asset-fetch'
 

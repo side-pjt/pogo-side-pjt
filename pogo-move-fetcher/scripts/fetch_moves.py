@@ -58,7 +58,7 @@ PRIMARY_FORMATS = ['great', 'mega-1500', 'ultra', 'mega-2500', 'master', 'mega-1
 # 어느 포맷 순위에도 아직 없는 신규 종 (PvPoke 게임마스터에 released:false 로만 있다).
 # 게임마스터의 기술 목록으로 넣어 검색·배틀에서 고를 수 있게 한다. 추천 기술은 비워 두고,
 # 순위에 오르면 PvPoke 추천이 들어오니 그때 지운다.
-UNRANKED_SPECIES = ['minior_meteor', 'minior_core']
+UNRANKED_SPECIES = ['minior_meteor', 'minior_core', 'clefable_mega']
 
 LEAGUE_KEY = {1500: 'great', 2500: 'ultra', 10000: 'master'}
 LEAGUE_EN = {500: 'Little', 1500: 'Great League', 2500: 'Ultra League', 10000: 'Master League'}

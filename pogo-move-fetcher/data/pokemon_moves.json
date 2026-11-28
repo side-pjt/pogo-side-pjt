@@ -14,7 +14,7 @@
   "fantasy-1500",
   "halloweenmega-1500"
  ],
- "count": 1589,
+ "count": 1590,
  "pokemon": [
   {
    "speciesId": "melmetal",
@@ -140292,6 +140292,50 @@
      "moveId": "TAKE_DOWN",
      "nameKo": "돌진",
      "turns": 3,
+     "share": 0
+    }
+   ]
+  },
+  {
+   "speciesId": "clefable_mega",
+   "speciesName": "Clefable (Mega)",
+   "rank": null,
+   "mega": false,
+   "score": null,
+   "formats": {},
+   "recommended": {
+    "fast": null,
+    "charged": []
+   },
+   "fastMoves": [
+    {
+     "moveId": "CHARGE_BEAM",
+     "nameKo": "차지빔",
+     "turns": 3,
+     "share": 0
+    },
+    {
+     "moveId": "POUND",
+     "nameKo": "막치기",
+     "turns": 2,
+     "share": 0
+    },
+    {
+     "moveId": "ZEN_HEADBUTT",
+     "nameKo": "사념의박치기",
+     "turns": 3,
+     "share": 0
+    },
+    {
+     "moveId": "CHARM",
+     "nameKo": "애교부리기",
+     "turns": 3,
+     "share": 0
+    },
+    {
+     "moveId": "FAIRY_WIND",
+     "nameKo": "요정의바람",
+     "turns": 2,
      "share": 0
     }
    ]

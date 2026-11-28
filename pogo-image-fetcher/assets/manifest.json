@@ -2,8 +2,8 @@
  "source": "https://pogomate.com/battles/great-league",
  "rankSource": "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data/rankings/all/overall/rankings-1500.json",
  "league": "all",
- "top": 1589,
- "count": 1589,
+ "top": 1590,
+ "count": 1590,
  "pokemon": [
   {
    "rank": 1,
@@ -32650,6 +32650,27 @@
    "file": "pokemon/sliggoo_hisuian_미끄네일.png",
    "spriteKey": "pm705.fHISUIAN.icon.png",
    "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm705.fHISUIAN.icon.png"
+  },
+  {
+   "rank": null,
+   "pogomateRank": null,
+   "id": "clefable_mega",
+   "name": "Clefable (Mega)",
+   "nameKo": "픽시",
+   "nameJa": null,
+   "displayKo": "메가 픽시",
+   "dex": 36,
+   "isShadow": false,
+   "isMega": false,
+   "form": null,
+   "types": [
+    "fairy",
+    "flying"
+   ],
+   "level": null,
+   "file": "pokemon/clefable_mega_메가픽시.png",
+   "spriteKey": "pm36.icon.png",
+   "url": "https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Pokemon%20-%20256x256/Addressable%20Assets/pm36.icon.png"
   }
  ]
 }
