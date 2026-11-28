@@ -36,7 +36,7 @@ PROVISIONAL_MOVES = {
                          'energy': 45, 'energyGain': 0, 'cooldown': 500, 'turns': 1, 'nameKo': '나이트헤드+'},
 }
 # 임시 기술을 쓸 수 있는 종 {종 id: [기술 id]}
-PROVISIONAL_LEARNERS = {'sableye_mega': ['NIGHT_SHADE_PLUS']}
+PROVISIONAL_LEARNERS = {'sableye_mega': ['NIGHT_SHADE_PLUS'], 'clefable_mega': ['MOONBLAST_PLUS']}
 
 
 def format_movesets():
